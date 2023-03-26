@@ -1,0 +1,58 @@
+﻿@using ViewRes
+@using Webmall.Model.Entities.Catalog
+@using Webmall.UI.Core.HtmlHelpers
+
+@model WareListItem
+@{
+    var imgUrl = Model.ImageUrl ?? (Model.HasImage ? Url.WareImage(Model.ImageId) : "~/assets/images/general/product-default.jpg");
+}
+<article class="product-card catalog__item">
+    <div class="product-card__wrapper">
+        <header class="product-card__header">
+            <a class="product-card__img-wrap" href="@Model.Url">
+                <img class="product-card__img" src="@(Url.Content(imgUrl))" alt="@Model.Name">
+            </a>
+            
+            <img class="product-card__logo" src="@(Url.ProducerImage(Model.ProducerName))" alt="@Model.ProducerName" title="@Model.ProducerName">
+            @{ Html.RenderPartial("Components/WareActionLabel", Model); }
+            <div class="product-card__informers">
+                @if (Model.Producer?.IsRecommended == true)
+                {
+                    <span class="product-card__informer badge" data-tippy-content="@SharedResources.IsRecommended">
+                        <svg class="icon icon-like badge__icon"><use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#like")"></use></svg>
+                    </span>
+                }
+                <a class="product-card__informer badge" href="#">
+                    <svg class="icon icon-scales-add product__informer-icon"><use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#scales-add")"></use></svg>
+                </a>
+            </div>
+        </header>
+        <div class="product-card__body">
+            <div class="product-card__title"><a class="product-card__title-link" href="@Model.Url">@Model.Name</a></div>
+            <div class="product-card__info">
+                <div class="product-card__brand">@Model.ProducerName</div>
+                <div class="product-card__articul" data-template-articul="art-1" aria-expanded="false">
+                    <div class="product-card__articul-text">@Model.WareNumber</div>
+                </div>
+                <div data-tooltip-content="art-1">
+                    <div class="product-card__articul-tooltip">@Model.WareNumber</div>
+                </div>
+            </div>
+            <a class="product-card__add btn btn--primary" href="@Model.Url">@SharedResources.Details @*@(SessionHelper.IsRetail ? SessionHelper.PriceFormat(Model.RetailPrice) : SessionHelper.PriceFormat(Model.MinimalPrice))*@</a>
+            <div class="product-card__footer">
+                <dl class="product-card__params" data-ware-id="@Model.Id" id="tile_spec_@Model.Id">
+                    <div class="product-card__param">
+                        <dt class="product-card__property">@SharedResources.Loading ...</dt>
+                        <dd class="product-card__value"></dd>
+                    </div>
+                </dl>
+            </div>
+        </div>
+        <div class="product-card__more-trigger">
+            <button class="product-card__more-trigger-btn js-mob-extra-trigger">
+                <span class="product-card__more-trigger-text">@SharedResources.Specifications</span>
+                <svg class="icon icon-chevron-down product-card__more-trigger-icon"><use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#chevron-down")"></use></svg>
+            </button>
+        </div>
+    </div>
+</article>

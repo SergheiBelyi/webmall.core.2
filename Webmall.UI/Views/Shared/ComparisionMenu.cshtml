@@ -1,0 +1,18 @@
+﻿@{
+    Layout = null;
+}
+@model Webmall.UI.Models.WareComparision.ComparisionList
+
+<div id="ComparePannel">
+    @{ Html.RenderPartial("ComparisionPannel", Model); }
+</div>
+
+<script type="text/javascript">
+    function RemoveComparision(id) {
+        updatePannel('@Url.Action("RemoveComparision", "Catalog")' + '?id=' + id, 'ComparePannel', null, checkComparisionPanalPresence);
+    }
+
+    function AddComparision(id) {
+        updatePannel('@Url.Action("AddComparision", "Catalog")' + '?id=' + id, 'ComparePannel', null, checkComparisionPanalPresence);
+    }
+</script>

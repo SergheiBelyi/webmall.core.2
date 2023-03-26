@@ -1,0 +1,91 @@
+﻿@using Webmall.Model.Entities.Client
+@using Webmall.UI.Core
+
+@{
+    var breef = SessionHelper.CurrentUser != null ? SessionHelper.CurrentClient?.Breefing.Data : new BreefingData();
+}
+@*@if (breef.HaveDebt) { Html.RenderPartial("Components/AlertNotification"); }*@
+<header class="header">
+    @{Html.RenderAction("MainInformer", "Layout");}
+    
+    @{Html.RenderPartial("Components/TopHeaderNav");}
+
+    <div class="header-main">
+        <div class="container-fluid">
+            <div class="header-main__body">
+                @{Html.RenderPartial("Components/Logo");}
+                @{Html.RenderAction("TopMenu", "Layout", new { culture = UserPreferences.CurrentCulture });}
+                @if (SessionHelper.CurrentUser == null)
+                {
+                    if (ViewBag.HideAuthorize != true)
+                    {
+                        Html.RenderPartial("Components/Authorize");
+                    }
+                }
+                else
+                {
+                    Html.RenderAction("Authorized", "Layout", new { culture = UserPreferences.CurrentCulture });
+                }
+
+                @{Html.RenderPartial("Components/MobUtils");}
+                @if (ViewBag.BlockPayUpTo != null)
+                {
+                    <div class="header-alert is-warning d-none d-md-block">@ViewBag.BlockPayUpTo</div>
+                }
+
+            </div>
+        </div>
+    </div>
+
+    <div class="header-meta-area">
+        <div class="container-fluid">
+            <div class="header-meta-area__body">
+                <div class="logo header-sticky-logo">
+                    <span class="logo__wrap">
+                        <img class="logo__img img-responsive" src="@Url.Content("~/assets/images/logo.svg")" alt="" width="220" height="60">
+                    </span>
+                </div>
+
+                @{Html.RenderAction("GroupMenu", "Catalog", new { culture = UserPreferences.CurrentCulture });}
+                @{Html.RenderPartial("Components/SearchForm");}
+                @*@{ Html.RenderPartial("Components/BrandCatalogs");}*@
+                @{ Html.RenderAction("UserCars", "Layout"); }
+                @*@{ Html.RenderPartial("Components/UserCars");}*@
+
+                @if (SessionHelper.CurrentUser == null)
+                {
+                    if (ViewBag.HideAuthorize != true)
+                    {
+                        <div class="header__meta-link is-auth d-none">
+                            <a class="brand-catalogs header-meta-area__brand-catalogs" href="@Url.Action("Authorize", "Security")">
+                                <svg class="icon icon-logout-2 brand-catalogs__icon">
+                                    <use href=@Url.Content("~/assets/images/svg/symbol/sprite.svg#logout-2")></use>
+                                </svg>
+                            </a>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="header__meta-link is-auth d-none">
+                        <a class="brand-catalogs header-meta-area__brand-catalogs" href="@Url.Action("EditPersonalData", "Security")">
+                            <svg class="icon icon-avatar brand-catalogs__icon">
+                                <use href=@Url.Content("~/assets/images/svg/symbol/sprite.svg#avatar")></use>
+                            </svg>
+                        </a>
+                    </div>
+                }
+
+                @{ Html.RenderPartial("Components/CartHeader");}
+
+            </div>
+        </div>
+    </div>
+
+    @{Html.RenderAction("ContactHeaderMob", "Layout", new { culture = UserPreferences.CurrentCulture });}
+
+    @*@{Html.RenderAction("StickyHeader", "Layout", new { culture = @UserPreferences.CurrentCulture });}*@
+
+    @if (breef.HaveDebt) { Html.RenderPartial("Components/AlertNotification"); }
+
+</header>

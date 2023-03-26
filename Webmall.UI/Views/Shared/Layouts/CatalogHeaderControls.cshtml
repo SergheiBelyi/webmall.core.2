@@ -1,0 +1,27 @@
+﻿@using ViewRes
+@model Webmall.UI.Models.Catalog.CatalogWaresModel
+@{
+    var pageSizes = new int[] { 12, 24, 36, 50 };
+    var productSize = Model.Wares.List.Count;
+    }
+
+    @if (Model.Wares.AllowPagging && Model.Wares.AllowPageSizeSelection)
+    {
+        <div class="header-control">
+            <select class="js-select-default show-by-select">
+                @foreach (var item in pageSizes)
+                {
+                    var selected = (Model.Wares.PageSize == item) ? "SELECTED" : "";
+                    <option value="@item" @selected>@item</option>
+                }
+            </select>
+            <label class="header-control__title" for="show-by-select-drop">@SharedResources.ProductsPerPage</label>
+        </div>
+    }
+    @if (Model.TotalAmountWares > 0)
+    {
+        <div class="header-control d-none d-md-block">
+            <div class="header-control__progress">@SharedResources.Products <strong>@productSize</strong> @SharedResources.of <strong>@Model.TotalAmountWares</strong></div>
+        </div>
+    }
+

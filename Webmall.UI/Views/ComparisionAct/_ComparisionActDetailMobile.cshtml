@@ -1,0 +1,25 @@
+﻿@using ViewRes
+@using ValmiStore.Model.Entities.User
+
+@model List<ComparisionActDetail>
+@{
+    Layout = null;
+}
+
+@foreach (var item in Model)
+{
+    <dl class="spec__params">
+        <dt class="spec__property">@SharedResources.Number</dt>
+        <dd class="spec__value">@item.WareNum</dd>
+        <dt class="spec__property">@SharedResources.WareName</dt>
+        <dd class="spec__value">@item.Name</dd>
+        <dt class="spec__property">@SharedResources.Brand</dt>
+        <dd class="spec__value">@item.ProducerName</dd>
+        <dt class="spec__property">@SharedResources.UnitPrice</dt>
+        <dd class="spec__value">@(string.Format("{0:n2}", item.Price))</dd>
+        <dt class="spec__property">@SharedResources.Amount</dt>
+        <dd class="spec__value">@item.WareQnt</dd>
+        <dt class="spec__property">@SharedResources.Sum</dt>
+        <dd class="spec__value">@(string.Format("{0:n2}", item.Price * item.WareQnt))</dd>
+    </dl>
+}

@@ -1,0 +1,193 @@
+﻿@using ViewRes
+@using Webmall.Model.CoreHelpers
+@using Webmall.UI.Core
+@using Webmall.UI.Core.HtmlHelpers
+@using Webmall.UI.ViewModel.Catalog
+
+@model Webmall.UI.ViewModel.Catalog.OffersViewModel
+
+@{
+    Layout = null;
+}
+
+@if (Model.Offers.Any())
+{
+    <div class="data-table__subsection js-more-parent">
+        <div class="data-table__subheading">@Model.Caption</div>
+
+        <input id="SortDir" name="SortDir" type="hidden" value="@Model.PageOptions.Direction.ToString()">
+        <input id="SortColumn" name="SortColumn" type="hidden" value="@Model.PageOptions.OrderColumn">
+
+        @{var count = 0;}
+        @foreach (var off in Model.Offers)
+        {
+            var url = off.IsReplacement ? Url.Ware(off.Ware) : "#info-header";
+            count++;
+            <div class="data-table__row @(count > 5 ? "is-hidden" : "")">
+                <div class="data-table__cell">
+                    <div class="data-table__meta">
+                        <a class="data-table__brand" href="@url">@off.Ware.ProducerName</a>
+                        <a class="data-table__articul" href="@url">@off.Ware.WareNumber</a>
+                    </div>
+                    @if (off.Ware.Producer?.IsRecommended == true)
+                    {
+                        <div class="data-table__badges">
+                            <span class="data-table__badge badge" data-tippy-content="@SharedResources.IsRecommended">
+                                <svg class="icon icon-like badge__icon" width="25" height="25">
+                                    <use href="@(Url.Content("/assets/images/svg/symbol/sprite.svg#like"))"></use>
+                                </svg>
+                            </span>
+                        </div>
+                    }
+                </div>
+
+                <div class="data-table__cell">
+                    <div class="data-table__heading">
+                        <a class="data-table__heading-link" href="@url">@off.Ware.Name</a>
+                    </div>
+                    <div class="data-table__badges">
+                        @{
+                            var imgUrl = off.Ware.HasImage ? Url.WareImage(off.Ware.Id) : "~/assets/images/general/product-default.jpg";
+                            //var imgUrlTest = off.Ware.ImageUrl ?? (off.Ware.HasImage ? ConfigHelper.PriceAggrearorImg + off.Ware.ImageId : "~/assets/images/general/product-default.jpg");
+                        }
+                        @if (off.Ware.HasImage)
+                        {
+                            <div class="data-table__badge badge js-item-gallery" href="@(Url.Content(imgUrl))">
+                                @*<svg class="icon icon-photo badge__icon stock-table__product-img" width="25" height="25" data-template="@off." aria-expanded="false">*@
+                                    <svg class="icon icon-photo badge__icon stock-table__product-img" width="25" height="25" data-template="@off.Ware.Id" aria-expanded="false">
+                                    <use href="@(Url.Content("/assets/images/svg/symbol/sprite.svg#photo"))"></use>
+                                </svg>
+                                @*<div class="tooltip-content" data-tooltip-content="@off.Ware.Id">
+                                <a class="stock-table__product-img-wrap">
+                                    <img class="stock-table__product-img" data-wareId="@off.Ware.Id" src="@off.Ware.ImgUrl" alt="@off.Ware.Name">
+                                </a>
+                            </div>*@
+                                <div style="display: none">
+                                    @*<div class="tooltip-content" Id="WareImagePannel_@(465907)"></div>*@
+                                    <div class="tooltip-content" Id="WareImagePannel_@(off.Ware.Id)"></div>
+                                </div>
+                            </div>
+                        }
+                        @if (off.IsReplacement)
+                        {
+                            <a class="data-table__badge badge" href="#">
+                                <svg class="icon icon-undo badge__icon" width="25" height="25">
+                                    <use href="@(Url.Content("/assets/images/svg/symbol/sprite.svg#undo"))"></use>
+                                </svg>
+                            </a>
+                        }
+                        @if (off.AllowAddToCompare)
+                        {
+                            <a class="data-table__badge badge" href="#">
+                                <svg class="icon icon-scales-add badge__icon" width="25" height="25">
+                                    <use href="@(Url.Content("/assets/images/svg/symbol/sprite.svg#scales-add"))"></use>
+                                </svg>
+                            </a>
+                        }
+                        <a class="data-table__badge badge" href="@url">
+                            <svg class="icon icon-info badge__icon" width="25" height="25">
+                                <use href="@(Url.Content("/assets/images/svg/symbol/sprite.svg#info"))"></use>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="data-table__cell">
+                    <div class="data-table__progress progress-badge is-warning">@(off.Offer.DeliveryRating)%</div>
+                    <div class="data-table__text">@off.Offer.SupplierWarehouseName</div>
+                    <div class="data-table__stickers">
+                        @if (off.Ware.IsSale)
+                        {
+                            <div class="data-table__sticker sticker is-discount">Распродажа</div>
+                        }
+                        @if (off.Ware.InAction)
+                        {
+                            <div class="data-table__sticker sticker is-action">Акция</div>
+                        }
+                        @if (off.Ware.IsNew)
+                        {
+                            <div class="data-table__sticker sticker is-new">@SharedResources.NewWare</div>
+                        }
+                    </div>
+                </div>
+                <div class="data-table__cell text-center">
+                    <div class="data-table__text">@(off.Offer.AvailableQntStr)</div>
+                </div>
+                <div class="data-table__cell text-center">
+                    <div class="data-table__text" data-tippy-gray-content="@SharedResources.TermDays">@off.Offer.DeliveryTerm.ToString("dd.MM")</div>
+                </div>
+                <div class="data-table__cell text-center" data-col-buy>
+                    <div class="data-table__text">@(off.Offer.ClientPrice.ToString(Model.PriceFormat))</div>
+                </div>
+                <div class="data-table__cell text-center" data-col-sell>
+                    <div class="data-table__text">@(off.Offer.ClientSalePrice.ToString(Model.PriceFormat))</div>
+                </div>
+                <div class="data-table__cell">
+                    @if (off.Status == OfferStatuses.CanAddToCart)
+                    {
+                        var offerId = off.Offer.Id;
+                        <div class="data-table__controls">
+                            <div class="data-table__control" data-tippy-gray-content="Кратность = @(off.Offer.SaleQnt)">
+                                <div class="counter data-table__counter">
+                                    <button class="counter__btn counter__btn--remove" data-action="remove" type="button">
+                                        <svg class="icon icon-minus counter__btn-icon" width="25" height="25">
+                                            <use href="@(Url.Content("/assets/images/svg/symbol/sprite.svg#minus"))"></use>
+                                        </svg>
+                                    </button>
+                                    <input class="counter__input input" type="tel" name="quantity" data-cartQt="@offerId" data-multiplicity="@off.Offer.SaleQnt" @*readonly*@ 
+                                           value="@off.Offer.SaleQnt" min="1" max="@(off.Offer.AvailableQnt?.ToString("n0") ?? off.Offer.AvailableQntStr)">
+                                    <button class="counter__btn counter__btn--add" data-action="add" type="button">
+                                        <svg class="icon icon-plus counter__btn-icon" width="25" height="25">
+                                            <use href="@(Url.Content("/assets/images/svg/symbol/sprite.svg#plus"))"></use>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="data-table__control">
+                                @{
+                                    var offer = off.Offer.ToJson().Replace("+", "|plus|");
+                                    var p = $"{off.Ware.Id ?? "null"},'{offerId}',{off.Offer.ClientPrice.ToString().Replace(",", ".")},'{off.Ware.WareNumber}','{off.Ware.ProducerName}'";
+                                    var func = SessionHelper.CurrentUser != null ? $"AddToCart(this, {p})" : $"AddToCartLocal(this, {p})";
+                                }
+                                <a class="data-table__action action-control" href="#" onclick="return @(func)" data-offer="@offer">
+                                    <svg class="icon icon-clock action-control__icon" width="25" height="25">
+                                        <use href="@(Url.Content("/assets/images/svg/symbol/sprite.svg#shopping-cart"))"></use>
+                                    </svg>
+                                    <small class="action-control__info in-cart" @(off.InCart == 0 ? "hidden" : "")>@off.InCart</small>
+                                </a>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+            </div>
+        }
+        @if (count > 5)
+        {
+            <div class="data-table__bottom">
+                <button class="data-table__more btn js-more-btn" type="button" data-more-text="@SharedResources.ShowAll" data-less-text="Скрыть">
+                    <span class="btn__text">@SharedResources.ShowAll</span>
+                    <svg class="icon icon-chevron-down btn__icon" width="25" height="25">
+                        <use href="@(Url.Content("/assets/images/svg/symbol/sprite.svg#chevron-down"))"></use>
+                    </svg>
+                </button>
+            </div>
+        }
+
+    </div>
+}
+else
+{
+    <div class="data-table__subsection js-more-parent">
+        <div class="data-table__subheading">@Model.Caption</div>
+
+        <div class="data-table__row" bis_skin_checked="1">
+            <input id="SortDir" name="SortDir" type="hidden" value="">
+            <input id="SortColumn" name="SortColumn" type="hidden" value="">
+
+            <div class="data-table__cell" bis_skin_checked="1">
+                <span>@SharedResources.NoData</span>
+            </div>
+        </div>
+    </div>
+}

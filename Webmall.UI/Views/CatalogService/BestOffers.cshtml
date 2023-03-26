@@ -1,0 +1,75 @@
+﻿@using ViewRes
+@using Webmall.UI.Core
+
+@model Webmall.UI.ViewModel.Catalog.OffersViewModel
+@{
+    Layout = null;
+}
+@if (Model.Offers.Any())
+{
+    <section class="product-detail-offers">
+        @foreach (var el in Model.Offers)
+        {
+            var addToCart = SessionHelper.CurrentUser != null
+                ? "AddToCart(this, " + el.Ware.Id + ", '" + el.Offer.Id + "', " + el.Offer.ClientPrice.ToString().Replace(",", ".") + ", '" + el.Ware.WareNumber + "', '" + el.Ware.ProducerName + "')"
+                : "AddToCartLocal(this, " + el.Ware.Id + ", '" + el.Offer.Id + "', " + el.Offer.ClientPrice.ToString().Replace(",", ".") + ", '" + el.Ware.WareNumber + "', '" + el.Ware.ProducerName + "')";
+            <article class="product-detail-offers__offer product-offer tabs__offer">
+                <div class="product-offer__header">
+                    <div class="product-offer__heading">@el.Caption</div>
+                </div>
+                <div class="product-offer__main">
+                    <div class="product-offer__info">
+                        <div class="product-offer__title">
+                            <a class="product-offer__title-link" href="#">@el.Ware.ProducerName @el.Ware.WareNumber</a>
+                        </div>
+                        <div class="product-offer__price">@el.Offer.ClientPrice.ToString(Model.PriceFormat) @Model.Valute.Code</div>
+                    </div>
+                    <p class="product-offer__desc">@el.Ware.Name</p>
+                </div>
+                <div class="product-offer__bottom">
+                    <dl class="product-offer__params">
+                        <div class="product-offer__param">
+                        <dt class="product-offer__property">@SharedResources.Term</dt>
+                        <dd class="product-offer__value">@el.Offer.DeliveryTerm.ToString("dd.MM")</dd>
+                </div>
+                <div class="product-offer__param">
+                    <dt class="product-offer__property">@SharedResources.Quantity</dt>
+                    <dd class="product-offer__value">@(el.Offer.AvailableQntStr)</dd>
+                </div>
+                </dl>
+                <div class="product-offer__controls">
+                    <div class="product-offer__control" data-tippy-gray-content="Кратность = @(el.Offer.SaleQnt)">
+                        <div class="counter product-offer__counter">
+                            <button class="counter__btn counter__btn--remove" data-action="remove" type="button">
+                                <svg class="icon icon-minus counter__btn-icon" width="25" height="25">
+                                    <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#minus")"></use>
+                                </svg>
+                            </button>
+                            <input class="counter__input input" type="tel" name="quantity" maxlength="3" value="@el.Offer.SaleQnt" data-cartQt="@el.Offer.Id" data-multiplicity="@el.Offer.SaleQnt" min="1" max="@(el.Offer.AvailableQnt?.ToString("n0") ?? el.Offer.AvailableQntStr)">
+                            <button class="counter__btn counter__btn--add" data-action="add" type="button">
+                                <svg class="icon icon-plus counter__btn-icon" width="25" height="25">
+                                    <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#plus")"></use>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-offer__control">
+                        <input class="product-offer__add btn btn--primary" type="submit" name="send"
+                               onclick="return @(addToCart)" value="@SharedResources.Buy">
+                    </div>
+                </div>
+                </div>
+            </article>
+        }
+    </section>
+}
+else
+{
+    <div class="product-offer">
+        <div class="product-offer__header">
+            <div class="product-offer__heading">
+                <div>@SharedResources.NoData</div>
+            </div>
+        </div>
+    </div>
+}

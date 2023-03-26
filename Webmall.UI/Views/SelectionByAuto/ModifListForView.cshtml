@@ -1,0 +1,12 @@
+﻿@using ViewRes
+@model List<Webmall.Model.Entities.Auto.AutoModification>
+
+<div class="content-secondary">
+    <h2>@SharedResources.SelectModel</h2>
+    @Html.Partial("ModifList", Model)
+</div>
+
+@section dialogs
+{
+    @Html.Partial("_ModifInfoDialog")
+}

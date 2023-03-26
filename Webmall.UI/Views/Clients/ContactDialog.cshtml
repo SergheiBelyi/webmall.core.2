@@ -1,0 +1,71 @@
+﻿@using ViewRes
+
+<div class="modal-content" data-modal-win="contact-detail" hidden>
+    <form class="add-modal" method="POST" action="@Url.Action("SaveContact")" name="product-add" id="saveContactForm" enctype="multipart/form-data">
+        <div class="add-modal__main">
+            <div class="managed managed-delivery-address">
+                <div class="row">
+                    <input type="hidden" id="ContactId" name="Id"/>
+                    <div class="col-sm-6">
+                        <div class="main-form__field">
+                            <label class="main-form__label" for="ContactName">@SharedResources.Name</label>
+                            @Html.TextBox("Name", "", new { id = "ContactName", @class = "profile-form__input input" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="main-form__field">
+                            <label class="main-form__label" for="ContactDateFrom">@SharedResources.from</label>
+                            @Html.TextBox("DateFrom", "", new { id = "ContactDateFrom", @class = "profile-form__input input", type = "date" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="main-form__field">
+                            <label class="main-form__label" for="ContactDateTo">@SharedResources.to</label>
+                            @Html.TextBox("DateTo", "", new { id = "ContactDateTo", @class = "profile-form__input input", type = "date" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="main-form__field">
+                            <label class="main-form__label" for="ContactPhone">@SharedResources.Phone</label>
+                            @Html.TextBox("Phone", "", new { id = "ContactPhone", @class = "profile-form__input input" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="main-form__field">
+                            <label class="main-form__label" for="ContactComment">@SharedResources.Comment</label>
+                            @Html.TextBox("Comment", "", new { id = "ContactComment", @class = "profile-form__input input" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="main-form__field">
+                            <div class="checkbox-label">
+                                <input class="checkbox-label__input" type="checkbox" name="IsTrustee" id="ContactIsTrustee" value="false">
+                                <label class="checkbox-label__main" for="ContactIsTrustee">@SharedResources.TrustedPerson</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="main-form__field">
+                            <label class="main-form__label" for="ContactDocumentNumber">@SharedResources.DocNumber</label>
+                            @Html.TextBox("DocumentNumber", "", new { id = "ContactDocumentNumber", @class = "profile-form__input input" })
+                        </div>
+                    </div>
+                    <label class="main-form__label" for="ContactFiles">@SharedResources.SelectFile</label>
+                    <input type="file" name="Files" id="ContactFiles" />
+                </div>
+            </div>
+
+            @*<div class="add-modal__field is-row">
+                    <div class="add-modal__caption">
+                        @SharedResources.OnWarehouse: <span id="onWarehouse">10</span>
+                    </div>
+                    <div class="add-modal__caption">
+                        @SharedResources.SaleMultiplisity = <span id="saleMultiplicity">2</span>
+                    </div>
+                </div>*@
+        </div>
+        <div class="add-modal__bottom">
+            <input class="add-modal__btn btn btn--primary" type="submit" value="@SharedResources.Save">
+        </div>
+    </form>
+</div>

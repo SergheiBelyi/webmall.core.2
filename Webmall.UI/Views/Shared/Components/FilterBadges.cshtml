@@ -1,0 +1,42 @@
+﻿@model Webmall.UI.ViewModel.Catalog.CatalogFilterViewModel
+
+<ul class="catalog-top-section__badges filter-badges">
+    @if (Model.GroupSection.Options.Any())
+    {
+        Html.RenderPartial("Components/FilterBadgesSelection", Model.GroupSection);
+    }
+    @if (Model.BrandSection.Options.Any())
+    {
+        Html.RenderPartial("Components/FilterBadgesSelection", Model.BrandSection);
+    }
+    @foreach (var section in Model.PropertySections)
+    {
+        Html.RenderPartial("Components/FilterBadgesSelection", section);
+    }
+    @*<li class="filter-badges__badge">
+        <div class="filter-badges__badge-main filter-badge">
+            <div class="filter-badge">
+                <div class="filter-badge__text">SCODA</div>
+                <button class="filter-badge__remove">
+                    <svg class="icon icon-close filter-badge__remove-icon" width="25" height="25">
+                        <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#close")"></use>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </li>
+    <li class="filter-badges__badge">
+        <div class="filter-badges__badge-main filter-badge">
+            <div class="filter-badge">
+                <div class="filter-badge__text">Характеристики</div>
+                <button class="filter-badge__remove">
+                    <svg class="icon icon-close filter-badge__remove-icon" width="25" height="25">
+                        <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#close")"></use>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </li>*@
+</ul>
+
+

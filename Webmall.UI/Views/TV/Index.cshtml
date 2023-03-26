@@ -1,0 +1,353 @@
+﻿@using Webmall.UI.Models.TV
+
+@model TVModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Index</title>
+    @Scripts.Render("~/bundles/jquery")
+    <script type="text/javascript" src="@Url.Content("~/scripts/jwplayer/jwplayer.js")"></script>
+
+    <style>
+        table.cellzero {
+            border: 0;
+            padding: 0;
+            border-collapse: collapse;
+        }
+
+            table.cellzero td {
+                padding: 0
+            }
+
+        #player-wrapper {
+            margin-top: -50px;
+        }
+
+        #orderList {
+            padding: 5px;
+            margin: 5px;
+            color: black;
+            /*width: 500px;*/
+            border-collapse: collapse;
+            font-weight: bold;
+            font-family: arial;
+        }
+
+            #orderList td {
+                border: 3px solid gray;
+                padding: 5px 4px;
+                text-align: center;
+                font-size: 23px;
+                background-color: rgba(245, 245, 245, 0.5);
+                white-space: nowrap;
+                /*width: 250px;*/
+                height: 47px;
+                vertical-align: middle;
+            }
+
+                #orderList td.number {
+                    font-size: 36px;
+                    width: 75px;
+                }
+
+                #orderList td.ready {
+                    color: black;
+                    /*color: #299B29;*/
+                    background-color: rgba(110, 255, 69, 0.5);
+                }
+
+                #orderList td.not-ready {
+                    color: black;
+                    /*color: #A60E0D;*/
+                    background-color: rgba(242, 255, 25, 0.5);
+                }
+
+                #orderList td img {
+                    display: inline-block;
+                    margin-bottom: -7px;
+                    margin-top: -13px;
+                    height: 47px;
+                }
+
+                    #orderList td img.not-ready {
+                        display: none;
+                    }
+
+        /*#valuteInformer {
+            background: white;
+        }
+
+        #informers {
+            padding: 5px;
+        }
+
+        #valuteInformer img {
+            width: 100%;
+        }*/
+
+        .divider {
+            margin-top: 10px;
+        }
+
+        #table_resize h1 {
+            font-size: 18px !important;
+            font-weight: bold;
+        }
+
+        #table_resize a {
+            display: none;
+        }
+
+        #table_resize br {
+            display: none;
+        }
+
+        #newsInformer {
+            background-color: #f3f3f3;
+            min-height: 170px;
+            /*color: black;
+            text-align: left;*/
+        }
+
+        .informer {
+            background-color: #f3f3f3;
+            color: black;
+            text-align: left;
+            float: left;
+            padding: 10px;
+            /*margin-left: 5px;*/
+            min-height: 170px;
+            width: 47%;
+        }
+
+            .informer a {
+                color: black;
+            }
+
+            .informer li {
+                margin-left: 15px;
+            }
+
+        .tlt {
+            display: none;
+        }
+
+        #valuteInformer {
+            text-align: center;
+        }
+
+        .string {
+            width: 100%;
+            /*height: 42px;*/
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            font-size: 64px;
+            /*margin: 60px auto;*/
+            /*line-height: 28px;*/
+            /*padding: 0 10px;*/
+            /*border-radius: 4px;*/
+            /*box-shadow: 0 1px 2px #777;*/
+            background: rgba(0,0,0,0.7);
+            /*background: rgba(100,124,124); /*#647c7c*/
+            z-index: 100;
+            /*background: linear-gradient(to bottom, rgba(100,124,124,0.5) 0%,rgba(204,204,204,0.5) 100%);*/
+        }
+
+        /*.informer hr {
+            display: none;
+        }*/
+    </style>
+</head>
+
+<body style="background-color: black; color: white">
+    @*  <div style="font-family: arial; font-size: 50px; margin-left: 25px">Состояние заказов</div>*@
+    <table id="etable">
+        <tr style="vertical-align: top">
+            <td rowspan="2">
+                @*<div id="ol" style="width: 220px; font-family: arial; font-size: 40px">*@
+                <div id="orderListContainer">
+                    <table id="orderList" style="position: absolute; z-index: 100">
+                        <tr><td colspan="3">COMANDA DVS</td></tr>
+                        <tr>
+                            <td style="width: 75px;">№</td>
+                            @*<td style="min-width: 20px"></td>*@
+                            <td style="min-width: 160px">Statutul</td>
+                        </tr>
+                    </table>
+                </div>
+                @*</div>*@
+            </td>
+            <td style="padding-top: 5px; width:100%; text-align: center">
+                <div id="player" style="width:100%; margin-top: -20px;">
+                </div>
+            </td>
+        </tr>
+    </table>
+    <div style="display: none"><div id="announce" style="display: none"></div></div>
+    @if (!string.IsNullOrEmpty(Model.RunningLineText))
+    {
+        <div class="string">
+            <marquee scrollamount="25">
+                @Html.Raw(Model.RunningLineText)
+            </marquee>
+            @*<div id="marquee">@Model.RunningLineText</div>*@
+        </div>
+    }
+</body>
+</html>
+
+
+<script type="text/javascript">
+    $(function() {
+
+        @*        var FilId = @(Model.WarehouseId); // код склада
+        if(FilId)*@
+        window.timer = window.setInterval("ShowOrders()", 10 * 1000);
+        //    ShowOrders();
+        window.timer = window.setInterval("ValuteRefresh()", 3600 * 1000);
+
+        jwplayer("player").setup({
+            title: 'Automall.MD',
+            height: 900,
+            width: 1000,
+            autostart: true,
+            repeat: true,
+            primary: 'html5',
+            //image: "/uploads/example.jpg"
+            playlist: [
+                @foreach (var item in Model.PlayList)
+                {
+                    <text>
+				    {
+				        //image: "/assets/sintel.jpg",
+				        sources: [
+                        {
+                            file: "@Url.Content(item.URL)",
+                        }],
+				        title: "@Url.Content(item.Title)",
+				    },
+                    </text>
+                }
+                {}]
+        });
+
+        jwplayer("player").onReady(RecalcPlayer);
+        RecalcOrders();
+
+
+        $(window).resize(function() {
+            RecalcPlayer();
+            RecalcOrders();
+        });
+
+        jwplayer("announce").setup({
+            title: 'Webmall.MD',
+            height: 0,
+            width: 0,
+            autostart: false,
+            primary: 'html5',
+            //image: "/uploads/example.jpg"
+            file: "@Url.Content("~/content/sounds/announce.mp3")"
+        });
+
+            //ValuteRefresh();
+            //  CreateInformer();
+        }
+    );
+
+    @*function ValuteRefresh() {
+        var url = "@Url.Action("GetValuteInfo", "TV")?rnd=" + new Date().getTime();
+        $.get(url, function (response) {
+            $('#eur').text(response.euro);
+            $('#usd').text(response.usd);
+        });
+    }*@
+
+    function RecalcPlayer () {
+        var w = document.body.clientWidth - 25 - $("#etable td").first().width(); // - $("#etable td").last().width();
+        var h = window.innerHeight - 29 - $("#newsInformer").height(); //w * (3/4);
+        jwplayer("player").resize(w, h);
+    }
+
+    function RecalcOrders () {
+
+        var h = window.innerHeight - 66 - $("#informers").first().height(); //w * (3/4);
+        $('#orderListContainer').css('height', h);
+    }
+
+    function rgbToHex(col)
+    {
+        if(col.charAt(0)=='r')
+        {
+            col=col.replace('rgb(','').replace(')','').split(',');
+            var r=parseInt(col[0], 10).toString(16);
+            var g=parseInt(col[1], 10).toString(16);
+            var b=parseInt(col[2], 10).toString(16);
+            r=r.length==1?'0'+r:r; g=g.length==1?'0'+g:g; b=b.length==1?'0'+b:b;
+            var colHex='#'+r+g+b;
+            return colHex;
+        }
+    }
+
+    function ShowOrders() {
+
+        var url = "@Url.Action("GetOrdersInfo", "TV")?whId=" + @(Model.WarehouseId) + "&rnd=" + new Date().getTime();
+        $.get(url, function(response) {
+            var tbl = $('#orderList');
+            tbl.find('tr:gt(1)').remove();
+            var play = false;
+            $.each(response, function() {
+                if (this.IsNew)
+                    play = true;
+                tbl.append('<tr></tr>');
+                var row = tbl.find('tr:last');
+                if (row.offset().top > $('#orderListContainer').height()-66) {
+                    row.remove();
+                    return;
+                }
+                row.append('<td class="number">' + ("0000"+this.Id).substr(-4,4) + '</td>');
+                row.append('<td class="' + (this.StatusId === 1 ? 'not-' : '') + 'ready' + (this.IsNew ? ' blink' : '') + '">' + this.Status + '</td>');
+            });
+            if (play) {
+                //jwplayer("announce").play();
+                $('.blink').each(function () {
+                    var elem = $(this);
+                    setInterval(function () {
+                        if (elem.css('background-color') === 'rgba(245, 245, 245, 0.5)') {
+                            elem.css('background-color', 'rgba(110, 255, 69, 0.5)'); //I'm changing the background color, you may hide and show the div as well.
+                        } else {
+                            elem.css('background-color', 'rgba(245, 245, 245, 0.5)');
+                        }
+                    }, 1000);
+                });
+            }
+        });
+    }
+    @*
+    //function CreateInformer() {
+    //    window._PI = window._PI || [];
+
+    //    window._PI.push({
+    //        id: '13b36c4f-d6cc-42c0-acc0-7c7c917a7a30',
+    //        width: 240,
+    //        iframe_url: 'http://informer.point.md/public/iframe.html'
+    //    });
+
+    //    (function () {
+    //        var s = document.createElement('script')
+    //            , b = document.getElementsByTagName('body')[0];
+
+    //        s.src = 'http://i.point.md/public/i.js';
+
+    //        b.appendChild(s);
+    //    })();
+    //}
+        *@
+</script>

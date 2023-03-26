@@ -1,0 +1,136 @@
+﻿@using ViewRes
+@using Webmall.UI.Core
+@using Webmall.Model
+
+<div class="modal-content" data-modal-win="comment-edit">
+    <div class="modal-content__subheading">@SharedResources.Add @SharedResources.Note</div>
+    <div class="modal-form__fields">
+        <div class="modal-form__field">
+            <input class="modal-form__input input" type="text" id="addPositionCommentText" placeholder="@SharedResources.NoteText" name="comment" style="font-size: 1.3rem; color: #525252;">
+        </div>
+    </div>
+    <div class="modal-form__bottom">
+        <button class="modal-form__btn btn btn--main" onclick="SubmitAddPositionComment()" type="button">@SharedResources.Save</button>
+    </div>
+</div>
+
+<div class="modal-content" data-modal-win="comment-edited">
+    <div class="modal-content__subheading">@SharedResources.Edit @SharedResources.Note</div>
+    <div class="modal-form__fields">
+        <div class="modal-form__field">
+            <input class="modal-form__input input" type="text" placeholder="@SharedResources.NoteText" name="comment" id="editPositionCommentText" value="" style="font-size: 1.3rem; color: #525252;">
+        </div>
+    </div>
+    <div class="modal-form__bottom">
+        <button class="modal-form__btn btn btn--main" onclick="SubmitEditPositionComment()" type="button">@SharedResources.Save</button>
+    </div>
+</div>
+
+<div class="modal-content is-error-message" data-modal-win="product-detail-add">
+    <div class="add-modal__main">
+        <div class="add-modal__field">
+            <label class="add-modal__caption">Кол-во</label>
+            <div class="counter add-modal__counter">
+                <button class="counter__btn counter--remove" type="button">-</button>
+                <input class="counter__field" type="tel" name="quantity-mob" data-positionId="0" onchange="UpdatePosition(this)" size="4" maxlength="3" value="1">
+                <button class="counter__btn counter--add" type="button">+</button>
+            </div>
+        </div>
+        <div class="add-modal__field is-row">
+            <div class="add-modal__caption">На складе: <span>10</span></div>
+            <div class="add-modal__caption">Кратность = <span>2</span></div>
+        </div>
+    </div>
+    <div class="add-modal__bottom">
+        <input class="add-modal__btn btn btn--main" type="submit" value="Добавить">
+    </div>
+</div>
+
+<div class="modal-content is-error-message" data-modal-win="product-import-cart">
+    <div class="import">
+        <h3>@SharedResources.ImportToCart</h3>
+        @using (Html.BeginForm("ImportToCartExele", "Cart", FormMethod.Post, new { enctype = "multipart/form-data", id="upload-import-cart-form" }))
+        {
+            <div class="row align-items-center mt-5">
+                <div class="col-md-6">
+                    <div class="upload-file__field">
+                        <i class="fas fa-file-image"></i>
+                        <input accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" class="upload-file__upload" id="UploadFile" name="UploadFile" type="file" value="">
+                        <label class="upload-file__label" for="UploadFile"><span>Выберите файл</span></label>
+                    </div>
+
+                    @*<div class="upload-file__field">
+                        <input class="upload-file__upload" type="file" id="upload-import-cart-file" name="file"
+                               accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                        <label class="upload-file__label">
+                            <span>@SharedResources.SelectFile Excel</span>
+                        </label>
+                    </div>*@
+                </div>
+                <div class="col-md-6">
+                    <div class="upload-file__example">@Html.Raw(string.Format(SharedResources.DownloadImportFileExample, Url.Content(ConfigHelper.CartImportFileExamplePath)))</div>
+                </div>
+                <div class="col-md-12" style="display: none" id="importRowSettings">
+                    <h4 class="mt-5">Колонки </h4>
+                    <div class="row align-items-center mb-5">
+                        <div class="col-md-4">
+                            <div class="import__column-number">
+                                <label for="codeColumn"><span>@SharedResources.Code:</span></label>
+                                <div class="import-cols__counter">
+                                    <div class="counter">
+                                        <button class="counter__btn counter--remove">-</button>
+                                        <input class="counter__field" onchange="" type="tel" name="codeColumn" id="codeColumn" value="1">
+                                        <button class="counter__btn counter--add">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="import__column-number">
+                                <label for="brandColumn"><span>@SharedResources.Brand:</span></label>
+                                <div class="import-cols__counter">
+                                    <div class="counter">
+                                        <button class="counter__btn counter--remove">-</button>
+                                        <input class="counter__field" onchange="" type="tel" name="brandColumn" id="brandColumn" value="2">
+                                        <button class="counter__btn counter--add">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="import__column-number">
+                                <label for="qntColumn"><span>@SharedResources.Amount:</span></label>
+                                <div class="import-cols__counter">
+                                    <div class="counter">
+                                        <button class="counter__btn counter--remove">-</button>
+                                        <input class="counter__field" onchange="" type="tel" name="qntColumn" id="qntColumn" value="3">
+                                        <button class="counter__btn counter--add">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <input class="upload-file__btn btn btn--main" type="submit" value="@SharedResources.ImportToCart">
+                </div>
+            </div>
+           
+       }
+    </div>
+</div>
+
+<div class="modal-content is-error-message" id="show-message-cart" data-modal-win="show-message-cart">
+    <div class="modal-warning">
+        <div class="modal-warning__heading">Ошибка</div>
+        <p class="modal-warning__desc">Ошибка</p>
+    </div>
+</div>
+
+<div class="modal-content is-error-message" id="show-test" data-modal-win="show-test">
+    <div class="modal-warning">
+        <div class="modal-warning__heading">Test</div>
+        <p class="modal-warning__desc">Test</p>
+    </div>
+</div>
+   

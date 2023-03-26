@@ -1,0 +1,64 @@
+﻿@using ViewRes
+@model Webmall.Model.Entities.Cms.Contacts.Contact
+
+@{
+    Layout = null;
+}
+
+<div class="header-top-area">
+    <div class="container-fluid">
+        <div class="header-top-area-main">
+            <div class="header__locations">
+                <div class="location-details">
+                    <div class="location-details__main">
+                        <svg class="icon icon-location" width="25" height="25">
+                            <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#location")"></use>
+                        </svg>
+                        <span id="current-location">@SharedResources.NothingChecked</span>
+                        <svg class="icon icon-chevron-down" width="25" height="25">
+                            <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#chevron-down")"></use>
+                        </svg>
+                        <span class="location-details__trigger js-regions-trigger"></span>
+                    </div>
+                    <div class="location-details__dropdown">
+                        <div class="location-details__body">
+                            <dl class="location-details__params">
+                                <div class="location-details__param">
+                                    <dt class="location-details__property">@SharedResources.Address:</dt>
+                                    <dt class="location-details__value">@Model.MainOffice</dt>
+                                </div>
+                                <div class="location-details__param">
+                                    <dt class="location-details__property">@SharedResources.Schedule:</dt>
+                                    @foreach(var item in Model.Schedule.Current) { 
+                                        <dt class="location-details__value">@Html.Raw(item.Timetable)</dt>
+                                    }
+                                </div>
+                            </dl>
+                        </div>
+                        <div class="location-details__bottom" data-modal-win-trigger="modal-locations">
+                            <div class="location-details__bottom-text">
+                                <svg class="icon icon-location" width="25" height="25">
+                                    <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#location")"></use>
+                                </svg>@SharedResources.ChooseStore
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="navigation-trigger js-dropdown-toggle d-md-none">
+                <svg class="icon icon-menu-dots navigation-trigger__icon">
+                    <use href="~/assets/images/svg/symbol/sprite.svg#menu-dots"></use>
+                </svg>
+                <svg class="icon icon-close navigation-trigger__icon">
+                    <use href="~/assets/images/svg/symbol/sprite.svg#close"></use>
+                </svg>
+            </button>
+            <div class="tiny-contacts d-none d-md-flex">
+                <a class="tiny-contacts__wrap" href="tel:@Model.Phones[0].Phone">
+                    <span class="tiny-contacts__phone">@Model.Phones[0].Phone</span>
+                </a>
+                <a class="tiny-contacts__btn btn btn--main" href="#" data-modal-win-trigger="callback-modal">@SharedResources.RequestCall</a>
+            </div>
+        </div>
+    </div>
+</div>

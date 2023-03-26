@@ -1,0 +1,153 @@
+﻿@using System.Linq
+@using Webmall.Model.Entities.User
+@using ViewRes
+@using Webmall.UI.Core
+@model VINRequest
+@{
+    Layout = "~/Views/Shared/_PersonalLayout.cshtml";
+    ViewBag.Title = SharedResources.ViewRequesByAuto;
+}
+<h1 class="main-title">@SharedResources.VINRequest №@Model.Id</h1>
+
+<div class="card-specification-section">
+    <div class="section-area">
+        <div class="section-area__heading">@SharedResources.AutoData</div>
+        <div class="manual-params manual-params--bigger">
+            <dl class="manual-params__param">
+                <dt class="manual-params__value">@SharedResources.AutoVINCode</dt>
+                <dd class="manual-params__property">@Model.VIN</dd>
+            </dl>
+            <dl class="manual-params__param">
+                <dt class="manual-params__value">@SharedResources.AutoMarka</dt>
+                <dd class="manual-params__property">@Model.MarkaName</dd>
+            </dl>
+            <dl class="manual-params__param">
+                <dt class="manual-params__value">@SharedResources.AutoModel</dt>
+                <dd class="manual-params__property">@Model.ModelName</dd>
+            </dl>
+            <dl class="manual-params__param">
+                <dt class="manual-params__value">@SharedResources.AutoModification</dt>
+                <dd class="manual-params__property">@Model.ModifName</dd>
+            </dl>
+            <dl class="manual-params__param">
+                <dt class="manual-params__value">@SharedResources.YearOfProduce</dt>
+                <dd class="manual-params__property">@Model.Year</dd>
+            </dl>
+            <dl class="manual-params__param">
+                <dt class="manual-params__value">@SharedResources.Comment</dt>
+                <dd class="manual-params__property">@Model.Comment</dd>
+            </dl>
+        </div>
+    </div>
+    <div class="section-area">
+        <div class="section-area__heading">@SharedResources.NeedPartList</div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>@SharedResources.Name</th>
+                        <th>@SharedResources.Amount</th>
+                        <th>@SharedResources.SelectedPartNumbers</th>
+                        <th>@SharedResources.Responce</th>
+                        @if (SecurityHelper.IsUserInRoleTypes((long)UserRoles.VINRequestManager))
+                        {
+                            <th></th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in @Model.Parts)
+                    {
+                        <tr>
+                            <td>@item.Description</td>
+                            <td>@item.Quantity</td>
+                            <td>
+                                @{
+                                    IEnumerable<string> links = new List<string>();
+                                    if (item.WareNums != null)
+                                    {
+                                        links = item.WareNums.Replace(" ", "|").Replace(";", "|").Replace(",", "|").Split('|').Where(s => !string.IsNullOrWhiteSpace(s));
+                                    }
+                                }
+                                @foreach (var link in links)
+                                {
+                                    @Html.ActionLink(link, "Search", "Catalog", new { number = link }, null)
+                                    @(links.Last() == link ? "" : ", ")
+                                }
+                            </td>
+                            <td>
+                                @item.ResponseComment
+                            </td>
+                            @if (SecurityHelper.IsUserInRoleTypes((long)UserRoles.VINRequestManager))
+                            {
+                                <td>
+                                    <a class="clickable" onclick="showdlg(@item.Id, '@item.WareNums', '@item.ResponseComment')"><img src="@Url.Content("~/Content/images/edit.png")" width="21" height="19"></a>
+                                </td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="section-area__summary">
+        <a class="section-area__summary-cancel" href="@(Url.Action("Index"))"><i class="fa fa-times-circle"></i> @SharedResources.ReturnToRequests</a>
+        @if (SecurityHelper.IsUserInRoleTypes((long)UserRoles.VINRequestManager))
+        {
+            using (Html.BeginForm("MarkVINRequestAsAnswered", "VINRequest", FormMethod.Post, new { @style = "display:inline-block" }))
+            {
+                @Html.Hidden("id")
+                <input class="btn btn--main" type="submit" name="send-data" value="@SharedResources.SendResponce">
+
+                @*@Html.SubmitButton(SharedResources.SendResponce)*@
+            }
+        }
+    </div>
+</div>
+@section dialogs
+{
+    <div id="dialog-vin" title="Подбор каталожных номеров" style="display: none">
+        @using (Html.BeginForm("MakeOrUpdateResponse", "VINRequest", FormMethod.Post))
+        {
+            <label>
+                @SharedResources.SelectedPartNumbersFull
+                @Html.TextBox("wareNums")
+            </label>
+            <label>
+                @SharedResources.Comment
+                @Html.TextArea("responseComment")
+            </label>
+            <div class="right">
+                @Html.SubmitButton(SharedResources.Save)
+            </div>
+            @Html.Hidden("id")
+            @Html.Hidden("posid")
+        }
+    </div>
+}
+@section scripts
+{
+    <script type="text/javascript">
+
+        function showdlg(posid, wareNums, responseComment) {
+            $('#posid').val(posid);
+            $('#wareNums').val(wareNums);
+            $('#responseComment').val(responseComment);
+            $('#dialog-vin').dialog('open');
+        }
+
+        $(function () {
+            $("#dialog-vin").dialog({
+                autoOpen: false,
+                show: {
+                    effect: "fade",
+                    duration: 500
+                },
+                hide: {
+                    effect: "fade",
+                    duration: 500
+                }
+            });
+        });
+    </script>
+}

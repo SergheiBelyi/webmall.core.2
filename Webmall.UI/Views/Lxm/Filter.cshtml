@@ -1,0 +1,29 @@
+﻿@using ViewRes
+@using Webmall.UI.Core
+@using Webmall.UI.Models.Laximo
+
+@model FilterModel
+
+@{
+    Layout = null;
+    ViewBag.Title = "Filter";
+    var baseModel = Model.Clone();
+}
+
+@using (Html.BeginForm("Unit", "Lxm", FormMethod.Get))
+{
+    @Html.HiddenFor(m=>Model.VehicleId)
+    @Html.HiddenFor(m => Model.CatalogId)
+    @Html.HiddenFor(m => Model.CategoryId)
+    @Html.HiddenFor(m => Model.UnitId)
+    @Html.HiddenFor(m => Model.Ssd)
+
+    <label class="long">
+        @Model.Filters[0].Name<br>
+        @Html.DropDownList("filter",  Model.Filters[0].Values.Select(i=>new SelectListItem { Text = i.Name, Value = i.SsdModification }))
+    </label>
+    <br />
+
+    @Html.SubmitButton(SharedResources.Select)
+}
+

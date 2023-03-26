@@ -1,0 +1,103 @@
+﻿@using Webmall.UI.Core
+
+@model GridViewOptions
+
+@if (Model.TotalPages > 1 && Model.AllowPagging)
+{
+    Model.CurrentPage = Model.CurrentPage ?? 1;
+
+
+    var pages = new List<int?>();
+    if (Model.TotalPages < 7)
+    {
+        for (int i = 1; i <= Model.TotalPages; i++) { pages.Add(i);}
+    }
+    else if (Model.CurrentPage <= 2)
+    {
+        for (int i = 1; i <= 3; i++) { pages.Add(i);}
+        pages.Add(null);
+        for (int i = Model.TotalPages - 2; i <= Model.TotalPages; i++) { pages.Add(i); }
+    }
+    else if (Model.CurrentPage >= Model.TotalPages - 2)
+    {
+        for (int i = 1; i <= 2; i++)
+        {
+            pages.Add(i);
+           
+        }
+        pages.Add(null);
+        
+        for (int i = Model.TotalPages - 3; i <= Model.TotalPages; i++)
+        {
+            pages.Add(i);
+        }
+    }
+    else
+    {
+        for (int i = 1; i <= 2; i++)
+        {
+            pages.Add(i);
+        }
+        pages.Add(null);
+        for (int i = Model.CurrentPage.Value - 1; i <= Model.CurrentPage.Value + 1; i++)
+        {
+            pages.Add(i);
+        }
+        pages.Add(null);
+        for (int i = Model.TotalPages - 1; i <= Model.TotalPages; i++)
+        {
+            pages.Add(i);
+        }
+    }
+
+
+        <div class="pagination">
+
+            @if (Model.CurrentPage != 1)
+            {
+                <a class="pagination__first" href="#" onclick="return gotoPage(this, 1)">
+                    <svg class="pagination__first-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.5 6.93038V13.0618L7.90139 9.97312L12.5 6.93038Z"></path>
+                        <line x1="5.5" y1="5.71429" x2="5.5" y2="14.2857"></line>
+                    </svg>
+                </a>
+
+                <a class="pagination__prev" href="#" onclick="return gotoPage(this, @(Model.CurrentPage - 1));">
+                    <svg class="pagination__prev-icon" width="6" height="8" viewBox="0 0 6 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 8L0 3.97L6 0V8Z"></path>
+                    </svg>
+                </a>
+            }
+            <ul class="pagination__list">
+                @foreach (var p in pages)
+                {
+                    <li class="pagination__item">
+                        @if (p.HasValue)
+                        {
+                            var active = Model.CurrentPage == p ? "active" : "";
+                            <a class="pagination__link @active" onclick="return gotoPage(this, @p);" href="#">@p.ToString()</a>
+                        }
+                        else
+                        {
+                            <text>&hellip;</text>
+                        }
+                    </li>
+                }
+            </ul>
+            @if (Model.CurrentPage != @Model.TotalPages)
+            {
+                <a class="pagination__next" href="#" onclick="return gotoPage(this, @(Model.CurrentPage + 1)); ">
+                    <svg class="pagination__next-icon" width="6" height="8" viewBox="0 0 6 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 8L6 3.97L0 0V8Z"></path>
+                    </svg>
+                </a><a class="pagination__last" href="#" onclick="return gotoPage(this, @(Model.TotalPages)); ">
+                    <svg class="pagination__last-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.5 6.93038V13.0618L12.0986 9.97312L7.5 6.93038Z"></path>
+                        <line y1="-0.5" x2="8.57143" y2="-0.5" transform="matrix(0 1 1 0 15 5.71429)"></line>
+                    </svg>
+                </a>
+            }
+            @Html.Hidden("CurrentPage")
+        </div>
+    
+}

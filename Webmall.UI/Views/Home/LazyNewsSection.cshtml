@@ -1,0 +1,7 @@
+﻿@{ Layout = null; }
+
+<div class="container-fluid">
+
+    @{ Html.RenderAction("RenderNews", new { type = "news" }); }
+    @{ Html.RenderAction("RenderNews", new { type = "promo" }); }
+</div>

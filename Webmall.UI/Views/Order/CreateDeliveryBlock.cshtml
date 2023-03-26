@@ -1,0 +1,266 @@
+﻿
+@{
+    Layout = null;
+}
+
+<div class="tabs__pane js-tabs-pane">
+    <div class="tabs__accordion-toggle js-tabs-accordion-toggle" id="delivery-2">Доставка</div>
+    <div class="tabs__accordion-body">
+        <!-- delivery-table-->
+        <div class="delivery-table">
+            <div class="delivery-table__header">
+                <div class="delivery-table__addresses user-addresses" hidden>
+                    <div class="user-addresses__field">
+                        <select class="user-addresses__input select" name="address">
+                            <option value="" selected disabled hidden>Адрес доставки</option>
+                            <option value="addr">Адрес доставки 1</option>
+                            <option value="addr">Адрес доставки 2</option>
+                            <option value="addr">Адрес доставки 3</option>
+                            <option value="addr">Адрес доставки 4</option>
+                        </select>
+                    </div>
+                    <button class="user-addresses__btn btn-add" type="button" data-modal-win-trigger="address-add">
+                        <span class="btn-add__icon-wrap">
+                            <svg class="icon icon-plus btn-add__icon" width="25" height="25">
+                                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#plus")"></use>
+                            </svg>
+                        </span>
+                        <span class="btn-add__text">Добавить</span>
+                    </button>
+                </div>
+                <div class="delivery-table__checks">
+                    <!-- check-order-->
+                    <div class="delivery-table__check check-order">
+                        <div class="check-order__option checkbox-label">
+                            <input class="checkbox-label__input" type="checkbox" name="opt" id="opts-1">
+                            <label class="checkbox-label__main" for="opts-1">
+                                <span class="checkbox-label__main-text">Нужен товарный чек</span>
+                            </label>
+                        </div>
+                    </div><!-- /check-order-->
+                    <!-- check-order-->
+                    <div class="delivery-table__check check-order is-accent">
+                        <div class="check-order__option checkbox-label">
+                            <input class="checkbox-label__input" type="checkbox" name="opt" id="opts-2">
+                            <label class="checkbox-label__main" for="opts-2">
+                                <span class="checkbox-label__main-text">Доставлять по доступности</span>
+                            </label>
+                        </div>
+                    </div><!-- /check-order-->
+                </div>
+            </div>
+            <div class="delivery-table__main">
+                <!-- table-->
+                <div class="table-responsive delivery-table__area">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Способ доставки</th>
+                                <th class="text-center">21.05.2021</th>
+                                <th class="text-center">21.05.2021</th>
+                                <th class="text-center">21.05.2021</th>
+                                <th class="text-center">21.05.2021</th>
+                                <th class="text-center">21.05.2021</th>
+                                <th class="text-center">21.05.2021</th>
+                                <th class="text-center">21.05.2021</th>
+                                <th class="text-center">21.05.2021</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="is-days">
+                                <td>&nbsp;</td>
+                                <td>пт</td>
+                                <td>сб</td>
+                                <td>вс</td>
+                                <td>пн</td>
+                                <td>вт</td>
+                                <td>ср</td>
+                                <td>чт</td>
+                                <td>пт</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>До двери</strong>
+                                </td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Курьер</strong>
+                                </td>
+                                <td>
+                                    <ul class="is-current">
+                                        <li>11:00-13:00</li>
+                                        <li>13:00-15:00</li>
+                                        <li>15:00-17:00</li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul>
+                                        <li>09:00-11:00</li>
+                                        <li>11:00-13:00</li>
+                                        <li>13:00-15:00</li>
+                                        <li>15:00-17:00</li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul>
+                                        <li>09:00-11:00</li>
+                                        <li>11:00-13:00</li>
+                                        <li>13:00-15:00</li>
+                                        <li>15:00-17:00</li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul>
+                                        <li>09:00-11:00</li>
+                                        <li>11:00-13:00</li>
+                                        <li>13:00-15:00</li>
+                                        <li>15:00-17:00</li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul>
+                                        <li>09:00-11:00</li>
+                                        <li>11:00-13:00</li>
+                                        <li>13:00-15:00</li>
+                                        <li>15:00-17:00</li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul>
+                                        <li>09:00-11:00</li>
+                                        <li>11:00-13:00</li>
+                                        <li>13:00-15:00</li>
+                                        <li>15:00-17:00</li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul>
+                                        <li>09:00-11:00</li>
+                                        <li>11:00-13:00</li>
+                                        <li>13:00-15:00</li>
+                                        <li>15:00-17:00</li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul>
+                                        <li>09:00-11:00</li>
+                                        <li>11:00-13:00</li>
+                                        <li>13:00-15:00</li>
+                                        <li>15:00-17:00</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div><!-- /table-->
+                <!-- delivery-timetable-->
+                <div class="delivery-table__timetable delivery-timetable">
+                    <div class="delivery-timetable__header">Способ доставки - курьер</div>
+                    <div class="delivery-timetable__main">
+                        <div class="delivery-timetable__row js-accordion">
+                            <div class="delivery-timetable__caption js-accordion-trigger">21.05.2021 пт</div>
+                            <div class="delivery-timetable__body js-accordion-body" hidden>
+                                <ul class="delivery-timetable__list">
+                                    <li class="delivery-timetable__item">09:00-11:00</li>
+                                    <li class="delivery-timetable__item">09:00-11:00</li>
+                                    <li class="delivery-timetable__item">13:00-15:00</li>
+                                    <li class="delivery-timetable__item">15:00-17:00</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="delivery-timetable__row js-accordion">
+                            <div class="delivery-timetable__caption js-accordion-trigger">21.05.2021 сб</div>
+                            <div class="delivery-timetable__body js-accordion-body" hidden>
+                                <ul class="delivery-timetable__list">
+                                    <li class="delivery-timetable__item">09:00-11:00</li>
+                                    <li class="delivery-timetable__item">09:00-11:00</li>
+                                    <li class="delivery-timetable__item">13:00-15:00</li>
+                                    <li class="delivery-timetable__item">15:00-17:00</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="delivery-timetable__row js-accordion">
+                            <div class="delivery-timetable__caption js-accordion-trigger">21.05.2021 вс</div>
+                            <div class="delivery-timetable__body js-accordion-body" hidden>
+                                <ul class="delivery-timetable__list">
+                                    <li class="delivery-timetable__item">09:00-11:00</li>
+                                    <li class="delivery-timetable__item">09:00-11:00</li>
+                                    <li class="delivery-timetable__item">13:00-15:00</li>
+                                    <li class="delivery-timetable__item">15:00-17:00</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="delivery-timetable__row js-accordion">
+                            <div class="delivery-timetable__caption js-accordion-trigger">21.05.2021 пн</div>
+                            <div class="delivery-timetable__body js-accordion-body" hidden>
+                                <ul class="delivery-timetable__list">
+                                    <li class="delivery-timetable__item">09:00-11:00</li>
+                                    <li class="delivery-timetable__item">09:00-11:00</li>
+                                    <li class="delivery-timetable__item">13:00-15:00</li>
+                                    <li class="delivery-timetable__item">15:00-17:00</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="delivery-timetable__row js-accordion">
+                            <div class="delivery-timetable__caption js-accordion-trigger">21.05.2021 вт</div>
+                            <div class="delivery-timetable__body js-accordion-body" hidden>
+                                <ul class="delivery-timetable__list">
+                                    <li class="delivery-timetable__item">09:00-11:00</li>
+                                    <li class="delivery-timetable__item">09:00-11:00</li>
+                                    <li class="delivery-timetable__item">13:00-15:00</li>
+                                    <li class="delivery-timetable__item">15:00-17:00</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="delivery-timetable__row js-accordion">
+                            <div class="delivery-timetable__caption js-accordion-trigger">21.05.2021 ср</div>
+                            <div class="delivery-timetable__body js-accordion-body" hidden>
+                                <ul class="delivery-timetable__list">
+                                    <li class="delivery-timetable__item">09:00-11:00</li>
+                                    <li class="delivery-timetable__item">09:00-11:00</li>
+                                    <li class="delivery-timetable__item">13:00-15:00</li>
+                                    <li class="delivery-timetable__item">15:00-17:00</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="delivery-timetable__row js-accordion">
+                            <div class="delivery-timetable__caption js-accordion-trigger">21.05.2021 чт</div>
+                            <div class="delivery-timetable__body js-accordion-body" hidden>
+                                <ul class="delivery-timetable__list">
+                                    <li class="delivery-timetable__item">09:00-11:00</li>
+                                    <li class="delivery-timetable__item">09:00-11:00</li>
+                                    <li class="delivery-timetable__item">13:00-15:00</li>
+                                    <li class="delivery-timetable__item">15:00-17:00</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="delivery-timetable__row js-accordion">
+                            <div class="delivery-timetable__caption js-accordion-trigger">21.05.2021 пт</div>
+                            <div class="delivery-timetable__body js-accordion-body" hidden>
+                                <ul class="delivery-timetable__list">
+                                    <li class="delivery-timetable__item">09:00-11:00</li>
+                                    <li class="delivery-timetable__item">09:00-11:00</li>
+                                    <li class="delivery-timetable__item">13:00-15:00</li>
+                                    <li class="delivery-timetable__item">15:00-17:00</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /delivery-timetable-->
+            </div>
+            <div class="delivery-table__bottom">
+                <div class="delivery-table__bottom-caption">Курьерская доставка</div>
+                <div class="delivery-table__bottom-value">500 р</div>
+            </div>
+        </div><!-- /delivery-table-->
+    </div>
+</div>

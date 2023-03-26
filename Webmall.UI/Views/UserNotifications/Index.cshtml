@@ -1,0 +1,37 @@
+﻿@using ViewRes
+@model List<ValmiStore.Model.Entities.User.NotificationHistoryItem>
+
+@{
+    Layout = "~/Views/Shared/_PersonalLayout.cshtml";
+    ViewBag.Title = SharedResources.NotificationsHistory;
+    ViewBag.HideTitle = false;
+}
+
+
+<aside id="catalog-content">
+    <h2>@SharedResources.NotificationsHistory</h2>
+    <div id="act-verification">
+        <table class="all-product verification">
+            <thead>
+                <tr>
+                    <th>@SharedResources.Date</th>
+                    @*<th>@SharedResources.Email</th>*@
+                    <th>@SharedResources.Subject</th>
+                </tr>
+            </thead>
+            @foreach (var row in Model)
+            {
+                <tbody>
+                    <tr>
+                        <td rowspan="2">@row.Date</td>
+                        @*<td>@row.Address</td>*@
+                        <td><b>@(row.Subject)</b></td>
+                    </tr>
+                <tr>
+                    <td colspan="2">@Html.Raw(row.Text)</td>
+                </tr>
+                </tbody>
+            }
+        </table>
+    </div>
+</aside>

@@ -1,0 +1,52 @@
+﻿@using Webmall.UI.Models.Laximo
+@using ViewRes
+
+@model UnitModel
+          
+@{
+    var baseModel = Model.Clone();
+    baseModel.UnitId = Model.UnitInfo.Id;
+    baseModel.Ssd = Model.Ssd;
+}
+
+<div id="dialogLxmFilter" title="2.0 TDI"></div>
+
+<script>
+    $(function () {
+
+        $("#dialogLxmFilter").dialog({
+            autoOpen: false,
+            resizable: false,
+            draggable: true,
+            width: "auto",
+            minHeight: 50,
+            show: {
+                effect: "fade",
+                duration: 100
+            },
+            hide: {
+                effect: "explode",
+                duration: 500
+            }
+        }
+        );
+    });
+
+    function ViewInfo(obj) {
+        var title = '@SharedResources.SelectFromList';
+        $('#dialogLxmFilter').dialog("option", "title", title);
+        $("#dialogLxmFilter").dialog("open");
+        $('#dialogLxmFilter').dialog("widget").position({
+            my: "left top",
+            at: "right bottom",
+            of: obj
+        });
+    }
+
+    function UpdateInfo(obj) {
+        //var id = obj.id;
+        var filter = (obj.attributes.filter) ? obj.attributes.filter.value : null;
+        updatePannel('@Html.Raw(Url.Action("Filter", baseModel))'+'&filter='+filter, 'dialogLxmFilter', null, ViewInfo, obj);
+    }
+
+</script>

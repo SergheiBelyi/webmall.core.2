@@ -1,0 +1,29 @@
+﻿@{ Layout = null; }
+@model List<Webmall.Model.Entities.Cms.HomePage.Banner>
+
+<div class="main-carousel">
+    <div class="swiper main-carousel__container js-main-carousel">
+        <div class="swiper-wrapper">
+            @foreach (var t in Model)
+            {       
+                <div class="swiper-slide">
+                    <a href="@(new HtmlString(t.Url))">
+                    <figure class="main-carousel__slide" style="background-image: url('@(new HtmlString(t.ImageUrl))')">
+                        <img class="main-carousel__img" src="@(new HtmlString(t.ImageUrl))" />
+                    </figure></a>
+                </div>
+            }
+        </div>
+        <div class="main-carousel__pagination js-main-carousel-pagination"></div>
+        <div class="main-carousel__prev js-main-carousel-prev">
+            <svg class="icon icon-arrow-left main-carousel__move-icon">
+                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#arrow-left")"></use>
+            </svg>
+        </div>
+        <div class="main-carousel__next js-main-carousel-next">
+            <svg class="icon icon-arrow-right main-carousel__move-icon">
+                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#arrow-right")"></use>
+            </svg>
+        </div>
+    </div>
+</div>

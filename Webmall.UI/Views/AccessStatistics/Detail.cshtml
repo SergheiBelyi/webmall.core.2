@@ -1,0 +1,30 @@
+﻿@using Webmall.UI.Core
+@model Webmall.UI.Models.AccessStatistics.AccessStatisticsDetail
+
+@{
+    ViewBag.Title = "AccessStatistics detail";
+    Layout = "~/Views/Shared/_PersonalLayout.cshtml";
+}
+
+<table class="brands-table table">
+    <thead>
+        <tr class="first">
+            <th>@Html.SortColumnLink(Model.Items, "Время", "AccessTime")</th>
+            <th>@Html.SortColumnLink(Model.Items, "URL", "URL")</th>
+        </tr>
+    </thead>
+    @foreach (var item in Model.Items.List)
+    {
+        <tr>
+            <td>@item.AccessTime.ToString()</td>
+            <td>@item.URL</td>
+        </tr>
+    }
+</table>
+@{Html.RenderPartial("Components/Pagination", Model.Items);}
+@*@{ Html.RenderPartial("GridViewFooter", Model.Items); }*@
+
+@section scripts
+{
+    @{ Html.RenderPartial("GridViewFooterScripts", Model.Items); }
+}

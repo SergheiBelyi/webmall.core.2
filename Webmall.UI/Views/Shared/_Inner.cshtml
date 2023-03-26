@@ -1,0 +1,51 @@
+﻿@{
+    Layout = "_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    @RenderSection("BreadCrumbs", false)
+    <div class="catalog-top-section d-none d-md-flex">
+        <div class="catalog-top-section__main">
+            @RenderSection("FilterBadges", false)
+            @RenderSection("ViewModes", false)
+        </div>
+    </div>
+
+    <div class="catalog-layout">
+        @RenderSection("Sidebar", false)
+        <main class="catalog-layout__main" role="main">
+            @RenderBody()
+        </main>
+    </div>
+</div>
+<div id="locker"></div>
+
+@section scripts
+{
+    @RenderSection("scripts", required: false)
+    <script>
+        function checkComparisionPanalPresence() {
+            var pannel = $('#compare');
+            if (pannel.length) {
+                $('.compare-resizable').removeClass('search');
+            } else {
+                $('.compare-resizable').addClass('search');
+            }
+        }
+
+        $(function () {
+            window.checkComparisionPanalPresence();
+        });
+    </script>
+}
+
+@section styles
+{
+    @RenderSection("styles", required: false)
+    @Styles.Render("~/Content/views/inner")
+}
+
+@section dialogs
+{
+    @RenderSection("dialogs", required: false)
+}

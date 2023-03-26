@@ -1,0 +1,14 @@
+﻿@using Webmall.UI.Core.HtmlHelpers
+@model System.Collections.Generic.List<string>
+
+@{
+    Layout = null;
+}
+
+@foreach (var item in Model)
+{
+    var imgUrl = Url.WareImage(item); //Url.Action("GetImage", "Images", new {imageId = item});
+    <a class="stock-table__product-img-wrap" href="@imgUrl">
+        <img class="stock-table__product-img" data-imageId="@item" src="@imgUrl" alt="Image">
+    </a>
+}

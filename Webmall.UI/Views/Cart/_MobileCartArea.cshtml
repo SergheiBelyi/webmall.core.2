@@ -1,0 +1,391 @@
+﻿@using ViewRes
+@using Webmall.UI.Core
+
+@model Webmall.UI.Models.Cart.CartModel
+@{ var rate = SessionHelper.CurrentValute.Rate; }
+
+<!-- stock-table-mob-->
+<div class="stock-area__mob-table stock-mob-table js-checked-all">
+    <header class="stock-mob-table__header">
+        <div class="stock-mob-table__row">
+            <div class="stock-mob-table__cell">
+                <div class="stock-mob-table__checkbox checkbox-label">
+                    <input class="checkbox-label__input js-checked-all-trigger" type="checkbox" name="m-is-opt-0" id="m-opt-0" checked="checked">
+                    <label class="checkbox-label__main" for="m-opt-0"></label>
+                </div>
+            </div>
+            <div class="stock-mob-table__cell">
+                <div class="stock-mob-table__caption">@SharedResources.PartNumber, @SharedResources.Brand</div>
+            </div>
+            <div class="stock-mob-table__cell">
+                <div class="stock-mob-table__caption">@SharedResources.Term</div>
+            </div>
+            <div class="stock-mob-table__cell">
+                <div class="stock-mob-table__caption" style="justify-content: center;">@SharedResources.Amount</div>
+            </div>
+            <div class="stock-mob-table__cell">
+                <div class="stock-mob-table__caption">@SharedResources.Sum</div>
+            </div>
+            <div class="stock-mob-table__cell">
+                <div class="stock-mob-table__caption">&nbsp;</div>
+            </div>
+        </div>
+    </header>
+    <div class="stock-mob-table__main">
+        @foreach (var item in Model.Positions.List)
+        {
+            var wareUrl = item.Url; // Url.Action("WareIndex", "Catalog", new { group = Request.QueryString["group"], id = item.WareId, returnUrl = Request.Url });
+            var deliveryRatingClass = (item.DeliveryRating >= 90) ? "is-success" : (item.DeliveryRating >= 50) ? "is-warning" : "is-danger";
+
+            <div class="stock-mob-table__row js-accordion">
+                <div class="stock-mob-table__cell">
+                    <div class="stock-mob-table__checkbox checkbox-label">
+                        <input class="checkbox-label__input js-checked-all-item" type="checkbox" value="@item.Id" name="m-selected" id="m-opt-@item.Id" checked="checked">
+                        <label class="checkbox-label__main" for="m-opt-@item.Id"></label>
+                    </div>
+                </div>
+                <div class="stock-mob-table__cell">
+                    <div class="stock-mob-table__info">
+                        <a class="stock-mob-table__articul" href="@wareUrl">@item.WareNum</a>
+                        <div class="stock-mob-table__heading">
+                            <a class="stock-mob-table__heading-link" href="@wareUrl">@item.ProducerName</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="stock-mob-table__cell">
+                    <div class="stock-mob-table__term term-info @(item.IsReturnAllowed ? "" : "is-danger")" data-modal-win-trigger="term">
+                        <span class="term-info__text">@item.DeliveryPresentation</span>
+                        <div class="term-info__availability">
+                            @if (item.IsReturnAllowed)
+                            {
+                                <span class="term-info__availability-text">@item.ReturnDays</span>
+                            }
+                            else
+                            {
+                                <svg class="icon icon-close term-info__availability-cross" width="25" height="25">
+                                    <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#close")"></use>
+                                </svg>
+                            }
+                            <svg class="icon icon-stock term-info__availability-icon" width="25" height="25">
+                                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#stock")"></use>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="stock-mob-table__cell">
+                    <div class="stock-mob-table__counter-area">
+                        <div class="stock-mob-table__progress progress-badge @deliveryRatingClass">@item.DeliveryRating%</div>
+                        <div class="stock-mob-table__counter-trigger input" data-modal-win-trigger="product-detail-add"
+                             id="mob-qnt-@item.Id" data-after-open="UpdateCartDialog(@item.Id);"
+                             data-id="@(item.Id)" data-sale-qnt="@item.SaleQnt" data-warehouse-qnt="@item.WarehouseQnt">@($"{item.WareQnt:0}")</div>
+                    </div>
+                </div>
+                <div class="stock-mob-table__cell">
+                    <div class="stock-mob-table__prices">
+                        <strong class="stock-mob-table__price-primary" id="positionMobile@(item.Id)">@SessionHelper.PriceFormat(new Decimal(Math.Round((double)(item.ClientPrice / rate), 2)) * item.WareQnt)</strong>
+                        @*<span class="stock-mob-table__price-secondary">1000,24</span>*@
+                    </div>
+                </div>
+                <div class="stock-mob-table__cell">
+                    <button class="stock-mob-table__mob-toggle js-accordion-trigger">
+                        <svg class="icon icon-chevron-down stock-mob-table__mob-toggle-icon" width="25" height="25">
+                            <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#chevron-down")"></use>
+                        </svg>
+                    </button>
+                </div>
+                <div class="stock-mob-table__dropdown js-accordion-body" hidden>
+                    <dl class="stock-mob-table__params">
+                        <div class="stock-mob-table__param">
+                        <dt class="stock-mob-table__property">@SharedResources.Name</dt>
+                        <dd class="stock-mob-table__value">@item.WareName</dd>
+                </div>
+                <div class="stock-mob-table__param">
+                    <dt class="stock-mob-table__property">@SharedResources.Warehouse</dt>
+                    <dd class="stock-mob-table__value">@item.WarehouseName</dd>
+                </div>
+                <div class="stock-mob-table__param">
+                    <dt class="stock-mob-table__property">@SharedResources.PricePerOne</dt>
+                    <dd class="stock-mob-table__value">@SessionHelper.PriceFormat(item.ClientPrice)</dd>
+                </div>
+                <div class="stock-mob-table__param">
+                    <dt class="stock-mob-table__property">@SharedResources.AddTime</dt>
+                    <dd class="stock-mob-table__value">@item.CreationDate.ToString("MM/dd/yyyy"), @item.CreationDate.ToString("HH:mm")</dd>
+                </div>
+                <div class="stock-mob-table__param">
+                    <dt class="stock-mob-table__property">@SharedResources.DeliveryProbability</dt>
+                    <dd class="stock-mob-table__value">
+                        <div class="progress-badge is-success">@item.DeliveryRating%</div>
+                    </dd>
+                </div>
+                </dl>
+                <div class="stock-mob-table__comment user-note">
+                    <label class="user-note__caption" for="un-@item.Id">@item.Comment:</label>
+                    <textarea class="user-note__input input" placeholder="@SharedResources.AddComment" id="un-@item.Id" oninput="return SubmitEditPositionCommentMobile(this,  @item.Id)">@item.Comment</textarea>
+                </div>
+                <div class="stock-mob-table__bottom">
+                    <a class="stock-mob-table__remove" href="#" onclick="return RemoveCartPositionMob(this, @item.Id)">@SharedResources.Delete</a>
+                </div>
+            </div>
+        </div>
+    }
+        @*
+            <div class="stock-mob-table__row js-accordion">
+                <div class="stock-mob-table__cell">
+                    <div class="stock-mob-table__checkbox checkbox-label">
+                        <input class="checkbox-label__input js-checked-all-item" type="checkbox" name="is-opt-18" id="opt-18">
+                        <label class="checkbox-label__main" for="opt-18"></label>
+                    </div>
+                </div>
+                <div class="stock-mob-table__cell">
+                    <a class="stock-mob-table__articul" href="#">46576898908</a>
+                    <div class="stock-mob-table__heading">
+                        <a class="stock-mob-table__heading-link" href="#">BOSCH Battery</a>
+                    </div>
+                </div>
+                <div class="stock-mob-table__cell">
+                    <div class="stock-mob-table__term term-info is-danger" data-modal-win-trigger="term-failure">
+                        <span class="term-info__text">19.05</span>
+                        <div class="term-info__availability">
+                            <svg class="icon icon-close term-info__availability-cross" width="25" height="25">
+                                <use href="assets/images/svg/symbol/sprite.svg#close"></use>
+                            </svg>
+                            <svg class="icon icon-stock term-info__availability-icon" width="25" height="25">
+                                <use href="assets/images/svg/symbol/sprite.svg#stock"></use>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="stock-mob-table__cell">
+                    <div class="stock-mob-table__counter-area">
+                        <div class="stock-mob-table__progress progress-badge is-success">98%</div>
+                        <div class="stock-mob-table__counter-trigger input" data-modal-win-trigger="product-detail-add">2</div>
+                    </div>
+                </div>
+                <div class="stock-mob-table__cell">
+                    <div class="stock-mob-table__prices">
+                        <span class="stock-mob-table__price-secondary">1000,24</span>
+                    </div>
+                </div>
+                <div class="stock-mob-table__cell">
+                    <button class="stock-mob-table__mob-toggle js-accordion-trigger">
+                        <svg class="icon icon-chevron-down stock-mob-table__mob-toggle-icon" width="25" height="25">
+                            <use href="assets/images/svg/symbol/sprite.svg#chevron-down"></use>
+                        </svg>
+                    </button>
+                </div>
+                <div class="stock-mob-table__dropdown js-accordion-body" hidden>
+                    <dl class="stock-mob-table__params">
+                        <div class="stock-mob-table__param">
+                            <dt class="stock-mob-table__property">Наименование</dt>
+                            <dd class="stock-mob-table__value">АКБ Bosch S4 12V 52Ah 470EN 207x175x190 -/+ </dd>
+                        </div>
+                        <div class="stock-mob-table__param">
+                            <dt class="stock-mob-table__property">Склад</dt>
+                            <dd class="stock-mob-table__value">ТО Пинск</dd>
+                        </div>
+                        <div class="stock-mob-table__param">
+                            <dt class="stock-mob-table__property">Цена за единицу </dt>
+                            <dd class="stock-mob-table__value">1340, 70</dd>
+                        </div>
+                        <div class="stock-mob-table__param">
+                            <dt class="stock-mob-table__property">Дата добавления</dt>
+                            <dd class="stock-mob-table__value">22.05.22, 14:50</dd>
+                        </div>
+                        <div class="stock-mob-table__param">
+                            <dt class="stock-mob-table__property">Вероятность поставки</dt>
+                            <dd class="stock-mob-table__value">
+                                <div class="progress-badge is-success">81%</div>
+                            </dd>
+                        </div>
+                    </dl>
+                    <div class="stock-mob-table__comment user-note">
+                        <label class="user-note__caption" for="un-11">Примечание:</label>
+                        <textarea class="user-note__input input scrollbar" name="usernote" placeholder="Добавить примечание" id="un-11"></textarea>
+                    </div>
+                    <div class="stock-mob-table__bottom">
+                        <a class="stock-mob-table__remove" href="#">Удалить из корзины</a>
+                    </div>
+                </div>
+            </div>
+            <div class="stock-mob-table__row js-accordion">
+                <div class="stock-mob-table__cell">
+                    <div class="stock-mob-table__checkbox checkbox-label">
+                        <input class="checkbox-label__input js-checked-all-item" type="checkbox" name="is-opt-19" id="opt-19">
+                        <label class="checkbox-label__main" for="opt-19"></label>
+                    </div>
+                </div>
+                <div class="stock-mob-table__cell">
+                    <a class="stock-mob-table__articul" href="#">46576898908</a>
+                    <div class="stock-mob-table__heading">
+                        <a class="stock-mob-table__heading-link" href="#">BOSCH Battery</a>
+                    </div>
+                </div>
+                <div class="stock-mob-table__cell">
+                    <div class="stock-mob-table__term term-info">
+                        <span class="term-info__text">19.05</span>
+                    </div>
+                </div>
+                <div class="stock-mob-table__cell">
+                    <div class="stock-mob-table__counter-area">
+                        <div class="stock-mob-table__progress progress-badge is-warning">86%</div>
+                        <div class="stock-mob-table__counter-trigger input" data-modal-win-trigger="product-detail-add">1</div>
+                    </div>
+                </div>
+                <div class="stock-mob-table__cell">
+                    <div class="stock-mob-table__prices">
+                        <span class="stock-mob-table__price-secondary">1000,24</span>
+                    </div>
+                </div>
+                <div class="stock-mob-table__cell">
+                    <button class="stock-mob-table__mob-toggle js-accordion-trigger">
+                        <svg class="icon icon-chevron-down stock-mob-table__mob-toggle-icon" width="25" height="25">
+                            <use href="assets/images/svg/symbol/sprite.svg#chevron-down"></use>
+                        </svg>
+                    </button>
+                </div>
+                <div class="stock-mob-table__dropdown js-accordion-body" hidden>
+                    <dl class="stock-mob-table__params">
+                        <div class="stock-mob-table__param">
+                            <dt class="stock-mob-table__property">Наименование</dt>
+                            <dd class="stock-mob-table__value">АКБ Bosch S4 12V 52Ah 470EN 207x175x190 -/+ </dd>
+                        </div>
+                        <div class="stock-mob-table__param">
+                            <dt class="stock-mob-table__property">Склад</dt>
+                            <dd class="stock-mob-table__value">ТО Пинск</dd>
+                        </div>
+                        <div class="stock-mob-table__param">
+                            <dt class="stock-mob-table__property">Цена за единицу </dt>
+                            <dd class="stock-mob-table__value">1340, 70</dd>
+                        </div>
+                        <div class="stock-mob-table__param">
+                            <dt class="stock-mob-table__property">Дата добавления</dt>
+                            <dd class="stock-mob-table__value">22.05.22, 14:50</dd>
+                        </div>
+                        <div class="stock-mob-table__param">
+                            <dt class="stock-mob-table__property">Вероятность поставки</dt>
+                            <dd class="stock-mob-table__value">
+                                <div class="progress-badge is-warning">81%</div>
+                            </dd>
+                        </div>
+                    </dl>
+                    <div class="stock-mob-table__comment user-note">
+                        <label class="user-note__caption" for="un-11">Примечание:</label>
+                        <textarea class="user-note__input input scrollbar" name="usernote" placeholder="Добавить примечание" id="un-11"></textarea>
+                    </div>
+                    <div class="stock-mob-table__bottom">
+                        <a class="stock-mob-table__remove" href="#">Удалить из корзины</a>
+                    </div>
+                </div>
+            </div>
+            <div class="stock-mob-table__row js-accordion is-danger">
+                <div class="stock-mob-table__cell">
+                    <div class="stock-mob-table__checkbox checkbox-label">
+                        <input class="checkbox-label__input js-checked-all-item" type="checkbox" name="is-opt-20" id="opt-20">
+                        <label class="checkbox-label__main" for="opt-20"></label>
+                    </div>
+                </div>
+                <div class="stock-mob-table__cell">
+                    <div class="stock-mob-table__info">
+                        <a class="stock-mob-table__articul" href="#">46576898908</a>
+                        <div class="stock-mob-table__heading">
+                            <a class="stock-mob-table__heading-link" href="#">BOSCH Battery</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="stock-mob-table__cell">
+                    <div class="stock-mob-table__term term-info" data-modal-win-trigger="term">
+                        <span class="term-info__text">19.05</span>
+                        <div class="term-info__availability">
+                            <span class="term-info__availability-text">14</span>
+                            <svg class="icon icon-stock term-info__availability-icon" width="25" height="25">
+                                <use href="assets/images/svg/symbol/sprite.svg#stock"></use>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="stock-mob-table__cell">
+                    <div class="stock-mob-table__counter-area">
+                        <div class="stock-mob-table__progress progress-badge is-danger">24%</div>
+                        <div class="counter stock-mob-table__counter">
+                            <button class="counter__btn counter__btn--remove" data-action="remove" type="button">
+                                <svg class="icon icon-minus counter__btn-icon" width="25" height="25">
+                                    <use href="assets/images/svg/symbol/sprite.svg#minus"></use>
+                                </svg>
+                            </button>
+                            <input class="counter__input input" type="tel" name="quantity" maxlength="3" readonly value="1">
+                            <button class="counter__btn counter__btn--add" data-action="add" type="button">
+                                <svg class="icon icon-plus counter__btn-icon" width="25" height="25">
+                                    <use href="assets/images/svg/symbol/sprite.svg#plus"></use>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="stock-mob-table__cell">
+                    <div class="stock-mob-table__prices">
+                        <strong class="stock-mob-table__price-primary">1000,24</strong>
+                        <span class="stock-mob-table__price-secondary">1000,24</span>
+                    </div>
+                </div>
+                <div class="stock-mob-table__cell">
+                    <button class="stock-mob-table__mob-toggle js-accordion-trigger">
+                        <svg class="icon icon-chevron-down stock-mob-table__mob-toggle-icon" width="25" height="25">
+                            <use href="assets/images/svg/symbol/sprite.svg#chevron-down"></use>
+                        </svg>
+                    </button>
+                </div>
+                <div class="stock-mob-table__dropdown js-accordion-body" hidden>
+                    <dl class="stock-mob-table__params">
+                        <div class="stock-mob-table__param">
+                            <dt class="stock-mob-table__property">Наименование</dt>
+                            <dd class="stock-mob-table__value">АКБ Bosch S4 12V 52Ah 470EN 207x175x190 -/+ </dd>
+                        </div>
+                        <div class="stock-mob-table__param">
+                            <dt class="stock-mob-table__property">Склад</dt>
+                            <dd class="stock-mob-table__value">ТО Пинск</dd>
+                        </div>
+                        <div class="stock-mob-table__param">
+                            <dt class="stock-mob-table__property">Цена за единицу </dt>
+                            <dd class="stock-mob-table__value">1340, 70</dd>
+                        </div>
+                        <div class="stock-mob-table__param">
+                            <dt class="stock-mob-table__property">Дата добавления</dt>
+                            <dd class="stock-mob-table__value">22.05.22, 14:50</dd>
+                        </div>
+                        <div class="stock-mob-table__param">
+                            <dt class="stock-mob-table__property">Вероятность поставки</dt>
+                            <dd class="stock-mob-table__value">
+                                <div class="progress-badge is-danger">24%</div>
+                            </dd>
+                        </div>
+                    </dl>
+                    <div class="stock-mob-table__comment user-note">
+                        <label class="user-note__caption" for="un-11">Примечание:</label>
+                        <textarea class="user-note__input input scrollbar" name="usernote" placeholder="Добавить примечание" id="un-11"></textarea>
+                    </div>
+                    <div class="stock-mob-table__bottom">
+                        <a class="stock-mob-table__remove" href="#">Удалить из корзины</a>
+                    </div>
+                </div>
+                    </div>
+        *@
+    </div>
+
+
+    <div class="stock-mob-table__footer">
+        <dl class="stock-mob-table__summary summary-list">
+            @*<div class="summary-list__param">
+                <dt class="summary-list__property">@SharedResources.MinimumDeliveryAmount: </dt>
+                <dd class="summary-list__value">3343 </dd>
+            </div>*@
+            <div class="summary-list__param">
+                <dt class="summary-list__property">@SharedResources.Quantity</dt>
+                <dd class="summary-list__value"><span id="totalQntMobile"></span> <span>@SharedResources.Things.</span></dd>
+            </div>
+            <div class="summary-list__param">
+                <dt class="summary-list__property">@SharedResources.TotalSelectedSum</dt>
+                <dd class="summary-list__value"><span id="totalSelectedSumMobile"></span> <span>@Model.ValuteName</span></dd>
+            </div>
+        </dl>
+    </div>
+</div><!-- /stock-table-mob-->

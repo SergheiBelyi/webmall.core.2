@@ -1,0 +1,190 @@
+﻿@using ViewRes
+@using Webmall.UI.Core
+@using Webmall.UI.Core.Helpers
+@{
+    //var valute = SessionHelper.CurrentValute;
+}
+<script>
+    document._action_GetWareProps = '@Url.Action("ShortProperties", "CatalogService")';
+    document._action_GetWareReplacements = '@Url.Action("Analogs", "CatalogService")';
+    document._action_GetWareActionInfo = '@Url.Action("GetWareActionInfo", "CatalogService")';
+
+    var timer;
+    $(".product, .product-card").mouseenter(function () {
+        var prod = this;
+        timer = setTimeout(function () {
+            stockMainDocsHoverHandlerUpdate(prod);
+        }, 500);
+    }).mouseleave(function () {
+        clearTimeout(timer);
+    });
+
+    function dataDealerToggleHandlerUpdate (e) {
+        const parent = e.target.closest('.spec__product');
+        const toggleName = this.dataset.dealerToggle;
+        const dropInfoBlock = childrenMatches(parent, "[data-dealer='" + toggleName + "']")[0];
+
+        if (dropInfoBlock && dropInfoBlock.dataset.loaded != 'true') {
+            switch (toggleName) {
+                case "spec":
+                    UpdateSpecs(this.dataset.wareId, dropInfoBlock, 'div_');
+                    break;
+                case "similar":
+                    UpdateAnaloguesInList(this.dataset.wareId, dropInfoBlock, 'div_');
+                    break;
+            }
+        }
+    }
+
+    function stockMainDocsHoverHandlerUpdate(product) {
+        let div = product.closest('div');
+
+        let dropInfoBlock = div.querySelector('.product__params, .product-card__params');
+        if (dropInfoBlock == null && getNextSibling) {
+            dropInfoBlock = getNextSibling(div, '.product__footer').querySelector('.product__params, .product-card__params');
+        }
+
+        if (dropInfoBlock && dropInfoBlock.dataset.loaded != 'true') {
+            UpdateSpecs(dropInfoBlock.dataset.wareId, dropInfoBlock, 'tile');
+        }
+    }
+
+    function stockTableDocsClickHandlerUpdate(link) {
+        let div = this.closest('div');
+        let dropInfoBlock = div.querySelector('.spec-table-params__list');
+        if (dropInfoBlock && dropInfoBlock.dataset.loaded != 'true') {
+            UpdateSpecs(dropInfoBlock.dataset.wareId, dropInfoBlock, link.currentTarget.typeParam);
+        }
+    }
+
+    function stockTableAnalogsClickHandlerUpdate(link) {
+        let tr = this.closest('tr');
+
+        let dropInfoBlock = tr.nextElementSibling.querySelector('.product-line__analogs-list .manual-params');
+        if (dropInfoBlock == null && getNextSibling) {
+            dropInfoBlock = getNextSibling(tr, '.stock-table__more').querySelector('.product-line__analogs-list .manual-params');
+        }
+
+        if (dropInfoBlock && dropInfoBlock.dataset.loaded != 'true') {
+            UpdateAnaloguesInList(dropInfoBlock.dataset.wareId, dropInfoBlock, 'table_');
+        }
+    }
+
+    $(function () {
+        $('#gallerySortColumn').change(resort);
+        $('#gallerySortDirection').change(resort);
+        $('#brandFilter').change(resort);
+        $('#currentWarehouse').change(function () {
+            var id = $('#currentWarehouse').val();
+            var url = '@Url.Action("ChangeCurrentWarehouse", "Security")';
+            var currentUrl = '@Server.UrlEncode(ViewContext.RequestContext.HttpContext.Request.RawUrl)';
+            document.location.href = url + "?id=" + id + "&returnUrl=" + currentUrl;
+        });
+        $("#extView").bind('change', function () {
+            $(this).is(":checked") ? showImages() : hideImages();
+        });
+
+        var showImg = $.cookie('VALMI_SHOW_IMAGES');
+        if (showImg == null) showImg = 'true';
+        showImg = showImg == 'true';
+
+        if ((showImg) && ($("#extView").attr("checked"))) {
+            showImages();
+            $("#extView").trigger("change");
+        }
+        else {
+            $("#extView").attr("checked", showImg).trigger("change");
+        };
+
+        document.querySelectorAll('[data-dealer-toggle]').forEach(function (toggle) {
+            toggle.addEventListener('click', dataDealerToggleHandlerUpdate);
+        });
+
+        document.querySelectorAll('.spec-table-params__trigger').forEach((link) => {
+            link.addEventListener('click', stockTableDocsClickHandlerUpdate);
+            link.typeParam = 'table';
+        });
+
+        document.querySelectorAll('.spec__preview-specs').forEach((link) => {
+            link.addEventListener('click', stockTableDocsClickHandlerUpdate);
+            link.typeParam = 'mobTable';
+        });
+
+         document.querySelectorAll('.stock-table__analogs').forEach((link) => {
+                link.addEventListener('click', stockTableAnalogsClickHandlerUpdate);
+            });
+    });
+
+    function setview(view) {
+        document.location.href = Url.set(document.location.href, 'view', view);
+    }
+
+    function resort(col) {
+        $('#SortColumn').val(col);
+        window.SortByColumn(this, col, true, false);
+    }
+
+    function resortMobile(col, direction) {
+        $('#SortColumn').val(col);
+        window.SortByColumn(this, col, true, null, direction);
+    }
+
+    var isPrivate = true;
+    $(function () {
+        isPrivate = ($.cookie('@CommonHelpers.PrivateCookieName') == "true" && '@(SessionHelper.CurrentUser!=null && SessionHelper.IsGross)' == 'True');
+        setYourPriceVisibility();
+    });
+
+    function switchPriceVs() {
+        isPrivate = !isPrivate;
+        setYourPriceVisibility();
+        $.cookie('@CommonHelpers.PrivateCookieName', isPrivate, { expires: 365 });
+    }
+
+    function setYourPriceVisibility() {
+        if (isPrivate) {
+            $('th.view,td.price').hide();
+            $('.ware-price').css("display", "none");
+            $('.ware-retail-price').css("display", "inline");
+            //$('td.price').hide();
+            $('th.hide').removeClass('slim');
+            @*$('th.hide').html('<span onclick="switchPriceVs()" title="@SharedResources.ShowPrices">@SharedResources.RetailPrice, @(valute.ShortName)</span>');*@
+            $('th.hide').html('<span onclick="switchPriceVs()" title="@SharedResources.ShowPrices">@SharedResources.QntOnStock</span>');
+        } else {
+            $('th.view,td.price,.ware-price').show();
+            $('.ware-price').css("display", "inline");
+            $('.ware-retail-price').css("display", "none");
+            $('th.hide').addClass('slim');
+            $('th.hide').text('@SharedResources.QntOnStock');
+        }
+    }
+
+    function showImages() {
+        // переключение видимости первого столбца
+        $('#wareList tr > *:nth-child(1)').show();
+        $('.ware-action-img').hide();
+        $.cookie('VALMI_SHOW_IMAGES', true);
+    }
+
+    function hideImages() {
+        // переключение видимости первого столбца
+        $('#wareList tr > *:nth-child(1)').hide();
+        $('.ware-action-img').show();
+        $.cookie('VALMI_SHOW_IMAGES', false);
+    }
+
+    function UpdateSpecs(wareId, dropInfoBlock, prefix) {
+        updatePannel(document._action_GetWareProps + "?wareId=" + wareId + "&type=" + prefix, prefix + "_spec_" + wareId, null, function (d) { d.loaded = true; }, dropInfoBlock.dataset);
+    }
+
+    function UpdateAnaloguesInList(wareId, dropInfoBlock, prefix) {
+        updatePannel(document._action_GetWareReplacements + "?Id=" + wareId + "&inTab=false", prefix+"similar_" + wareId, null, function (d) {
+            d.loaded = true;
+            document.querySelectorAll("#similar_" + wareId+' [data-dealer-toggle]').forEach(function (toggle) {
+                toggle.addEventListener('click', dataDealerToggleHandler);
+                toggle.addEventListener('click', dataDealerToggleHandlerUpdate);
+            });
+        }, dropInfoBlock.dataset);
+    }
+
+</script>

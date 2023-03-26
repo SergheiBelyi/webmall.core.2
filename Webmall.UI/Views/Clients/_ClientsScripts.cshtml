@@ -1,0 +1,274 @@
+﻿@using ViewRes
+
+<script type="text/javascript">
+        $(function () {
+            $('#presentations input[represent]:checkbox').bind('change', function () {
+
+                changeRepresentationRole($(this).attr('id'), $(this).is(":checked"));
+            });
+
+            @*$('#addressButton').bind("click", function () {
+                var pannel = $('#addressPanel');
+                if (pannel.is(":hidden")) {
+                    newAddress();
+                    pannel.show();
+                }
+                else {
+                    pannel.hide();
+                }
+
+            });
+
+            $('#cancelAddressButton').bind("click", function () {
+                var pannel = $('#addressPanel');
+                newAddress();
+                pannel.hide();
+            });
+
+
+            //$('.clients input:checkbox[tag=defbox]:checked').attr('disabled', true);
+
+            $('input:checkbox[tag=defbox]').bind('change', function () {
+                var oldCheckbox = $('input:checkbox[tag=defbox]:checked');
+                oldCheckbox.removeAttr('checked');
+                oldCheckbox.removeAttr('disabled');
+
+                var newCheckbox = $(this);
+                newCheckbox.attr('checked', true);
+                newCheckbox.attr('disabled', true);
+
+                var addid = newCheckbox.attr('addrid');
+                var clientId = $('#ClientId').val();
+                var url = '@Url.Action("SetDefaultDeliveryAddress")?clientId=' + clientId + '&addressId=' + addid;
+                $.getJSON(url, { date: (new Date().getTime()) }, function () { });
+            });*@
+
+            //setInterval('commentChanged();', 250);
+
+            // setAutoCompletes();
+        });
+
+    function changeRepresentationRole(id, state) {
+        //alert("changeRepresentationRole");
+        console.log("changeRepresentationRole: id= " + id + "state = " + state);
+            var url = "@(Url.Action("ChangeRepresentationRole"))" + "?id=" + id + "&state=" + state;
+            $.get(url, function () { });
+        }
+
+        @*function commentChanged() {
+            var length = $('#Comment').val().length;
+            if (length > 100) {
+                $('#Comment').val($('#Comment').val().substr(0, 100));
+                length = 100;
+            }
+            $('#rest').text(100 - length);
+        }
+
+        function deleteAddress(addressId) {
+            if (!confirm('@SharedResources.AreYouSure')) return;
+
+            $.post('@Url.Action("Delete", "Clients")?id=' + addressId, null, function (content) {
+                $('#delivery-addresses-container').html(content);
+                $('#delivery-addresses-container').removeClass('progress');
+                $('#delivery-addresses-container').trigger('updated');
+            });
+        }*@
+
+        //function jqSelector(str) {
+        //    return str.replace(/([;&,\.\+\*\~':"\!\^#$%\[\]\(\)=>\|])/g, '\\$1');
+        //}
+
+        function setAutoCompletes() {
+            //$.expr[':'].textEquals = function (a, i, m) {
+            //    return $(a).text().toLowerCase().match("^" + m[3].toLowerCase() + "$");
+            //};
+
+
+            @*var options = {
+                url: function () {
+                    return '@Url.Action("GetRegions", "Clients")';
+                },
+                getValue: "label",
+                requestDelay: 250,
+                list: {
+                    maxNumberOfElements: 20,
+                    onChooseEvent: function () {
+                        //$('#LocalityName').val('');
+                        //$("#StreetName").val('');
+                        return true;
+                    }
+                },
+                adjustWidth: false
+            };
+            $("#RegionName").easyAutocomplete(options);
+
+
+            options = {
+                url: function () {
+                    return '@Url.Action("UILocalities", "Clients")' + "?region=" + $('#RegionName').val();
+                },
+                getValue: "label",
+                requestDelay: 250,
+                list: {
+                    maxNumberOfElements: 20,
+                },
+                adjustWidth: false
+            };
+            $("#LocalityName").easyAutocomplete(options);
+
+
+            options = {
+                url: function () {
+                    return '@Url.Action("UIAddresses", "Clients")';
+                },
+                getValue: "label",
+                requestDelay: 250,
+                list: {
+                    maxNumberOfElements: 20,
+                },
+                adjustWidth: false
+            };
+            $("#LocalityName").easyAutocomplete(options);*@
+
+            @*$('#RegionName').autocomplete({
+                source: '@Url.Action("GetRegions", "Clients")',
+                select: function (event, ui) {
+                    $('#RegionId').val(ui.item.id);
+                    $('#LocalityName').val('');
+                    $('#LocalityId').val(null);
+                    $("#StreetName").val('');
+                    $("#StreetId").val(null);
+                    return true;
+                },
+                change: function (event, ui) {
+                    var items = $(".ui-autocomplete li:textEquals('" + jqSelector($(this).val()) + "')");
+                    if (items.size() != 1) {
+                        $(this).val('');
+
+                    } else {
+                        $('#RegionId').val(items.data("ui-autocomplete-item").id);
+                        $('#RegionName').val(items.data("ui-autocomplete-item").value);
+                        $('#LocalityName').val('');
+                        $('#LocalityId').val(null);
+                        $("#StreetName").val('');
+                        $("#StreetId").val(null);
+                    }
+                }
+            });*@
+
+            @*$('#LocalityName').autocomplete({
+                source: //'@Url.Action("UILocalities", "Clients")',
+                    function (request, response) {
+                        $.ajax({
+                            url: '@Url.Action("UILocalities", "Clients")',
+                            dataType: "json",
+                            data: {
+                                term: request.term,
+                                regionId: function () { return $('#RegionId').val(); }
+                            },
+                            success: function (data) {
+                                response(data);
+                            },
+                        });
+                    },
+                search: function () {
+                    // custom minLength
+                    var term = this.value;
+                    if (term.length < 3) {
+                        return false;
+                    }
+                },
+                minLength: 1,
+                delay: 500,
+                select: function (event, ui) {
+                    $('#LocalityId').val(ui.item.id);
+                    $("#StreetName").val('');
+                    $("#StreetId").val(null);
+                    return true;
+                },
+                change: function (event, ui) {
+                    var items = $(".ui-autocomplete li:textEquals('" + jqSelector($(this).val()) + "')");
+                    if (items.size() != 1) {
+                        $(this).val('');
+
+                    } else {
+                        $('#LocalityId').val(items.data("ui-autocomplete-item").id);
+                        $('#LocalityName').val(items.data("ui-autocomplete-item").value);
+                        $("#StreetName").val('');
+                        $("#StreetId").val(null);
+                    }
+                }
+            });*@
+
+            @*$('#StreetName').autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: '@Url.Action("UIAddresses", "Clients")',
+                        dataType: "json",
+                        data: {
+                            term: request.term,
+                            cityId: function () { return $('#LocalityId').val(); }
+                        },
+                        success: function (data) {
+                            response(data);
+                        },
+                    });
+                },
+                select: function (event, ui) {
+                    setStreetData(ui.item);
+                },
+                change: function (event, ui) {
+                    var items = $(".ui-autocomplete li:textEquals('" + jqSelector($(this).val()) + "')");
+                    //if (items.size() != 1) {
+                    //    $(this).val('');
+
+                    //} else {
+                    setStreetData(items.data("ui-autocomplete-item"));
+                    //}
+                }
+            });
+                *@
+        }
+
+        //function setStreetData(item) {
+        //    if (item) {
+        //        $('#StreetId').val(item.id);
+        //        $('#StreetName').val(item.value);
+        //    }
+        //}
+
+        //function editAddress(el, id, localityId, localityName, streetId, streetName, house, flat, zip, comment) {
+        //    $('#addressPanel #AddressId').val(id);
+
+        //    $('#addressPanel #LocalityId').val(localityId);
+        //    $('#addressPanel #LocalityName').val(localityName);
+        //    $('#addressPanel #StreetId').val(streetId);
+        //    $('#addressPanel #StreetName').val(streetName);
+
+        //    $('#addressPanel #House').val(house);
+        //    $('#addressPanel #Flat').val(flat);
+        //    $('#addressPanel #Zip').val(zip);
+
+        //    $('#addressPanel #Comment').val(comment);
+        //    var pannel = $('#addressPanel');
+        //    pannel.show();
+        //}
+
+        //function newAddress() {
+        //    $('#addressPanel #AddressId').val(null);
+
+        //    $('#addressPanel #LocalityId').val(null);
+        //    $('#addressPanel #LocalityName').val('');
+        //    $('#addressPanel #StreetId').val(null);
+        //    $('#addressPanel #StreetName').val('');
+
+        //    $('#addressPanel #House').val('');
+        //    $('#addressPanel #Flat').val('');
+        //    $('#addressPanel #Zip').val('');
+        //    $('#addressPanel #Comment').val('');
+        //    var pannel = $('#addressPanel');
+        //    pannel.show();
+
+        //    return false;
+        //}
+</script>

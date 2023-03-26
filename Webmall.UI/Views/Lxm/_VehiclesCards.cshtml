@@ -1,0 +1,90 @@
+﻿@using ViewRes
+@using Webmall.Laximo.Core
+@using Webmall.UI.Core.HtmlHelpers
+
+@model Webmall.UI.Models.Laximo.VehicleListModel
+
+@{
+    Layout = null;
+}
+
+<div class="match-area-products">
+    @foreach (var item in Model.Vehicles)
+    {
+        var url = Url.Action("Groups", new { item.CatalogId, item.VehicleId, item.Ssd });
+
+        <div class="match-area-products__product match-area-section">
+            <div class="match-area-section__main">
+                <div class="match-area-section__item">
+                    <!-- media-card-info-->
+                    <div class="media-card-info">
+                        <a class="media-card-info__card media-card" href="@url">
+                            <figure class="media-card__main">
+                                <div class="media-card__img-wrap">
+                                    <img class="media-card__img" src="@Url.MarkaImage(item.Brand)" alt="" width="120" height="175">
+                                </div>
+                                <figcaption class="media-card__info">
+                                    <div class="media-card__caption">@item.Brand @item.Model</div>
+                                </figcaption>
+                            </figure>
+                        </a>
+                        <div class="media-card-info__main">
+                            <div class="media-card-info__info">
+                                <!-- kit-table-->
+                                <div class="table-responsive media-card-info__wrap">
+                                    <table class="kit-table media-card-info__table is-dark">
+                                        <tbody>
+                                            <tr>
+                                                <td><a href="@url">@SharedResources.AutoMarka</a></td>
+                                                <td><a href="@url">@item.Brand</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="@url">@SharedResources.AutoModel</a></td>
+                                                <td><a href="@url">@item.Name @(string.IsNullOrEmpty(item.Model) ? "" : "(" + item.Model + ")")</a></td>
+                                            </tr>
+                                            @foreach (var attr in Model.ExtAttrTitles)
+                                            {
+                                                <tr>
+                                                    <td><a href="@url">@attr.Value</a></td>
+                                                    <td><a href="@url">@item.ExtAttributes.GetValue(attr.Key)</a></td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div><!-- /kit-table-->
+                                <!-- kit-area-->
+                                <div class="media-card-info__data kit-products">
+                                    <!-- kit-product-->
+                                    <div class="kit-products__item kit-product js-accordion">
+                                        <div class="kit-product__header js-accordion-trigger">
+                                            <div class="kit-product__heading">@SharedResources.Details</div>
+                                        </div>
+                                        <div class="kit-product__main js-accordion-body">
+                                            <div class="kit-product__subsection">
+                                                <dl class="kit-product__props">
+                                                    @foreach (var attr in Model.ExtAttrTitles)
+                                                    {
+                                                        <div class="kit-product__prop">
+                                                        <dt class="kit-product__property">@attr.Value</dt>
+                                                        <dd class="kit-product__value">
+                                                            <a class="kit-product__link" href="#">@item.ExtAttributes.GetValue(attr.Key)</a>
+                                                        </dd>
+                                                        </div>
+                                                    }
+                                                    </dl>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /kit-product-->
+                                    </div><!-- /kit-area-->
+                                </div>
+                                <div class="media-card-info__bottom">
+                                    <a class="media-card-info__btn btn btn--primary-reverse btn--sm" href="@url">@SharedResources.SelectionByAuto</a>
+                                </div>
+                            </div>
+                        </div><!-- /media-card-info-->
+                    </div>
+                </div>
+            </div>
+        }
+    </div>

@@ -1,0 +1,41 @@
+﻿@using ViewRes
+@model Webmall.UI.Models.Payments.PaymentModel
+
+@{
+    ViewBag.Title = SharedResources.PaymentRejected;
+    Layout = "~/Views/Shared/_PersonalLayout.cshtml";
+}
+
+<aside id="catalog-content">
+    @if (Model.Order != null) { Html.RenderPartial("OrderHeaderPartial", Model.Order); }
+    <ul class="breadcrumbs" id="pageBreadscrumbs">
+        <li><span id="bs1">@SharedResources.WareSelection</span></li>
+        <li>&#8250;</li>
+        <li><span id="bs2">@SharedResources.PaymentForm</span></li>
+        <li>&#8250;</li>
+        <li><span id="bs3">@SharedResources.Delivery</span></li>
+        <li>&#8250;</li>
+        <li><span id="bs4" class="current">@SharedResources.OrderCompleting</span></li>
+    </ul>
+
+    <div class="clear-div"> </div>
+    <div class="invoice-wrapper">
+        <div class="invoice">
+            <div class="invoice-border">
+                <a id="logo-small"><img src="@Url.Content("~/ExtContent/images/logo-invoice.png")" alt=""> </a>
+                <h2>@SharedResources.OrderPayment</h2>
+                <div class="clear-div"> </div>
+
+                <div class="payment-error">
+                    @(new HtmlString(string.Format(SharedResources.PaymentErrorMessage, Model.OrderId, Model.Amount, Url.Action("Order", "Order", new { id = Model.OrderId, showPaymentFirst = true }))))
+                </div>
+
+                @if (Model.Order != null) { Html.RenderPartial("_SummaryOrderInfo", Model.Order); }
+
+                <div class="clear-div"> </div>
+
+            </div>
+        </div>
+        @{ Html.RenderPartial("_SummaryVidgets"); }
+    </div>
+</aside>

@@ -1,0 +1,21 @@
+﻿@using ViewRes
+
+@model Webmall.UI.ViewModel.News.NewsArticleViewModel
+@{
+    var article = Model.Article;
+    var newsUrl = Url.Action("Index", "News", new { category = Model.Category?.Slug, id = article.Url });
+}
+
+<div class="col-6 col-md-3">
+    <article class="news">
+        <a class="news__img-wrap" href="@newsUrl"><img class="news__img" src="@(article.ImageUrl.StartsWith("http") ? article.ImageUrl : Url.Content("~/" + article.ImageUrl))" alt="@article.Header"></a>
+        <div class="news__body">
+            <time class="news__date" datetime="2019-08-16">@article.Date.ToShortDateString()</time>
+            <div class="news__title"><a class="news__title-link" href="@newsUrl">@article.ShortText</a></div>
+            @if (Model.Category?.Slug != "news")
+            {
+                <a class="news__more-btn btn btn--primary" href="@newsUrl">@SharedResources.Details</a>
+            }
+        </div>
+    </article>
+</div>

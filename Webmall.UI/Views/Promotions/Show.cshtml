@@ -1,0 +1,65 @@
+﻿@using Webmall.Model
+@using ViewRes
+
+@model Webmall.Model.Entities.Cms.NewsData.NewsArticle
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = ViewBag.NewsType;
+}
+
+<div class="container-fluid">
+    <ul class="breadcrumbs">
+        <li class="breadcrumbs__item"><a class="breadcrumbs__link" href="@Url.Content("~")">@SharedResources.MainPage</a></li>
+        <li class="breadcrumbs__item"><a class="breadcrumbs__link" href="./../">@title</a></li>
+        <li class="breadcrumbs__item">@Model.Header</li>
+    </ul>
+    <div class="inner-section__header">
+        <h1 class="inner-section__heading">@SharedResources.Promotions</h1><a class="inner-section__link" href="#">@Model.Header</a>
+    </div>
+    <div class="primary-content">
+        <div class="sidebar">
+            <div class="category-nav d-none d-md-block">
+                <ul class="category-nav__list">
+                    <li class="category-nav__item"><a class="category-nav__link" href="@Url.Action("Index", "News")">@SharedResources.News</a></li>
+                    <li class="category-nav__item"><a class="category-nav__link" href="@Url.Action("Index", "Promotions")">@SharedResources.Promotions</a></li>
+                </ul>
+            </div>
+        </div>
+        <main class="main-content">
+            <div class="inner-news">
+                <p class="data">@Model.Date.ToShortDateString()</p>
+                @(new HtmlString(Model.FullText))
+                @if (ConfigHelper.AllowSocialShare)
+                {
+
+                    <div class="socialbookmarks-content">
+                        @SharedResources.DoYouLikeShare
+                        <script type="text/javascript" src="//yastatic.net/share/share.js" charset="utf-8"></script>
+                        <span class="yashare-auto-init" data-yasharel10n="ru" data-yasharetype="none" data-yasharequickservices="facebook,twitter,vkontakte"></span>
+                    </div>
+                }
+                <div class="prev-next">
+                    @if (Model.PrevId != null)
+                    {
+                        <a href="@Url.Action("Show", "Promotions", new {id = Model.PrevId})"><img src="@Url.Content("~/Content/images/start.gif")" width="8" height="9"></a>
+                        <a href="@Url.Action("Show", "Promotions", new {id = Model.PrevId})">@SharedResources.PrevNews</a>
+                    }
+                    @if (Model.NextId != null)
+                    {
+                        <a href="@Url.Action("Show", "Promotions", new {id = Model.NextId})">@SharedResources.NextNews</a>
+                        <a href="@Url.Action("Show", "Promotions", new {id = Model.NextId})"><img src="@Url.Content("~/Content/images/finish.gif")" width="8" height="9"></a>
+                    }
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+@section styles {
+    @Styles.Render("~/Content/fancybox/fancy")
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/fancy")
+}

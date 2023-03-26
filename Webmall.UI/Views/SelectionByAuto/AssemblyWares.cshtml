@@ -1,0 +1,103 @@
+﻿@using ViewRes
+@model Webmall.UI.ViewModel.SelectionByAuto.AssemblyWaresViewModel
+
+@*@{Html.RenderPartial("~/Views/Catalog/Catalog.cshtml", Model.WaresModel);}*@
+
+<div class="match-area-products">
+    <div class="match-area-products__product match-area-section">
+        <div class="match-area-section__header">
+                <div class="match-area-section__heading">@Model.Assembly.Name</div>
+            </div>
+        <div class="match-area-section__main">
+            <div class="match-area-section__item">
+                <!-- media-card-info-->
+                <div class="media-card-info">
+                    @*<a class="media-card-info__card media-card" href="@unitUrl">
+                            <figure class="media-card__main">
+                                <div class="media-card__img-wrap">
+                                    <img class="media-card__img" src="@unit.GetImageUrl("250")" alt="" width="120" height="175">
+                                </div>
+                                <figcaption class="media-card__info">
+                                    <div class="media-card__caption">@unit.Code: @unit.Name</div>
+                                </figcaption>
+                            </figure>
+                        </a>*@
+                    <div class="media-card-info__main">
+                        <div class="media-card-info__info">
+                            <!-- kit-table-->
+                            <div class="table-responsive media-card-info__wrap">
+                                <table class="kit-table media-card-info__table is-dark">
+                                    <thead>
+                                        <tr>
+                                            <th id="c_toggle" style="display: none;">&nbsp;</th>
+                                            <th id="c_pnc">@SharedResources.Number</th>
+                                            <th id="c_name">@SharedResources.Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var detail in Model.Items)
+                                        {
+                                            var detUrl = !string.IsNullOrEmpty(detail.WareNumber) ? Url.Action("Index", "SearchOem", new { oem = detail.WareNumber }, null) : "#";
+
+                                            <tr>
+                                                <td name="c_pnc" class="hd"><span><a href="@detUrl" target="_blank">@detail.WareNumber</a></span></td>
+                                                <td name="c_name" class="hd"><a class="illustration-title" href="@detUrl" target="_blank">@detail.Name</a></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div><!-- /kit-table-->
+                            <!-- kit-area-->
+                            <div class="media-card-info__data kit-products">
+                                @foreach (var detail in Model.Items)
+                                {
+                                    var detUrl = !string.IsNullOrEmpty(detail.WareNumber) ? Url.Action("Index", "SearchOem", new { oem = detail.WareNumber }, null) : "#";
+
+                                    <!-- kit-product-->
+                                    <div class="kit-products__item kit-product js-accordion is-active">
+                                        <div class="kit-product__header js-accordion-trigger">
+                                            <div class="kit-product__heading">@detail.WareNumber</div>
+                                        </div>
+                                        <div class="kit-product__main js-accordion-body">
+                                            <div class="kit-product__subsection">
+                                                <dl class="kit-product__props">
+                                                    <div class="kit-product__prop">
+                                                        <dt class="kit-product__property">@SharedResources.Number</dt>
+                                                        <dd class="kit-product__value">
+                                                            <a class="kit-product__link" href="@detUrl">@detail.WareNumber</a>
+                                                        </dd>
+                                                    </div>
+                                                    <div class="kit-product__prop">
+                                                        <dt class="kit-product__property">@SharedResources.Name</dt>
+                                                        <dd class="kit-product__value">
+                                                            <a class="kit-product__link" href="@detUrl">@detail.Name</a>
+                                                        </dd>
+                                                    </div>
+                                                </dl>
+                                            </div>
+                                        @*<div class="kit-product__bottom">
+                                            <span class="kit-product__info group-tippy-mobile" data-id="@detail.WareNumber">
+                                                @SharedResources.Details
+                                                <svg class="icon icon-info kit-product__info-icon" width="25" height="25">
+                                                    <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#info")"></use>
+                                                </svg>
+                                            </span>
+                                        </div>*@
+                                    </div>
+                                </div>
+                                <!-- /kit-product-->
+                            }
+                            </div><!-- /kit-area-->
+                        </div>
+                    </div>
+                </div><!-- /media-card-info-->
+            </div>
+        </div>
+    </div>
+    <!-- /media-area-section-->
+
+    @if (!Model.Items.Any())
+    {
+        @SharedResources.NothingFound3
+    }
+</div>

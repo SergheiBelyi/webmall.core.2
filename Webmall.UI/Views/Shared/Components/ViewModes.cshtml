@@ -1,0 +1,20 @@
+﻿@{
+    var view = ViewBag.ViewMode;
+}
+
+<ul class="catalog-top-section__views view-modes">
+    <li class="view-modes__item @(view==1 ? "is-active":"")">
+        <a class="view-modes__link" href="#" @if (view == 0) { <text> onclick="setview(1); return false;" </text> }>
+            <svg class="icon icon-th view-modes__icon" width="25" height="25">
+                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#th")"></use>
+            </svg>
+        </a>
+    </li>
+    <li class="view-modes__item @(view==0 ? "is-active":"")">
+        <a class="view-modes__link" href="#" @if (view == 1) { <text> onclick="setview(0); return false;" </text> }>
+            <svg class="icon icon-th-list view-modes__icon" width="25" height="25">
+                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#th-list")"></use>
+            </svg>
+        </a>
+    </li>
+</ul>

@@ -1,0 +1,100 @@
+﻿@using ViewRes
+@using Webmall.UI.Core
+
+@model List<Webmall.Model.Entities.Cart.CartPosition>
+
+@{
+    Layout = null;
+    var rate = 1;
+}
+
+<div class="stock-mob-table__main">
+    @foreach (var item in Model)
+    {
+        var wareUrl = Url.Action("WareCard", "Catalog")?.Replace("WareCard", "") + $"{item.ProducerName}/{item.WareNum}";
+
+        <div class="stock-mob-table__row js-accordion">
+            <div class="stock-mob-table__cell">
+                <div class="stock-mob-table__info">
+                    <a class="stock-mob-table__articul" href="@wareUrl">@item.WareNum</a>
+                    <div class="stock-mob-table__heading">
+                        <a class="stock-mob-table__heading-link" href="@wareUrl">@item.ProducerName</a>
+                    </div>
+                </div>
+            </div>
+            <div class="stock-mob-table__cell">
+                <div class="stock-mob-table__term term-info" data-modal-win-trigger="term">
+                    <span class="term-info__text">@(item.DeliveryTerm.HasValue ? @item.DeliveryTerm.Value.ToString("dd.MM") : SharedResources.NoData)</span>
+                    <div class="term-info__availability">
+                        <span class="term-info__availability-text">@item.ReturnDays</span>
+                        <svg class="icon icon-stock term-info__availability-icon" width="25" height="25">
+                            <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#stock")"></use>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="stock-mob-table__cell">
+                <div class="stock-mob-table__counter-area">
+                    <div class="stock-mob-table__progress progress-badge is-success">@item.AvailableQnt%</div>
+                    <div class="counter stock-mob-table__counter">
+                        <button class="counter__btn counter__btn--remove" data-action="remove" type="button">
+                            <svg class="icon icon-minus counter__btn-icon" width="25" height="25">
+                                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#minus")"></use>
+                            </svg>
+                        </button>
+                        <input class="counter__input input" type="tel" name="quantity" maxlength="3" readonly="" value="@item.WareQnt">
+                        <button class="counter__btn counter__btn--add" data-action="add" type="button">
+                            <svg class="icon icon-plus counter__btn-icon" width="25" height="25">
+                                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#plus")"></use>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="stock-mob-table__cell">
+                <div class="stock-mob-table__prices">
+                    <strong class="stock-mob-table__price-primary">@SessionHelper.PriceFormat(new Decimal(Math.Round((double)(item.ClientPrice / rate), 2)) * item.WareQnt)</strong>
+                </div>
+            </div>
+            <div class="stock-mob-table__cell">
+                <button class="stock-mob-table__mob-toggle js-accordion-trigger" type="button">
+                    <svg class="icon icon-chevron-down stock-mob-table__mob-toggle-icon" width="25" height="25">
+                        <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#chevron-down")"></use>
+                    </svg>
+                </button>
+            </div>
+            <div class="stock-mob-table__dropdown js-accordion-body" hidden>
+                <div class="stock-mob-table__params">
+                    <div class="stock-mob-table__param">
+                        <dt class="stock-mob-table__property">@SharedResources.Name</dt>
+                        <dd class="stock-mob-table__value">@item.WareName</dd>
+                    </div>
+                    <div class="stock-mob-table__param">
+                        <dt class="stock-mob-table__property">@SharedResources.Warehouse</dt>
+                        <dd class="stock-mob-table__value">@item.WarehouseName</dd>
+                    </div>
+                    <div class="stock-mob-table__param">
+                        <dt class="stock-mob-table__property">@SharedResources.PricePerOne</dt>
+                        <dd class="stock-mob-table__value">@SessionHelper.PriceFormat(item.ClientPrice)</dd>
+                    </div>
+                    <div class="stock-mob-table__param">
+                        <dt class="stock-mob-table__property">@SharedResources.AddTime</dt>
+                        <dd class="stock-mob-table__value">@item.CreationDate.ToString("MM/dd/yyyy"), @item.CreationDate.ToString("HH:mm")</dd>
+                    </div>
+                    <div class="stock-mob-table__param">
+                        <dt class="stock-mob-table__property">@SharedResources.DeliveryProbability</dt>
+                        <dd class="stock-mob-table__value">
+                            <div class="progress-badge is-success">@item.DeliveryRating%</div>
+                        </dd>
+                    </div>
+                </div>
+                <div class="stock-mob-table__comment user-note">
+                    <label class="user-note__caption" for="un-@item.Id">@item.Comment:</label>
+                    <textarea class="user-note__input input" placeholder="@SharedResources.AddComment" id="un-@item.Id" oninput="return SubmitEditPositionCommentMobile(this,  @item.Id)">@item.Comment</textarea>
+                </div>
+                
+            </div>
+        </div>
+    }
+</div>
+

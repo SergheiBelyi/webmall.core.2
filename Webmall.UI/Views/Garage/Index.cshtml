@@ -1,0 +1,141 @@
+﻿@using ViewRes
+
+@model Webmall.UI.ViewModel.Garage.GarageViewModel
+
+@{
+    Layout = "~/Views/Shared/_PersonalLayout.cshtml";
+    ViewBag.Title = SharedResources.MyGarage;
+}
+
+<div class="addresses">
+    <h1 class="page-intro__heading main-heading">@ViewBag.Title</h1>
+    @*<div class="addresses__notification notification is-success is-block text-center">Основной адрес установлен</div>*@
+    <div class="addresses__header">
+        <a class="addresses__btn btn btn--primary" href="#" data-modal-win-trigger="address-detail"
+           id="addr-0" data-close-outside="false" data-after-open="UpdateCarDialog()"
+           data-id="0" data-data="">@SharedResources.NewCar</a>
+    </div>
+
+    <div class="addresses__main">
+        @foreach (var item in Model.Cars)
+        {
+            Html.RenderPartial("_CarCard", item);
+        }
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        var markaSelector, modelSelector, modificationSelector;
+        var carData;
+
+        $(function() {
+            markaSelector = new Choices(document.querySelector('#Marka'));
+            modelSelector = new Choices(document.querySelector('#Model'));
+            modificationSelector = new Choices(document.querySelector('#Modification'));
+        });
+
+        function UpdateCarDialog(id) {
+            var el = document.getElementById("addr-" + id);
+            if (el && el.dataset.data) {
+                carData = JSON.parse(el.dataset.data);
+            } else
+                carData = { isNew: true };
+
+            markaSelector.setChoiceByValue(carData.MarkaId);
+            MarkaSelected();
+            if (carData.isNew) {
+                document.getElementById("CarId").value = "";
+                document.getElementById("Vin").value = "";
+                document.getElementById("Year").value = "";
+                document.getElementById("Comment").value = "";
+                document.getElementById("Contacts").value = "";
+            } else {
+                document.getElementById("CarId").value = carData.Id;
+                document.getElementById("Vin").value = carData.Vin;
+                document.getElementById("Year").value = carData.Year;
+                document.getElementById("Comment").value = carData.Comment;
+                document.getElementById("Contacts").value = carData.Contacts;
+            }
+        }
+
+        function MarkaSelected(obj) {
+            modelSelector.clearChoices();
+            modelSelector.setValue([""]);
+            $.getJSON("@Url.Action("GetModelsList", "SelectionByAuto")?markId=" + $("#Marka").val()).done(function(data) {
+                if (data)
+                    modelSelector.setChoices(data, 'Value', 'Text', true);
+                if (carData.ModelId) {
+                    modelSelector.setChoiceByValue(carData.ModelId);
+                    carData.ModelId = null;
+                }
+                ModelSelected();
+            });
+        }
+
+        function ModelSelected(obj) {
+            modificationSelector.clearChoices();
+            modificationSelector.setValue([""]);
+            $.getJSON("@Url.Action("GetModifListByModel", "SelectionByAuto")?modelId=" + $("#Model").val()).done(function(data) {
+                if (data)
+                    modificationSelector.setChoices(data, 'Id', 'Name', true);
+                if (carData.ModificationId) {
+                    modificationSelector.setChoiceByValue(carData.ModificationId);
+                    carData.ModificationId = null;
+                }
+            });
+        }
+                @*
+        function DeliveryLocalitySelected(obj) {
+            deliveryCarrier.setValue([""]);
+            deliveryCarrier.clearChoices();
+            $.getJSON("@Url.Action("GetCarriers", "Address")?localityId=" + $("#DeliveryLocality").val()).done(function(data) {
+                if (data)
+                    deliveryCarrier.setChoices(data, 'id', 'value', true);
+                if (addressData.CarrierServiceId) {
+                    deliveryCarrier.setChoiceByValue(addressData.CarrierServiceId);
+                    addressData.CarrierServiceId = null;
+                }
+                DeliveryCarrierSelected();
+            });
+        }
+
+        function DeliveryCarrierSelected(obj) {
+            deliveryCarrierPickupPoint.setValue([""]);
+            deliveryCarrierPickupPoint.clearChoices();
+            $.getJSON("@Url.Action("GetCarrierPickupPoints", "Address")?localityId=" + $("#DeliveryLocality").val() + "&carrierId=" + $("#DeliveryCarrier").val()).done(function(data) {
+                if (data)
+                    deliveryCarrierPickupPoint.setChoices(data, 'id', 'value', true);
+                if (addressData.PickupPointId) {
+                    deliveryCarrierPickupPoint.setChoiceByValue(addressData.PickupPointId);
+                    addressData.PickupPointId = null;
+                }
+                DeliveryCarrierPickupPointSelected();
+            });
+        }
+
+        function DeliveryCarrierPickupPointSelected(obj) {
+        }*@
+
+        function deleteCar(id) {
+            if (!confirm('@SharedResources.AreYouSure')) return;
+
+            $.post('@Url.Action("Delete")?id=' + id, null, function (content) {
+                $('#user-car-' + id).remove();
+                $('#cont-' + id).remove();
+            });
+        }
+
+    </script>
+}
+@section BreadCrumbs
+{
+    <ul class="breadcrumbs"></ul>
+}
+
+
+@section dialogs
+    {
+    @{ Html.RenderPartial("CarDialog", Model); }
+}

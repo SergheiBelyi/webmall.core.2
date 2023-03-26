@@ -1,0 +1,365 @@
+﻿@using Webmall.UI.Core
+
+@{
+    var valute = SessionHelper.CurrentValute.Code;
+}
+
+@* ReSharper disable PossibleNullReferenceException *@
+@* ReSharper disable ConditionIsAlwaysConst *@
+@Scripts.Render("~/bundles/notify")
+<script type="text/javascript">
+
+    var lastKeyPressed = -1;
+    let addToCartDialog;
+
+    $(function() {
+        $(document).keydown(function(event) {
+            lastKeyPressed = event.keyCode;
+        });
+
+        addToCartDialog = new Modal({
+            content: document.querySelector('#pop-up-addToCartDialog'),
+            className: 'modal-win__body--wide'
+        });
+    });
+
+    function JumpOnKeyEnter(ctrl) {
+        if (lastKeyPressed == 13) {
+            UpdateCart(ctrl);
+            return false;
+        } else return true;
+    }
+
+    function CloseCartDialog() {
+        addToCartDialog.close();
+    }
+
+    @*
+    function UpdateCart(ctrl, input) {
+        var wareId = $(ctrl).attr('wareid');
+        var offerId = $(ctrl).attr('offerid');
+        var offerTypeId = $(ctrl).attr('offertypeid');
+        //var input = $(ctrl).parent().find('input[type=text]');
+        var value = parseInt($(input).val());
+        var mult = parseInt($(input).attr("mult"));
+        if (!mult)
+            mult = parseInt($(ctrl).attr("mult"));
+        if (!(mult > 1)) mult = 1;
+        if (!value)
+            value = 1;
+        if (value == '') return false;
+        if (value % mult != 0)
+            value = value - (value % mult) + mult;
+        var re = new RegExp(/^\d+$/);
+        if (!re.test(value)) return false;
+        if (value < 1) return false;
+        var canUpdate = '@(SessionHelper.CurrentUser != null)';
+        if (canUpdate != 'True') {
+            document.location.href = '@Url.Action("LogOn", "Security")' + '?returnUrl=' + '@Request.Url.OriginalString';
+            return false;
+        }
+        $('#pop-up-add').text('@Html.Raw(ViewRes.SharedResources.WareWasAddedToCart)');
+        addToCartDialog.open();
+
+        var url = '@Url.Action("PrepareForCart", "Cart")' + '?wareId=' + wareId + '&offerId=' + offerId + '&offerQnt=' + value + '&offerTypeId=' + offerTypeId;
+        var modif = '@(Request.QueryString["modif"])';
+        if (modif != '') url += '&modif=' + modif;
+        var closeDialog = false;
+        var succesCounter = 0;
+
+        setTimeout(function() { closeDialog = true; }, 2000); // after a second dialog may be closed
+        $.post(url, null, function (data) {
+            if (data != null) {
+                $('.modal-win__body #pop-up-add').text(data);
+            }
+            succesCounter++;
+            $(input).val(mult);
+            url = '@Url.Action("GetCartOrderPosistionsCount", "Cart")';
+            $.getJSON(url, { date: (new Date()).getTime() }, function(response) {
+                succesCounter++;
+                var cartCounter = $('.logged-in__basket-count');
+                if (closeDialog) {
+                    //$.notify('@Html.Raw(ViewRes.SharedResources.WareWasAddedToCart)', "success");
+                    //addToCartDialog.close();
+                    cartCounter.empty();
+                    cartCounter.text( response.cart);
+                } else
+                    setTimeout(function() {
+                       // $.notify('@Html.Raw(ViewRes.SharedResources.WareWasAddedToCart)', "success");
+                        //addToCartDialog.close();
+                       cartCounter.empty();
+                       cartCounter.text(response.cart);
+                    }, 900);
+            });
+        });
+        setTimeout(function() {
+            if (succesCounter != 2) {
+                //$.notify('@Html.Raw(ViewRes.SharedResources.AddToCartErrorMessage)', "error", { autoHide: true, autoHideDelay: 5000, });
+                $('.modal-win__body #pop-up-add').text('@Html.Raw(ViewRes.SharedResources.AddToCartErrorMessage)');
+                setTimeout(function () {
+                    //$('#pop-up-add').hide();
+                }, 2000);
+            }
+        }, 5000);
+        return false;
+    }
+    *@
+    /* LazyLoadScript */
+    function LazyShortPropertiesFun() {
+        /* Go To Full Params Tab */
+        let toggle = document.querySelector('[data-goto-tab]');
+
+        if (toggle) {
+            toggle.addEventListener('click', function (e) {
+                let hash = this.dataset.gotoTab;
+
+                let hashTab = document.querySelector('.tabs__link[href="' + hash + '"]');
+                let hashAccordion = document.querySelector(hash);
+
+                if (hashTab) {
+                    let ev = new Event('click');
+                    hashTab.dispatchEvent(ev);
+                }
+
+                if (hashAccordion) {
+                    document.querySelectorAll('.tabs__tab-pane').forEach(function (item) {
+                        item.classList.remove('is-opened');
+                    });
+
+                    hashAccordion.parentNode.classList.add('is-opened');
+                }
+
+                e.preventDefault();
+            });
+        }
+        /* Go To Full Params Tab */
+    }
+
+    function LazyOfferFun(pannelId) {
+        initSliders();
+
+        AddCounterListener(document.getElementById(pannelId));
+        InitGallery(document.getElementById(pannelId));
+
+        $(".stock-table__product-img").click(imageLoader);
+        $("[name='query']").bind("change keyup input paste", filterSection);
+        $("[name='query']").keydown(preventSubmit);
+    }
+
+    function LazyRelatedFun() {
+
+        var instance = document.querySelector("#lazyRelated .swiper");
+        initializeCarouselInstance(instance);
+    }
+
+    function InitGallery(block) {
+        block.querySelectorAll('.spec-helpers').forEach((item) => {
+            lightGallery(item, {
+                selector: '.js-single-gallery'
+            });
+        });
+    }
+    //function LazyBestOfferFun(pannelId) {
+    //    AddCounterListener(document.getElementById(pannelId));
+    //}
+    //function LazyWarehouseOffersFun(pannelId) {
+    //    AddCounterListener(document.getElementById(pannelId));
+    //    InitGallery(document.getElementById(pannelId));
+    //}
+    //function LazyNonWarehouseOffersFun(pannelId) {
+    //    AddCounterListener(document.getElementById(pannelId));
+    //    InitGallery(document.getElementById(pannelId));
+    //}
+    //function LazyAnalogsFun(pannelId) {
+    //    AddCounterListener(document.getElementById(pannelId));
+    //    InitGallery(document.getElementById(pannelId));
+    //}
+
+    function AddCounterListener(block) {
+        /* ------------ Counter ------------ */
+        block.querySelectorAll('.counter__btn--add').forEach(function (item) {
+            item.addEventListener('click', function (e) {
+                const input = this.closest('.counter').querySelector('input[type="tel"]');
+                const value = input.value;
+
+                if (!parseInt(value) === value) return;
+                if (parseInt(input.value) >= 999) return;
+                if (parseInt(input.value) < 1) {
+                    input.value = 1;
+                    return;
+                }
+                if (parseInt(input.value) >= input.max) {
+                    input.value = input.max;
+                    return;
+                }
+
+                input.value = parseInt(value) + 1;
+
+                e.preventDefault();
+            });
+        });
+
+        block.querySelectorAll('.counter__btn--remove').forEach(function (item) {
+            item.addEventListener('click', function (e) {
+                const input = this.closest('.counter').querySelector('input[type="tel"]');
+                const value = input.value;
+
+                if (!parseInt(value) === value) return;
+                if (parseInt(input.value) < 1) {
+                    input.value = 1;
+                    return;
+                }
+                if (parseInt(input.value) <= input.min) {
+                    input.value = input.min;
+                    return;
+                }
+                if (value > 1) {
+                    input.value = parseInt(value) - 1;
+                }
+
+                e.preventDefault();
+            });
+        });
+        /* ------------ Counter ------------ */
+    }
+    /* LazyLoadScript */
+
+    function AddToCartLocal(el, wareId, offerId, price, article, producer) {
+        var findInput = $(el).parent().parent().find('[data-cartQt="' + offerId + '"]')[0];
+        var qnt = $('[data-cartQt="' + offerId + '"]').val();
+        event.preventDefault();
+
+        if (findInput != undefined) qnt = $(findInput).val();
+        var url = '@Url.Action("AddCartToStoreOrLocalStorage", "Cart")' + '?wareId=' + wareId + '&offerId=' + offerId + '&article=' + article + '&producer=' + producer + '&offerQnt=' + qnt + '&price=' + price + '&isLocalStorage=true';
+
+        $.post(url, null, function (data) {
+            var localCart = localStorage.getItem('cart');
+            var totalProdStorage = [];
+            var totalPrice = 0;
+            var totalCount = localCart != null ? JSON.parse(localCart).length : 0;
+
+            if (data.message) {
+                ShowErrorAddToCart(data.message);
+                return;
+            }
+            if (localCart == null) {
+                localStorage.setItem('cart', JSON.stringify(data.carts));
+                totalProdStorage.push(data.carts[0]);
+                totalCount += 1;
+            }
+            else {
+                var isHaveElement = false;
+                totalProdStorage = JSON.parse(localCart);
+                totalProdStorage.forEach(function (elem) {
+                    if (elem.OfferId == data.carts[0].OfferId) {
+                        isHaveElement = true;
+                        elem.WareQnt += data.carts[0].WareQnt;
+                    }
+                });
+                if (!isHaveElement) {
+                    totalProdStorage.push(data.carts[0]);
+                    totalCount += 1;
+                }
+                localStorage.setItem('cart', JSON.stringify(totalProdStorage));
+            }
+
+            addToCartDialog.open();
+
+            var currentQnt = 0;
+            totalProdStorage.forEach(function (elem) {
+                totalPrice += (elem.ClientPrice * elem.WareQnt);
+                if (elem.OfferId === offerId)
+                    currentQnt = elem.warehouseQnt;
+            });
+
+            $(".cart-text").html(totalPrice.toFixed(2) + " @(valute)");
+            $(".cart-counter").html(totalCount);
+            var inCart = el.querySelector('.in-cart');
+            inCart.innerHTML = currentQnt; 
+            inCart.removeAttribute("hidden");
+
+            setTimeout(function () {
+                addToCartDialog.close();
+            }, 2000);
+        });
+    }
+
+    function AddToCart(el, wareId, offerId, price, article, producer) {
+        var qnt = $('[data-cartQt="' + offerId + '"]').val();
+        var url = '@Url.Action("AddCartToStoreOrLocalStorage", "Cart")' + '?wareId=' + wareId + '&offerId=' + offerId + '&article=' + article + '&producer=' + producer + '&offerQnt=' + qnt + '&price=' + price + '&isLocalStorage=false';
+        event.preventDefault();
+        $.post(url, el.dataset.offer,
+            function(data) {
+
+                if (data.message) {
+                    ShowErrorAddToCart(data.message);
+                    return;
+                }
+                var totalProdStorage = [];
+                var totalPrice = 0;
+                var totalCount = 0;
+
+                data.carts.forEach((el) => { totalProdStorage.push(el) });
+
+                addToCartDialog.open();
+
+                var currentQnt = 0;
+                totalProdStorage.forEach(function(elem) {
+                    totalPrice += (elem.ClientPrice * elem.WareQnt);
+                    totalCount += 1;
+                    if (elem.OfferId === offerId)
+                        currentQnt = elem.WareQnt;
+                });
+
+                $(".cart-text").html(totalPrice.toFixed(2) + " @(valute)");
+                $(".cart-counter").html(totalCount);
+
+                var inCart = el.querySelector('.in-cart');
+                inCart.innerHTML = currentQnt; 
+                inCart.removeAttribute("hidden");
+
+                setTimeout(function() {
+                        addToCartDialog.close();
+                    },
+                    2000);
+            });
+    }
+
+    function ShowErrorAddToCart(message) {
+        var titleOld = $(".modal-win__title").text();
+        $(".modal-win__title").text(message);
+        $(".product-added-footer").hide();
+        addToCartDialog.open();
+        setTimeout(function() {
+                addToCartDialog.close();
+                $(".modal-win__title").text(titleOld);
+                $(".product-added-footer").show();
+            },
+            2000);
+    }
+
+    function setCartFromLocal() {
+        var localCart = localStorage.getItem('cart');
+        if (localCart != null) {
+            var totalProdStorage = JSON.parse(localCart);
+            var totalPrice = 0;
+            var totalCount = totalProdStorage.length;
+            totalProdStorage.forEach(function(elem) {
+                totalPrice += (elem.ClientPrice * elem.WareQnt);
+            });
+
+            $(".cart-text").html(totalPrice.toFixed(2) + " @(valute)");
+            $(".cart-counter").html(totalCount);
+        }
+    }
+
+    @if (SessionHelper.CurrentUser == null)
+    {
+        <text>
+            setCartFromLocal();
+        </text>
+    }
+
+</script>
+@* ReSharper restore ConditionIsAlwaysConst *@
+@* ReSharper restore PossibleNullReferenceException *@

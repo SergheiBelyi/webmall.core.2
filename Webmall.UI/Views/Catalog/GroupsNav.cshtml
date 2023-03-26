@@ -1,0 +1,25 @@
+﻿@using Webmall.Model.Entities.Catalog
+@using ViewRes
+@using Webmall.UI.Core
+
+@{
+    Layout = null;
+    var currentParentLink = "~/" + UserPreferences.CurrentCultureLink + "Catalog/";
+}
+@model List<Group>
+
+<div class="category-nav d-none d-md-block">
+    @if (Model != null && Model.Any())
+    {
+        <div class="category-nav__title h3">@SharedResources.ProductCategory</div>
+        <ul class="category-nav__list">
+            @foreach (var item in Model)
+            {
+                var url = Url.Content(currentParentLink + item.Url);
+                var active = (item.Id == ViewBag.CurrentGroupId) ? "active" : "";
+                <li class="category-nav__item @active"><a class="category-nav__link" href="@url">@item.Name</a></li>
+
+            }
+        </ul>
+    }
+</div>

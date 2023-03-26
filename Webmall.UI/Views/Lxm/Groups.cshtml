@@ -1,0 +1,219 @@
+﻿@using ViewRes
+@using Webmall.UI.Core.Renderers
+@using Webmall.UI.Models.Laximo
+@using Webmall.UI.ViewModel
+
+@model GroupsModel
+
+@{
+    Layout = "~/Views/Shared/_Inner.cshtml";
+    var renderGroups = Model.SelectedGroup == null || (!((GroupTree)Model.SelectedGroup).Group.IsLink || (Model.SelectedGroup.Children != null && Model.SelectedGroup.Children.Any()));
+}
+
+@section BreadCrumbs{
+    @{
+        var links = new List<BreadCrumbsModel>
+        {
+            new BreadCrumbsModel
+            {
+                Url = Model.Type == "Auto" ? Url.Action("Selection", "SelectionByAuto") + "#section-3" : Url.Action("VinSearch", Model.Clone()),
+                Name = Model.VehicleInfo.Brand + " " + Model.VehicleInfo.Name
+            },
+            new BreadCrumbsModel {Name = SharedResources.SelectByGroups}
+        };
+    }
+    @{Html.RenderPartial("Components/BreadCrumbsRender", links);}
+}
+
+@section Sidebar{
+    <aside class="match-area__aside filter">
+        <!-- tree-nav-widget-->
+        <div class="match-area__nav tree-nav-widget js-accordion is-active">
+            <div class="tree-nav-widget__header">
+                <div class="tree-nav-widget__heading js-accordion-trigger">@Model.VehicleInfo.Brand @Model.VehicleInfo.Name</div>
+            </div>
+            <div class="tree-nav-widget__main js-accordion-body">
+                <nav class="tree-nav-widget__nav tree-nav">
+                    @(new HtmlString(Html.RenderTree(Model.Groups, Model.SelectedGroup, "groups", gr =>
+                    {
+                        var baseModel = Model.Clone();
+                        baseModel.CategoryId = gr.Id;
+                        var group = (GroupTree)gr;
+                        return group.Group.IsLink ? "<a href=\"\" onclick=\"updateUnitInfo('" + Url.Action("GroupDetails", new { Model.VehicleId, Model.CatalogId, Model.CategoryId, Model.Ssd, groupId = gr.Id, Model.Type }) + "', event);\">" + gr.Name + "</a>" : gr.Name;
+                    })))
+                </nav>
+            </div>
+        </div><!-- /tree-nav-widget-->
+    </aside>
+}
+
+<button class="filter-toggle match-area__filter-toggle" type="button">
+    <svg class="icon icon-tree filter-toggle__icon" width="25" height="25">
+        <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#tree")"></use>
+    </svg>
+    <span class="filter-toggle__text">@SharedResources.Categories</span>
+</button>
+
+@*<div class="header-controls d-md-none">
+        <div class="header-control">
+            <a class="filter-toggle" href="#">
+                <svg class="icon icon-sliders-h filter-toggle__icon">
+                    <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#sliders-h")"></use>
+                </svg>@SharedResources.Filters
+            </a>
+        </div>
+    </div>*@
+
+<main class="match-area__main">
+    <div class="match-area__tabs tabs js-tabs">
+        <div class="tabs__header">
+            <ul class="tabs__list">
+                <li class="tabs__item js-tabs-item">
+                    <a class="tabs__link is-active" href="@Url.Action("Groups", Model.Clone())">@SharedResources.SelectByGroups</a>
+                </li>
+                <li class="tabs__item js-tabs-item">
+                    <a class="tabs__link" href="@Url.Action("Categories", Model.Clone())">@SharedResources.SelectByCategories</a>
+                </li>
+            </ul>
+            <div class="tabs__panes">
+                <div class="tabs__pane js-tabs-pane is-active" id="groupDetail">
+                    @if (renderGroups)
+                    {
+                        Html.RenderPartial("SelectionByAutoGroupsAsImages", Model);
+                    }
+                </div>
+                <div class="tabs__pane js-tabs-pane"></div>
+            </div>
+        </div>
+    </div>
+</main>
+@section styles
+    {
+    @*@Styles.Render("~/Content/views/laximo")*@
+    @*@Styles.Render("~/Content/jUI")*@
+}
+
+@section scripts
+{
+    <script>
+        $(function () {
+            var searchInput = $('#searchInput');
+            searchInput.click(stopEvent);
+            searchInput.change(function() {
+                searchGroup(searchInput.val());
+            });
+            searchInput.keyup(function () {
+                searchGroup(searchInput.val());
+            });
+        });
+
+        function updateUnitInfo(url, e) {
+            updatePannel(url, 'groupDetail', 'progressWindow', tippyInitGroupDetail);
+            if (e) {
+                $("li.current").removeClass("current");
+                e.srcElement.parentElement.classList.add("current");
+                e.preventDefault();
+            }
+        }
+
+        function tippyInitGroupDetail() {
+            tippy('.group-tippy',
+                {
+                    allowHTML: true,
+                    content: 'Loading...',
+                    onCreate(instance) {
+                        // Setup our own custom state properties
+                        instance._isFetching = false;
+                        instance._src = null;
+                        instance._error = null;
+                    },
+                    onShow(instance) {
+                        if (instance._isFetching || instance._src || instance._error) {
+                            return;
+                        }
+                        instance._isFetching = true;
+                        instance.setContent(g_getHint(instance.reference));
+                        instance._isFetching = false;
+                    },
+                    onHidden(instance) {
+                        instance.setContent('Loading...');
+                        // Unset these properties so new network requests can be initiated
+                        instance._src = null;
+                        instance._error = null;
+                    }
+                });
+            tippy('.group-tippy-mobile',
+                {
+                    allowHTML: true,
+                    content: 'Loading...',
+                    onCreate(instance) {
+                        // Setup our own custom state properties
+                        instance._isFetching = false;
+                        instance._src = null;
+                        instance._error = null;
+                    },
+                    onShow(instance) {
+                        if (instance._isFetching || instance._src || instance._error) {
+                            return;
+                        }
+                        instance._isFetching = true;
+                        instance.setContent(g_getHint(document.getElementById(instance.reference.dataset.id)));
+                        instance._isFetching = false;
+                    },
+                    onHidden(instance) {
+                        instance.setContent('Loading...');
+                        // Unset these properties so new network requests can be initiated
+                        instance._src = null;
+                        instance._error = null;
+                    }
+                });
+        }
+
+        function searchGroup(searchStr) {
+            var nav = $('#filteredNavigation');
+            var show = false;
+
+            nav.hide();
+            nav.html('');
+            if (searchStr.length >= 3) {
+                updatePannel('@(Html.Raw(Url.Action("FilteredGroups", new { Model.VehicleId, Model.CatalogId, Model.CategoryId, Model.Ssd })))&filter=' + searchStr, 'filteredNavigation', null,
+                    function () {
+                        let treeNavs = document.querySelectorAll('#filteredNavigation');
+
+                        treeNavs.forEach(function (item) {
+                            item.querySelectorAll('li').forEach(function (item) {
+                                if (!item.querySelector('ul')) return;
+
+                                item.classList.add('has-children', 'is-active');
+                                item.prepend(createTreeNavToggle());
+                            });
+                        });
+
+                        document.querySelectorAll('#filteredNavigation li.has-children > .tree-nav__toggle').forEach(function (item) {
+                            item.addEventListener('click', function (e) {
+                                this.closest('li').classList.toggle('is-active');
+
+                                e.preventDefault();
+                            });
+                        });
+                    });
+                show = true;
+            }
+
+            if (show) {
+                nav.show();
+                $("#groups").hide();
+            } else {
+                $("#groups").show();
+            }
+        }
+
+        @if (!renderGroups)
+        {
+            <text>
+                updateUnitInfo('@Html.Raw(Url.Action("GroupDetails", new { Model.VehicleId, Model.CatalogId, Model.CategoryId, Model.Ssd, groupId = Model.SelectedGroup.Id }))');
+            </text>
+        }
+    </script>
+    @Scripts.Render("~/bundles/laximo")
+}

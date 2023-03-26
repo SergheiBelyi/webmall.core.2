@@ -1,0 +1,11 @@
+﻿@using Webmall.UI.Core.Helpers
+
+@{
+    var langHref = this.ToLocalizedUrl("/");
+}
+
+<div class="logo header__logo">
+    <a class="logo__wrap" href="@langHref">
+        <img class="logo__img img-responsive" src="@Url.Content("~/assets/images/logo.svg")" alt="" width="190" height="60" role="presentation">
+    </a>
+</div>

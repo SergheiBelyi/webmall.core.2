@@ -1,0 +1,166 @@
+﻿@using ViewRes
+@using Webmall.Laximo.Core
+
+@model Webmall.UI.Models.Laximo.VehicleListModel
+
+@{
+    Layout = null;
+}
+
+<div class="table-responsive select-car__wrap">
+    <table class="kit-table select-car__table is-fixed is-dark">
+        <thead>
+            <tr>
+                <th>@SharedResources.AutoMarka</th>
+                <th>@SharedResources.AutoModel</th>
+                <th>@SharedResources.ProduceDate</th>
+                <th>@SharedResources.Transmission</th>
+                <th></th>
+                @foreach (var i in Model.ExtAttrTitles)
+                {
+                    <th id="c_@i.Key" style="display: none">@i.Value</th>
+                } 
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Vehicles)
+            {
+                var url = Url.Action("Groups", new { item.CatalogId, item.VehicleId, item.Ssd, type = "Auto" });
+                <tr>
+                    <td name="c_brand">
+                        <div class="kit-table__title">
+                            <a class="spec-table__title-model" href="@url">@item.Brand</a>
+                        </div>
+                    </td>
+                    <td name="c_name"><div class="kit-table__text"><a class="spec-table__title-model" href="@url">@item.Name @(string.IsNullOrEmpty(item.Model) ? "" : "(" + item.Model + ")")</a></div></td>
+                    <td name="c_prodRang"><span class="kit-table__text">@item.ProdRange</span></td>
+                    <td name="c_transm"><span class="kit-table__text">@item.Transmission</span></td>
+                    <td class="text-right">
+                        <div class="kit-table__text is-mute">
+                            <span class="kit-table__info auto-tippy">
+                                <svg class="icon icon-info kit-table__info-icon" width="25" height="25">
+                                    <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#info")"></use>
+                                </svg>
+                            </span>
+                        </div>
+                        @*<div class="spec-table__type">@item.BodyTypeName<i data__title="" id="@(item.Id)" onclick="UpdateInfo(this);" class="tooltip fas fa-info"></i></div>*@
+                    </td>
+                    @foreach (var i in Model.ExtAttrTitles)
+                    {
+                        <td class="hd" name="c_@i.Key" style="display: none"><a href="@url">@item.ExtAttributes.GetValue(i.Key)</a></td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- kit-area-->
+@*
+<div class="select-car__data kit-products">
+    <!-- kit-product-->
+    <div class="kit-products__item kit-product js-accordion is-active">
+        @*<div class="kit-product__header js-accordion-trigger">
+                <div class="kit-product__heading">Audi</div>
+            </div>* @
+        <div class="kit-product__main js-accordion-body">
+            @foreach (var item in Model)
+            {
+                var url = Url.Action("WaresForModif", "Catalog", new { modif = item.Id });
+                <div class="kit-product__subsection">
+                    <div class="kit-product__model">@item.Name</div>
+                    <dl class="kit-product__props">
+                        <div class="kit-product__prop">
+                            <dt class="kit-product__property">@SharedResources.EngineCode</dt>
+                            <dd class="kit-product__value">
+                                <a class="kit-product__link" href="@url">@item.EngineCode</a>
+                            </dd>
+                        </div>
+                        <div class="kit-product__prop">
+                            <dt class="kit-product__property">@SharedResources.YearOfProduce</dt>
+                            <dd class="kit-product__value">@(item.DateBegin.HasValue ? item.DateBegin.Value.ToShortDateString() : string.Empty) - @(item.DateEnd.HasValue ? item.DateEnd.Value.ToShortDateString() : string.Empty)</dd>
+                        </div>
+                        <div class="kit-product__prop">
+                            <dt class="kit-product__property">@SharedResources.PowerKw</dt>
+                            <dd class="kit-product__value">@item.KW</dd>
+                        </div>
+                        <div class="kit-product__prop">
+                            <dt class="kit-product__property">@SharedResources.PowerHp</dt>
+                            <dd class="kit-product__value">@item.PS</dd>
+                        </div>
+                        <div class="kit-product__prop">
+                            <dt class="kit-product__property">@SharedResources.VolumeCm</dt>
+                            <dd class="kit-product__value">@item.CcmTech</dd>
+                        </div>
+                        <div class="kit-product__prop">
+                            <dt class="kit-product__property">@SharedResources.BodyType</dt>
+                            <dd class="kit-product__value">
+                                @item.BodyTypeName
+                                <span class="kit-product__info auto-tippy" id="@(item.Id)">
+                                    <svg class="icon icon-info kit-product__info-icon" width="25" height="25">
+                                        <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#info")"></use>
+                                    </svg>
+                                </span>
+                            </dd>
+                        </div>
+                    </dl>
+                </div>
+            }
+        </div>
+    </div>
+    <!-- /kit-product-->
+</div>
+*@
+
+
+@*<div class="table-responsive d-none d-md-block">
+        <table class="spec-table spec-table--inner">
+            <tbody class="spec-table__tbody">
+                @foreach (var item in Model.Vehicles)
+                {
+                    var url = Url.Action("Groups", new { item.CatalogId, item.VehicleId, item.Ssd, type = "Auto" });
+                    <tr class="spec-table__tr">
+                        <td class="spec-table__td" name="c_brand"><a class="spec-table__title-model" href="@url">@item.Brand</a></td>
+                        <td class="spec-table__td" name="c_name"><a class="spec-table__title-model" href="@url">@item.Name @(string.IsNullOrEmpty(item.Model) ? "" : "(" + item.Model + ")")</a></td>
+                        <td class="spec-table__td" name="c_prodRang">@item.ProdRange</td>
+                        <td class="spec-table__td" name="c_transm">@item.Transmission</td>
+                        <td name="c_tooltip" class="info" title="tooltip"><img src="@Url.Content("~/Content/images/voskl.png")" width="18" height="18"></td>
+                        @foreach (var i in Model.ExtAttrTitles)
+                        {
+                            <td class="spec-table__td hd" name="c_@i.Key" style="display: none"><a href="@url">@item.ExtAttributes.GetValue(i.Key)</a></td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>*@
+@*
+    <div class="spec d-md-none">
+        <div class="spec__title">@SharedResources.Engine</div>
+        @foreach (var item in Model.Vehicles)
+        {
+            var url = Url.Action("Groups", new { item.CatalogId, item.VehicleId, item.Ssd });
+            <div class="spec__product">
+                <div class="spec__heading"><a href="@url">@item.Brand @item.Name  @(string.IsNullOrEmpty(item.Model) ? "" : "(" + item.Model + ")")</a></div>
+                <div class="spec__detail">
+                    <dl class="spec__params">
+                        <dt class="spec__property"> @SharedResources.EngineCode</dt>
+                        <dt class="spec__value">@item.Engine</dt>
+                        <dt class="spec__property">@SharedResources.Transmission</dt>
+                        <dt class="spec__value">@item.Transmission</dt>
+                        <dt class="spec__property">@SharedResources.ProduceDate</dt>
+                        <dt class="spec__value">@item.Date</dt>
+                        <dt class="spec__property">@SharedResources.EngineNumber</dt>
+                        <dt class="spec__value">@item.EngineNo</dt>
+                        @foreach (var i in Model.ExtAttrTitles)
+                        {
+                            <dt class="spec__property">@i.Value</dt>
+                            <dt class="spec__value">@item.ExtAttributes.GetValue(i.Key)</dt>
+                        }
+                    </dl>
+                    @*<a class="spec__params-more" href="" id="@(mod.Id)" onclick="UpdateInfo(this); return false;" data__title="@mod.EngineCode">@SharedResources.Specifications</a>* @
+                </div>
+            </div>
+        }
+    </div>
+*@

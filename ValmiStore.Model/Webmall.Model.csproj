@@ -1,0 +1,414 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B8938641-3D4C-466A-845D-7D96A4073720}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Webmall.Model</RootNamespace>
+    <AssemblyName>Webmall.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.9.0.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.BouncyCastle.1.9.0\lib\net40\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.15\lib\net45\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="MailKit, Version=2.13.0.0, Culture=neutral, PublicKeyToken=4e064fe7c44a8f1b, processorArchitecture=MSIL">
+      <HintPath>..\packages\MailKit.2.13.0\lib\net47\MailKit.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.7.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.7.0.0\lib\net462\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.2.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="MimeKit, Version=2.13.0.0, Culture=neutral, PublicKeyToken=bede1c8a46c66814, processorArchitecture=MSIL">
+      <HintPath>..\packages\MimeKit.2.13.0\lib\net47\MimeKit.dll</HintPath>
+    </Reference>
+    <Reference Include="MiniProfiler, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b44f9351044011a3, processorArchitecture=MSIL">
+      <HintPath>..\packages\MiniProfiler.4.2.22\lib\net461\MiniProfiler.dll</HintPath>
+    </Reference>
+    <Reference Include="MiniProfiler.EF6, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b44f9351044011a3, processorArchitecture=MSIL">
+      <HintPath>..\packages\MiniProfiler.EF6.4.2.22\lib\net461\MiniProfiler.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="MiniProfiler.Shared, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b44f9351044011a3, processorArchitecture=MSIL">
+      <HintPath>..\packages\MiniProfiler.Shared.4.2.22\lib\net461\MiniProfiler.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.7.0.0\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\Webmall.AutonovaD\packages\System.Reflection.4.3.0\lib\net462\System.Reflection.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reflection.TypeExtensions, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\Webmall.AutonovaD\packages\System.Reflection.TypeExtensions.4.3.0\lib\net462\System.Reflection.TypeExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Runtime.Serialization.Primitives, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\Webmall.AutonovaD\packages\System.Runtime.Serialization.Primitives.4.3.0\lib\net46\System.Runtime.Serialization.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.9\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.9\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.XmlDocument, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\Webmall.AutonovaD\packages\System.Xml.XmlDocument.4.3.0\lib\net46\System.Xml.XmlDocument.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Abstract\ICommonTreeComposite.cs" />
+    <Compile Include="ConfigHelper.cs" />
+    <Compile Include="CoreHelpers\ObjectExtensions.cs" />
+    <Compile Include="CoreHelpers\PasswordGenerator.cs" />
+    <Compile Include="CoreHelpers\RecapchaValidationAttribute.cs" />
+    <Compile Include="CoreHelpers\RepositoryResultException.cs" />
+    <Compile Include="CoreHelpers\SiteMapComparer.cs" />
+    <Compile Include="CoreHelpers\StringWriterWithEncoding.cs" />
+    <Compile Include="CoreHelpers\SumToString.cs" />
+    <Compile Include="CoreHelpers\WareComparer.cs" />
+    <Compile Include="Entities\Address\CarrierServiceInfo.cs" />
+    <Compile Include="Entities\Address\PickupPointInfo.cs" />
+    <Compile Include="Entities\Auto\Applicability.cs" />
+    <Compile Include="Entities\Auto\AutoAttribute.cs" />
+    <Compile Include="Entities\Auto\AutoMarka.cs" />
+    <Compile Include="Entities\Auto\AutoModel.cs" />
+    <Compile Include="Entities\Auto\AutoModification.cs" />
+    <Compile Include="Entities\Auto\TDAssebly.cs" />
+    <Compile Include="Entities\Catalog\AutoDataFilterOptions.cs" />
+    <Compile Include="Entities\Catalog\Filters\Actions.cs" />
+    <Compile Include="Entities\Catalog\Filters\Visibility.cs" />
+    <Compile Include="Entities\Catalog\BrandFilterOptions.cs" />
+    <Compile Include="Entities\Cms\Brand\BrandNewsItem.cs" />
+    <Compile Include="Entities\Cms\Brand\DocsItem.cs" />
+    <Compile Include="Entities\Cms\Brand\GalleryItem.cs" />
+    <Compile Include="Entities\Cms\Brand\FeatureData.cs" />
+    <Compile Include="Entities\Cms\Localization\LArray.cs" />
+    <Compile Include="Entities\Delivery\Receiver.cs" />
+    <Compile Include="Entities\Cms\EmbeddedText.cs" />
+    <Compile Include="Entities\Cms\Order\CheckboxList.cs" />
+    <Compile Include="Entities\Cms\Order\FileList.cs" />
+    <Compile Include="Entities\Cms\Order\OrderInfoText.cs" />
+    <Compile Include="Entities\Cms\Order\OrderPayment.cs" />
+    <Compile Include="Entities\Cms\Order\SuccessfulText.cs" />
+    <Compile Include="Entities\Cms\PersonalMenu\Menu.cs" />
+    <Compile Include="Entities\Delivery\DeliveryMethod.cs" />
+    <Compile Include="Entities\Delivery\DeliveryMethods.cs" />
+    <Compile Include="Entities\Order\Checkout\CheckoutDeliveryData.cs" />
+    <Compile Include="Entities\Order\Checkout\CheckoutOrderData.cs" />
+    <Compile Include="Entities\Order\Checkout\CheckoutPaymentData.cs" />
+    <Compile Include="Entities\Order\DeliveryInfo.cs" />
+    <Compile Include="Entities\Order\DeliveryPayload.cs" />
+    <Compile Include="Entities\Delivery\DeliveryTime.cs" />
+    <Compile Include="Entities\Order\OrderFilterOptions.cs" />
+    <Compile Include="Entities\Order\Order.cs" />
+    <Compile Include="Entities\Order\OrderPositionsList.cs" />
+    <Compile Include="Entities\Order\OrderOptions.cs" />
+    <Compile Include="Entities\Order\OrderPositionsListItem.cs" />
+    <Compile Include="Entities\Order\OrderList.cs" />
+    <Compile Include="Entities\Order\PaymentInfo.cs" />
+    <Compile Include="Entities\Order\PickUpPayload.cs" />
+    <Compile Include="Entities\Order\PickupPointInfo.cs" />
+    <Compile Include="Entities\Order\RefOrderStatus.cs" />
+    <Compile Include="Entities\Order\PositionStatus.cs" />
+    <Compile Include="Entities\Catalog\ImageInfo.cs" />
+    <Compile Include="Entities\Order\Checkout\SetOrderDeliveryData.cs" />
+    <Compile Include="Entities_old\FilterOptions.cs" />
+    <Compile Include="Entities\Client\Breefing.cs" />
+    <Compile Include="Entities\Client\Valute.cs" />
+    <Compile Include="Entities\Cms\HomePage\Shops.cs" />
+    <Compile Include="Entities\Cms\Location.cs" />
+    <Compile Include="Entities\Cms\WareGroups.cs" />
+    <Compile Include="Entities\FileInfo.cs" />
+    <Compile Include="Entities\FilterOptions.cs" />
+    <Compile Include="Entities\Catalog\Group.cs" />
+    <Compile Include="Entities\Catalog\GroupProperty.cs" />
+    <Compile Include="Entities\Catalog\GroupPropertyAvailableValues.cs" />
+    <Compile Include="Entities\Home.cs" />
+    <Compile Include="Entities\Catalog\Offer.cs" />
+    <Compile Include="Entities\PageOptions.cs" />
+    <Compile Include="Entities\Catalog\Producer.cs" />
+    <Compile Include="Entities\User\UserConfiguration.cs" />
+    <Compile Include="Entities\User\UserRegistrationData.cs" />
+    <Compile Include="Entities\User\UserRoles.cs" />
+    <Compile Include="Entities\User\UserStatuses.cs" />
+    <Compile Include="Entities\Catalog\Ware.cs" />
+    <Compile Include="Entities\Catalog\WareList.cs" />
+    <Compile Include="Entities\Catalog\WareListItem.cs" />
+    <Compile Include="Entities\Catalog\WareProperty.cs" />
+    <Compile Include="Entities\Catalog\WareReplacement.cs" />
+    <Compile Include="Entities_old\Citys.cs" />
+    <Compile Include="Entities\Cms\Brand\BrandItem.cs" />
+    <Compile Include="Entities\Cms\Contacts\Contact.cs" />
+    <Compile Include="Entities\Cms\Contacts\Emails.cs" />
+    <Compile Include="Entities\Cms\Contacts\Info.cs" />
+    <Compile Include="Entities\Cms\Contacts\Phones.cs" />
+    <Compile Include="Entities\Cms\Contacts\Schedule.cs" />
+    <Compile Include="Entities\Cms\HomePage\CustomerReview.cs" />
+    <Compile Include="Entities\Cms\HomePage\FlashNews.cs" />
+    <Compile Include="Entities\Cms\HeaderNav.cs" />
+    <Compile Include="Entities\Cms\Informer.cs" />
+    <Compile Include="Entities\Cms\Localization\LObjectGeneric.cs" />
+    <Compile Include="Entities\Cms\NewsData\NewsCategory.cs" />
+    <Compile Include="Entities\Cms\PersonalMenu\MenuItem.cs" />
+    <Compile Include="Entities\Cms\PersonalMenu\UserRolesCustom.cs" />
+    <Compile Include="Entities\Order\DeliveryTypes.cs" />
+    <Compile Include="Entities\Cart\ImportResult.cs" />
+    <Compile Include="Entities\Catalog\AvailableNumber.cs" />
+    <Compile Include="Entities_old\Catalog\WareList.cs" />
+    <Compile Include="Entities\Cms\HomePage\Banner.cs" />
+    <Compile Include="Entities\Cms\Brand\BrandArticle.cs" />
+    <Compile Include="Entities\Cms\ExternalCatalog\CatalogItem.cs" />
+    <Compile Include="Entities_old\Cms\Configuration\TopBanner.cs" />
+    <Compile Include="Entities\Cms\Menu\MenuLevel1.cs" />
+    <Compile Include="Entities\Cms\Menu\MenuLevel2.cs" />
+    <Compile Include="Entities\Cms\Footer\FooterColumn.cs" />
+    <Compile Include="Entities\Cms\Footer\FooterPosition.cs" />
+    <Compile Include="Entities\Cms\Footer\SocialLink.cs" />
+    <Compile Include="Entities\Cms\Localization\Language.cs" />
+    <Compile Include="Entities\Cms\Localization\LBoolean.cs" />
+    <Compile Include="Entities\Cms\Localization\LString.cs" />
+    <Compile Include="Entities\Cms\Article.cs" />
+    <Compile Include="Entities\Cms\MailMessageTemplate.cs" />
+    <Compile Include="Entities\Cms\NewsData\NewsTracker.cs" />
+    <Compile Include="Entities\Cms\NewsData\PromotionNews.cs" />
+    <Compile Include="Entities\Cms\IncorporatingText.cs" />
+    <Compile Include="Entities_old\Cms\Configuration\Configuration.cs" />
+    <Compile Include="Entities\Cms\Seo\SeoBase.cs" />
+    <Compile Include="Entities\Cms\Seo\SeoTemplate.cs" />
+    <Compile Include="Entities_old\Cms\Configuration\DeliveryConfig.cs" />
+    <Compile Include="Entities_old\Configuration\EmailConfig.cs" />
+    <Compile Include="Entities_old\Delivery\DeliveryOffice.cs" />
+    <Compile Include="Entities_old\Kros.cs" />
+    <Compile Include="Entities_old\MarketingActions\CumulativeAction.cs" />
+    <Compile Include="Entities_old\MarketingActions\DiscountsAction.cs" />
+    <Compile Include="Entities_old\MarketingActions\InstantAction.cs" />
+    <Compile Include="Entities_old\MarketingActions\LoyaltyProgram.cs" />
+    <Compile Include="Entities_old\MarketingActions\MarketingAction.cs" />
+    <Compile Include="Entities_old\Order\PickupPoint.cs" />
+    <Compile Include="Entities_old\SupplierPrice.cs" />
+    <Compile Include="Entities_old\User\ClientInfo.cs" />
+    <Compile Include="Entities\Garage\Car.cs" />
+    <Compile Include="Entities_old\User\DebtInfo.cs" />
+    <Compile Include="Entities\Client\ManagerData.cs" />
+    <Compile Include="Entities\VinSearch\VinHistoryFilter.cs" />
+    <Compile Include="Entities\VinSearch\VinSearchHistoryItem.cs" />
+    <Compile Include="Entities_old\Configuration\Features\FeaturesModels.cs" />
+    <Compile Include="Entities_old\Configuration\Features\FeaturesConfig.cs" />
+    <Compile Include="CultureHelper.cs" />
+    <Compile Include="Entities\Address\Address.cs" />
+    <Compile Include="Entities_old\Applicability.cs" />
+    <Compile Include="Entities_old\Cms\AutoService\AutoServiceDetail.cs" />
+    <Compile Include="Entities\Cart\CartPosition.cs" />
+    <Compile Include="Entities_old\Cms\AutoService\AutoServiceInfo.cs" />
+    <Compile Include="Entities\References\LocalityReference.cs" />
+    <Compile Include="Entities_old\ClientsListItem.cs" />
+    <Compile Include="Entities_old\Cms\SelectionByAuto\BannerGroup.cs" />
+    <Compile Include="Entities_old\FileInfo.cs" />
+    <Compile Include="Entities_old\Meta\AutoMarkMetaInfo.cs" />
+    <Compile Include="Entities_old\Meta\MetaInfo.cs" />
+    <Compile Include="Entities_old\Order\AvailableDelivery.cs" />
+    <Compile Include="Entities_old\Order\DeliverySchedule.cs" />
+    <Compile Include="Entities_old\Order\VisaAdditionalInfo.cs" />
+    <Compile Include="Entities_old\Order\WareAvailability.cs" />
+    <Compile Include="Entities_old\Order\WareAvailabilityWrapper.cs" />
+    <Compile Include="Entities_old\ProducersList.cs" />
+    <Compile Include="Entities_old\SiteMapItem.cs" />
+    <Compile Include="Entities\References\StreetReference.cs" />
+    <Compile Include="Entities_old\TiresCombination.cs" />
+    <Compile Include="Entities\Client\BreefingData.cs" />
+    <Compile Include="Entities_old\User\NotificationHistoryItem.cs" />
+    <Compile Include="Entities_old\User\LoyaltyListItem.cs" />
+    <Compile Include="Entities_old\User\ComparisionAct.cs" />
+    <Compile Include="Entities_old\User\ComparisionActDetail.cs" />
+    <Compile Include="Entities\Client\Contact.cs" />
+    <Compile Include="Entities\Warehouse.cs" />
+    <Compile Include="Entities\Delivery\DeliveryAddress.cs" />
+    <Compile Include="Entities_old\Group.cs" />
+    <Compile Include="Abstract\ITreeComposite.cs" />
+    <Compile Include="Entities\Catalog\MeasureUnit.cs" />
+    <Compile Include="Entities\Cms\NewsData\NewsArticle.cs" />
+    <Compile Include="Entities_old\Offer.cs" />
+    <Compile Include="Entities_old\Order\Order.cs" />
+    <Compile Include="Entities\Order\OrderListItem.cs" />
+    <Compile Include="Entities\Order\OrderPosition.cs" />
+    <Compile Include="Entities\Cms\ExternalCatalog\CatalogCategory.cs" />
+    <Compile Include="Entities_old\Producer.cs" />
+    <Compile Include="Entities_old\Properties.cs" />
+    <Compile Include="Entities\References\SimpleReferenceItem.cs" />
+    <Compile Include="Entities_old\Trend.cs" />
+    <Compile Include="Entities\Client\Contract.cs" />
+    <Compile Include="Entities\Client\Client.cs" />
+    <Compile Include="Entities\User\ClientPresenter.cs" />
+    <Compile Include="Entities\User\User.cs" />
+    <Compile Include="Entities\User\VINRequest.cs" />
+    <Compile Include="Entities\User\VINRequestFilter.cs" />
+    <Compile Include="Entities_old\Ware.cs" />
+    <Compile Include="Entities_old\WareProperty.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="Helper.cs" />
+    <Compile Include="MailHelper.cs" />
+    <Compile Include="PostHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Entities\DemandRequestTypes.cs" />
+    <Compile Include="Repositories\Abstract\IAutoDataRepository.cs" />
+    <Compile Include="Repositories\Abstract\IAddressRepository.cs" />
+    <Compile Include="Repositories\Abstract\IGarageRepository.cs" />
+    <Compile Include="Repositories\Abstract\IClientRepository.cs" />
+    <Compile Include="Repositories\Abstract\IDemandRequestRepository.cs" />
+    <Compile Include="Repositories\Abstract\IFinanceRepository.cs" />
+    <Compile Include="Repositories\Abstract\IPresentationRepository.cs" />
+    <Compile Include="Repositories\Abstract\ICmsRepository.cs" />
+    <Compile Include="Repositories\Abstract\IConfigRepository.cs" />
+    <Compile Include="Repositories\Abstract\IImageRepository.cs" />
+    <Compile Include="Repositories\Abstract\ICartRepository.cs" />
+    <Compile Include="Repositories\Abstract\ICatalogRepository.cs" />
+    <Compile Include="Repositories\Abstract\IMarketingActionsRepository.cs" />
+    <Compile Include="Repositories\Abstract\IOrderRepository.cs" />
+    <Compile Include="Repositories\Abstract\IReferenceRepository.cs" />
+    <Compile Include="Repositories\Abstract\IReportsRepository.cs" />
+    <Compile Include="Repositories\Abstract\ISuppliersRepository.cs" />
+    <Compile Include="Repositories\Abstract\IUserRepository.cs" />
+    <Compile Include="Entities\User\UserFilter.cs" />
+    <Compile Include="Repositories\Abstract\IVinRequestRepository.cs" />
+    <Compile Include="Entities\Client\ClientDocument.cs" />
+    <Compile Include="Entities\Cart\ImportPosition.cs" />
+    <Compile Include="StringExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\DataSources\ValmiStore.Model.DataLayer.ValmiStoreDBEntities.datasource" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ValmiStore.Resources\ValmiStore.Resources.csproj">
+      <Project>{031dd7bb-90dc-4b3f-890d-1e3464f2cc36}</Project>
+      <Name>ValmiStore.Resources</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

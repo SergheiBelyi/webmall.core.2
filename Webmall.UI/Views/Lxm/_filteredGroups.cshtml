@@ -1,0 +1,17 @@
+﻿@using ViewRes
+@using Webmall.UI.Core.Renderers
+@using Webmall.UI.Models.Laximo
+
+@model GroupsModel
+
+@{
+    Layout = null;
+}
+
+@(new HtmlString(Html.RenderTree(Model.Groups, Model.SelectedGroup, "groups", gr =>
+                                                       {
+                                                           var baseModel = Model.Clone();
+                                                           baseModel.CategoryId = gr.Id;
+                                                           var group = (GroupTree)gr;
+                                                           return group.Group.IsLink ? "<a href=\"\" onclick=\"updateUnitInfo('" + Url.Action("GroupDetails", new { Model.VehicleId, Model.CatalogId, Model.CategoryId, Model.Ssd, groupId = gr.Id }) + "', event);\">" + gr.Name + "</a>" : gr.Name;
+                                                       })))

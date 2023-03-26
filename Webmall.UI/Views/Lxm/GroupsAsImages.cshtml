@@ -1,0 +1,27 @@
+﻿@model Webmall.UI.Models.Laximo.GroupsModel
+
+@{
+    Layout = null;
+    string modif = Request.QueryString["modif"];
+    var hasmodif = !string.IsNullOrEmpty(modif);
+    if (!hasmodif)
+    {
+        modif = Request.QueryString["searchModifId"];
+    }
+}
+
+<div class="tiles">
+    @foreach (var group in (Model.SelectedGroup != null) ? Model.SelectedGroup.Children : Model.Groups)
+    {
+        var imgUrl = string.Format("~/ExtContent/TDGroupImages/{0}.png", group.Id);
+        if (!File.Exists(Server.MapPath(imgUrl)))
+        {
+            imgUrl = "~/ExtContent/TDGroupImages/default.png";
+        }
+        <div class="tile-small">
+            <a href="@Url.Action("WaresForModif", "Catalog", new { modif, groupId = group.Id, wareGroupId = (group.Children.Any()) ? null : group.Id, Model.Type, OnlySpecials = (group.Id == null) })"><img src="@Url.Content(imgUrl)" />@group.Name</a>
+        </div>
+    }
+</div>
+
+

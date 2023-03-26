@@ -1,0 +1,76 @@
+﻿@using ViewRes
+@using Webmall.Model
+@model Webmall.Model.Entities.Cms.Article
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = Model.Header;
+}
+
+<div class="container-fluid">
+    @*    @{Html.RenderPartial("Components/BreadCrumbsRender", Model.BreadCrumbs);}*@
+    <main class="content">
+        <div class="primary">
+            <main class="primary__main">
+                <!-- article-->
+                <article class="article">
+                    <header class="article__header">
+                        <h1 class="article__heading">@Model.Header</h1>
+                    </header>
+                    <div class="article__main">
+                        <div class="article__content post-entry">
+                            @Html.Raw(Model.FullText)
+                        </div>
+                        @if (ConfigHelper.AllowSocialShare)
+                        {
+                            <div class="article__share">
+                                <a class="article__share-link share-link" href="">
+                                    <script src="https://yastatic.net/share2/share.js"></script>
+                                    <div class="ya-share2" data-curtain data-size="m" data-shape="round" data-services="facebook,telegram,twitter"></div>
+                                    @*<script type="text/javascript" src="//yastatic.net/share/share.js" charset="utf-8"></script>
+                                        <span class="yashare-auto-init" data-size="l" data-yasharel10n="ru" data-yasharetype="none" data-yasharequickservices="facebook, twitter, vkontakte"></span>*@
+                                    @*<svg class="icon icon-facebook share-link__icon" width="25" height="25">
+                                            <use href="assets/images/svg/symbol/sprite.svg#facebook"></use>
+                                        </svg>*@
+                                    <span class="share-link__text">&nbsp; @SharedResources.DoYouLikeShare</span>
+                                </a>
+                            </div>
+                        }
+                    </div>
+                </article><!-- /article-->
+            </main>
+        </div>
+    </main>
+</div>
+
+@*<div class="container-fluid">
+        <div class="primary-content">
+            <main>
+                @if (!string.IsNullOrEmpty(Model.Header))
+                {
+                    <h1 class="main-title">@Model.Header</h1>
+                }
+                <div class="post">
+                    @(new HtmlString(Model.FullText))
+                </div>
+            </main>
+        </div>
+    </div>*@
+@section styles {
+    @Styles.Render("~/Content/fancybox/fancy")
+}
+@section scripts
+{
+    @Scripts.Render("~/bundles/fancy")
+    <script>
+        $("a[rel=images].fancy").fancybox({
+            'transitionIn': 'elastic',
+            'transitionOut': 'elastic',
+            'titlePosition': 'inside',
+            'titleFormat': function (title, currentArray, currentIndex, currentOpts) {
+                var url = $(currentArray[currentIndex]).attr('url');
+                return "<span id='fancybox-title-inside' class='hand' onclick=document.location.href='" + url + "'>" + title + "</span>";
+            }
+        });
+    </script>
+}

@@ -1,0 +1,146 @@
+﻿@using System.Linq
+@using Webmall.Model
+@using ViewRes
+@using Webmall.UI.Core
+@model Webmall.UI.Models.Order.DeliveryScheduleModel
+           
+@{
+    Layout = null;
+}
+
+@if (Model.routes.Count != 0)
+{
+    var useShippingDate = ConfigHelper.UseShippingDate;
+    <table>
+        <tr>
+            <td>&nbsp;</td>
+            @if (useShippingDate)
+            {
+                <th>@SharedResources.DeliveryDate</th>
+            }
+            <td>@SharedResources.DeliveryScheduleTime</td>
+            <td>@SharedResources.Cost, @SessionHelper.DefaultValute.Code</td>
+        </tr>
+        @{
+            int previousArrivalDay = -1;
+        }
+        @foreach (var shdl in Model.routes.OrderBy(i => i.ArrivalTime))
+        {
+            if (!(shdl.ReceiveTime.HasValue && shdl.ArrivalTime.HasValue))
+            {
+                continue;
+            }
+            <tr>
+                <td><input type="radio" name="scheduleId" value="@shdl.Id" @(Model.routes.First() == shdl ? "checked=checked" : "") /></td>
+                @if (useShippingDate)
+                {
+                    if (previousArrivalDay != shdl.ArrivalTime.Value.DayOfYear)
+                    {
+                        previousArrivalDay = shdl.ArrivalTime.Value.DayOfYear;
+                        var rowSpan = Model.routes.Count(k => k.ArrivalTime.HasValue && k.ArrivalTime.Value.DayOfYear == previousArrivalDay);
+                        <td rowspan="@rowSpan" class="shippingDateCell" style="text-align: right; vertical-align: text-top;">@string.Format("{0:dd.MM.yyyy}", shdl.ArrivalTime)</td>
+                    }
+                }
+                @if (shdl.GoTime.HasValue)
+                {
+                    <td>@string.Format("{0:HH:mm} - {1:HH:mm}", shdl.GoTime, shdl.ArrivalTime)</td>
+                }
+                else
+                {
+                    <td>@string.Format("{0:HH:mm}", shdl.ArrivalTime)</td>
+                }
+                @if (shdl.IsExternalDeliveryService)
+                {
+                    <td>
+                        <a href="@shdl.ExternalUrl" target="blank">@SharedResources.AccordingOfDeliveryServiceTarifs "@shdl.DeliveryService"</a>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @shdl.TariffSum
+                        @if (!shdl.IsOurTransport)
+                        {
+                            <img width="18" alt="" title="@SharedResources.NotOurTransporComment" src="@Url.Content("~/Content/images/icons/exclamation.png")" />
+                        }
+                    </td>
+                }
+            </tr>
+        }
+    </table>
+}
+else
+{
+    @Model.reason
+}
+@*<div>
+    @if (Model.routes.Count != 0)
+    {
+        var useShippingDate = ConfigHelper.UseShippingDate;
+        <table class="catalog catalog-blue" style="width: auto">
+            <tr>
+                <th width="15px"></th>
+                @if (useShippingDate)
+                {
+                    <th width="100px">@SharedResources.DeliveryDate</th>
+                }
+                <th width="180px">@SharedResources.DeliveryScheduleTime</th>
+                <th width="160px">@SharedResources.Cost, @SessionHelper.DefaultValute.ShortName</th>
+            </tr>
+            @{
+                //int previousReceiveDay = -1; 
+                int previousArrivalDay = -1;
+            }
+            @foreach (var shdl in Model.routes.OrderBy(i => i.ArrivalTime))
+            {
+                if (!(shdl.ReceiveTime.HasValue && shdl.ArrivalTime.HasValue))
+                {
+                    continue;
+                }
+                <tr>
+                    <td class="center">
+                        <input type="radio" name="scheduleId" value="@shdl.Id" @(Model.routes.First() == shdl ? "checked=checked" : "") />
+                    </td>
+                    @if (useShippingDate)
+                    {
+                        if (previousArrivalDay != shdl.ArrivalTime.Value.DayOfYear)
+                        {
+                            previousArrivalDay = shdl.ArrivalTime.Value.DayOfYear;
+                            var rowSpan = Model.routes.Count(k => k.ArrivalTime.HasValue && k.ArrivalTime.Value.DayOfYear == previousArrivalDay);
+                            <td rowspan="@rowSpan" style="text-align: right; vertical-align: text-top; width: 80px">@string.Format("{0:dd.MM.yyyy}", shdl.ArrivalTime)</td>
+                        }
+                    }
+                    @if (shdl.GoTime.HasValue)
+                    {
+                        <td class="center">@string.Format("{0:HH:mm} - {1:HH:mm}", shdl.GoTime, shdl.ArrivalTime)</td>
+                    }
+                    else
+                    {
+                        <td class="center">@string.Format("{0:HH:mm}", shdl.ArrivalTime)</td>
+                    }
+                
+                    @if (shdl.IsExternalDeliveryService)
+                    {
+                        <td class="left" style="text-decoration: underline">
+                            <a href="@shdl.ExternalUrl" target="blank" >@SharedResources.AccordingOfDeliveryServiceTarifs "@shdl.DeliveryService"</a>
+                        </td>
+                    }
+                    else
+                    {
+                        <td class="align-right">
+                            @shdl.TariffSum
+                            @if (!shdl.IsOurTransport)
+                            {
+                                <img width="18" alt="" title="@SharedResources.NotOurTransporComment" src="@Url.Content("~/Content/images/icons/exclamation.png")"/>
+                            }
+                        </td>
+                    }
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <div style="max-width: 300px; padding: 10px">@Model.reason</div>
+    }
+</div>*@

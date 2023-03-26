@@ -1,0 +1,126 @@
+﻿@using System.Linq
+@using ViewRes
+
+@model Webmall.UI.Models.VinRequest.NewVINRequestModel
+
+@{
+    Layout = "~/Views/Shared/_PersonalLayout.cshtml";
+    ViewBag.Title = SharedResources.NewRequestByAuto;
+}
+
+<h1 class="main-title">@SharedResources.NewRequestByAuto</h1>
+@using (Html.BeginForm("NewRequest", "VINRequest", FormMethod.Post, new { @class = "registration" }))
+{
+    <div class="section-area">
+        <div class="section-area__heading">@SharedResources.AutoData</div>
+        <div class="manual-params manual-params--bigger">
+            <fieldset>
+                <dl class="manual-params__param">
+                    <dt class="manual-params__value">@SharedResources.AutoVINCode</dt>
+                    <dd class="manual-params__property main-form__field">@Html.TextBoxFor(model => model.Request.VIN, new { placeholder = SharedResources.VINWatermark, @class = "section-area__input" })</dd>
+                </dl>
+                <dl class="manual-params__param">
+                    <dt class="manual-params__value">@SharedResources.AutoMarka</dt>
+                    <dd class="manual-params__property main-form__field">@Html.DropDownListFor(m => m.Request.MarkaId, Model.AutoMark.Select(mark => new SelectListItem { Text = mark.Text, Value = mark.Value }))</dd>
+                </dl>
+                <dl class="manual-params__param">
+                    <dt class="manual-params__value">@SharedResources.AutoModel</dt>
+                    <dd class="manual-params__property main-form__field">@Html.DropDownListFor(m => m.Request.ModelId, new SelectListItem[0])</dd>
+                </dl>
+                <dl class="manual-params__param">
+                    <dt class="manual-params__value">@SharedResources.AutoModification</dt>
+                    <dd class="manual-params__property main-form__field">@Html.DropDownListFor(m => m.Request.ModifId, new SelectListItem[0])</dd>
+                </dl>
+                <dl class="manual-params__param">
+                    <dt class="manual-params__value">@SharedResources.YearOfProduce</dt>
+                    <dd class="manual-params__property main-form__field">@Html.TextBoxFor(model => model.Request.Year, new { placeholder = SharedResources.VINWatermark, @class = "section-area__input" })</dd>
+                </dl>
+                <dl class="manual-params__param">
+                    <dt class="manual-params__value">@SharedResources.Comment</dt>
+                    <dd class="manual-params__property main-form__field">
+                        @Html.TextAreaFor(model => model.Request.Comment)
+                    </dd>
+                </dl>
+            </fieldset>
+        </div>
+    </div>
+
+    <div class="section-area">
+        <div class="section-area__heading">@SharedResources.AutoSpareParts</div>
+        <div class="manual-params manual-params--bigger">
+            <fieldset>
+                <dl class="manual-params__param">
+                    <dt class="manual-params__value">@SharedResources.PartName</dt>
+                    <dd class="manual-params__property main-form__field">
+                        @Html.TextBox("pos", null, new { @class = "name-detail" })
+                    </dd>
+                </dl>
+                <dl class="manual-params__param">
+                    <dt class="manual-params__value">@SharedResources.Amount</dt>
+                    <dd class="manual-params__property main-form__fieldt">
+                        @Html.TextBox("count", 1, new { @class = "cantity-detail", type="number", step="1", min = "1" })
+                    </dd>
+                </dl>
+                <dl class="manual-params__param">
+                    <dt></dt>
+                    <dd class="manual-params__property main-form__field">
+                        <button type="submit" class="orders-filter__btn btn btn--main" onclick="updatePositionsPanel($('#pos').val(),$('#count').val(),'a'); $('#pos').val(''); $('#count').val('1'); return false;">
+                            @SharedResources.Add
+                        </button>
+                    </dd>
+                </dl>
+                <dl class="manual-params__param">
+                    <dt> </dt>
+                    <dd>
+                        @{ Html.RenderPartial("NewRequestPositions"); }
+
+                    </dd>
+                </dl>
+                @*<dl class="manual-params__param">
+
+                        <dt> </dt>
+                        <dd>
+                            <button type="button" class="submit-inactive" onclick="document.location.href = '@Url.Action("Index")'">@SharedResources.ReturnToRequests</button>
+                            @Html.Button(SharedResources.SendRequest, new { @class = "button-submit-grey", id = "submitButton" })
+                        </dd>
+                    </dl>*@
+            </fieldset>
+        </div>
+        <div class="section-area__footer">
+            <div class="section-area__summary">
+                <a class="section-area__summary-cancel" href="@(Url.Action("Index"))"><i class="fa fa-times-circle"></i> @SharedResources.ReturnToRequests</a>
+            </div>
+            <br />
+            <input class="btn btn--main" type="submit" name="send-data" value="@SharedResources.SendRequest">
+        </div>
+    </div>
+    @Html.HiddenFor(model => model.Request.Id)
+}
+
+@section scripts
+{
+    <script type="text/javascript">
+        attachAjaxRef('Request_MarkaId', 'Request_ModelId', '@Url.Action("GetModel")?id=');
+        attachAjaxRef('Request_ModelId', 'Request_ModifId', '@Url.Action("GetModif")?id=');
+        $(function() { $('#Request_MarkaId').change(); });
+
+        function updatePositionsPanel(tag, value, act) {
+            if (tag == '') return;
+            //
+            var url = "@(Url.Action("ChangePosition"))" + "?pos=" + Url.encode(tag) + "&value=" + value + "&act=" + act;
+            $.get(url, function(response) {
+                $('#reqPos').replaceWith(response);
+                var sb = $('#submitButton');
+                if ($('#reqPos tr').length > 0) {
+                    sb.attr("type", "submit");
+                    sb.removeClass("button-submit-grey");
+                    sb.addClass("button-submit");
+                } else {
+                    sb.attr("type", "button");
+                    sb.addClass("button-submit-grey");
+                    sb.removeClass("button-submit");
+                }
+            });
+        }
+    </script>
+}

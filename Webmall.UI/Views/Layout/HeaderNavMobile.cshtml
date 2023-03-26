@@ -1,0 +1,27 @@
+﻿@using Webmall.UI.Core.Helpers
+@model List<Webmall.Model.Entities.Cms.HeaderNav>
+
+@{ Layout = null; }
+
+
+@if(Model.Count > 0)
+{
+    foreach (var item in Model)
+    {
+        <li class="mob-categories__item">
+            <a class="mob-categories__link" href="@(this.ToLocalizedUrl(item.Url))" @this.LikAttrs(item.Url)>
+                @if (item.Image == null)
+                {
+                    <svg class="icon icon-brand mob-categories__link-icon" width="25" height="25">
+                        <use href="@Url.Content($"~/assets/images/svg/symbol/sprite.svg#{item.Icon}")"></use>
+                    </svg>
+                }
+                else { 
+                    <img alt="@item.Name" src="@item.Image" />
+                }
+
+                <span class="mob-categories__link-text">@item.Name</span>
+            </a>
+        </li>
+    }
+}

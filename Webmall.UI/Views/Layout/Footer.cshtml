@@ -1,0 +1,174 @@
+﻿@using ViewRes
+@using Webmall.Model
+@using Webmall.UI.Core
+@using System.Net.Mail
+@using Webmall.UI.Core.Helpers
+@using Webmall.UI.ViewModel.Common
+
+@model FooterModel
+@{
+    Layout = null;
+    var isGross = SessionHelper.IsGross;
+    const string fmt = "mm\\:ss\\.fff";
+}
+
+<div class="wrapper__footer">
+    <footer class="footer js-footer-collapse">
+        <div class="container-fluid">
+            <div class="footer__main">
+                @foreach (var column in Model.Columns)
+                {
+                    <div class="footer__main-col">
+                        <div class="footer-collapse">
+                            <div class="footer-collapse__title js-footer-collapse">
+                                @column.Title
+                                <svg class="icon icon-chevron-down footer-collapse__title-icon">
+                                    <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#chevron-down")"></use>
+                                </svg>
+                            </div>
+                            <div class="footer-collapse__body">
+                                <nav class="footer-collapse_nav">
+                                    <ul class="footer-collapse__list">
+                                        @foreach (var item in column.Positions.Where(i => i.ForGrossOnly != true || isGross))
+                                        {
+                                            var url = item.Url.ToString();
+                                            var href = url.StartsWith("http") ? url : Url.Content("~/" + url);
+                                            <li class="footer-collapse__item"><a class="footer-collapse__link" href="@this.ToLocalizedUrl(href)">@item.Title</a></li>
+                                        }
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div class="footer__main-col">
+                    <div class="footer-collapse">
+                        <div class="footer-collapse__title js-footer-collapse">Подпишитесь на нашу рассылку<svg class="icon icon-chevron-down footer-collapse__title-icon" width="25" height="25">
+                                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#chevron-down")"></use>
+                            </svg>
+                        </div>
+                        <div class="footer-collapse__body">
+                            <form class="footer-collapse__subscribe subscribe-widget" action="/" method="POST" name="subscribe">
+                                <div class="subscribe-widget__main">
+                                    <input class="subscribe-widget__input input" type="email" name="email" placeholder="e-mail">
+                                    <input class="subscribe-widget__btn btn btn--primary" type="submit" name="send" value="Подписаться">
+                                </div>
+                                <div class="subscribe-widget__privacy checkbox-label">
+                                    <input class="checkbox-label__input" type="checkbox" name="privacy" id="privacy">
+                                    <label class="checkbox-label__main" for="privacy">Да, я хочу получать информационные бюллетени по электронной почте со специальными предложениями. </label>
+                                </div>
+                                <p class="subscribe-widget__desc">Обратите внимание на нашу <a href="#" target="_blank">политику конфиденциальности</a>.</p>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="footer-collapse">
+                        @if (Model.ContactInfo.PaymentImg.Any())
+                        {
+                            <div class="footer-collapse__title">
+                                @SharedResources.AcceptForPayment
+                                <svg class="icon icon-chevron-down footer-collapse__title-icon">
+                                    <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#chevron-down")"></use>
+                                </svg>
+                            </div>
+                            <div class="footer-collapse__body">
+                                <ul class="footer-collapse__payments payments">
+                                    @foreach (var item in Model.ContactInfo.PaymentImg)
+                                    {
+                                        <li class="payments__item">
+                                            <div class="payments__img-wrap"><img class="payments__img" src="@item" alt=""></div>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer__conclude">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="footer__socials">
+                            <div class="logo footer__logo">
+                                <span class="logo__wrap"><img class="logo__img img-responsive" src="@Url.Content("~/assets/images/logo.svg")" alt="Autobeat" width="140" height="40"></span>
+                            </div>
+                            <ul class="soc">
+                                @foreach (var item in Model.SocialLinks)
+                                {
+                                    <li class="soc__item">
+                                        <a class="soc__link soc__link--@item.ClassName" target="_blank" rel="nofollow" href="@Html.Raw(item.Url)" title="@item.Title">
+                                            <svg class="icon icon-@item.IconName soc__icon">
+                                                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#"+item.IconName)"></use>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="worktime">
+                            <div class="worktime__heading">@SharedResources.Schedule</div>
+                            <div class="worktime__desc">
+                                @if (Model.ContactInfo.Schedule.Any())
+                                {
+                                    foreach (var item in Model.ContactInfo.Schedule.Current)
+                                    {
+                                        <dl>@Html.Raw(item.Timetable)</dl>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="footer__meta"><small class="copy">© 2021 www.motex.de интернет магазин </small><a class="meta-link" href="#">Карта сайта</a></div>
+                    </div>
+                    <div class="col-md-4">
+                        <small class="copy">
+                            @if (HttpContext.Current != null && HttpContext.Current.Items != null && HttpContext.Current.Items[SessionHelper.IIS_TIME] != null)
+                            {
+                                var siteTime = DateTime.Now - (DateTime)HttpContext.Current.Items[SessionHelper.IIS_TIME];
+                                var dbTime = HttpContext.Current.Items[SessionHelper.DB_TIME] != null ? new TimeSpan?((TimeSpan)HttpContext.Current.Items[SessionHelper.DB_TIME]) : null;
+                                var time1 = siteTime.ToString(fmt);
+                                var time2 = dbTime != null ? ", DB: " + dbTime.Value.ToString(fmt) : "";
+                                {
+                                    try
+                                    {
+                                        HttpContext.Current.Items.Add(SessionHelper.PREV_REQ_TIMES, SessionHelper.PrevReqTime);
+                                    }
+                                    catch (Exception) { }
+                                    SessionHelper.PrevReqTime = time1 + time2;
+
+                                    CommonHelpers.Log.DebugFormat("Page processing time (Request: {0}, ctx: {1}): " + time1 + time2, HttpContext.Current.Request.GetHashCode(), HttpContext.Current.GetHashCode());
+                                    if (dbTime != null && (siteTime - dbTime.Value).TotalSeconds > 5)
+                                    {
+                                        CommonHelpers.Log.DebugFormat("Page URL (Request: {0}, ctx: {1}): " + HttpContext.Current.Request.Url.OriginalString, HttpContext.Current.Request.GetHashCode(), HttpContext.Current.GetHashCode());
+                                    }
+
+                                    if (siteTime.TotalSeconds > 60)
+                                    {
+                                        var mail = new MailMessage { Subject = (dbTime == null || (siteTime - dbTime.Value).TotalSeconds > 5) ? "Long site response" : "Long DB response", Body = "URL: " + Request.Url.PathAndQuery, IsBodyHtml = true };
+                                        if (!string.IsNullOrEmpty(Request.Headers["Referer"]))
+                                        {
+                                            mail.Body += "<br/>Referer: " + Request.Headers["Referer"];
+                                        }
+                                        mail.Body += "<br/>Time: " + DateTime.Now.ToString("O");
+                                        mail.Body += string.Format("<br/>IP: {2}, User: {1}, Client: {0}", SessionHelper.CurrentClientId, (SessionHelper.CurrentUser != null) ? SessionHelper.CurrentUser.Email : "", Request.UserHostAddress);
+
+                                        mail.Body += "<br/>Page processing time: " + time1 + time2;
+
+                                        MailHelper.SendMailMessage(ConfigHelper.SysAdminEmail, mail);
+                                    }
+                                }
+                                <div class="copy" title="@(CommonHelpers.VersionInfo())">@SharedResources.PageCreationTime: @(time1) @(time2)</div>
+                            }
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+@*@{Html.RenderAction("StickyFooter", "Layout", new { culture = @UserPreferences.CurrentCulture });}*@

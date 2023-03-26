@@ -1,0 +1,137 @@
+﻿@using ViewRes
+@using Webmall.UI.Core
+@model GridViewModel<Webmall.Model.Entities.User.VINRequest>
+@{
+    ViewBag.Title = SharedResources.VINRequests;
+    Layout = "~/Views/Shared/_PersonalLayout.cshtml";
+    ViewBag.HideTitle = true;
+}
+<h1 class="main-title">@SharedResources.VINRequests</h1>
+<header class="orders-header-controls d-md-none">
+    <a class="orders-filter-toggle" href="#">
+        <svg class="icon icon-sliders-h orders-filter-toggle__icon">
+            <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#sliders-h")"></use>
+        </svg>@SharedResources.Filters
+    </a>
+</header>
+@{ Html.RenderPartial("_VinRequestFilter"); }
+
+<div class="card-specification-section">
+    @using (Html.BeginForm("RemoveRequest", "VinRequest"))
+    {
+        <div class="table-responsive d-none d-md-block">
+            <table class="spec-payment-table" id="spec-payment-table">
+                <thead class="spec-payment-table__thead">
+                    <tr class="spec-payment-table__tr">
+                        <th class="spec-payment-table__th spec-payment-table__number"> @Html.SortColumnLink(Model, SharedResources.Number, "Id")</th>
+                        <th class="spec-payment-table__th">@Html.SortColumnLink(Model, SharedResources.RequestDate, "SendDate")</th>
+                        <th class="spec-payment-table__th spec-payment-table__vin">@Html.SortColumnLink(Model, SharedResources.AutoVINCode, "VIN")</th>
+                        <th class="spec-payment-table__th">@Html.SortColumnLink(Model, SharedResources.AutoMarka, "MarkaName")</th>
+                        <th class="spec-payment-table__th">@Html.SortColumnLink(Model, SharedResources.AutoModel, "ModelName")</th>
+                        <th class="spec-payment-table__th spec-payment-table__modif">@Html.SortColumnLink(Model, SharedResources.AutoModification, "ModifName")</th>
+                        <th class="spec-payment-table__th">@Html.SortColumnLink(Model, SharedResources.YearOfProduce, "Year")</th>
+                        <th class="spec-payment-table__th">@Html.SortColumnLink(Model, SharedResources.Responce, "IsRepsonded")</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody class="spec-payment-table__tbody">
+                    @foreach (var item in Model.List)
+                    {
+                        //string click = "onclick=\"document.location.href='" + Url.Action("ViewRequest", new { id = item.Id }) + "'\"";
+                        <tr class="spec-payment-table__tr comp-act-row">
+                            <td class="spec-payment-table__td">
+                                <div class="spec-payment-table__value-primary"><a href="@Url.Action("ViewRequest", new { id = item.Id })">@(item.Id)</a></div>
+                            </td>
+                            <td class="spec-payment-table__td">
+                                <div class="spec-payment-table__value">@item.SendDate.ToShortDateString()</div>
+                            </td>
+                            <td class="spec-payment-table__td">
+                                <div class="spec-payment-table__value"><a href="@Url.Action("ViewRequest", new { id = item.Id })">@item.VIN</a></div>
+                            </td>
+                            <td class="spec-payment-table__td">
+                                <div class="spec-payment-table__value">@item.MarkaName</div>
+                            </td>
+                            <td class="spec-payment-table__td">
+                                <div class="spec-payment-table__value">@item.ModelName</div>
+                            </td>
+                            <td class="spec-payment-table__td">
+                                <div class="spec-payment-table__value">@item.ModifName</div>
+                            </td>
+                            <td class="spec-payment-table__td">
+                                <div class="spec-payment-table__value">@item.Year</div>
+                            </td>
+                            <td class="spec-payment-table__td">
+                                <div class="spec-payment-table__value">
+                                    @if (item.IsRepsonded)
+                                    {
+                                        <span title="@(@item.AnswerDate.HasValue ? @item.AnswerDate.Value.ToShortDateString() : String.Empty)">
+                                            @SharedResources.Yes
+                                        </span>
+                                    }
+                                </div>
+                            </td>
+                            <td class="spec-payment-table__td">
+                                <div class="spec-payment-table__value">@Html.CheckBox("delete", new { Value = item.Id })</div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+        <div class="spec d-md-none">
+            <div class="spec__title">@SharedResources.VINRequests</div>
+            @if (Model.List != null)
+            {
+                foreach (var item in Model.List)
+                {
+                    <div class="spec__product">
+                        <div class="spec__heading">@SharedResources.Number - @item.Id</div>
+                        <div class="spec__main">
+                            <dl class="spec__params">
+                                <dt class="spec__property"><strong>@SharedResources.AutoVINCode</strong></dt>
+                                <dd class="spec__value">@item.VIN</dd>
+                                <dt class="spec__property"><strong>@SharedResources.RequestDate</strong></dt>
+                                <dd class="spec__value">@(item.SendDate.ToShortDateString())</dd>
+                                <dt class="spec__property"><strong>@SharedResources.AutoMarka</strong></dt>
+                                <dd class="spec__value">@(item.MarkaName)</dd>
+                                <dt class="spec__property"><strong>@SharedResources.AutoModel</strong></dt>
+                                <dd class="spec__value">@item.ModelName</dd>
+                                <dt class="spec__property"><strong>@SharedResources.AutoModification</strong></dt>
+                                <dd class="spec__value">@item.ModifName</dd>
+                                <dt class="spec__property"><strong>@SharedResources.YearOfProduce</strong></dt>
+                                <dd class="spec__value">@item.Year</dd>
+                                <dt class="spec__property"><strong>@SharedResources.Responce</strong></dt>
+                                <dd class="spec__value">@(item.IsRepsonded ? @SharedResources.Yes : "")</dd>
+                            </dl>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+
+        {Html.RenderPartial("Components/Pagination", Model);}
+
+        <div class="clear-div"></div>
+        <div class="section-area__footer">
+            @Html.SubmitButton(SharedResources.Delete,
+                new
+                {
+                    onclick = string.Format("if (!confirm('"+SharedResources.AreYouSure+"')) return false; ", Url.Action("RemoveRequest")),
+                    @class = "btn btn--reverse"
+                })
+            @Html.Button(SharedResources.NewRequest,
+                new
+                {
+                    onclick = string.Format("document.location.href = '{0}'; return false; ", Url.Action("NewRequest")),
+                    @class = "btn btn--main"
+                })
+        </div>
+    }
+</div>
+
+@section scripts {
+    @{
+        Html.RenderPartial("GridViewFooterScripts", Model);
+    }
+}

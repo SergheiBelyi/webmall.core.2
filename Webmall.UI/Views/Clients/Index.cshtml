@@ -1,0 +1,118 @@
+﻿@using ViewRes
+@model Webmall.UI.ViewModel.Client.ClientViewModel
+
+@{
+    Layout = "~/Views/Shared/_PersonalLayout.cshtml";
+    ViewBag.Title = SharedResources.ClientManagementTitle;
+    ViewBag.HideTitle = true;
+}
+
+<h1 class="main-title">@SharedResources.Client: @(Model.Client?.Name)</h1>
+@Html.Hidden("ClientId", Model.Client?.Id ?? "")
+<div class="profile__subsections">
+    @if (Model.HaveClient)
+    {
+
+        Html.RenderPartial("_ClientInfo", Model.Client);
+        Html.RenderPartial("_Contracts", Model.Client);
+        Html.RenderPartial("_Contacts", Model.Client);
+        Html.RenderPartial("ClientPresenters", Model);
+
+    }
+
+    <div class="addresses users__subsection">
+        <h2 class="profile__subheading secondary-heading">@SharedResources.RepresentationRequest</h2>
+        <div class="client-request">
+            @using (Html.BeginForm("AddRepresentation", "Clients", FormMethod.Post, new { @class = "client-request__form", name = "client-request" }))
+            {
+                <label class="client-request__heading" for="code-request">@SharedResources.RepresentationRequest</label>
+                <div class="client-request__field">
+                    <input class="client-request__input" type="text" name="clientCode" id="code-request" placeholder="@SharedResources.ClientCode">
+                </div>
+                <div class="client-request__submit">
+                    <input class="client-request__btn btn btn--primary" type="submit" value="@SharedResources.SendRequest">
+                </div>
+            }
+        </div>
+    </div>
+    @section styles {
+
+    }
+
+    @section scripts
+{
+        @{ Html.RenderPartial("_ClientsScripts"); }
+        @{ Html.RenderPartial("_ClientsScriptsEx"); }
+        <script>
+        var contactData;
+
+        $(function() {
+            $("#saveContactForm").submit(function (event) {
+                event.preventDefault();
+                //var status = document.getElementById("my-form-status");
+                //var formData = new FormData(event.target);
+                var closeButton = this.closest(".modal-win").querySelector(".modal-win__close");
+                var formData = new FormData(this);
+                //var form = $("#saveContactForm");
+                $.ajax("@Url.Action("SaveContact")", {
+                    type: "POST",
+                    data: formData,
+                    contentType: false,
+                    //data: form.serialize()
+                    //dataType: "json",
+                    //encode: true,
+                    processData: false
+                }).done(function (data) {
+                    document.getElementById("cont-contact-" + document.getElementById("ContactId").value).remove();
+                    document.getElementById("contacts").insertAdjacentHTML('beforeend', data);
+                    closeButton.click();
+                    //    console.log(data);
+                });
+            });
+        });
+
+        function UpdateContactDialog(contactId) {
+            var el = document.getElementById("contact-" + contactId);
+            if (el && el.dataset.data) {
+                contactData = JSON.parse(el.dataset.data);
+            } else
+                contactData = { isNew: true };
+
+            document.getElementById("ContactFiles").value = "";
+            if (contactData.isNew) {
+                document.getElementById("ContactId").value = "";
+                document.getElementById("ContactName").value = "";
+                document.getElementById("ContactDateFrom").value = "";
+                document.getElementById("ContactDateTo").value = "";
+                document.getElementById("ContactPhone").value = "";
+                document.getElementById("ContactComment").value = "";
+                document.getElementById("ContactIsTrustee").value = "";
+                document.getElementById("ContactDocumentNumber").value = "";
+            } else {
+                document.getElementById("ContactId").value = contactData.Id;
+                document.getElementById("ContactName").value = contactData.Name;
+                document.getElementById("ContactDateFrom").value = contactData.DateFrom;
+                document.getElementById("ContactDateTo").value = contactData.DateTo;
+                document.getElementById("ContactPhone").value = contactData.Phone;
+                document.getElementById("ContactComment").value = contactData.Comment;
+                document.getElementById("ContactIsTrustee").value = contactData.IsTrustee;
+                document.getElementById("ContactDocumentNumber").value = contactData.DocumentNumber;
+            }
+        }
+
+        function deleteContact(contactId) {
+            if (!confirm('@SharedResources.AreYouSure')) return;
+
+            $.post('@Url.Action("DeleteContact")?contactId=' + contactId, null, function (content) {
+                $('#cont-contact-'+contactId).remove();
+            });
+        }
+
+        </script>
+    }
+
+
+    @section dialogs
+{
+        @{ Html.RenderPartial("ContactDialog"); }
+    }

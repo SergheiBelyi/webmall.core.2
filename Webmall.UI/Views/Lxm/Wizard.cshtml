@@ -1,0 +1,47 @@
+﻿@using ViewRes
+@model Webmall.UI.Models.Laximo.WizardModel
+
+@{
+    Layout = null;
+}
+
+@using (Html.BeginForm("Wizard", "Lxm", FormMethod.Get))
+{
+    @Html.HiddenFor(m => m.CatalogId)
+
+    foreach (var item in Model.Rows)
+    {
+        var selected = !string.IsNullOrEmpty(item.Value);
+        <div class="select-picker__stage">
+            <div>
+                @item.Name
+                @if (selected)
+                {
+                    <a href="#" data-ssd="@item.Ssd"> X</a>
+                }
+            </div>
+            <div class="input-field">
+                <select id="@item.Name" class="js-select-lxm" name="@item.Name" @(selected ? "disabled" : "")>
+                    @if (selected)
+                    {
+                        <option value="">@item.Value</option>
+                    }
+                    else
+                    {
+                        <option value="">@SharedResources.SelectValue</option>
+                        foreach (var opt in item.Options)
+                        {
+                            <option value="@opt.Key">@opt.Value</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+    }
+    if (Model.AllowShowAutos)
+    {
+        <div class="select-picker__bottom">
+            <button class="select-picker__btn btn btn--primary btn--block" type="button" onclick="ShowAutos('@Model.Ssd'); return false;">@SharedResources.Show</button>
+        </div>
+    }
+}

@@ -1,0 +1,14 @@
+﻿@model Webmall.UI.Models.Catalog.CatalogWaresModel
+@{
+    var view = ViewBag.ViewMode;
+}
+
+<div class="catalog-layout__heading main-heading">@ViewBag.CatalogTitle</div>
+
+<div class="catalog catalog-layout__primary">
+    @{Html.RenderPartial("CatalogHeader", Model);}
+    @{
+        Html.RenderPartial(view == 0 ? "CatalogList" : "CatalogTiles", Model.Wares);
+    }
+    @{Html.RenderPartial("CatalogBottom", Model);}
+</div>

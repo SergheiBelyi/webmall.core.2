@@ -1,0 +1,31 @@
+﻿@using Webmall.Model
+@using ViewRes
+
+<div class="modal-content" data-modal-win="modal-auth" hidden>
+    <div class="modal-content__heading modal-win-title">@SharedResources.Authorize</div>
+    <div class="modal-content__body">
+        @using (Html.BeginForm("LogOn", "Security", FormMethod.Post, new { @class = "main-form", name = "auth-form", id = "auth-form-mob" }))
+        {
+            <div class="main-form__field">
+                <label class="main-form__label" for="user-email-mod">@SharedResources.Email</label>
+                <input class="main-form__input" type="email" name="UserName" id="user-email-mod">
+            </div>
+            <div class="main-form__field">
+                <label class="main-form__label" for="user-psw-mod">@SharedResources.Password <span>*</span>:</label>
+                <input class="main-form__input" type="password" name="Pass" id="user-psw-mod">
+            </div>
+            <div class="main-form__field main-form__field--flex">
+                <div class="main-form__checkbox checkbox-label">
+                    <input class="checkbox-label__input" type="checkbox" name="is-remember" id="remember-psw-mod" @(ConfigHelper.IsDefaultRememberMe ? "checked=\"checked\"" : "")>
+                    <label class="checkbox-label__main" for="remember-psw-mod">@SecurityResources.RememberMe</label>
+                </div><a class="main-form__recover-psw" href="@Url.Action("PasswordRecovery", "Security")">@SecurityResources.AreYouForgetPassword</a>
+            </div>
+            <div class="main-form__footer text-center">
+                <input class="main-form__btn btn btn--main btn--upper" type="submit" value="@SharedResources.Enter">
+            </div>
+        }
+        <div class="main-form__footer text-center">
+            <a class="main-form__btn btn btn--main btn--upper" href="@Url.Action("LogOn", "Security")">@SharedResources.Registration</a>
+        </div>
+    </div>
+</div>

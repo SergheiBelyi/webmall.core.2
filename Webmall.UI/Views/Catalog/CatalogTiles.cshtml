@@ -1,0 +1,16 @@
+﻿@using System.Web.Mvc.Html
+@using Webmall.Model.Entities.Catalog
+
+@model Webmall.UI.Core.GridViewModel<WareListItem>
+
+<div class="catalog__main is-grid-view">
+    @if (Model.List.Count > 0)
+    {
+        foreach (var item in Model.List)
+        {
+            <div class="col-6 col-sm-4 col-lg-3">
+                @{ Html.RenderPartial("Components/Product", item); }
+            </div>
+        }
+    }
+</div>

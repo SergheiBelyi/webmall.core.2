@@ -1,0 +1,220 @@
+﻿@using ViewRes
+@using Webmall.UI.Core
+
+@model Webmall.UI.ViewModel.Order.OrdersDetailModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Detail";
+    var rate = 1;
+}
+
+<div class="container-fluid">
+    <main class="content">
+        <div class="page-intro">
+            <h1 class="page-intro__heading main-heading">@SharedResources.OrderDetails</h1>
+        </div>
+
+        <div class="stock-area">
+            <div class="stock-area__header">
+                <div class="stock-area__params">
+                    <div class="stock-area__param">
+                        <dt class="stock-area__property">@SharedResources.OrderNumber:</dt>
+                        <dd class="stock-area__value">@Model.Order.Number</dd>
+                    </div>
+                    <div class="stock-area__param">
+                        <dt class="stock-area__property">@SharedResources.DataAndTimeOrder:</dt>
+                        <dd class="stock-area__value">@Model.Order.OrderDate.ToString("dd.MM.yyyy"), @Model.Order.OrderDate.ToString("HH:mm")</dd>
+                    </div>
+                    <div class="stock-area__param">
+                        <dt class="stock-area__property">@SharedResources.OrderAuthor:</dt>
+                        <dd class="stock-area__value">@Model.Order.UserName</dd>
+                    </div>
+                    <div class="stock-area__param">
+                        <dt class="stock-area__property">@SharedResources.StatusOrder:</dt>
+                        <dd class="stock-area__value">@Model.Order.StatusName</dd>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stock-area__table">
+                <div class="stock-table stock-area__table-main js-checked-all scrollbar is-detail">
+                    <div class="stock-table__header">
+                        <div class="stock-table__row">
+                            <div class="stock-table__cell text-center">
+                                @*<div class="stock-table__checkbox checkbox-label">
+                                    <input class="checkbox-label__input js-checked-all-trigger" type="checkbox" name="is-opt-0" id="opt-0">
+                                    <label class="checkbox-label__main" for="opt-0"></label>
+                                </div>*@
+                            </div>
+                            <div class="stock-table__cell">
+                                <div class="stock-table__caption">
+                                    @SharedResources.Producer, @SharedResources.WareNumber
+                                </div>
+                            </div>
+                            <div class="stock-table__cell">
+                                <div class="stock-table__caption">@SharedResources.Name</div>
+                            </div>
+                            <div class="stock-table__cell text-center">
+                                <div class="stock-table__caption">@SharedResources.PricePerOne</div>
+                            </div>
+                            <div class="stock-table__cell text-center">
+                                <div class="stock-table__caption">@SharedResources.Amount</div>
+                            </div>
+                            <div class="stock-table__cell text-center">
+                                <div class="stock-table__caption">@SharedResources.Sum</div>
+                            </div>
+                            <div class="stock-table__cell text-center">
+                                <div class="stock-table__caption">@SharedResources.Status</div>
+                            </div>
+                            <div class="stock-table__cell text-center">
+                                <div class="stock-table__caption">@SharedResources.DeliveryDate</div>
+                            </div>
+                            <div class="stock-table__cell text-center">
+                                <div class="stock-table__caption">@SharedResources.Note</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stock-table__main">
+                        @foreach (var item in Model.Order.Positions)
+                        {
+                            var wareUrl = Url.Action("WareCard", "Catalog")?.Replace("WareCard", "") + $"{item.ProducerName}/{item.WareNumber}";
+                            var status = Model.PositionStatuses.FirstOrDefault(i => i.StatusId == item.StatusId);
+                            <div class="stock-table__row">
+                                <div class="stock-table__cell text-center">
+                                    @*<div class="stock-table__checkbox checkbox-label">
+                                        <input class="checkbox-label__input js-checked-all-item" type="checkbox" name="is-opt-@item.Id" id="opt-@item.Id">
+                                        <label class="checkbox-label__main" for="opt-@item.Id"></label>
+                                    </div>*@
+                                </div>
+
+                                <div class="stock-table__cell">
+                                    <div class="stock-table__meta">
+                                        <a class="stock-table__brand" href="@wareUrl">@item.ProducerName</a>
+                                        <a class="stock-table__articul" href="@wareUrl">@item.WareNumber</a>
+                                    </div>
+                                </div>
+
+                                <div class="stock-table__cell">
+                                    <div class="stock-table__heading">
+                                        <a class="stock-table__heading-link" href="@wareUrl">@item.WareName</a>
+                                    </div>
+                                </div>
+                                <div class="stock-table__cell text-center">
+                                    <div class="stock-table__text" data-tippy-gray-content="@SharedResources.PurchasePriceForOneUnit">@SessionHelper.PriceFormat(item.Price)</div>
+                                </div>
+                                <div class="stock-table__cell text-center">
+                                    <div class="stock-table__text">@($"{item.WareQnt:0}")</div>
+                                </div>
+                                <div class="stock-table__cell text-center">
+                                    <strong class="stock-table__text">@SessionHelper.PriceFormat(new Decimal(Math.Round((double)(item.Price / rate), 2)) * item.WareQnt)</strong>
+                                </div>
+                                <div class="stock-table__cell text-center">
+                                    <div class="stock-table__badge status-badge" style="background-color: @(status?.WebColor)">@item.StatusName</div>
+                                </div>
+                                <div class="stock-table__cell text-center">
+                                    <time class="stock-table__accent" datetime="2022" data-tippy-gray-content="Срок поставки"> @(item.DeliveryTermAsString)</time>
+                                </div>
+                                <div class="stock-table__cell">
+                                    <div class="stock-table__comment custom-comment" data-modal-win-trigger="comment-add">
+                                        @item.Comment
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+                    </div>
+
+                    <div class="stock-table__bottom">
+                        <div class="stock-table__row">
+                            <div class="stock-table__summary">
+                                <div class="stock-table__summary-info">
+                                    @*Доставка: <strong>0,00</strong> $,*@
+                                    @SharedResources.Total: 
+                                    <strong>@Model.Order.Sum @Model.ValuteName</strong> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            
+            @{ Html.RenderPartial("OrderDetailMob", Model); }
+
+            <div class="stock-area__bottom">
+                <div class="stock-area__controls">
+                    <a class="stock-area__btn btn btn--primary" href="#">Оплата онлайн</a>
+                    <a class="stock-area__btn btn btn--primary" href="#">Получить счет на оплату заказа</a>
+                    <button class="stock-area__btn btn btn--gray" type="button">Оформить возврат</button>
+                </div>
+            </div>
+
+            <div class="stock-area__summary order-summary has-top-decoration">
+                <h2 class="order-summary__heading secondary-heading">Дополнительная информация:</h2>
+                <div class="order-summary__subsections">
+                    <div class="order-summary__subsection">
+                        <div class="order-summary__params params">
+                            <div class="params__param">
+                                <dt class="params__property">Телефон:</dt>
+                                <dd class="params__value">@Model.Order.Options.ContactPhone</dd>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="order-summary__subsection">
+                        <h2 class="order-summary__heading secondary-heading">@SharedResources.Delivery</h2>
+                        <p class="order-summary__desc">
+                            <strong>@Model.Order.DeliveryInfo.StatusName</strong>
+                        </p>
+                        @if (Model.Order.DeliveryInfo.DeliveryTypeId == 1)
+                        {
+                            <div class="order-summary__params params">
+                                <div class="params__param">
+                                    <dt class="params__property">@SharedResources.DeliveryType:</dt>
+                                    <dd class="params__value">@SharedResources.SelfDelivery</dd>
+                                </div>
+                                <div class="params__param">
+                                    <dt class="params__property">@SharedResources.FromWarehouse:</dt>
+                                    <dd class="params__value">@Model.Order.DeliveryInfo.PickUpPayload.PickupPointName</dd>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="order-summary__params params">
+                                <div class="params__param">
+                                    <dt class="params__property">@SharedResources.DeliveryType:</dt>
+                                    <dd class="params__value">@SharedResources.Delivery</dd>
+                                </div>
+                                <div class="params__param">
+                                    <dt class="params__property">@SharedResources.DeliveryAddress:</dt>
+                                    <dd class="params__value">@Model.Order.DeliveryInfo.DeliveryPayload.AddressId</dd>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                    <div class="order-summary__subsection">
+                        <h2 class="order-summary__heading secondary-heading">@SharedResources.Payment</h2>
+                        <div class="order-summary__params params">
+                            <div class="params__param">
+                                <dt class="params__property">Наличные:</dt>
+                                <dd class="params__value">При получении</dd>
+                            </div>
+                        </div>
+                        <div class="order-summary__comment">
+                            <p>@Model.Order.Options.Comment</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-summary__bottom text-right">
+                    <a class="order-summary__btn btn btn--primary" href="@Url.Action("List")">@SharedResources.Close</a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+</div>
+

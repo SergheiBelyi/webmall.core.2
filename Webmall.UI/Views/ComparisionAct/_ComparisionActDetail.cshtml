@@ -1,0 +1,30 @@
+﻿@using ValmiStore.Model.Entities.User
+
+@model List<ComparisionActDetail>
+@{ 
+    Layout = null;
+}
+
+@foreach (var item in Model)
+{
+    <tr class="spec-payment-table__tr">
+        <td class="spec-payment-table__td">
+            <div class="spec-payment-table__value-gray">@item.WareNum</div>
+        </td>
+        <td class="spec-payment-table__td">
+            <div class="spec-payment-table__value">@item.Name</div>
+        </td>
+        <td class="spec-payment-table__td">
+            <div class="spec-payment-table__value-primary">@item.ProducerName</div>
+        </td>
+        <td class="spec-payment-table__td">
+            <div class="spec-payment-table__value">@(string.Format("{0:n2}", item.Price))</div>
+        </td>
+        <td class="spec-payment-table__td">
+            <div class="spec-payment-table__value text-center">@item.WareQnt</div>
+        </td>
+        <td class="spec-payment-table__td">
+            <div class="spec-payment-table__value">@(string.Format("{0:n2}", item.Price * item.WareQnt))</div>
+        </td>
+    </tr>
+}

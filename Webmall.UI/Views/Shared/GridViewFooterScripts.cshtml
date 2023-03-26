@@ -1,0 +1,11 @@
+﻿@using Webmall.UI.Core
+
+@model GridViewOptions
+
+@* ReSharper disable once Html.IdNotResolved *@
+<script type="text/javascript">
+    document.GridViewFooter_Model_SortTypeCookieName = '@Model.SortTypeCookieName';
+    document.GridViewFooter_Model_SortDirCookieName = '@Model.SortDirCookieName';
+</script>
+
+@Scripts.Render("~/bundles/views/gridViewFooter")

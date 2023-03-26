@@ -1,0 +1,34 @@
+﻿@using ViewRes
+
+<div id="pop-up-addToCartDialog" class="product-added-modal" data-modal-win="add" hidden>
+    <div class="modal-win__title" id="pop-up-add">@SharedResources.WareWasAddedToCart</div>
+    @*<div class="table-responsive">
+            <table class="table-added">
+                <thead>
+                    <tr>
+                        <th colspan="2">@SharedResources.Name</th>
+                        <th>@SharedResources.Amount</th>
+                        <th>@SharedResources.Sum</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a class="table-added__img-wrap" href="#"><img class="table-added__img img-responsive" src="@Url.Content("~/assets/images/content/product-img-3.jpg")" alt="Product Img"></a></td>
+                        <td>
+                            <div class="table-added__title">Трансмиссионное масло; Моторное масло; Моторное масло; Масло ступенчат</div>
+                        </td>
+                        <td><strong>x1</strong></td>
+                        <td>
+                            <div class="table-added__price"><span class="table-added__price-value">242,94</span> mdl</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>*@
+    <div class="product-added-footer"><a class="btn btn--white" href="" onclick="CloseCartDialog(); return false;">@SharedResources.ContinueShopping</a><a class="btn btn--main" href="@Url.Action("Index", "Cart")">@SharedResources.GotoCart</a></div>
+</div>
+
+
+@*<div id="pop-up-add" class="pop-up-add" style="display: none">
+    @Html.Raw(ViewRes.SharedResources.WareWasAddedToCart)
+</div>*@

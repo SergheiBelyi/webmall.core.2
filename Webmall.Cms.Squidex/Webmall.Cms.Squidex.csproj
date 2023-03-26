@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AC2F0387-800B-4C90-B1C3-7EA00ED9C64B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Webmall.Cms.Squidex</RootNamespace>
+    <AssemblyName>Webmall.Cms.Squidex</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=6.4.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.6.4.0\lib\netstandard2.0\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper, Version=10.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.10.1.1\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.15\lib\net45\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Markdig.Signed, Version=0.30.0.0, Culture=neutral, PublicKeyToken=870da25a133885f8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Markdig.Signed.0.30.4\lib\net452\Markdig.Signed.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.7.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Caching.Abstractions, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Caching.Abstractions.7.0.0\lib\net462\Microsoft.Extensions.Caching.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Caching.Memory, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Caching.Memory.7.0.0\lib\net462\Microsoft.Extensions.Caching.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.7.0.0\lib\net462\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.7.0.0\lib\net462\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.7.0.0\lib\net462\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.7.0.0\lib\net462\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="MimeMapping, Version=1.0.1.50, Culture=neutral, PublicKeyToken=680e2d5f226b327b, processorArchitecture=MSIL">
+      <HintPath>..\packages\MimeMapping.1.0.1.50\lib\netstandard2.0\MimeMapping.dll</HintPath>
+    </Reference>
+    <Reference Include="MimeTypesMap, Version=1.0.8.0, Culture=neutral, PublicKeyToken=1b320cc08ad5aa89, processorArchitecture=MSIL">
+      <HintPath>..\packages\MimeTypesMap.1.0.8\lib\net452\MimeTypesMap.dll</HintPath>
+    </Reference>
+    <Reference Include="MiniProfiler.Shared, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b44f9351044011a3, processorArchitecture=MSIL">
+      <HintPath>..\packages\MiniProfiler.Shared.4.2.22\lib\net461\MiniProfiler.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Squidex.ClientLibrary, Version=7.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Squidex.ClientLibrary.7.4.0\lib\netstandard2.0\Squidex.ClientLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.5.0.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.7.0.0\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Cms\MappingProfile.cs" />
+    <Compile Include="Cms\Models\BrandArticles\BrandArticleData.cs" />
+    <Compile Include="Cms\Models\BrandArticles\BrandArticlesItem.cs" />
+    <Compile Include="Cms\Models\Brands\BrandItemData.cs" />
+    <Compile Include="Cms\Models\Brands\BrandItemItem.cs" />
+    <Compile Include="Cms\Models\CatalogNews\CatalogNewsData.cs" />
+    <Compile Include="Cms\Models\CatalogNews\CatalogNewsItem.cs" />
+    <Compile Include="Cms\Models\CmsIdEntity.cs" />
+    <Compile Include="Cms\Models\Contact\ContactData.cs" />
+    <Compile Include="Cms\Models\Contact\ContactItem.cs" />
+    <Compile Include="Cms\Models\CustomerReviews\CustomerReviewsData.cs" />
+    <Compile Include="Cms\Models\CustomerReviews\CustomerReviewsItem.cs" />
+    <Compile Include="Cms\Models\EmbeddedText\EmbeddedTextData.cs" />
+    <Compile Include="Cms\Models\EmbeddedText\EmbeddedTextItem.cs" />
+    <Compile Include="Cms\Models\HeaderNav\HeaderNavData.cs" />
+    <Compile Include="Cms\Models\HeaderNav\HeaderNavItem.cs" />
+    <Compile Include="Cms\Models\Menu\MenuData.cs" />
+    <Compile Include="Cms\Models\Order\InfoTextData.cs" />
+    <Compile Include="Cms\Models\Order\InfoTextItem.cs" />
+    <Compile Include="Cms\Models\Order\SuccessfulTextData.cs" />
+    <Compile Include="Cms\Models\Order\PaymentData.cs" />
+    <Compile Include="Cms\Models\Order\SuccessfulTextItem.cs" />
+    <Compile Include="Cms\Models\Order\PaymentItem.cs" />
+    <Compile Include="Cms\Models\PersonalMenu\MenuItemData.cs" />
+    <Compile Include="Cms\Models\PersonalMenu\MenuItemItem.cs" />
+    <Compile Include="Cms\Models\ExternalCatalog\CatalogCategoryData.cs" />
+    <Compile Include="Cms\Models\ExternalCatalog\CatalogCategoryItem.cs" />
+    <Compile Include="Cms\Models\ExternalCatalog\CatalogItemData.cs" />
+    <Compile Include="Cms\Models\ExternalCatalog\CatalogItemItem.cs" />
+    <Compile Include="Cms\Models\FlashNews\FlashNewsData.cs" />
+    <Compile Include="Cms\Models\FlashNews\FlashNewsItem.cs" />
+    <Compile Include="Cms\Models\Informer\InformerData.cs" />
+    <Compile Include="Cms\Models\Informer\InformerItem.cs" />
+    <Compile Include="Cms\Models\Menu\MenuLevel1Data.cs" />
+    <Compile Include="Cms\Models\Menu\MenuLevel1Item.cs" />
+    <Compile Include="Cms\Models\Menu\MenuLevel2Data.cs" />
+    <Compile Include="Cms\Models\Menu\MenuLevel2Item.cs" />
+    <Compile Include="Cms\Models\FooterColumns\FooterPositionItem.cs" />
+    <Compile Include="Cms\Models\FooterColumns\FooterPositionData.cs" />
+    <Compile Include="Cms\Models\IncorporatingText\IncorporatingTextData.cs" />
+    <Compile Include="Cms\Models\IncorporatingText\IncorporatingTextItem.cs" />
+    <Compile Include="Cms\Models\Articles\ArticleData.cs" />
+    <Compile Include="Cms\Models\Articles\ArticlesItem.cs" />
+    <Compile Include="Cms\Models\Banners\BannerData.cs" />
+    <Compile Include="Cms\Models\Banners\BannerItem.cs" />
+    <Compile Include="Cms\Models\News\PromoData.cs" />
+    <Compile Include="Cms\Models\News\PromoItem.cs" />
+    <Compile Include="Cms\Models\MailMessageTemplate\MailMessageTemplateData.cs" />
+    <Compile Include="Cms\Models\MailMessageTemplate\MailMessageTemplateItem.cs" />
+    <Compile Include="Cms\Models\Property.cs" />
+    <Compile Include="Cms\Models\SeoTemplate\SeoTemplateData.cs" />
+    <Compile Include="Cms\Models\SeoTemplate\SeoTemplateItem.cs" />
+    <Compile Include="Cms\Models\News\NewsItem.cs" />
+    <Compile Include="Cms\Models\News\NewsData.cs" />
+    <Compile Include="Cms\Models\FooterColumns\FooterColumnData.cs" />
+    <Compile Include="Cms\Models\FooterColumns\FooterColumnItem.cs" />
+    <Compile Include="Cms\Models\Shops\ShopData.cs" />
+    <Compile Include="Cms\Models\Shops\ShopItem.cs" />
+    <Compile Include="Cms\Models\SocialLinks\SocialLinkData.cs" />
+    <Compile Include="Cms\Models\SocialLinks\SocialLinkItem.cs" />
+    <Compile Include="Cms\Models\UserRolesCustom\UserRolesCustomData.cs" />
+    <Compile Include="Cms\Models\UserRolesCustom\UserRolesCustomItem.cs" />
+    <Compile Include="Cms\Models\WareGroup\WareGroupData.cs" />
+    <Compile Include="Cms\Models\WareGroup\WareGroupItem.cs" />
+    <Compile Include="Config\ConfigRepository.cs" />
+    <Compile Include="Config\MappingProfile.cs" />
+    <Compile Include="Cms\CmsRepository.cs" />
+    <Compile Include="Config\Models\Email\EmailConfig.cs" />
+    <Compile Include="Config\Models\Email\EmailConfigData.cs" />
+    <Compile Include="Core\Model\LTag.cs" />
+    <Compile Include="Helpers\ClientManagerFactory.cs" />
+    <Compile Include="Helpers\ClientManager.cs" />
+    <Compile Include="Helpers\MarkdownHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServicesConnector.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ValmiStore.Model\Webmall.Model.csproj">
+      <Project>{b8938641-3d4c-466a-845d-7d96a4073720}</Project>
+      <Name>Webmall.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

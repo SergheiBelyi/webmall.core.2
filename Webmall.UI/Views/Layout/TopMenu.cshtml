@@ -1,0 +1,35 @@
+﻿@using Webmall.UI.Core.Helpers
+@model List<Webmall.Model.Entities.Cms.Menu.MenuLevel1>
+
+@{ Layout = null; }
+
+<nav class="section-nav d-none d-md-block">
+    <ul class="section-nav__list">
+        @{
+            foreach (var item in Model)
+            {
+                <li class="section-nav__item @(item.Level2.Count > 0 ? "has-dropdown" : "")">
+                    <a class="section-nav__link" href="@this.ToLocalizedUrl(item.Url)">
+                        <span class="section-nav__text">@item.Title</span>
+                        @if (item.Level2.Count > 0)
+                        {
+                            <svg class="icon icon-chevron-down" width="25" height="25">
+                                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#chevron-down")"></use>
+                            </svg>
+                        }
+                    </a>
+                    @if (item.Level2.Count > 0)
+                    {
+                        <ul class="section-nav__sublist">
+                            @foreach (var level2 in item.Level2)
+                            {
+                                <li class="section-nav__subitem"><a class="section-nav__sublink" href="@this.ToLocalizedUrl(level2.Url)">@level2.Title</a></li>
+                            }
+                        </ul>
+                    }
+                </li>
+            }
+        }
+    </ul>
+</nav>
+

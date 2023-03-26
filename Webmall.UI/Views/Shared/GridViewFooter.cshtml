@@ -1,0 +1,108 @@
+﻿@using ViewRes
+@using Webmall.UI.Core
+
+@model GridViewOptions
+
+@Html.Hidden("SortColumn", Model.SortColumn)
+@Html.Hidden("SortDirection", Model.SortDirection)
+@Html.Hidden("OnlyWithPrice", (bool?)ViewBag.OnlyWithPrice)
+
+@if (Model.TotalPages > 1 && Model.AllowPagging)
+{
+    Model.CurrentPage = Model.CurrentPage ?? 1;
+    <ul class="pagination">
+        <li><a class="start clickable" onclick="return gotoPage(this, 1);"> </a></li>
+        @if (Model.CurrentPage != 1)
+        {
+            <li><a onclick="return gotoPage(this, @(Model.CurrentPage - 1));" class="prev clickable"> </a> </li>
+        }
+        @if (Model.TotalPages < 11)
+        {
+            for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                <li><a class="clickable" id="@(i == Model.CurrentPage ? "current" : "")" onclick="return gotoPage(this, @i);">@i </a></li>
+            }
+        }
+        else if (Model.CurrentPage <= 4)
+        {
+            for (int i = 1; i <= 5; i++)
+            {
+                <li><a class="clickable" id="@(i == Model.CurrentPage ? "current" : "")" onclick="return gotoPage(this, @i);">@i </a></li>
+            }
+            <li>...</li>
+            <li><input type="text" name="PageNumber" id="PageNumber"></li>
+            <li>...</li>
+            for (int i = Model.TotalPages - 2; i <= Model.TotalPages; i++)
+            {
+                <li><a class="clickable" onclick="return gotoPage(this, @i);">@i </a></li>
+            }
+        }
+        else if (Model.CurrentPage >= Model.TotalPages - 3)
+        {
+            for (int i = 1; i <= 3; i++)
+            {
+                <li><a class="clickable" onclick="return gotoPage(this, @i );">@i </a></li>
+            }
+            <li>...</li>
+            <li><input type="text" name="PageNumber" id="PageNumber"></li>
+            <li>...</li>
+            for (int i = Model.TotalPages - 4; i <= Model.TotalPages; i++)
+            {
+                <li><a class="clickable" id="@(i == Model.CurrentPage ? "current" : "")" onclick="return gotoPage(this, @i );">@i </a></li>
+            }
+        }
+        else
+        {
+            for (int i = 1; i <= 3; i++)
+            {
+                <li><a class="clickable" onclick="return gotoPage(this, @i );">@i </a></li>
+            }
+            <li>...</li>
+            for (int i = Model.CurrentPage.Value - 1; i <= Model.CurrentPage.Value + 1; i++)
+            {
+                <li>
+                    @if (i == Model.CurrentPage)
+                    {
+                        <input type="text" name="PageNumber" id="PageNumber" value="@Model.CurrentPage">
+                    }
+                    else
+                    {
+                        <a class="clickable" id="@(i == Model.CurrentPage ? "current" : "")" onclick="return gotoPage(this, @i);">@i </a>
+                    }
+                </li>
+            }
+            <li>...</li>
+            for (int i = Model.TotalPages - 2; i <= Model.TotalPages; i++)
+            {
+                <li><a class="clickable" onclick="return gotoPage(this, @i);">@i </a></li>
+            }
+        }
+        @if (Model.CurrentPage != @Model.TotalPages)
+        {
+            <li><a onclick="return gotoPage(this, @(Model.CurrentPage + 1)); " class="next clickable"></a></li>
+        }
+        <li><a onclick="return gotoPage(this, @Model.TotalPages);" class="finish clickable"></a> </li>
+    </ul>
+
+    @Html.Hidden("CurrentPage")
+
+    @*<div class="right">
+        @SharedResources.GotoPage
+        <input type="text" name="PageNumber" id="PageNumber" value="@Model.CurrentPage" >
+    </div>*@
+}
+
+@if (Model.AllowPagging && Model.AllowPageSizeSelection)
+{
+    <div class="cantity-page">
+        @SharedResources.PageSize @Html.DropDownListFor(m => m.PageSize, new[] {
+            new SelectListItem { Text = @"10", Value = "10" },
+            new SelectListItem { Text = @"25", Value = "25" },
+            new SelectListItem { Text = @"50", Value = "50" },
+            new SelectListItem { Text = @"100", Value = "100" }
+        })
+    </div>
+    <div class="clear-div"> </div>
+}
+
+

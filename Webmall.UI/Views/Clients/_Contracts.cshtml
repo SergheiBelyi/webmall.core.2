@@ -1,0 +1,15 @@
+﻿@using ViewRes
+@model Webmall.Model.Entities.Client.Client
+
+@if (Model?.Contracts != null)
+{
+    <div class="addresses users__subsection">
+        <h2 class="profile__subheading secondary-heading">@SharedResources.Contracts</h2>
+        <div class="addresses__main">
+            @foreach (var item in Model.Contracts)
+            {
+                Html.RenderPartial("_ContractCard", item);
+            }
+        </div>
+    </div>
+}

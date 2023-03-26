@@ -1,0 +1,151 @@
+﻿@using Webmall.Model
+@using ViewRes
+@model Webmall.UI.Models.LogOnModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = SharedResources.Authorize;
+}
+
+<div class="container-fluid">
+    <div class="content">
+        <div class="auth-area">
+            <h1 class="auth-area__heading main-heading">@ViewBag.Title</h1>
+            <div class="auth-area__top">
+                <div class="auth-area__socials">
+                    <a class="auth-area__social soc-btn" href="#">
+                        <img class="soc-btn__icon" src="@Url.Content("~/assets/images/google.png")" alt="google" width="35" height="35">
+                        <span class="soc-btn__text">
+                            Войти с помощью <strong>Google</strong>
+                        </span>
+                    </a>
+                    <a class="auth-area__social soc-btn" href="#">
+                        <img class="soc-btn__icon" src="@Url.Content("~/assets/images/facebook.png")" alt="facebook" width="35" height="35">
+                        <span class="soc-btn__text">
+                            Войти с помощью <strong>Facebook</strong>
+                        </span>
+                    </a>
+                </div>
+            </div>
+            @using (Html.BeginForm("Logon", "Security", FormMethod.Post, new { @class = "auth-form auth-area__main", name = "auth-form" }))
+            {
+                @Html.ValidationSummary(true, SharedResources.ErrorsFound)
+                <div class="auth-form__fields">
+                    <div class="auth-form__field">
+                        <label class="auth-form__caption" for="auth-field-1">@SharedResources.Login</label>
+                        <input class="auth-form__input input" type="text" name="UserName" id="user-email">
+                    </div>
+                    <div class="auth-form__field">
+                        <label class="auth-form__caption" for="auth-field-2">@SharedResources.Password</label>
+                        <input class="auth-form__input input" type="password" name="pass" id="user-psw">
+                    </div>
+                </div>
+                <div class="auth-form__bottom">
+                    <div class="auth-form__checkbox checkbox-label">
+                        <input class="checkbox-label__input" type="checkbox" name="RememberMe" id="remember" value="true" @(Model.RememberMe ? "checked=\"checked\"" : "")>
+                        <label class="checkbox-label__main" for="remember">@SecurityResources.RememberMe</label>
+                    </div>
+                    <button class="auth-form__btn btn btn--primary" type="submit" name="send">@SharedResources.Enter</button>
+                </div>
+                <div class="auth-form__links">
+                    <a class="auth-form__link" href="@Url.Action("PasswordRecovery")">@SecurityResources.AreYouForgetPassword</a>
+                    @if (ConfigHelper.AllowAutoRegistration)
+                    {
+                        <a class="auth-form__link" href="@Url.Action("Registration", "Security")">@SharedResources.Registration</a>
+                    }
+                </div>
+                @Html.Hidden("ReturnUrl", Model.ReturnUrl)
+            }
+        </div>
+    </div>
+</div>
+
+@*
+            <div class="page-intro">
+                <h1 class="page-intro__heading main-heading">@ViewBag.Title</h1>
+            </div><!-- /page-intro-->
+
+            <div class="primary">
+                <main class="primary__main">
+                    @using (Html.BeginForm("Logon", "Security", FormMethod.Post, new { @class = "profile", name = "auth-form" }))
+                    {
+                        <div class="profile__subsections">
+                            <div class="profile__subsection">
+                                @Html.ValidationSummary(true, SharedResources.ErrorsFound)
+                                <div class="profile__params-area">
+                                    <dl class="profile__params params is-dotted">
+                                        <div class="params__param">
+                                        <dt class="params__property">@SharedResources.Email</dt>
+                                        <dd class="params__value">
+                                            <input class="profile-form__input input" type="email" name="UserName" id="user-email">
+                                        </dd>
+                                </div>
+                                <div class="params__param">
+                                    <dt class="params__property">@SharedResources.Password</dt>
+                                    <dd class="params__value">
+                                        <input class="profile-form__input input" type="password" name="Pass" id="user-psw">
+                                    </dd>
+                                </div>
+                                <div class="params__param">
+                                    <input class="checkbox-label__input" type="checkbox" name="RememberMe" id="remember" value="true" @(Model.RememberMe ? "checked=\"checked\"" : "")>
+                                    <label class="checkbox-label__main" for="remember">@SecurityResources.RememberMe</label>
+                                </div>
+                                </dl>
+                                @if (ConfigHelper.AllowAutoRegistration)
+                                {
+                                    <div class="main-form__field main-form__field--flex">
+                                        <div class="main-form__checkbox checkbox-label"></div>
+                                        <a class="main-form__recover-psw" href="@Url.Action("Registration", "Security")">@SharedResources.Registration</a>
+                                    </div>
+                                }
+                            </div>
+                            @Html.Hidden("ReturnUrl", Model.ReturnUrl)
+                        </div>
+                        <div class="profile__bottom">
+                            <input class="profile__btn btn btn--primary" type="submit" value="@SharedResources.Enter">
+                        </div>
+                </div>
+            }
+                    </main>
+                </div>
+        </div>
+    </div>
+*@
+@*<div class="inner-section">
+        <div class="inner-section__main">
+            <div class="inner-section__header">
+                <h1 class="inner-section__heading">@SharedResources.Authorize</h1>@SharedResources.Authorize
+            </div>
+            <div class="inner-section__body">
+                @using (Html.BeginForm("Logon", "Security", FormMethod.Post, new { @class = "auth-form", name = "auth-form" }))
+                {
+                    @Html.ValidationSummary(true, SharedResources.ErrorsFound)
+                    @Html.Hidden("ReturnUrl", Model.ReturnUrl)
+                    <div class="main-form__field">
+                        <label class="main-form__label" for="user-email">@SharedResources.Email <span>*</span></label>
+                        <input class="main-form__input" type="email" name="UserName" id="user-email">
+                    </div>
+                    <div class="main-form__field">
+                        <label class="main-form__label" for="user-psw">@SharedResources.Password <span>*</span></label>
+                        <input class="main-form__input" type="password" name="Pass" id="user-psw">
+                    </div>
+                    <div class="main-form__field main-form__field--flex">
+                        <div class="main-form__checkbox checkbox-label">
+                            <input class="checkbox-label__input" type="checkbox" name="RememberMe" id="remember" value="true" @(Model.RememberMe ? "checked=\"checked\"" : "")>
+                            <label class="checkbox-label__main" for="remember">@SecurityResources.RememberMe</label>
+                        </div><a class="main-form__recover-psw" href="@Url.Action("PasswordRecovery")">@SecurityResources.AreYouForgetPassword</a>
+                    </div>
+                    if (ConfigHelper.AllowAutoRegistration)
+                    {
+                        <div class="main-form__field main-form__field--flex">
+                            <div class="main-form__checkbox checkbox-label"></div>
+                            <a class="main-form__recover-psw" href="@Url.Action("LogOn", "Security")">@SharedResources.Registration</a>
+                        </div>
+                    }
+                    <div class="main-form__footer text-center">
+                        <input class="main-form__btn btn btn--main btn--upper" type="submit" value="@SharedResources.Enter">
+                    </div>
+                }
+            </div>
+        </div>
+    </div>*@
+

@@ -1,0 +1,18 @@
+﻿@model Webmall.UI.ViewModel.Filter.RangeViewModel
+
+@if (Model != null)
+{
+    <div class="price-range filter__range">
+        <div class="price-range__values">
+            <div class="price-range__field">
+                <input class="price-range__input input" type="text" name="@Model.NameMin" value="@Model.MinSelected" @(string.IsNullOrEmpty(Model.NameMin) ? "hidden" : "")>
+            </div>
+            <div class="price-range__field">
+                <input class="price-range__input input" type="text" name="@Model.NameMax" value="@Model.MaxSelected" @(string.IsNullOrEmpty(Model.NameMax) ? "hidden" : "")>
+            </div>
+        </div>
+        <div class="price-range__slider js-range-slider noUi-target noUi-ltr noUi-horizontal noUi-txt-dir-ltr"
+             data-step="@Model.Step" data-from="@Model.Min" data-to="@Model.Max">
+        </div>
+    </div>
+}

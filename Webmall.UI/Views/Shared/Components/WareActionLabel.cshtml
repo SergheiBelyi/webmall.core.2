@@ -1,0 +1,23 @@
+﻿@using ViewRes
+@using Webmall.Model.Entities.Catalog
+
+@model WareListItem
+
+@{
+    Layout = null;
+}
+
+<div class="product-card__stickers">
+    @if (Model.IsAction)
+    {
+        <div class="product-card__sticker sticker is-action">@SharedResources.Action</div>
+    }
+    @if (Model.IsNew)
+    {
+        <div class="product-card__sticker sticker is-new">@SharedResources.NewWare</div>
+    }
+    @if (Model.IsSale)
+    {
+        <div class="product-card__sticker sticker is-discount">@SharedResources.Sale</div>
+    }
+</div>

@@ -1,0 +1,419 @@
+﻿@using Webmall.Model
+@using ViewRes
+
+@model Webmall.Model.Entities.User.UserRegistrationData
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = SecurityResources.Registration;
+    var phonePrefix = ConfigHelper.PhonePrefix;
+    var latinOnly = ConfigHelper.UserNameLatinOnly;
+}
+
+@if (ConfigHelper.AllowAutoRegistration)
+{
+    <div class="inner-section">
+        <div class="inner-section__main inner-section__main--wider">
+            <div class="inner-section__header">
+                <h1 class="inner-section__heading">@SecurityResources.Registration</h1>
+            </div>
+            <div class="inner-section__body inner-section__body--no-gutters">
+                @if (ViewBag.Logon != true)
+                {
+                    @Html.ValidationSummary(true, SharedResources.ErrorsFound)
+                }
+                <div class="reg-form-wrap">
+                    @using (Html.BeginForm("Registration", "Security", FormMethod.Post, new { @class = "main-form", id = "register-form", name = "auth-form" }))
+                    {
+                        @Html.Hidden("Custom[0].Id", "Test custom param")
+                        @Html.Hidden("Custom[0].Value", "Test custom value")
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="main-form__field">
+                                    <label class="main-form__label" for="FirstName">@SharedResources.FirstName @(latinOnly ? SharedResources.latin_only : "") <span>*</span></label>
+                                    @Html.TextBoxFor(m => m.FirstName, new { @class = "main-form__input" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="main-form__field">
+                                    <label class="main-form__label" for="LastName">@SharedResources.LastName @(latinOnly ? SharedResources.latin_only : "") <span>*</span></label>
+                                    @Html.TextBoxFor(m => m.LastName, new { @class = "main-form__input" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="main-form__field">
+                                    <div class="radio-label">
+                                        <input class="radio-label__input" type="radio" name="IsJuridical" value="false" id="u-rl-1" checked>
+                                        <label class="radio-label__main" for="u-rl-1">@SecurityResources.PhisicalPersons</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="main-form__field">
+                                    <div class="radio-label">
+                                        <input class="radio-label__input" type="radio" name="IsJuridical" value="true" id="u-rl-2">
+                                        <label class="radio-label__main" for="u-rl-2">@SecurityResources.JuridicalPersons</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="extra-fields is-hidden">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="main-form__field">
+                                        <label class="main-form__label" for="JuridicalName">@SharedResources.JuridicalName @(latinOnly ? SharedResources.latin_only : "") <span>*</span></label>
+                                        @Html.TextBoxFor(m => m.JuridicalName, new { @class = "main-form__input" })
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="main-form__field">
+                                        <label class="main-form__label" for="FiscalCode">@SharedResources.FiscalCode <span>*</span>:</label>
+                                        @Html.TextBoxFor(m => m.FiscalCode, new { @class = "main-form__input" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="main-form__field">
+                                        <label class="main-form__label" for="BankAccount">@SharedResources.BankAccount</label>
+                                        @Html.TextBoxFor(m => m.BankAccount, new { @class = "main-form__input" })
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="main-form__field">
+                                        <label class="main-form__label" for="BankCode">@SharedResources.BankCode</label>
+                                        @Html.TextBoxFor(m => m.BankCode, new { @class = "main-form__input" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="main-form__field">
+                                <label class="main-form__label" for="JuridicalAddress">@SharedResources.JuridicalAddress @(latinOnly ? SharedResources.latin_only : "")</label>
+                                @Html.TextBoxFor(m => m.JuridicalAddress, new { @class = "main-form__input" })
+                            </div>
+                        </div>
+                        <div class="main-form__field">
+                            <label class="main-form__label" for="Login">@SharedResources.EmailAsLogin <span>*</span></label>
+                            @Html.TextBoxFor(m => m.Login, new { @class = "main-form__input", type = "email" })
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="main-form__field">
+                                    <label class="main-form__label" for="user-password">@SharedResources.Password <span>*</span></label>
+                                    @Html.PasswordFor(m => m.Password)
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="main-form__field">
+                                    <label class="main-form__label" for="user-password-verify">@SharedResources.RepeatPassword <span>*</span></label>
+                                    @Html.Password("Password2")@*<small class="error__desc">Пароли не совпадают</small>*@
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="main-form__field phone-mob">
+                                    <label class="main-form__label" for="PhoneMobile">@SharedResources.MobilePhone <span>*</span></label>
+                                    @phonePrefix @Html.TextBoxFor(m => m.PhoneMobile, new { @class = "main-form__input", type = "tel" })
+                                    @*<input class="main-form__input" type="tel" name="user-mob-phone" id="user-mob-phone" placeholder="+727">*@
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="main-form__field phone-mob">
+                                    <label class="main-form__label" for="PhoneHome">@SharedResources.FixedPhone</label>
+                                    @phonePrefix @Html.TextBoxFor(m => m.PhoneHome, new { @class = "main-form__input", type = "tel" })
+                                </div>
+                            </div>
+                        </div>
+                        @*<div class="row">
+                            <div class="col-sm-6">
+                                <div class="main-form__field">
+                                    <label class="main-form__label" for="RegionId">@SharedResources.Region <span>*</span></label>
+                                    @Html.DropDownListFor(m => m.Address.RegionId, (List<SelectListItem>)ViewBag.Organizations, new { @class = "js-select-default" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="main-form__field">
+                                    <label class="main-form__label" for="Address_LocalityName">@SharedResources.Locality</label>
+                                    @Html.TextBoxFor(m => m.Address.LocalityName, new { @class = "main-form__input" })
+                                    @Html.HiddenFor(m => m.Address.LocalityId)
+                                </div>
+                            </div>
+                        </div>*@
+
+                        <div class="main-form__footer">
+                            <div class="main-form__field">
+                                <div class="checkbox-label">
+                                    <input class="checkbox-label__input" type="checkbox" name="agreementFlag" id="agreementFlag" value="true">
+                                    <label class="checkbox-label__main" for="agreementFlag">@SecurityResources.SelectAgreementFlag / <a target="_blank" href="@Url.Content("~/eula.aspx")">@SecurityResources.Read</a></label>
+                                </div>
+                            </div>
+                            @if (ConfigHelper.AllowActionsSubscription)
+                            {
+                                <div class="main-form__field">
+                                    <div class="checkbox-label">
+                                        <input class="checkbox-label__input" type="checkbox" name="SubscribeForPromotions" id="SubscribeForPromotions" value="true">
+                                        <label class="checkbox-label__main" for="SubscribeForPromotions">@SharedResources.SubscribeForActionInformations</label>
+                                    </div>
+                                </div>
+                            }
+                            <div class="main-form__field main-form__field--flex">
+                                <div class="capcha"><div id="Recaptcha1"></div></div>
+                                <input class="main-form__btn btn btn--main" id="submit" value="@SharedResources.Registration" disabled type="submit">
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section headerScript
+{
+    <script src="//www.google.com/recaptcha/api.js?onload=CaptchaCallback&render=explicit" async defer></script>
+    <script type="text/javascript">
+        var CaptchaCallback = function() {
+            window.grecaptcha.render('Recaptcha1', { 'sitekey': '@ConfigHelper.CaptchaSiteKey' });
+        };
+    </script>
+}
+
+@section scripts
+{
+    <script>
+        var checkPhoneUrl = '@Url.Action("CheckPhone", "Security")';
+
+        $(function () {
+
+            $.expr[':'].textEquals = function (a, i, m) {
+                return $(a).text().toLowerCase().match("^" + m[3].toLowerCase() + "$");
+            };
+
+            var options = {
+                url: function (phrase) {
+                    return "UILocalities?term=" + phrase;
+                },
+                getValue: "label",
+                requestDelay: 250,
+                list: {
+                    maxNumberOfElements: 20,
+                    onChooseEvent: function () {
+                        $("#register-form").validate().element("#Address_LocalityName");
+                    }
+                },
+                adjustWidth: false
+            };
+
+            //$("#Address_LocalityName").easyAutocomplete(options);
+
+            document.phisValidationRules = {
+                errorClass: "error__desc",
+                errorElement: "small",
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass(errorClass).removeClass(validClass);
+                    $(element).parent().addClass('error');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass(errorClass).addClass(validClass);
+                    $(element).parent().removeClass('error');
+                },
+                rules: {
+                    Login: {
+                        required: true,
+                        email: true,
+                        remote: '@Url.Action("IsLoginAvailable", "Security")'
+                    },
+                    FirstName: {
+                        required: true,
+                        maxlength: 50
+                    },
+                    LastName: {
+                        required: true,
+                        maxlength: 50
+                    },
+                    JuridicalName: {
+                        required: false,
+                        maxlength: 100
+                    },
+                    JuridicalAddress: {
+                        required: false,
+                        maxlength: 100
+                    },
+                    FiscalCode: {
+                        required: false,
+                        minlength: @ConfigHelper.FiscalCodeLength,
+                        maxlength: @ConfigHelper.FiscalCodeLength
+                    },
+                    PhoneMobile: {
+                        required: true,
+                        digits: true,
+                        maxlength: @ConfigHelper.MaxPhoneLength,
+                        minlength: @ConfigHelper.MinPhoneLength,
+                        remote: checkPhoneUrl
+                    },
+                    PhoneHome: {
+                        required: false,
+                        maxlength: @ConfigHelper.MaxFixedPhoneLength,
+                        minlength: @ConfigHelper.MinFixedPhoneLength,
+                    },
+                    Password: {
+                        required: true,
+                        maxlength: 25,
+                        minlength: 4
+                    },
+                    Password2: {
+                        required: true,
+                        equalTo: "#Password",
+                        maxlength: 25,
+                        minlength: 4
+                    },
+                    BankAccount: {
+                        required: false,
+                        maxlength: 25
+                    },
+                    BankCode: {
+                        required: false,
+                        maxlength: 25
+                    },
+                },
+                messages: {
+                    Login: {
+                        remote: jQuery.validator.format("@SecurityResources.EmailAlreadyRegistered")
+                    }
+                }
+            };
+
+            document.jurValidationRules = {
+                errorClass: "error__desc",
+                errorElement: "small",
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass(errorClass).removeClass(validClass);
+                    $(element).parent().addClass('error');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass(errorClass).addClass(validClass);
+                    $(element).parent().removeClass('error');
+                },
+                rules: {
+                    Login: {
+                        required: true,
+                        email: true,
+                        remote: '@Url.Action("IsLoginAvailable", "Security")'
+                    },
+                    FirstName: {
+                        required: true,
+                        maxlength: 50
+                    },
+                    LastName: {
+                        required: true,
+                        maxlength: 50
+                    },
+                    JuridicalName: {
+                        required: true,
+                        maxlength: 100
+                    },
+                    JuridicalAddress: {
+                        required: false,
+                        maxlength: 100
+                    },
+                    FiscalCode: {
+                        required: true,
+                        minlength: @ConfigHelper.FiscalCodeLength,
+                        maxlength: @ConfigHelper.FiscalCodeLength
+                    },
+                    PhoneMobile: {
+                        required: true,
+                        digits: true,
+                        maxlength: @ConfigHelper.MaxPhoneLength,
+                        minlength: @ConfigHelper.MinPhoneLength,
+                        remote: checkPhoneUrl
+                    },
+                    PhoneHome: {
+                        required: false,
+                        maxlength: @ConfigHelper.MaxFixedPhoneLength,
+                        minlength: @ConfigHelper.MinFixedPhoneLength,
+                    },
+                    Password: {
+                        required: true,
+                        maxlength: 25,
+                        minlength: 4
+                    },
+                    Password2: {
+                        required: true,
+                        equalTo: "#Password",
+                        maxlength: 25,
+                        minlength: 4
+                    },
+                    BankAccount: {
+                        required: false,
+                        maxlength: 25
+                    },
+                    BankCode: {
+                        required: false,
+                        maxlength: 25
+                    },
+                },
+                messages: {
+                    Login: {
+                        remote: jQuery.validator.format("@SecurityResources.EmailAlreadyRegistered")
+                    }
+                }
+            };
+
+            $("#register-form").validate(document.phisValidationRules);
+
+            $("[name='representationFlag']").prop('checked', false);
+            representationFlagChange();
+
+            $("[name='agreementFlag']").on("change", function() {
+                var button = $(this).parents("form:first").find("#submit");
+                if ($(this).is(":checked")) {
+                    button.removeClass("submit-inactive");
+                    button.prop("disabled", false);
+                } else {
+                    button.addClass("submit-inactive");
+                    button.prop("disabled", true);
+                }
+            });
+            $("[name='representationFlag']").on("change", representationFlagChange);
+
+            /* ------------ Switch reg user type ------------ */
+            const userRadioTypes = document.querySelectorAll('[name="IsJuridical"]');
+
+            if (userRadioTypes) {
+                userRadioTypes.forEach(function (role) {
+                    role.addEventListener('change', function (e) {
+                        let role = this.value;
+                        let fields = document.querySelector('.extra-fields');
+
+                        if (role == 'false') {
+                            fields.classList.add('is-hidden');
+                            $("#register-form").validate(document.phisValidationRules);
+                        } else {
+                            fields.classList.remove('is-hidden');
+                            $("#register-form").validate(document.jurValidationRules);
+                        }
+                    });
+                });
+            }
+  /* ------------ Switch reg user type ------------ */
+        });
+
+        function representationFlagChange() {
+            if ($(this).is(':checked')) {
+                $('.presInfo').show();
+                $(".phone-mob input").rules("remove", "remote");
+            }
+            else {
+                $('.presInfo').hide();
+                $(".phone-mob input").rules("add", {
+                    // requred: true,
+                    remote: checkPhoneUrl
+                } );
+            }
+        }
+
+    </script>
+}

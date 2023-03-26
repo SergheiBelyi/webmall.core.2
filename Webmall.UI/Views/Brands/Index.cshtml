@@ -1,0 +1,99 @@
+﻿@using Webmall.UI.Core.HtmlHelpers
+
+@model Webmall.UI.ViewModel.Brands.BrandListViewModel
+
+@{ Layout = "~/Views/Shared/_Inner.cshtml"; }
+
+
+@section BreadCrumbs{
+    @{Html.RenderPartial("Components/BreadCrumbsRender", Model.BreadCrumbs);}
+}
+
+@*@section FilterBadges{
+        @{Html.RenderPartial("Components/FilterBadges", Model.Filter);}
+    }*@
+
+@*@section ViewModes{
+        @{Html.RenderPartial("Components/ViewModes");}
+    }*@
+
+@section Sidebar{
+    <aside class="catalog-layout__aside">
+        @{
+            Html.RenderPartial("Components/CommonFilter", Model.FilterModel);
+        }
+    </aside>
+}
+
+<main class="primary__main">
+    <!-- brands-area-->
+    <div class="brands-area">
+        <div class="brands-area__top brands-nav">
+            <ul class="brands-nav__list">
+                @for (char letter = 'A'; letter <= 'Z'; letter++)
+                {
+                    <li class="brands-nav__item letter_link">
+                        <a class="brands-nav__link" href="#" data-value="@letter">@letter</a>
+                    </li>
+                }
+                <li class="brands-nav__item">
+                    <a class="brands-nav__link is-numbers letter_link" data-value="0" href="#">0-9</a>
+                </li>
+                <li class="brands-nav__item">
+                    <a class="brands-nav__link is-numbers letter_link" data-value="other" href="#">А-Я</a>
+                </li>
+            </ul>
+        </div>
+        <div class="brands-area__main">
+            @foreach (var item in Model.Data.List)
+            {
+                <a class="brand-card" href="@Url.Action("Info", new {id = item.Name})">
+                    <figure class="brands-area__item brand-card__main">
+                        <div class="brand-card__img-wrap">
+                            <img class="brand-card__img" src="@(item.UrlName ?? Url.ProducerImage(item.Name))" alt="" width="80" height="80">
+                        </div>
+                        <figcaption class="brand-card__caption">@item.Name</figcaption>
+                    </figure>
+                </a>
+            }
+        </div>
+    </div><!-- /brands-area-->
+
+    <div class="header-control">
+        @if (Model.Data.AllowPagging)
+        {
+            Html.RenderPartial("Components/Pagination", Model.Data);
+        }
+    </div>
+
+</main>
+
+@section styles {
+}
+@section scripts
+{
+    @{ Html.RenderPartial("GridViewFooterScripts", Model.Data); }
+    @{ Html.RenderPartial("_FilterScripts", new Webmall.UI.ViewModel.Catalog.CatalogFilterViewModel()); }
+<script>
+        document.addEventListener('DOMContentLoaded',
+            function () {
+                var form = document.getElementById("filterForm");
+                var input = document.createElement("input");
+                input.type = "hidden";
+                input.name = "letter";
+                form.appendChild(input);
+
+                @if (!string.IsNullOrEmpty(Model.FilterOptions.Letter))
+                {
+                    <text>
+                        input.value = '@Model.FilterOptions.Letter';
+                    </text>
+                }
+
+                $(".letter_link").click((ev) => {
+                    input.value = ev.target.dataset.value;
+                    submitFilter();
+                });
+            });
+</script>
+}

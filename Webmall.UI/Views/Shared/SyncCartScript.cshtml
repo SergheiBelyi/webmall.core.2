@@ -1,0 +1,62 @@
+﻿@using Webmall.UI.Core
+
+@* ReSharper disable PossibleNullReferenceException *@
+@* ReSharper disable ConditionIsAlwaysConst *@
+@Scripts.Render("~/bundles/notify")
+<script type="text/javascript">
+
+    /* update cart to localstorage */
+    $(document).ready(function () {
+        @(SessionHelper.CurrentUser == null ? "UpdateCartToLocalStorage()" : "CartSyncToLocalStorage()");
+
+        function UpdateCartToLocalStorage() {
+            var localCart = localStorage.getItem('cart');
+            var totalProdStorage = localCart != null ? JSON.parse(localCart) : [];
+            var totalPrice = 0;
+            var totalCount = localCart != null ? JSON.parse(localCart).length : 0;
+
+            totalProdStorage.forEach(function (elem) {
+                totalPrice += (elem.Sum * elem.WareQnt);
+            });
+            $(".header-utility__text").html(totalPrice.toFixed(2) + " руб")
+
+            $(".header-utility__count").each(function () {
+                $(this).html(totalCount);
+            });
+        }
+
+        function CartSyncToLocalStorage() {
+            var localCart = localStorage.getItem('cart');
+            if (localCart != null) {
+                var totalProdStorage = localStorage.getItem('cart');
+                var url = '@Url.Action("CartSyncToLocalStorage", "Cart")';
+                $.post(url, { json: totalProdStorage }, function (data) {
+                    if (data.message == "SyncSuccessful") {
+                        console.log("Clear storage SyncSuccessful")
+                        localStorage.removeItem('cart');
+
+                        var totalPrice = 0;
+                        var totalCount = 0;
+
+                        data.carts.forEach(function (elem) {
+                            totalPrice += (elem.ClientPrice * elem.WareQnt);
+                            totalCount += 1;
+                        });
+                        $(".header-utility__text").html(totalPrice.toFixed(2) + " руб")
+
+                        $(".header-utility__count").each(function () {
+                            $(this).html(totalCount);
+                        });
+                    } else {
+                        console.log("error Sync")
+                    }
+                    console.log(data, " -data")
+                })
+            }
+        }
+    })
+    /* update cart to localstorage */
+
+</script>
+@* ReSharper restore ConditionIsAlwaysConst *@
+@* ReSharper restore PossibleNullReferenceException *@

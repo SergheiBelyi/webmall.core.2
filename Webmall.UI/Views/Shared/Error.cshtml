@@ -1,0 +1,46 @@
+﻿@using System.Text
+@using System.Net.Mail
+@using Webmall.Model
+@using ViewRes
+@using Webmall.UI.Core.Helpers
+@using Webmall.UI.Core
+
+@* ReSharper disable once PossibleNullReferenceException *@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var mail = new MailMessage { Subject = "Error500", Body = "URL: " + Request.Url.PathAndQuery, IsBodyHtml = true, BodyEncoding = Encoding.UTF8 };
+    var ex = ((HandleErrorInfo)ViewData.Model).Exception;
+    if (!string.IsNullOrEmpty(Request.Headers["Referer"]))
+    {
+        mail.Body += "<br/>Referer: " + Request.Headers["Referer"];
+    }
+    mail.Body += "<br/>Time: " + DateTime.Now.ToString("O");
+    mail.Body += string.Format("<br/>IP: {2}, User: {1}, Client: {0}", SessionHelper.CurrentClientId, (SessionHelper.CurrentUser != null) ? SessionHelper.CurrentUser.Email : "", Request.UserHostAddress);
+    CommonHelpers.AddExceptionToMail(mail, ex);
+    if (!ex.Message.Contains("Request.Path"))
+    {
+        CommonHelpers.Log.Error(string.Format("IP: {0}, Referer: " + Request.Headers["Referer"] + ", URL: " + Request.Url.PathAndQuery, Request.UserHostAddress), ex);
+        MailHelper.SendMailMessage(ConfigHelper.SysAdminEmail, mail);
+    }
+}
+
+<div class="inner-section inner-section--mod">
+    <div class="inner-section__main inner-section__main--secondary">
+        <div class="inner-section__header">
+            <h1 class="inner-section__heading">@(SharedResources.Error.ToUpper())</h1>
+        </div>
+        <figure class="error-notification">
+            <div class="error-notification__img-wrap"><img class="error-notification__img img-responsive" src="@Url.Content("~/assets/images/general/500.png")" alt="@(SharedResources.Error.ToUpper())"></div>
+            <figcaption class="error-notification__figcaption">
+                <div class="error-notification__desc">@Html.Raw(string.Format(SharedResources.ErrorMessage, Url.Content("~"), ConfigHelper.ContactRetailPhone))</div><a class="btn btn--main" href="@Url.Content("~")">Вернуться на главную</a>
+            </figcaption>
+        </figure>
+    </div>
+</div>
+
+@*<div class="content-secondary">
+        <div class="error500">
+            <h2>@(SharedResources.Error.ToUpper())</h2>
+            @Html.Raw(string.Format(SharedResources.ErrorMessage, Url.Content("~"), ConfigHelper.ContactRetailPhone))
+        </div>
+    </div>*@

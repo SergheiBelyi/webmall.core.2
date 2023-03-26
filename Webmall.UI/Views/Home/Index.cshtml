@@ -1,0 +1,18 @@
+﻿@model Webmall.UI.ViewModel.Home
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.BodyClass = "index-page";
+    ViewBag.HideTitle = true;
+}
+
+@{Html.RenderAction("RenderBanners");}
+@{Html.RenderPartial("Layouts/TypesSection");}
+@{Html.RenderPartial("NewsAndPromotionsSection");}
+@section styles
+{
+}
+
+@section scripts
+{
+}

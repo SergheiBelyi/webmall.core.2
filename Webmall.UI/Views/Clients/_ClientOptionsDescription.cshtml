@@ -1,0 +1,68 @@
+﻿@model Webmall.UI.ViewModel.Client.ClientViewModel
+
+@using ViewRes
+<div class="client-options">
+    <div class="row">
+        <div class="col-6 col-sm-3">
+            <a class="client-option">
+                <figure class="client-option__main">
+                    <div class="client-option__img-wrap">
+                        <svg class="icon icon-key client-option__img">
+                            <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#key")"></use>
+                        </svg>
+                    </div>
+                    <figcaption class="client-option__heading">@SharedResources.KeyUser</figcaption>
+                </figure>
+            </a>
+        </div>
+        <div class="col-6 col-sm-3">
+            <a class="client-option">
+                <figure class="client-option__main">
+                    <div class="client-option__img-wrap">
+                        <svg class="icon icon-contacts client-option__img">
+                            <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#contacts")"></use>
+                        </svg>
+                    </div>
+                    <figcaption class="client-option__heading">@SharedResources.AllOrderUser</figcaption>
+                </figure>
+            </a>
+        </div>
+        <div class="col-6 col-sm-3">
+            <a class="client-option">
+                <figure class="client-option__main">
+                    <div class="client-option__img-wrap">
+                        <svg class="icon icon-file client-option__img">
+                            <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#file")"></use>
+                        </svg>
+                    </div>
+                    <figcaption class="client-option__heading">@SharedResources.ComparisionActUser</figcaption>
+                </figure>
+            </a>
+        </div>
+        <div class="col-6 col-sm-3">
+            <a class="client-option">
+                <figure class="client-option__main">
+                    <div class="client-option__img-wrap">
+                        <svg class="icon icon-shopping-cart client-option__img">
+                            <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#shopping-cart")"></use>
+                        </svg>
+                    </div>
+                    <figcaption class="client-option__heading">@SharedResources.TradeUser</figcaption>
+                </figure>
+            </a>
+        </div>
+        <div class="col-6 col-sm-3">
+            <a class="client-option">
+                <figure class="client-option__main">
+                    <div class="client-option__img-wrap">
+                        <svg class="icon icon-shopping-cart client-option__img">
+                            <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#paper")"></use>
+                        </svg>
+                    </div>
+                    <figcaption class="client-option__heading">@SharedResources.PriceListUser</figcaption>
+                </figure>
+            </a>
+        </div>
+    </div>
+</div>
+

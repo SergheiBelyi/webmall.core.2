@@ -1,0 +1,1710 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="metadata">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" />
+							</xsd:sequence>
+							<xsd:attribute name="name" use="required" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="assembly">
+						<xsd:complexType>
+							<xsd:attribute name="alias" type="xsd:string" />
+							<xsd:attribute name="name" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="_amount" xml:space="preserve">
+    <value>к-сть</value>
+  </data>
+	<data name="_sum" xml:space="preserve">
+    <value>сума</value>
+  </data>
+	<data name="ABSPresence" xml:space="preserve">
+    <value>Наявність ABS</value>
+  </data>
+	<data name="AcceptedPayment" xml:space="preserve">
+    <value>Приймається&lt;br /&gt;оплата:</value>
+  </data>
+	<data name="active" xml:space="preserve">
+    <value>активних</value>
+  </data>
+	<data name="ActiveOrdersFilter" xml:space="preserve">
+    <value>[Усi активнi замовлення]</value>
+  </data>
+	<data name="Add" xml:space="preserve">
+    <value>Додати</value>
+  </data>
+	<data name="AddNewDelivery" xml:space="preserve">
+    <value>Оформити нову доставку</value>
+  </data>
+	<data name="AddNewDeliveryAddress" xml:space="preserve">
+    <value>Додати нову адресу доставки</value>
+  </data>
+	<data name="Address" xml:space="preserve">
+    <value>Адрес</value>
+  </data>
+	<data name="AddToCartErrorMessage" xml:space="preserve">
+    <value>Помилка при додаванні товару до кошику</value>
+  </data>
+	<data name="AddToOrder" xml:space="preserve">
+    <value>Додати в замовлення</value>
+  </data>
+	<data name="AddWareFromCart" xml:space="preserve">
+    <value>Додати товар з кошику</value>
+  </data>
+	<data name="Agreement" xml:space="preserve">
+    <value>Договір</value>
+  </data>
+	<data name="All" xml:space="preserve">
+    <value>Всі</value>
+  </data>
+	<data name="AllBrands" xml:space="preserve">
+    <value>Всі бренди</value>
+  </data>
+	<data name="AllOrderUser" xml:space="preserve">
+    <value>Може бачити всі замовлення клієнта</value>
+  </data>
+	<data name="Amount" xml:space="preserve">
+    <value>К-сть</value>
+  </data>
+	<data name="Analogues" xml:space="preserve">
+    <value>Аналоги</value>
+  </data>
+	<data name="AnotherPresentations" xml:space="preserve">
+    <value>Представництва інших клієнтів</value>
+  </data>
+	<data name="Apartment" xml:space="preserve">
+    <value>Квартира</value>
+  </data>
+	<data name="ApplyFilter" xml:space="preserve">
+    <value>Застосувати фільтр</value>
+  </data>
+	<data name="Approve" xml:space="preserve">
+    <value>Затвердити</value>
+  </data>
+	<data name="AreYouSure" xml:space="preserve">
+    <value>Ви впевнені?</value>
+  </data>
+	<data name="ascending" xml:space="preserve">
+    <value>за зростанням</value>
+  </data>
+	<data name="AskManager" xml:space="preserve">
+    <value>Запитати менеджера</value>
+  </data>
+	<data name="ASRPresence" xml:space="preserve">
+    <value>Наявність ASR</value>
+  </data>
+	<data name="Attention" xml:space="preserve">
+    <value>Увага</value>
+  </data>
+	<data name="AutoMarka" xml:space="preserve">
+    <value>Марка авто</value>
+  </data>
+	<data name="AutoModel" xml:space="preserve">
+    <value>Модель авто</value>
+  </data>
+	<data name="AutoModification" xml:space="preserve">
+    <value>Модифікація</value>
+  </data>
+	<data name="AutoSpareParts" xml:space="preserve">
+    <value>Автозапчастини</value>
+  </data>
+	<data name="AutoType" xml:space="preserve">
+    <value>Тип авто</value>
+  </data>
+	<data name="AutoVINCode" xml:space="preserve">
+    <value>VIN код авто</value>
+  </data>
+	<data name="Availability" xml:space="preserve">
+    <value>Наявність</value>
+  </data>
+	<data name="Block" xml:space="preserve">
+    <value>блокування</value>
+  </data>
+	<data name="BlockingSendOrderResumeErrorMessage" xml:space="preserve">
+    <value>Не вдалось відписатись від розсилання інформації по проведених замовленнях. Скористайтесь розділом {0} персольного кабінету.</value>
+  </data>
+	<data name="BlockingSendOrderResumeSuccessMessage" xml:space="preserve">
+    <value>Ви успішно відписались від розсилання інформації по проведених замовленнях. Для відновлення розсилання скористайтесь розділом “{0}” персольного кабінету.</value>
+  </data>
+	<data name="BodyType" xml:space="preserve">
+    <value>Тип кузова</value>
+  </data>
+	<data name="BrakeSystem" xml:space="preserve">
+    <value>Тип гальмівного механізму</value>
+  </data>
+	<data name="BrakeType" xml:space="preserve">
+    <value>Тип приводу гальмівної системи</value>
+  </data>
+	<data name="Brand" xml:space="preserve">
+    <value>Бренд</value>
+  </data>
+	<data name="byProperties" xml:space="preserve">
+    <value>за властивостями</value>
+  </data>
+	<data name="Calculate" xml:space="preserve">
+    <value>Розрахувати</value>
+  </data>
+	<data name="Cancel" xml:space="preserve">
+    <value>Відміна</value>
+  </data>
+	<data name="Cart" xml:space="preserve">
+    <value>Кошик</value>
+  </data>
+	<data name="Cash" xml:space="preserve">
+    <value>Готівковий</value>
+  </data>
+	<data name="Cashless" xml:space="preserve">
+    <value>Безготівковий</value>
+  </data>
+	<data name="CashPayment" xml:space="preserve">
+    <value>Розрахунок готівкою</value>
+  </data>
+	<data name="CashPaymentComment" xml:space="preserve">
+    <value>Оплата замовлення готівкою кур’єру або в касу</value>
+  </data>
+	<data name="Catalizator" xml:space="preserve">
+    <value>Каталізатор</value>
+  </data>
+	<data name="ChangeWare" xml:space="preserve">
+    <value>Замінити товар</value>
+  </data>
+	<data name="City" xml:space="preserve">
+    <value>Місто</value>
+  </data>
+	<data name="Client" xml:space="preserve">
+    <value>Клієнт</value>
+  </data>
+	<data name="ClientCode" xml:space="preserve">
+    <value>Фiскальний код клієнта</value>
+  </data>
+	<data name="ClientManagementTitle" xml:space="preserve">
+    <value>Керування клієнтами</value>
+  </data>
+	<data name="Clients" xml:space="preserve">
+    <value>Клієнти</value>
+  </data>
+	<data name="Close" xml:space="preserve">
+    <value>Закрити</value>
+  </data>
+	<data name="Code" xml:space="preserve">
+    <value>Код</value>
+  </data>
+	<data name="Comment" xml:space="preserve">
+    <value>Коментар</value>
+  </data>
+	<data name="CommentForOrder" xml:space="preserve">
+    <value>Коментар до замовлення</value>
+  </data>
+	<data name="Reconciliate" xml:space="preserve">
+    <value>Звірити</value>
+  </data>
+	<data name="ComparisionAct" xml:space="preserve">
+    <value>Акт звірки</value>
+  </data>
+	<data name="ComparisionActPeriodError" xml:space="preserve">
+    <value>Період введено не коректно</value>
+  </data>
+	<data name="ComparisionActUser" xml:space="preserve">
+    <value>Перегляд звірки</value>
+  </data>
+	<data name="Confirmation" xml:space="preserve">
+    <value>Підтвердження</value>
+  </data>
+	<data name="ContactPhone" xml:space="preserve">
+    <value>Контактний телефон</value>
+  </data>
+	<data name="Cost" xml:space="preserve">
+    <value>Вартiсть</value>
+  </data>
+	<data name="CurrentPassword" xml:space="preserve">
+    <value>Поточний пароль</value>
+  </data>
+	<data name="CylinderNumber" xml:space="preserve">
+    <value>Кількість циліндрів</value>
+  </data>
+	<data name="Date" xml:space="preserve">
+    <value>Дата</value>
+  </data>
+	<data name="days" xml:space="preserve">
+    <value>днів</value>
+  </data>
+	<data name="debt" xml:space="preserve">
+    <value>Заборгованість</value>
+  </data>
+	<data name="Delete" xml:space="preserve">
+    <value>Видалити</value>
+  </data>
+	<data name="DeleteSelectedPositions" xml:space="preserve">
+    <value>Видалити вибрані позиції</value>
+  </data>
+	<data name="DeleteWare" xml:space="preserve">
+    <value>Видалити товар</value>
+  </data>
+	<data name="Delivery" xml:space="preserve">
+    <value>Доставка</value>
+  </data>
+	<data name="DeliveryAddress" xml:space="preserve">
+    <value>Адреса доставки</value>
+  </data>
+	<data name="DeliveryAddresses" xml:space="preserve">
+    <value>Адреси доставок</value>
+  </data>
+	<data name="DeliveryScheduleTime" xml:space="preserve">
+    <value>Час доставки замовлення</value>
+  </data>
+	<data name="DeliveryTableComment" xml:space="preserve">
+    <value>Додати замовлення в одну з вже оформлених доставок</value>
+  </data>
+	<data name="descending" xml:space="preserve">
+    <value>за зменшенням</value>
+  </data>
+	<data name="Description" xml:space="preserve">
+    <value>Опис</value>
+  </data>
+	<data name="DocNumber" xml:space="preserve">
+    <value>№ док-ту</value>
+  </data>
+	<data name="DocType" xml:space="preserve">
+    <value>Тип док-ту</value>
+  </data>
+	<data name="Download" xml:space="preserve">
+    <value>Завантажити</value>
+  </data>
+	<data name="DriveType" xml:space="preserve">
+    <value>Привід колес</value>
+  </data>
+	<data name="Edit" xml:space="preserve">
+    <value>Редагувати</value>
+  </data>
+	<data name="Email" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+	<data name="EmailAsLogin" xml:space="preserve">
+    <value>Email (використовується як логін)</value>
+  </data>
+	<data name="EmailPhone" xml:space="preserve">
+    <value>Email, телефон</value>
+  </data>
+	<data name="EndYear" xml:space="preserve">
+    <value>Кінець випуску</value>
+  </data>
+	<data name="Engine" xml:space="preserve">
+    <value>Двигун</value>
+  </data>
+	<data name="EngineNumber" xml:space="preserve">
+    <value>Номер двигуна</value>
+  </data>
+	<data name="EngineType" xml:space="preserve">
+    <value>Тип двигуна</value>
+  </data>
+	<data name="Enter" xml:space="preserve">
+    <value>Вхід</value>
+  </data>
+	<data name="ErrorMessage" xml:space="preserve">
+    <value>&lt;br&gt;Сталася небередбачувана помилка на сервері. &lt;br /&gt;Адміністратори та розробники оповіщені  про помилку, що виникла. &lt;br /&gt;Вибачаємось за тимчасові незручності. &lt;br /&gt;</value>
+  </data>
+	<data name="ErrorsFound" xml:space="preserve">
+    <value>Виявленно помилки</value>
+  </data>
+	<data name="Expand" xml:space="preserve">
+    <value>Розгорнути</value>
+  </data>
+	<data name="Finish" xml:space="preserve">
+    <value>Завершити</value>
+  </data>
+	<data name="FIO" xml:space="preserve">
+    <value>ПІБ</value>
+  </data>
+	<data name="FirstName" xml:space="preserve">
+    <value>Ім’я</value>
+  </data>
+	<data name="FixedPhone" xml:space="preserve">
+    <value>Телефон стаціонарний</value>
+  </data>
+	<data name="FixedShippingMessage" xml:space="preserve">
+    <value>Для того, щоб забрати своє замовлення, вам необхідно з’явитись в наше представництво за адресою, вказанною нижче. Зверніть увагу на час, з якого буде доступне замовлення.</value>
+  </data>
+	<data name="ForPayment" xml:space="preserve">
+    <value>До сплати</value>
+  </data>
+	<data name="ForPeriod" xml:space="preserve">
+    <value>За період</value>
+  </data>
+	<data name="from" xml:space="preserve">
+    <value>з</value>
+  </data>
+	<data name="FuelType" xml:space="preserve">
+    <value>Тип палива</value>
+  </data>
+	<data name="GetExcelInvoice" xml:space="preserve">
+    <value>Рахунок на оплату в Excel</value>
+  </data>
+	<data name="GetPDFInvoice" xml:space="preserve">
+    <value>Рахунок на оплату в PDF</value>
+  </data>
+	<data name="hours" xml:space="preserve">
+    <value>годин</value>
+  </data>
+	<data name="House" xml:space="preserve">
+    <value>Будинок</value>
+  </data>
+	<data name="InCart" xml:space="preserve">
+    <value>В кошик</value>
+  </data>
+	<data name="Information" xml:space="preserve">
+    <value>Інформація</value>
+  </data>
+	<data name="InvoicePayment" xml:space="preserve">
+    <value>Оплата перерахунком</value>
+  </data>
+	<data name="InvoicePaymentComment" xml:space="preserve">
+    <value>При оплаті перерахунком необхідно перерахувати гроші на рахунок магазину. Рахунок на оплату можна отримати після вибору способу доставки.</value>
+  </data>
+	<data name="IsBlocked" xml:space="preserve">
+    <value>Заблокований</value>
+  </data>
+	<data name="KeyUser" xml:space="preserve">
+    <value>Ключовий</value>
+  </data>
+	<data name="LastName" xml:space="preserve">
+    <value>Прізвище</value>
+  </data>
+	<data name="latin_only" xml:space="preserve">
+    <value>(латиницею)</value>
+  </data>
+	<data name="Limit" xml:space="preserve">
+    <value>Ліміт</value>
+  </data>
+	<data name="Locality" xml:space="preserve">
+    <value>Місто</value>
+  </data>
+	<data name="Login" xml:space="preserve">
+    <value>Логін</value>
+  </data>
+	<data name="MakeOrder" xml:space="preserve">
+    <value>Сформувати замовлення</value>
+  </data>
+	<data name="MaxCartPositionMessage" xml:space="preserve">
+    <value>Допускається вибирати не більше 1000 позицій.</value>
+  </data>
+	<data name="MobilePhone" xml:space="preserve">
+    <value>Телефон мобільний</value>
+  </data>
+	<data name="ModelOfCar" xml:space="preserve">
+    <value>Модель автомобіля</value>
+  </data>
+	<data name="MultComment" xml:space="preserve">
+    <value>Кількісь товару повинна відповідати кратності продажу</value>
+  </data>
+	<data name="Name" xml:space="preserve">
+    <value>Найменування</value>
+  </data>
+	<data name="NeedPartList" xml:space="preserve">
+    <value>Список необхідних деталей</value>
+  </data>
+	<data name="NeedTaxInvoice" xml:space="preserve">
+    <value>Необхідна податкова накладна</value>
+  </data>
+	<data name="NewDeliveryAddress" xml:space="preserve">
+    <value>Нова адреса доставки</value>
+  </data>
+	<data name="NewPassword" xml:space="preserve">
+    <value>Новий пароль</value>
+  </data>
+	<data name="NewRequest" xml:space="preserve">
+    <value>Новий запит</value>
+  </data>
+	<data name="NewRequestByAuto" xml:space="preserve">
+    <value>Новий запит по автомобілю</value>
+  </data>
+	<data name="News" xml:space="preserve">
+    <value>Новини</value>
+  </data>
+	<data name="Next" xml:space="preserve">
+    <value>Далі</value>
+  </data>
+	<data name="NextNews" xml:space="preserve">
+    <value>Наступна новина &gt;&gt;</value>
+  </data>
+	<data name="No" xml:space="preserve">
+    <value>Ні</value>
+  </data>
+	<data name="NoData" xml:space="preserve">
+    <value>Немає даних</value>
+  </data>
+	<data name="NotAvailable" xml:space="preserve">
+    <value>Недоступно</value>
+  </data>
+	<data name="NotAvailableDeliveries" xml:space="preserve">
+    <value>Немає доступних оформлених доставок</value>
+  </data>
+	<data name="NothingChecked" xml:space="preserve">
+    <value>Нічого не вибрано</value>
+  </data>
+	<data name="NotOurTransporComment" xml:space="preserve">
+    <value>Звертаємо Вашу увагу, що цей варіант не забезпечує доставку замовлення «до дверей». Замовлення буде передано рейсовим транспортом. Наш співробітник зв’яжеться з Вами по телефону і повідомить , де і коли Вам необхідно зустріти замовлення.</value>
+  </data>
+	<data name="Number" xml:space="preserve">
+    <value>Номер</value>
+  </data>
+	<data name="OnlyOnStock" xml:space="preserve">
+    <value>Тільке те, що в наявності</value>
+  </data>
+	<data name="OnStock" xml:space="preserve">
+    <value>В наявності</value>
+  </data>
+	<data name="Order" xml:space="preserve">
+    <value>Замовлення</value>
+  </data>
+	<data name="orderBy" xml:space="preserve">
+    <value>сортувати за</value>
+  </data>
+	<data name="OrderConfirmDialogTitle" xml:space="preserve">
+    <value>Оформити і зарезервувати замовлення</value>
+  </data>
+	<data name="OrderDate" xml:space="preserve">
+    <value>Дата замовлення</value>
+  </data>
+	<data name="Ordering" xml:space="preserve">
+    <value>детальніше</value>
+  </data>
+	<data name="OrderIsAvailable" xml:space="preserve">
+    <value>Замовлення доступне</value>
+  </data>
+	<data name="OrderIsAvailableForShipment" xml:space="preserve">
+    <value>замовлення доступне для самовивозу з</value>
+  </data>
+	<data name="OrderMadeBy" xml:space="preserve">
+    <value>Замовлення сформував</value>
+  </data>
+	<data name="OrderNumber" xml:space="preserve">
+    <value>Номер замовлення</value>
+  </data>
+	<data name="OrderPreview" xml:space="preserve">
+    <value>Попередній перегляд замовлення</value>
+  </data>
+	<data name="OrderPreviewComment" xml:space="preserve">
+    <value>&lt;p&gt;Ваше замовлення було автоматично розділено на декілька підзамовлень, відповідно до часу доступності товарів. &lt;/p&gt;&lt;p&gt;Якщо Ви хочете об’єднати їх в одне замовлення, поставте галочку в графі «Об’єднати в одне замовлення». Інакше, натиснувши «Підтвердити замовлення», Ви перейдете до оформлення замовлення №1. По замовленням, що залишились, будуть сформовані чернетки в розділі «Замовлення». Їх необхідно буде оформляти окремо.&lt;/p&gt;</value>
+  </data>
+	<data name="Orders" xml:space="preserve">
+    <value>Замовлення</value>
+  </data>
+	<data name="Original" xml:space="preserve">
+    <value>Оригінал</value>
+  </data>
+	<data name="PackLength" xml:space="preserve">
+    <value>Довжина упаковки, мм</value>
+  </data>
+	<data name="PackQnt" xml:space="preserve">
+    <value>Кількість в упаковці</value>
+  </data>
+	<data name="PackWeight" xml:space="preserve">
+    <value>Вага упаковки брутто, кг</value>
+  </data>
+	<data name="PackWidth" xml:space="preserve">
+    <value>Ширина упаковки, мм</value>
+  </data>
+	<data name="PageCreationTime" xml:space="preserve">
+    <value>Час формування сторінки</value>
+  </data>
+	<data name="PartName" xml:space="preserve">
+    <value>Найменування деталі</value>
+  </data>
+	<data name="Password" xml:space="preserve">
+    <value>Пароль</value>
+  </data>
+	<data name="Payment" xml:space="preserve">
+    <value>Оплата</value>
+  </data>
+	<data name="PaymentConditions" xml:space="preserve">
+    <value>Умови оплати</value>
+  </data>
+	<data name="PaymentForm" xml:space="preserve">
+    <value>Форма оплати</value>
+  </data>
+	<data name="PersonalCabinet" xml:space="preserve">
+    <value>Мій кабінет</value>
+  </data>
+	<data name="PersonalData" xml:space="preserve">
+    <value>Особисті дані</value>
+  </data>
+	<data name="PersonalDataChange" xml:space="preserve">
+    <value>Зміна персональних даних</value>
+  </data>
+	<data name="Phone" xml:space="preserve">
+    <value>Телефон</value>
+  </data>
+	<data name="Phones" xml:space="preserve">
+    <value>Телефони</value>
+  </data>
+	<data name="positions" xml:space="preserve">
+    <value>позицій</value>
+  </data>
+	<data name="PowerHp" xml:space="preserve">
+    <value>Потужність, к.с.</value>
+  </data>
+	<data name="PowerKw" xml:space="preserve">
+    <value>Потужність, кВт</value>
+  </data>
+	<data name="Presence" xml:space="preserve">
+    <value>Наявніть</value>
+  </data>
+	<data name="Previous" xml:space="preserve">
+    <value>Назад</value>
+  </data>
+	<data name="PrevNews" xml:space="preserve">
+    <value>&lt;&lt; Попередня новина</value>
+  </data>
+	<data name="Price" xml:space="preserve">
+    <value>Ціна</value>
+  </data>
+	<data name="ProduceEndDateFull" xml:space="preserve">
+    <value>Дата кінця випуску</value>
+  </data>
+	<data name="Producer" xml:space="preserve">
+    <value>Виробник</value>
+  </data>
+	<data name="ProduceStartDateFull" xml:space="preserve">
+    <value>Дата початку випуску</value>
+  </data>
+	<data name="ProdusersCatalogs" xml:space="preserve">
+    <value>Каталоги виробників</value>
+  </data>
+	<data name="Profile" xml:space="preserve">
+    <value>Профіль</value>
+  </data>
+	<data name="PropertySearchResult" xml:space="preserve">
+    <value>Результат пошуку за властивостями</value>
+  </data>
+	<data name="Question" xml:space="preserve">
+    <value>Питання</value>
+  </data>
+	<data name="Registration" xml:space="preserve">
+    <value>Реєстрація</value>
+  </data>
+	<data name="RegistrationDate" xml:space="preserve">
+    <value>Дата реєстрації</value>
+  </data>
+	<data name="RepeatNewPassword" xml:space="preserve">
+    <value>Новий пароль ще раз</value>
+  </data>
+	<data name="RepeatPassword" xml:space="preserve">
+    <value>Повторіть пароль ще раз</value>
+  </data>
+	<data name="ReplyAddress" xml:space="preserve">
+    <value>Зворотня адреса або телефон</value>
+  </data>
+	<data name="Representations" xml:space="preserve">
+    <value>Представництва</value>
+  </data>
+	<data name="RequestDate" xml:space="preserve">
+    <value>Дата запиту</value>
+  </data>
+	<data name="RequestError" xml:space="preserve">
+    <value>Помилка запиту</value>
+  </data>
+	<data name="Responce" xml:space="preserve">
+    <value>Відповідь</value>
+  </data>
+	<data name="RetailPrice" xml:space="preserve">
+    <value>Роздріб. ціна</value>
+  </data>
+	<data name="ReturningType" xml:space="preserve">
+    <value>Тип повернення</value>
+  </data>
+	<data name="ReturnToOrder" xml:space="preserve">
+    <value>Повернутись до замовлення</value>
+  </data>
+	<data name="ReturnToRequests" xml:space="preserve">
+    <value>Повернутись до запитів</value>
+  </data>
+	<data name="ReturnWareToCart" xml:space="preserve">
+    <value>Повернути товар до кошику</value>
+  </data>
+	<data name="RolesInSystem" xml:space="preserve">
+    <value>Ролі в системі</value>
+  </data>
+	<data name="SaleMultiplisity" xml:space="preserve">
+    <value>Кратність продажу</value>
+  </data>
+	<data name="Save" xml:space="preserve">
+    <value>Зберегти</value>
+  </data>
+	<data name="SaveChanges" xml:space="preserve">
+    <value>Зберегти зміни</value>
+  </data>
+	<data name="Search" xml:space="preserve">
+    <value>Пошук</value>
+  </data>
+	<data name="Select" xml:space="preserve">
+    <value>Вибирати</value>
+  </data>
+	<data name="SelectedPartNumbers" xml:space="preserve">
+    <value>Підібрані каталожні номери</value>
+  </data>
+	<data name="SelectedPartNumbersFull" xml:space="preserve">
+    <value>Каталожний номер(и), що відповідає запиту</value>
+  </data>
+	<data name="SelectionByAuto" xml:space="preserve">
+    <value>Підбір за автомобілем</value>
+  </data>
+	<data name="SelectModel" xml:space="preserve">
+    <value>Виберіть модель</value>
+  </data>
+	<data name="SelectStatus" xml:space="preserve">
+    <value>Виберіть статус</value>
+  </data>
+	<data name="SelfDelivery" xml:space="preserve">
+    <value>Самовивіз</value>
+  </data>
+	<data name="Send" xml:space="preserve">
+    <value>Відправити</value>
+  </data>
+	<data name="SendRequest" xml:space="preserve">
+    <value>Відправити запит</value>
+  </data>
+	<data name="SendResponce" xml:space="preserve">
+    <value>Відправити відповідь</value>
+  </data>
+	<data name="SendToWork" xml:space="preserve">
+    <value>Оформити замовлення</value>
+  </data>
+	<data name="Settings" xml:space="preserve">
+    <value>Налаштування</value>
+  </data>
+	<data name="ShippingAddress" xml:space="preserve">
+    <value>Адреса відвантаження</value>
+  </data>
+	<data name="ShippingStock" xml:space="preserve">
+    <value>Склад відвантаження</value>
+  </data>
+	<data name="Show" xml:space="preserve">
+    <value>Показати</value>
+  </data>
+	<data name="ShowImages" xml:space="preserve">
+    <value>Показати мініатюри</value>
+  </data>
+	<data name="ShowPrices" xml:space="preserve">
+    <value>Відображення цін</value>
+  </data>
+	<data name="SiteManagement" xml:space="preserve">
+    <value>Управління сайтом</value>
+  </data>
+	<data name="Specifications" xml:space="preserve">
+    <value>Специфікації</value>
+  </data>
+	<data name="StartYear" xml:space="preserve">
+    <value>Начало випуску</value>
+  </data>
+	<data name="Stock" xml:space="preserve">
+    <value>Склад</value>
+  </data>
+	<data name="Street" xml:space="preserve">
+    <value>Вулиця</value>
+  </data>
+	<data name="SubmitOrder" xml:space="preserve">
+    <value>Підтвердити замовлення</value>
+  </data>
+	<data name="Sum" xml:space="preserve">
+    <value>Сума</value>
+  </data>
+	<data name="SummaryFooter" xml:space="preserve">
+    <value>Інформацію про стан Вашого замовлення Ви зможете дізнатись на сторінці «Мій кабінет» на вкладці «Замовлення». &lt;br /&gt;Текст даної форми був висланий на Ваш e-mail, вказанний при реєстрації.</value>
+  </data>
+	<data name="TankVolume" xml:space="preserve">
+    <value>Об’єм баку</value>
+  </data>
+	<data name="TC_Clearance" xml:space="preserve">
+    <value>Зміна кліренса (мм)</value>
+  </data>
+	<data name="TC_Difference" xml:space="preserve">
+    <value>Порівняння</value>
+  </data>
+	<data name="TC_DiscD" xml:space="preserve">
+    <value>Діаметр диска, мм</value>
+  </data>
+	<data name="TC_DiscParams" xml:space="preserve">
+    <value>Параметри диска</value>
+  </data>
+	<data name="TC_DiscWMax" xml:space="preserve">
+    <value>Максимальна ширина диска, мм</value>
+  </data>
+	<data name="TC_DiscWMin" xml:space="preserve">
+    <value>Мінімальна ширина диска, мм</value>
+  </data>
+	<data name="TC_ExternalD" xml:space="preserve">
+    <value>Зовнішній діаметр, мм (D)</value>
+  </data>
+	<data name="TC_H1" xml:space="preserve">
+    <value>Для чого потрібен шинний калькулятор:</value>
+  </data>
+	<data name="TC_InnerD" xml:space="preserve">
+    <value> Внутрішній діаметр, мм (С)</value>
+  </data>
+	<data name="TC_Measures" xml:space="preserve">
+    <value>Розміри</value>
+  </data>
+	<data name="TC_New" xml:space="preserve">
+    <value>Новий</value>
+  </data>
+	<data name="TC_NewMeasures" xml:space="preserve">
+    <value>Новий розмір:</value>
+  </data>
+	<data name="TC_Old" xml:space="preserve">
+    <value>Старий</value>
+  </data>
+	<data name="TC_OldMeasures" xml:space="preserve">
+    <value>Старий розмір:</value>
+  </data>
+	<data name="TC_Profile" xml:space="preserve">
+    <value>Висота профіля, мм (В)</value>
+  </data>
+	<data name="TC_RealSpeed" xml:space="preserve">
+    <value>Реальна швидкість (км/год)</value>
+  </data>
+	<data name="TC_SpeedDifference" xml:space="preserve">
+    <value>Різниця (км/год)</value>
+  </data>
+	<data name="TC_Speedometer" xml:space="preserve">
+    <value>Спідометр</value>
+  </data>
+	<data name="TC_SpeedometerValue" xml:space="preserve">
+    <value>Покази спідометра (км/год)</value>
+  </data>
+	<data name="TC_T1_1" xml:space="preserve">
+    <value>За допомогою шинного калькулятора Ви легко зможете порахувати як зміняться: зовнішні розміри колеса, висота дорожнього просвіту (кліренс), покази спідометра та інші характеристики, при встановленні шин з іншим типорозміром на Ваш автомобіль. Всі розміри шин калькулятор розраховує у міліметрах, а швидкість автомобіля в км/год. Таклж Ви можете розрахувати необхідну ширину диску для відповідного розміру шини.</value>
+  </data>
+	<data name="TC_T1_2" xml:space="preserve">
+    <value>Висота профіля шини (на малюнку позначена буквою «В»)  розраховується виходячи зі значення профіля шини та ширини покришки (в типорозмірі профіль шини – це друга цифра, який вказується в процентах від ширини автошини).</value>
+  </data>
+	<data name="TC_T1_3" xml:space="preserve">
+    <value>Ми рекомендуємо Вам встановлювати тільки заводські типорозміри шин, які вказані в інструкціїї по експлуатації для Вашої машини. Установка нестандартних типорозмірів може призвести до зняття гарантійних зобов’язань у ділера, а також до погіршення характеристик та керованості автомобіля</value>
+  </data>
+	<data name="TC_T2_1" xml:space="preserve">
+    <value>Введіть спочатку типорозмір, встановлений на Вашому автомобілі, а потіп той, який Ви хочете встановити та натисніть «Розрахувати».</value>
+  </data>
+	<data name="TC_T2_2" xml:space="preserve">
+    <value>В таблиці знизу будуть показані результати розрахунків калькулятора.</value>
+  </data>
+	<data name="TC_T3_2" xml:space="preserve">
+    <value>&lt;strong&gt;Увага!&lt;/strong&gt; Встановлення занадто вузьких або занадто широких дисків призведе до деформації шини, погіршенню її експлуатаційних характеристик, а також до підвищеного зносу.</value>
+  </data>
+	<data name="TC_Width" xml:space="preserve">
+    <value> Ширина шини, мм (А)</value>
+  </data>
+	<data name="TermDays" xml:space="preserve">
+    <value>Термін поставки</value>
+  </data>
+	<data name="ThankForUnderstanding" xml:space="preserve">
+    <value>Дякуємо за розуміння!</value>
+  </data>
+	<data name="Time" xml:space="preserve">
+    <value>Час</value>
+  </data>
+	<data name="TitleSkype" xml:space="preserve">
+    <value>Зв’язатись через Skype</value>
+  </data>
+	<data name="to" xml:space="preserve">
+    <value>до</value>
+  </data>
+	<data name="ToOrderList" xml:space="preserve">
+    <value>До списку замовлень</value>
+  </data>
+	<data name="Total" xml:space="preserve">
+    <value>Всього</value>
+  </data>
+	<data name="TradeUser" xml:space="preserve">
+    <value>Може робити замовлення</value>
+  </data>
+	<data name="TransmissionType" xml:space="preserve">
+    <value>Тип трансмісії</value>
+  </data>
+	<data name="UnitPrice" xml:space="preserve">
+    <value>Ціна за од.</value>
+  </data>
+	<data name="UsersManagement" xml:space="preserve">
+    <value>Управління користувачами</value>
+  </data>
+	<data name="ValveNumber" xml:space="preserve">
+    <value>Число клапанів</value>
+  </data>
+	<data name="ViewRequesByAuto" xml:space="preserve">
+    <value>Перегляд запиту по автомобілю</value>
+  </data>
+	<data name="VINRequests" xml:space="preserve">
+    <value>VIN запити</value>
+  </data>
+	<data name="VINWatermark" xml:space="preserve">
+    <value>з техпаспорту</value>
+  </data>
+	<data name="VisaPayment" xml:space="preserve">
+    <value>Оплата банківською карткою</value>
+  </data>
+	<data name="VoltageV" xml:space="preserve">
+    <value>Напруга, В</value>
+  </data>
+	<data name="VolumeCm" xml:space="preserve">
+    <value>Об’єм, см</value>
+  </data>
+	<data name="WaitingToApprove" xml:space="preserve">
+    <value>Очікування затвердження</value>
+  </data>
+	<data name="WantedDeliveryDate" xml:space="preserve">
+    <value>Бажана дата доставки</value>
+  </data>
+	<data name="ware" xml:space="preserve">
+    <value>товар</value>
+  </data>
+	<data name="WareFromWareHouse" xml:space="preserve">
+    <value>Товар зі складу</value>
+  </data>
+	<data name="WareGrossWeight" xml:space="preserve">
+    <value>Вага брутто, кг</value>
+  </data>
+	<data name="WareHeight" xml:space="preserve">
+    <value>Висота товару, мм</value>
+  </data>
+	<data name="WareLength" xml:space="preserve">
+    <value>Довжина товару, мм</value>
+  </data>
+	<data name="WareName" xml:space="preserve">
+    <value>Назва товару</value>
+  </data>
+	<data name="WareNumber" xml:space="preserve">
+    <value>№ товару</value>
+  </data>
+	<data name="WareWasAddedToCart" xml:space="preserve">
+    <value>Товар додано до кошику</value>
+  </data>
+	<data name="WareWidth" xml:space="preserve">
+    <value>Ширина товару, мм</value>
+  </data>
+	<data name="Warning" xml:space="preserve">
+    <value>Попередження</value>
+  </data>
+	<data name="WheelFormula" xml:space="preserve">
+    <value>Колесна формула</value>
+  </data>
+	<data name="WithoutResponce" xml:space="preserve">
+    <value>Без відповіді</value>
+  </data>
+	<data name="WithResponce" xml:space="preserve">
+    <value>З відповіддю</value>
+  </data>
+	<data name="YearOfProduce" xml:space="preserve">
+    <value>Рік випуску</value>
+  </data>
+	<data name="Yes" xml:space="preserve">
+    <value>Так</value>
+  </data>
+	<data name="YourName" xml:space="preserve">
+    <value>Ваше ім’я</value>
+  </data>
+	<data name="YourPrice" xml:space="preserve">
+    <value>Ваша ціна</value>
+  </data>
+	<data name="TiresCalculator" xml:space="preserve">
+    <value>Шинний калькулятор</value>
+  </data>
+	<data name="Promotions" xml:space="preserve">
+    <value>Акції</value>
+  </data>
+	<data name="ForReservation" xml:space="preserve">
+    <value>На замовлення</value>
+  </data>
+	<data name="AllPromotions" xml:space="preserve">
+    <value>Всі акції</value>
+  </data>
+	<data name="ServiceSelectionByMark" xml:space="preserve">
+    <value>Підбір &lt;span&gt;по марці&lt;/span&gt;</value>
+  </data>
+	<data name="ServiceTechStationBooking" xml:space="preserve">
+    <value>Online-запис &lt;span&gt;на сервіс&lt;/span&gt;</value>
+  </data>
+	<data name="ServiceTiresSelection" xml:space="preserve">
+    <value>Підбір &lt;span&gt;шин&lt;/span&gt;</value>
+  </data>
+	<data name="Applicability" xml:space="preserve">
+    <value>Застосування</value>
+  </data>
+	<data name="AllWareCategories" xml:space="preserve">
+    <value>Всі категорії товарів</value>
+  </data>
+	<data name="_delivery" xml:space="preserve">
+    <value>доставка</value>
+  </data>
+	<data name="AvailabilityOnOtherStock" xml:space="preserve">
+    <value>Наявність на інших складах</value>
+  </data>
+	<data name="AvailabilityOnShippingStock" xml:space="preserve">
+    <value>Наявність на складах для відвантаження</value>
+  </data>
+	<data name="DeliveryType" xml:space="preserve">
+    <value>Тип доставки</value>
+  </data>
+	<data name="FromWarehouse" xml:space="preserve">
+    <value>Зі складу</value>
+  </data>
+	<data name="GroupContentManagement" xml:space="preserve">
+    <value>Контент групп</value>
+  </data>
+	<data name="IsRequired" xml:space="preserve">
+    <value>Обов'язкове поле</value>
+  </data>
+	<data name="LiqPayment" xml:space="preserve">
+    <value>Оплата через систему LiqPay</value>
+  </data>
+	<data name="LiqPaymentComment" xml:space="preserve">
+    <value>Сервіс прийому платежів з пластикової картки надає &lt;a href="https://www.liqpay.com"&gt;LiqPAY&lt;/a&gt; от &lt;a href="http://privatbank.ua"&gt;ПриватБанк&lt;/a&gt;</value>
+  </data>
+	<data name="OrderError" xml:space="preserve">
+    <value>Помилка відправлення замовлення на обробку</value>
+  </data>
+	<data name="OrderErrorText" xml:space="preserve">
+    <value>При оформленні замовлення сталася помилка: &lt;b&gt; {0} &lt;/ b&gt;. &lt;br&gt; Повторіть оформлення або зв'яжіться з Вашим менеджером.</value>
+  </data>
+	<data name="OrderNotExist" xml:space="preserve">
+    <value>Дане замовлення не існує</value>
+  </data>
+	<data name="PageHeader" xml:space="preserve">
+    <value>Заголовок сторінки</value>
+  </data>
+	<data name="SelectService" xml:space="preserve">
+    <value>Виберіть автоцентр</value>
+  </data>
+	<data name="ServiceBooking" xml:space="preserve">
+    <value>Онлайн-запис на сервіс</value>
+  </data>
+	<data name="ServiceBookingSubmit" xml:space="preserve">
+    <value>Записатись на сервіс</value>
+  </data>
+	<data name="ThemeText" xml:space="preserve">
+    <value>Тематичний текст</value>
+  </data>
+	<data name="WareIsNotAvailable" xml:space="preserve">
+    <value>Немає в наявності</value>
+  </data>
+	<data name="ExtractToOrder" xml:space="preserve">
+    <value>Виділити в замовлення</value>
+  </data>
+	<data name="ReturnToOrderMessage" xml:space="preserve">
+    <value>Для повернення до замовлення натисніть кнопку "Назад" браузера.</value>
+  </data>
+	<data name="WareIsLate" xml:space="preserve">
+    <value>Товар запізнюється</value>
+  </data>
+	<data name="TotalSelectedSum" xml:space="preserve">
+    <value>Обрано всього на суму</value>
+  </data>
+	<data name="NewWare" xml:space="preserve">
+    <value>Новинка</value>
+  </data>
+	<data name="CityDistrict" xml:space="preserve">
+    <value>Район міста</value>
+  </data>
+	<data name="notSelected" xml:space="preserve">
+    <value>не обрано</value>
+  </data>
+	<data name="DeliveryDate" xml:space="preserve">
+    <value>Дата доставки</value>
+  </data>
+	<data name="WarehouseShipmentDate" xml:space="preserve">
+    <value>Дата відвантаження зі складу</value>
+  </data>
+	<data name="Remain" xml:space="preserve">
+    <value>Залишилось</value>
+  </data>
+	<data name="AccessStatistics" xml:space="preserve">
+    <value>Статистика доступу</value>
+  </data>
+	<data name="Specials" xml:space="preserve">
+    <value>Акція</value>
+  </data>
+	<data name="Message" xml:space="preserve">
+    <value>Повідомлення</value>
+  </data>
+	<data name="AddToCompare" xml:space="preserve">
+    <value>Додати до порівняння</value>
+  </data>
+	<data name="RemoveFromComparision" xml:space="preserve">
+    <value>Видалити з порівняння</value>
+  </data>
+	<data name="WareComparision" xml:space="preserve">
+    <value>Порівняння товарів</value>
+  </data>
+	<data name="Compare" xml:space="preserve">
+    <value>Порівняти</value>
+  </data>
+	<data name="AllParams" xml:space="preserve">
+    <value>Всі параметри</value>
+  </data>
+	<data name="OnlyDifference" xml:space="preserve">
+    <value>Тільки відмінності</value>
+  </data>
+	<data name="WareType" xml:space="preserve">
+    <value>Тип товару</value>
+  </data>
+	<data name="AdditionalInformation" xml:space="preserve">
+    <value>Додаткова інформація</value>
+  </data>
+	<data name="ContactInfo" xml:space="preserve">
+    <value>Контактна інформація</value>
+  </data>
+	<data name="AccordingOfDeliveryServiceTarifs" xml:space="preserve">
+    <value>Згідно тарифу служби</value>
+  </data>
+	<data name="Version" xml:space="preserve">
+    <value>Версія</value>
+  </data>
+	<data name="AutoData" xml:space="preserve">
+    <value>Дані автомобіля</value>
+  </data>
+	<data name="Change" xml:space="preserve">
+    <value>змінити</value>
+  </data>
+	<data name="AllNews" xml:space="preserve">
+    <value>Всі новини</value>
+  </data>
+	<data name="ActionWarningMessage" xml:space="preserve">
+    <value>Увага! В Вашому замовленні знаходяться акційні товари, які не підлягають поверненню!</value>
+  </data>
+	<data name="NoReturn" xml:space="preserve">
+    <value>Поверненню не підлягає</value>
+  </data>
+	<data name="ImageUrl" xml:space="preserve">
+    <value>URL зображення групи</value>
+  </data>
+	<data name="ShortProblemDescription" xml:space="preserve">
+    <value>Короткий опис проблеми</value>
+  </data>
+	<data name="CarStateNumber" xml:space="preserve">
+    <value>Державний номер автомобіля</value>
+  </data>
+	<data name="OnlyLettersAndDigits" xml:space="preserve">
+    <value>Тільки букви та цифри</value>
+  </data>
+	<data name="Contacts" xml:space="preserve">
+    <value>Контакти</value>
+  </data>
+	<data name="HowToBuy" xml:space="preserve">
+    <value>Як купити?</value>
+  </data>
+	<data name="ServiceProducerCatalogs" xml:space="preserve">
+    <value>Каталоги виробників</value>
+  </data>
+	<data name="Services" xml:space="preserve">
+    <value>Послуги</value>
+  </data>
+	<data name="ServiceSelectionByVIN" xml:space="preserve">
+    <value>Підбір &lt;span&gt; по VIN&lt;/span&gt;</value>
+  </data>
+	<data name="BankAccount" xml:space="preserve">
+    <value>Розрахунковий рахунок</value>
+  </data>
+	<data name="BankCode" xml:space="preserve">
+    <value>Код банку</value>
+  </data>
+	<data name="FiscalCode" xml:space="preserve">
+    <value>BIN / INN</value>
+  </data>
+	<data name="JuridicalAddress" xml:space="preserve">
+    <value>Юридична адреса</value>
+  </data>
+	<data name="JuridicalName" xml:space="preserve">
+    <value>Юридична назва</value>
+  </data>
+	<data name="RepresentationRequest" xml:space="preserve">
+    <value>Запит на представництво</value>
+  </data>
+	<data name="Error" xml:space="preserve">
+    <value>Помилка</value>
+  </data>
+	<data name="ChangePassword_Cap" xml:space="preserve">
+    <value>Змінити пароль</value>
+  </data>
+	<data name="OrderSum" xml:space="preserve">
+    <value>Сума замовлення</value>
+  </data>
+	<data name="SaveComment" xml:space="preserve">
+    <value>Зберегти коментар</value>
+  </data>
+	<data name="Buy" xml:space="preserve">
+    <value>Купити</value>
+  </data>
+	<data name="MainPage" xml:space="preserve">
+    <value>Головна</value>
+  </data>
+	<data name="GotoComparision" xml:space="preserve">
+    <value>Перейти до порівняння</value>
+  </data>
+	<data name="SelectDate" xml:space="preserve">
+    <value>Виберіть дату</value>
+  </data>
+	<data name="SubscribeForActionInformations" xml:space="preserve">
+    <value>Підписатись на інформацію про акції</value>
+  </data>
+	<data name="Booking" xml:space="preserve">
+    <value>Записатись!</value>
+  </data>
+	<data name="SummaryTitle2" xml:space="preserve">
+    <value>&lt;p&gt;Ваше замовлення &lt;span&gt;№{0}&lt;/span&gt; було прийнято нами, і найближчим часом ви його отримаєте.&lt;/p&gt;
+&lt;p&gt; Якщо у вас виникли запитання, зверніться у відділ продажу&lt;/p&gt;</value>
+  </data>
+	<data name="OrderCompleting" xml:space="preserve">
+    <value>Завершення замовлення</value>
+  </data>
+	<data name="PaymentTitle2" xml:space="preserve">
+    <value>&lt;p&gt;Ваше замовлення &lt;span&gt;№{0}&lt;/span&gt;було прийнято нами, і поки не оплачене.&lt;/p&gt;&lt;p&gt; Якщо у Вас виникли питання по замовленню, зверніться у відділ продажу &lt;a&gt; {2}&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt; (контактний телефон). Ваше замовлення складається з наступних позицій: &lt;/b&gt;&lt;/p&gt;</value>
+  </data>
+	<data name="ThanksForPurchase" xml:space="preserve">
+    <value>Дякуємо за покупку!</value>
+  </data>
+	<data name="WareSelection" xml:space="preserve">
+    <value>Вибір товару</value>
+  </data>
+	<data name="Apply" xml:space="preserve">
+    <value>Застосувати</value>
+  </data>
+	<data name="Filters" xml:space="preserve">
+    <value>Фільтри</value>
+  </data>
+	<data name="Reset" xml:space="preserve">
+    <value>Скинути</value>
+  </data>
+	<data name="PageSize" xml:space="preserve">
+    <value>Розмір сторінки</value>
+  </data>
+	<data name="TC_New_T1_1" xml:space="preserve">
+    <value>При збільшенні діаметра колісного диска (і, як наслідок, зменшення висоти профілю шини, щоб зовнішній діаметр колеса залишався без змін) збільшується навантаження на підвіску автомобіля, а так само погіршується комфорт (машина стане помітно жорсткіша).</value>
+  </data>
+	<data name="TC_New_T1_2" xml:space="preserve">
+    <value>При надмірному збільшенні профілю шини машина гірше кермується і при критичних значеннях висоти профілю шина може почати чіплятись за деталі кузова і підвіски автомобіля, що надалі приведе до її руйнування.</value>
+  </data>
+	<data name="TC_New_T3" xml:space="preserve">
+    <value>Похибка в показах спідометра залежить від швидкості автомобіля, при збільшенні швидкостіпогрішність збільшується. Крім того потрібно врахувати, що похибка впливає на свідчення витрати палива автомобіля.</value>
+  </data>
+	<data name="SelectMark" xml:space="preserve">
+    <value>Вберіть марку</value>
+  </data>
+	<data name="ShowAll" xml:space="preserve">
+    <value>Показати все</value>
+  </data>
+	<data name="EngineTypeAndVolume" xml:space="preserve">
+    <value>Об'єм і тип двигуна</value>
+  </data>
+	<data name="EnterYourCarData" xml:space="preserve">
+    <value>Вкажіть дані про Ваш автомобіль</value>
+  </data>
+	<data name="GotoMain" xml:space="preserve">
+    <value>На головну</value>
+  </data>
+	<data name="NothingFound2" xml:space="preserve">
+    <value>Нажаль, по Вашому запиту нічого не знайдено, що могло статися по наступним причинам:</value>
+  </data>
+	<data name="NothingFound2Message" xml:space="preserve">
+    <value>&lt;ol&gt;
+                &lt;li&gt;Введений вами каталожний номер не існує. Спробуйте переформулювати Ваш запит. &lt;/li&gt;
+                &lt;li&gt;Присутні певні обмеження щодо пошуку. Якщо наявні галочки біля графи "Точний пошук" або "Пошук в певному розділі" спробуйте прибрати їх. &lt;/li&gt;
+            &lt;/ol&gt;</value>
+  </data>
+	<data name="NothingFound2Title" xml:space="preserve">
+    <value>Пошук не вдався</value>
+  </data>
+	<data name="SelectPreferredDate" xml:space="preserve">
+    <value>Оберіть бажану дату</value>
+  </data>
+	<data name="SelectPreferredTime" xml:space="preserve">
+    <value>Виберіть зручний для вас час</value>
+  </data>
+	<data name="ServiceBookingFinishing" xml:space="preserve">
+    <value>Завершення запису</value>
+  </data>
+	<data name="SeviceBookingConfirmation2" xml:space="preserve">
+    <value>&lt;p&gt;Ваша заявка на обслуговування в автосервісі &lt;br&gt;
+            &lt;strong&gt;«{0}»&lt;/strong&gt; на &lt;strong&gt;{1}, {2}&lt;/strong&gt; відправлена.&lt;/p&gt;&lt;p&gt; Найближчим часом з вами зв'яжеться менеджер. &lt;/p&gt;</value>
+  </data>
+	<data name="VINRequest" xml:space="preserve">
+    <value>VIN-запит</value>
+  </data>
+	<data name="SubscribeForOrderInfo" xml:space="preserve">
+    <value>Отримувати сповіщення про замовлення на e-mail</value>
+  </data>
+	<data name="ShowResults" xml:space="preserve">
+    <value>Показати результати</value>
+  </data>
+	<data name="TiresSelection" xml:space="preserve">
+    <value>Підбір шин</value>
+  </data>
+	<data name="TiresSummer" xml:space="preserve">
+    <value>Літні</value>
+  </data>
+	<data name="TiresWinter" xml:space="preserve">
+    <value>Зимні</value>
+  </data>
+	<data name="AboutCompany" xml:space="preserve">
+    <value>Про компанію</value>
+  </data>
+	<data name="Providers" xml:space="preserve">
+    <value>Постачальники</value>
+  </data>
+	<data name="OrderPayment" xml:space="preserve">
+    <value>Оплата замовленння</value>
+  </data>
+	<data name="DoYouLikeShare" xml:space="preserve">
+    <value>Подобається публікація? Поділись!</value>
+  </data>
+	<data name="DescribeError" xml:space="preserve">
+    <value>Опишіть помилку</value>
+  </data>
+	<data name="Comment2" xml:space="preserve">
+    <value>Примітка</value>
+  </data>
+	<data name="EngineCode" xml:space="preserve">
+    <value>Номер/код двигуна</value>
+  </data>
+	<data name="ShowRetailPricesWareCard" xml:space="preserve">
+    <value>Роздрібна ціна в картці товару</value>
+  </data>
+	<data name="OrderDeleteError" xml:space="preserve">
+    <value>Неможливо видалити замовлення:</value>
+  </data>
+	<data name="cm3" xml:space="preserve">
+    <value>куб.см.</value>
+  </data>
+	<data name="Power" xml:space="preserve">
+    <value>Потужність</value>
+  </data>
+	<data name="Volume" xml:space="preserve">
+    <value>Об’єм</value>
+  </data>
+	<data name="_HP" xml:space="preserve">
+    <value>к.с.</value>
+  </data>
+	<data name="_kWt" xml:space="preserve">
+    <value>кВт</value>
+  </data>
+	<data name="DeliveryCreationError" xml:space="preserve">
+    <value>При оформленні замовлення виникла помилка:</value>
+  </data>
+	<data name="JsonUnknownError" xml:space="preserve">
+    <value>Щось пішло не так, і ми не змогли обробити Ваш запит. Повторіть або зв'яжіться з нами за номером …</value>
+  </data>
+	<data name="NoWareFound" xml:space="preserve">
+    <value>товар не знайдено</value>
+  </data>
+	<data name="NeedAllTaxInvoices" xml:space="preserve">
+    <value>Потрібні всі невиписані податкові накладні</value>
+  </data>
+	<data name="WareCode" xml:space="preserve">
+    <value>Код товара</value>
+  </data>
+	<data name="PaymentAccepted" xml:space="preserve">
+    <value>Платіж прийнятий</value>
+  </data>
+	<data name="PaymentAcceptedMessage" xml:space="preserve">
+    <value>Ваш платіж по замовленню {0} на суму {1} успішно прийнятий</value>
+  </data>
+	<data name="PaymentErrorMessage" xml:space="preserve">
+    <value>Ваш платіж по замовленню {0} на суму {1} не може бути оброблений.&lt;a href="{2}"&gt;Спробуйте ще раз&lt;/a&gt; або зверніться до вашого банку.</value>
+  </data>
+	<data name="Printing" xml:space="preserve">
+    <value>Друк</value>
+  </data>
+	<data name="TrustedPerson" xml:space="preserve">
+    <value>Довірена особа</value>
+  </data>
+	<data name="VINSearchPlaceholder" xml:space="preserve">
+    <value>Введіть VIN (17 символів)</value>
+  </data>
+	<data name="ProduceDate" xml:space="preserve">
+    <value>Дата випуску</value>
+  </data>
+	<data name="Transmission" xml:space="preserve">
+    <value>Трансмісія</value>
+  </data>
+	<data name="VinCodeNotFound" xml:space="preserve">
+    <value>Введеного Вами VIN-кода немає в базі або він був введений невірно</value>
+  </data>
+	<data name="Info" xml:space="preserve">
+    <value>Інфо</value>
+  </data>
+	<data name="UrgentCollection" xml:space="preserve">
+    <value>Зібрати терміново</value>
+  </data>
+	<data name="SelectByCategories" xml:space="preserve">
+    <value>Список вузлів</value>
+  </data>
+	<data name="SelectByGroups" xml:space="preserve">
+    <value>Пошук по групам</value>
+  </data>
+	<data name="EnterGroupName" xml:space="preserve">
+    <value>Ведіть назву групи</value>
+  </data>
+	<data name="Default" xml:space="preserve">
+    <value>За замовчуванням</value>
+  </data>
+	<data name="MaxRequestsPerDay" xml:space="preserve">
+    <value>Макс. запитів на добу</value>
+  </data>
+	<data name="Unlimited" xml:space="preserve">
+    <value>Необмежено</value>
+  </data>
+	<data name="ValabilityTerm" xml:space="preserve">
+    <value>Термін дії</value>
+  </data>
+	<data name="VINSearch" xml:space="preserve">
+    <value>Пошук по VIN</value>
+  </data>
+	<data name="ComparisionActErrorMessage" xml:space="preserve">
+    <value>&lt;p&gt;Система згенерувала порожній акт звірки&lt;/p&gt;&lt;p&gt;Спробуйте повторити запит з іншими параметрами або зв'язатися з нами за номером &lt;b&gt;{1}&lt;/b&gt;&lt;/p&gt;</value>
+  </data>
+	<data name="FefoMessage" xml:space="preserve">
+    <value>1. Для перегляду пропозицій, доступних під замовлення, натисніть кнопку "Оформити під замовлення".&lt;/br&gt; 2. Оберіть оптимальний за ціною та тарміном наявності товар. &lt;/b3&gt; 3. Після цього додайте товар до кошика та сформуйте замовлення.</value>
+  </data>
+	<data name="Details" xml:space="preserve">
+    <value>Подробиці</value>
+  </data>
+	<data name="NeedPart" xml:space="preserve">
+    <value>Необхідна деталь</value>
+  </data>
+	<data name="NothingFound3" xml:space="preserve">
+    <value>Нічого не знайдено</value>
+  </data>
+	<data name="Sale" xml:space="preserve">
+    <value>Розпродаж</value>
+  </data>
+	<data name="CategoryFirstEntranceMessage" xml:space="preserve">
+    <value>Для вибору категорії скористуйтеся цим списком</value>
+  </data>
+	<data name="SelectFromList" xml:space="preserve">
+    <value>Виберіть зі списку</value>
+  </data>
+	<data name="NeedParametersSpecification" xml:space="preserve">
+    <value>Потрібно уточнення параметрів</value>
+  </data>
+	<data name="SelectModification" xml:space="preserve">
+    <value>Виберіть модифікацію</value>
+  </data>
+	<data name="AutoIsNotSelected" xml:space="preserve">
+    <value>Автомобіль не вибраний</value>
+  </data>
+	<data name="SupportEmailLabel" xml:space="preserve">
+    <value>Написати технічному консультанту</value>
+  </data>
+	<data name="LoyaltyProgram" xml:space="preserve">
+    <value>Програма лояльності</value>
+  </data>
+	<data name="AllTires" xml:space="preserve">
+    <value>Всі шини</value>
+  </data>
+	<data name="Tires" xml:space="preserve">
+    <value>Шини</value>
+  </data>
+	<data name="NotificationsHistory" xml:space="preserve">
+    <value>Історія сповіщень</value>
+  </data>
+	<data name="Subject" xml:space="preserve">
+    <value>Тема</value>
+  </data>
+	<data name="AccessDenied" xml:space="preserve">
+    <value>Доступ заборонений</value>
+  </data>
+	<data name="FeatureDisabled" xml:space="preserve">
+    <value>Запитуваний розділ не підтримуєтсья на стороні серверу</value>
+  </data>
+	<data name="Region" xml:space="preserve">
+    <value>Регіон</value>
+  </data>
+	<data name="EPayKKBPayment" xml:space="preserve">
+    <value>Оплата через систему EPay KKB</value>
+  </data>
+	<data name="PaymentRejected" xml:space="preserve">
+    <value>Платіж відхилений</value>
+  </data>
+	<data name="QntOnStock" xml:space="preserve">
+    <value>К-сть на складі</value>
+  </data>
+	<data name="IsAbsent" xml:space="preserve">
+    <value>Відсутній</value>
+  </data>
+	<data name="Credit" xml:space="preserve">
+    <value>Кредит</value>
+  </data>
+	<data name="Debet" xml:space="preserve">
+    <value>Дебет</value>
+  </data>
+	<data name="OrderCommentText" xml:space="preserve">
+    <value>&lt;b&gt;Увага!!!&lt;/b&gt;&lt;br /&gt;Переконливе прохання протягом 3-х днів з моменту отримання товару перевірити наявність і зовнішній стан (цілісність, деформація і т.д.)&lt;br /&gt;По закінченню 3-х днів з моменту отримання товару претензії за зовнішнім виглядом і станом товару не приймаються!&lt;br /&gt; Повернення товару здійснюється протягом 14 робочих днів, за умови збереження товарного вигляду (не поширюється на замовні позиції).&lt;br /&gt;Технічна несправність товару оформлюється Актом Рекламації з моменту виявлення дефекту! 
+</value>
+  </data>
+	<data name="ByName" xml:space="preserve">
+    <value>По найменуванню</value>
+  </data>
+	<data name="CurrentDebt" xml:space="preserve">
+    <value>Поточна заборгованість</value>
+  </data>
+	<data name="EpayKKBAmount" xml:space="preserve">
+    <value>Сума до оплати</value>
+  </data>
+	<data name="EpayKKBDataTitle" xml:space="preserve">
+    <value>Введіть дані для проведення оплати</value>
+  </data>
+	<data name="EpayKKBEmail" xml:space="preserve">
+    <value>Email платника</value>
+  </data>
+	<data name="Inventory" xml:space="preserve">
+    <value>Інвентаризація</value>
+  </data>
+	<data name="OvervalueComment" xml:space="preserve">
+    <value>К-сть товару в замовленні перевищує доступну (макс. {0})</value>
+  </data>
+	<data name="UserRegistration" xml:space="preserve">
+    <value>Реєстрація користувачів</value>
+  </data>
+	<data name="RegistrationSuccessful" xml:space="preserve">
+    <value>Реєстрація успішно завершена</value>
+  </data>
+	<data name="NearestWorkingDays" xml:space="preserve">
+    <value>Найближчі робочі дні</value>
+  </data>
+	<data name="SelectSelfDeliveryWarehouse" xml:space="preserve">
+    <value>Виберіть склад самовивозу</value>
+  </data>
+	<data name="WrongVINCode" xml:space="preserve">
+    <value>Некоректний VIN-код</value>
+  </data>
+	<data name="UploadSupplierPriceKros" xml:space="preserve">
+    <value>Завантаження прайса/аналогів</value>
+  </data>
+	<data name="LoadCrosses" xml:space="preserve">
+    <value>Завантажити аналоги</value>
+  </data>
+	<data name="LoadPrice" xml:space="preserve">
+    <value>Завантажити прайс-лист</value>
+  </data>
+	<data name="SelectFile" xml:space="preserve">
+    <value>Вберіть файл</value>
+  </data>
+	<data name="RetailIsBlockedMessage" xml:space="preserve">
+    <value>На жаль в даний момент для Вашого регіону різдрібне обслуговування недоступне </value>
+  </data>
+	<data name="CodeHS" xml:space="preserve">
+    <value>Код УКТЗЕД</value>
+  </data>
+	<data name="SearchPlaceholderNumber" xml:space="preserve">
+    <value>Пошук за номером</value>
+  </data>
+	<data name="Discount" xml:space="preserve">
+    <value>Знижка</value>
+  </data>
+	<data name="UploadSupplierPriceKrosMissingData" xml:space="preserve">
+    <value>Помилка в розборі рядка № {0}. Немає даних в колонці № {1}</value>
+  </data>
+	<data name="PartNumber" xml:space="preserve">
+    <value>Артикул</value>
+  </data>
+	<data name="DebtWarningMessageBrief" xml:space="preserve">
+    <value>Є прострочена заборгованість</value>
+  </data>
+	<data name="ComparisionActFilter" xml:space="preserve">
+    <value>Фільтр акту звірки</value>
+  </data>
+	<data name="PeriodFrom" xml:space="preserve">
+    <value>Період з</value>
+  </data>
+	<data name="EndBalance" xml:space="preserve">
+    <value>Кінцевий залишок</value>
+  </data>
+	<data name="StartBalance" xml:space="preserve">
+    <value>Початковий залишок</value>
+  </data>
+	<data name="ExistingCartItemMessage" xml:space="preserve">
+    <value>Такий товар вже є у кошику</value>
+  </data>
+	<data name="OrdersAndPayments" xml:space="preserve">
+    <value>Замовлення і оплата</value>
+  </data>
+	<data name="Tools" xml:space="preserve">
+    <value>Інструменти</value>
+  </data>
+	<data name="UserFilter" xml:space="preserve">
+    <value>Фільтр користувачів</value>
+  </data>
+	<data name="SummaryListTitle" xml:space="preserve">
+    <value>Ваше замовлення включає в себе наступні позиції</value>
+  </data>
+	<data name="SummaryNotificationText" xml:space="preserve">
+    <value>Текст даної форми був відправлений на Ваш e-mail, вказаний при реєстрації</value>
+  </data>
+	<data name="Logout" xml:space="preserve">
+    <value>Вийти з магазину</value>
+  </data>
+	<data name="YourCarIsEmpty" xml:space="preserve">
+    <value>Ваш кошик пустий</value>
+  </data>
+	<data name="Sorting" xml:space="preserve">
+    <value>Сортування</value>
+  </data>
+	<data name="Authorize" xml:space="preserve">
+    <value>Авторизація</value>
+  </data>
+	<data name="Loading" xml:space="preserve">
+    <value>Завантаження</value>
+  </data>
+	<data name="ByAvailability" xml:space="preserve">
+    <value>По наявності</value>
+  </data>
+	<data name="Cheaper" xml:space="preserve">
+    <value>Дешевше</value>
+  </data>
+	<data name="ExternalUserCode" xml:space="preserve">
+    <value>Код користувача в обліковій системі</value>
+  </data>
+	<data name="ClientManager" xml:space="preserve">
+    <value>Ваш менеджер</value>
+  </data>
+	<data name="ManagerName" xml:space="preserve">
+    <value>Ім'я менеджера</value>
+  </data>
+	<data name="OrderCreateErrorMessage" xml:space="preserve">
+    <value>При формуванні замовлення виникла помилка</value>
+  </data>
+	<data name="of" xml:space="preserve">
+    <value>з</value>
+  </data>
+	<data name="TotalFound" xml:space="preserve">
+    <value>Всього знайдено</value>
+  </data>
+	<data name="Dealers" xml:space="preserve">
+    <value>Наші дилери</value>
+  </data>
+	<data name="Reserved" xml:space="preserve">
+    <value>В резерві</value>
+  </data>
+	<data name="ProductCategory" xml:space="preserve">
+    <value>Категорія товару</value>
+  </data>
+	<data name="Catalogs" xml:space="preserve">
+    <value>Каталоги</value>
+  </data>
+	<data name="GotoCart" xml:space="preserve">
+    <value>Перейти до кошика</value>
+  </data>
+	<data name="SearchHistory" xml:space="preserve">
+    <value>Історія пошуку</value>
+  </data>
+	<data name="LaximoDataSelection" xml:space="preserve">
+    <value>Каталог OEM</value>
+  </data>
+	<data name="SiteDataSelection" xml:space="preserve">
+    <value>Універсальний</value>
+  </data>
+	<data name="SiteTrackDataSelection" xml:space="preserve">
+    <value>Універсальний (вантажні)</value>
+  </data>
+</root>

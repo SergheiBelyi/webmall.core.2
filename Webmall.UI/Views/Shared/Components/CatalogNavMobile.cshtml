@@ -1,0 +1,542 @@
+﻿@using ViewRes
+@using Webmall.UI.Core
+
+@model List<Webmall.Model.Entities.Catalog.Group>
+
+@{
+    Layout = null;
+    var currentParentLink = UserPreferences.CurrentCultureLink + "/catalog/";
+}
+
+<div class="mobile-navigation">
+    <nav class="mobile-navigation__nav mobile-nav">
+        @*<div class="mobile-nav__header">
+                <div class="mobile-nav__crumbs">
+                    <div class="mobile-nav__crumb">
+                        <div class="mobile-nav__crumb-toggle" data-goto-level="0">aaaaaaaaaaaa</div>
+                    </div>
+                    <div class="mobile-nav__crumb">
+                        <div class="mobile-nav__crumb-toggle" data-goto-level="1">bbbbbbbbbbb</div>
+                    </div>
+                </div>
+            </div>*@
+        <ul class="mobile-nav__list">
+            @Extensions.GroupMenuElements(Html, Model, currentParentLink, this, 1)
+            <li class="mobile-nav__item has-dropdown">
+                <a class="mobile-nav__link" href="#">
+                    <span class="mobile-nav__link-text">Автозапчастини</span>
+                </a>
+                <ul class="mobile-nav__sublist">
+                    <li class="mobile-nav__subitem has-dropdown">
+                        <a class="mobile-nav__sublink" href="#">Запчастини для ТО</a>
+                        <ul class="mobile-nav__tertiarylist">
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="mobile-nav__subitem has-dropdown">
+                        <a class="mobile-nav__sublink" href="#">Запчастини для ТО</a>
+                        <ul class="mobile-nav__tertiarylist">
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="mobile-nav__subitem">
+                        <a class="mobile-nav__sublink" href="#">Запчастини для ТО</a>
+                    </li>
+                    <li class="mobile-nav__subitem">
+                        <a class="mobile-nav__sublink" href="#">Запчастини для ТО</a>
+                    </li>
+                    <li class="mobile-nav__subitem has-dropdown">
+                        <a class="mobile-nav__sublink" href="#">Запчастини для ТО</a>
+                        <ul class="mobile-nav__tertiarylist">
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="mobile-nav__subitem">
+                        <a class="mobile-nav__sublink" href="#">Запчастини для ТО</a>
+                    </li>
+                    <li class="mobile-nav__subitem has-dropdown">
+                        <a class="mobile-nav__sublink" href="#">Запчастини для ТО</a>
+                        <ul class="mobile-nav__tertiarylist">
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="mobile-nav__subitem">
+                        <a class="mobile-nav__sublink" href="#">Запчастини для ТО</a>
+                    </li>
+                    <li class="mobile-nav__subitem has-dropdown">
+                        <a class="mobile-nav__sublink" href="#">Запчастини для ТО</a>
+                        <ul class="mobile-nav__tertiarylist">
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="mobile-nav__subitem has-dropdown">
+                        <a class="mobile-nav__sublink" href="#">Запчастини для ТО</a>
+                        <ul class="mobile-nav__tertiarylist">
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="mobile-nav__subitem">
+                        <a class="mobile-nav__sublink" href="#">Запчастини для ТО</a>
+                    </li>
+                    <li class="mobile-nav__subitem">
+                        <a class="mobile-nav__sublink" href="#">Запчастини для ТО</a>
+                    </li>
+                    <li class="mobile-nav__subitem has-dropdown">
+                        <a class="mobile-nav__sublink" href="#">Запчастини для ТО</a>
+                        <ul class="mobile-nav__tertiarylist">
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="mobile-nav__tertiaryitem">
+                                <a class="mobile-nav__tertiarylink" href="#">
+                                    <figure class="category-card">
+                                        <div class="category-card__img-wrap">
+                                            <img class="category-card__img" src="assets/images/media/category-1.png" alt="" width="55" height="55">
+                                        </div>
+                                        <figcaption class="category-card__caption">Мастила для гальмівних систем</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="mobile-nav__item">
+                <a class="mobile-nav__link" href="#">
+                    <span class="mobile-nav__link-text">Інтер'єр</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>

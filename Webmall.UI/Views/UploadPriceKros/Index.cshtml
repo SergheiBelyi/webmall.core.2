@@ -1,0 +1,87 @@
+﻿@using ViewRes
+@using Webmall.UI.Core
+
+@model GridViewModel<ValmiStore.Model.Entities.SupplierPrice>
+
+@{
+    Layout = "~/Views/Shared/_PersonalLayout.cshtml";
+}
+
+<h1 class="main-title">@SharedResources.UploadSupplierPriceKros</h1>
+<div class="upload-files">
+    @using (Html.BeginForm("Upload", "UploadPriceKros", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="row align-items-center">
+            <div class="col-md-4">
+                <div class="upload-file__field">
+                    <i class="fas fa-file-excel"></i>
+                    <input class="upload-file__upload" type="file" id="upload-price-file" name="file" @*multiple="" data-multiple-caption="{count} файлов выбрано"*@
+                           accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                    <label class="upload-file__label" for="upload-price-file"><span>@SharedResources.SelectFile Excel</span></label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <input class="upload-file__btn btn btn--main" type="submit" value="@SharedResources.LoadPrice">
+            </div>
+            <div class="col-md-4">
+                <div class="upload-file__example">Скачать пример <a href="@Url.Content("~/Content/files/price_post_1.xlsx")">прайс листа</a></div>
+            </div>
+        </div>
+    }
+    @using (Html.BeginForm("UploadKros", "UploadPriceKros", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="row align-items-center">
+            <div class="col-md-4">
+                <div class="upload-file__field">
+                    <i class="fas fa-file-excel"></i>
+                    <input class="upload-file__upload" type="file" id="upload-cross-file" name="file" @*multiple="" data-multiple-caption="{count} файлов выбрано"*@
+                           accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                    <label class="upload-file__label" for="upload-cross-file"><span>@SharedResources.SelectFile Excel</span></label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <input class="upload-file__btn btn btn--main" type="submit" value="@SharedResources.LoadCrosses">
+            </div>
+            <div class="col-md-4">
+                <div class="upload-file__example">Скачать пример <a href="@Url.Content("~/Content/files/kross_post_1.xlsx")">файла кроссов</a></div>
+            </div>
+        </div>
+    }
+</div>
+<div class="table-responsive">
+    <table class="prices-table table">
+        <thead>
+            <tr>
+                <th>@Html.SortColumnLink(Model, SharedResources.WareCode, "Artice")</th>
+                <th>@Html.SortColumnLink(Model, SharedResources.CodeHS, "OEM")</th>
+                <th>@Html.SortColumnLink(Model, SharedResources.Producer, "Producer")</th>
+                <th>@Html.SortColumnLink(Model, SharedResources.Name, "Name")</th>
+                <th>@Html.SortColumnLink(Model, SharedResources.Availability, "Available")</th>
+                <th>@Html.SortColumnLink(Model, SharedResources.Price, "Price")</th>
+                <th>@Html.SortColumnLink(Model, SharedResources.SaleMultiplisity, "SaleMultiplier")</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.List)
+            {
+                <tr>
+                    <td>@(item.Article)</td>
+                    <td>@item.OEM</td>
+                    <td>@item.Producer </td>
+                    <td>@item.Name</td>
+                    <td>@item.Available</td>
+                    <td class="center">@item.Price</td>
+                    <td class="center">@item.SaleMultiplier</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @{
+        Html.RenderPartial("GridViewFooter", Model);
+    }
+</div>
+
+
+
+
+

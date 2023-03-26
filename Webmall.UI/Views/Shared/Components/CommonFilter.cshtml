@@ -1,0 +1,37 @@
+﻿@using System.Web.Mvc.Html
+@using ViewRes
+@model Webmall.UI.ViewModel.Common.BaseFilterViewModel
+
+
+<form class="filter catalog-layout__filter" id="filterForm" name="filterForm" method="get">
+    <div class="filter__mob-header">
+        <div class="filter__mob-heading filter__close">@SharedResources.Filters</div>
+        <button class="filter__collapse">@SharedResources.CollapseAll</button>
+    </div>
+
+    <div class="filter__header">
+        <div class="filter__heading">@SharedResources.Filters</div><span class="filter__collapse">@SharedResources.CollapseAll</span>
+    </div>
+
+    <div class="filter__main">
+        <div class="filter__sections">
+            @foreach(var section in Model.Sections)
+            {
+                Html.RenderPartial("Components/FilterSelectSection", section);
+            }
+        </div>
+        <div class="filter__footer">
+            <a class="filter__btn-reset btn btn--primary-reverse btn--sm" href="#" onclick="return resetFilter()">
+                <svg class="icon icon-close btn__icon" width="25" height="25">
+                    <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#close")"></use>
+                </svg><span class="btn__text">@SharedResources.Reset</span>
+            </a>
+            @if (!Model.AutoSubmit)
+            {
+                <a class="filter__btn-accept btn btn--primary btn--sm" href="" onclick="return submitFilter()">@SharedResources.Apply</a>
+            }
+        </div>
+    </div>
+
+</form>
+

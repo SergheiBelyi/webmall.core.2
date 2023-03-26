@@ -1,0 +1,85 @@
+﻿@using System.Web.Mvc.Html
+@using ViewRes
+
+@model Webmall.UI.ViewModel.Catalog.AllOffersViewModel
+
+
+@{ Html.RenderPartial("BestOffers", Model.BestOffers); }
+
+<section class="product-detail-bottom" id="offers">
+    <button class="filter-toggle product-detail-bottom__filter-toggle" type="button">
+        <svg class="icon icon-funnel filter-toggle__icon" width="25" height="25">
+            <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#funnel")"></use>
+        </svg>
+        <span class="filger-toggle__text">@SharedResources.Filters</span>
+    </button>
+    <div class="product-detail-bottom__aside">
+        @{Html.RenderPartial("OffersFilter", Model.FilterViewModel); }
+    </div>
+
+    <div class="product-detail-bottom__main">
+        <div class="product-detail-bottom__switcher switcher-label">
+            <input class="switcher-label__input visually-hidden" type="checkbox" name="has-option-1" id="option-opt-1">
+            <label class="switcher-label__main" for="option-opt-1">Группировать</label>
+        </div>
+
+        <div class="product-detail-bottom__table data-table">
+            <div class="data-table__header">
+                <div class="data-table__row">
+
+
+                    <div class="data-table__captions">
+                        <div class="data-table__caption is-desc" onclick="SortTableLazy('ProducerName')">@SharedResources.Brand</div>
+                        <div class="data-table__caption is-desc" onclick="SortTableLazy('WareNumber')">@SharedResources.PartNumber</div>
+                    </div>
+                    <div class="data-table__caption is-desc" onclick="SortTableLazy('Name')">@SharedResources.Name</div>
+                    <div class="data-table__caption is-asc" onclick="SortTableLazy('SupplierWarehouseName')">@SharedResources.Stock</div>
+                    <div class="data-table__caption is-desc" onclick="SortTableLazy('AvailableQnt')">@SharedResources.Amount</div>
+                    <div class="data-table__caption is-desc" onclick="SortTableLazy('DeliveryTerm')">@SharedResources.TermDays</div>
+                    <div class="data-table__caption is-desc" data-col-buy="" onclick="SortTableLazy('ClientPrice')">@SharedResources.PurchasePrice</div>
+                    <div class="data-table__caption is-desc" data-col-sell="" onclick="SortTableLazy('ClientSalePrice')">@SharedResources.SellingPrice</div>
+                    <div class="data-table__caption">&nbsp;</div>
+                </div>
+            </div>
+            <div class="data-table__body">
+                
+                @foreach (var item in Model.TableOffers)
+                {
+                    Html.RenderPartial("OffersTable", item);
+                }
+                @*@Html.LazyPanel(HtmlTextWriterTag.Div, Url.Action("WarehouseOffers", "CatalogService", new { brand = Model.Ware.ProducerName, article = Model.Ware.WareNumber }), "LazyWarehouseOffersFun",
+                    new { id = "lazyWarehouseOffers", @class = "" })
+                @Html.LazyPanel(HtmlTextWriterTag.Div, Url.Action("NonWarehouseOffers", "CatalogService", new { brand = Model.Ware.ProducerName, article = Model.Ware.WareNumber }), "LazyNonWarehouseOffersFun",
+                    new { id = "lazyNonWarehouseOffers", @class = "" })
+                @Html.LazyPanel(HtmlTextWriterTag.Div, Url.Action("Analogs", "CatalogService",
+                    new
+                    {
+                        brand = Model.Ware.ProducerName,
+                        article = Model.Ware.WareNumber,
+                        producers = string.Join(",", Model.CatalogPropertiesModel.FilterOptions?.Producers ?? new string[0])
+                    }), "LazyAnalogsFun",
+                    new { id = "lazyAnalogs", @class = "" })*@
+            </div>
+        </div>
+        <div class="product-detail-bottom__mob-table mob-data-table">
+            @foreach (var item in Model.TableOffers)
+            {
+                Html.RenderPartial("OffersTableMob", item);
+            }
+            @*@Html.LazyPanel(HtmlTextWriterTag.Div, Url.Action("WarehouseOffers", "CatalogService", new {brand = Model.Ware.ProducerName, article = Model.Ware.WareNumber, isMob = true}), "LazyWarehouseOffersFun",
+                new {id = "lazyWarehouseOffersMob", @class = ""})
+            @Html.LazyPanel(HtmlTextWriterTag.Div, Url.Action("NonWarehouseOffers", "CatalogService", new {brand = Model.Ware.ProducerName, article = Model.Ware.WareNumber, isMob = true}), "LazyNonWarehouseOffersFun",
+                new {id = "lazyNonWarehouseOffersMob", @class = ""})
+            @Html.LazyPanel(HtmlTextWriterTag.Div, Url.Action("Analogs", "CatalogService",
+                new
+                {
+                    brand = Model.Ware.ProducerName,
+                    article = Model.Ware.WareNumber,
+                    isMob = true,
+                    producers = string.Join(",", Model.CatalogPropertiesModel.FilterOptions?.Producers ?? new string[0])
+                }), "LazyAnalogsFun",
+                new {id = "lazyAnalogsMob", @class = ""})*@
+        </div>
+    </div>
+</section>
+

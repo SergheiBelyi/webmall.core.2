@@ -1,0 +1,28 @@
+﻿@using ViewRes
+@model List<Webmall.Model.Entities.Catalog.WareListItem>
+
+@{
+    Layout = null;
+}
+
+@if (Model.Any())
+{
+    <div class="js-section-carousel swiper">
+        <div class="swiper-wrapper">
+            @foreach (var item in Model)
+            {
+                <div class="swiper-slide">
+                    @{ Html.RenderPartial("Components/Product", item); }
+                </div>
+            }
+
+        </div>
+        <div class="js-section-carousel-pagination"></div>
+    </div>
+}
+else
+{
+    <div>@SharedResources.NoData</div>
+}
+
+

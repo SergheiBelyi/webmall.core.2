@@ -1,0 +1,35 @@
+﻿@using ViewRes
+@using Webmall.UI.Core
+
+@{
+    Layout = null;
+}
+
+<div class="top-informer" hidden>
+    <div class="container-fluid">
+        <div class="top-informer__main">
+            <div class="top-informer__about">
+                <div class="top-informer__caption" id="informer-caption"></div>
+                <p class="top-informer__desc" id="informer-desc"></p>
+            </div>
+            <div class="top-informer__bottom">
+                <a data-modal-win-trigger="modal-locations" class="top-informer__btn btn btn--primary" href="#">@SharedResources.ViewItems</a>
+            </div>
+            <button class="top-informer__close" id="informer-close">
+                <svg class="icon icon-close top-informer__close-icon">
+                    <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#close")"></use>
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+
+@{Html.RenderAction("ContactHeader", "Layout", new { culture = UserPreferences.CurrentCulture });}
+
+<script type="text/javascript">
+        var deniedAccessGeodata = "@SharedResources.DeniedAccessGeodata";
+        var deliveryPoint = "@SharedResources.DeliveryPoint";
+        var identifiedStoreClosest = "@SharedResources.IdentifiedStoreClosest";
+        var chooseAnotherDeliveryPoint = "@SharedResources.ChooseAnotherDeliveryPoint";
+        var linkGetCitys = "/"+"@UserPreferences.CurrentCultureLink" + "Home/GetCitys";
+</script>

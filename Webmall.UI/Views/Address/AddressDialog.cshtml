@@ -1,0 +1,105 @@
+﻿@using ViewRes
+
+@model Webmall.UI.ViewModel.Address.DeliveryAddressesViewModel
+
+<div class="modal-content" data-modal-win="address-detail" hidden>
+    <form class="add-modal" method="POST" action="@Url.Action("SaveAddressNew")" name="product-add">
+        <div class="add-modal__main">
+            <div class="managed managed-delivery-address">
+                <div class="row">
+                    @Html.Hidden("AddressId")
+                    <div class="col-sm-6">
+                        <div class="main-form__field">
+                            <label class="main-form__label" for="DeliveryRegion">@SharedResources.Region <span>*</span></label>
+                            @Html.DropDownList("RegionId", Model.Regions,
+                                new {id = "DeliveryRegion", @class = "", onchange = "DeliveryRegionSelected()"})
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="main-form__field">
+                            <label class="main-form__label" for="DeliveryLocality">@SharedResources.Locality <span>*</span></label>
+                            @Html.DropDownList("LocalityId", new List<SelectListItem>(),
+                                new {id = "DeliveryLocality", onchange = "DeliveryLocalitySelected()"})
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="main-form__field">
+                            <label class="main-form__label" for="DeliveryCarrier">@SharedResources.Carrier <span>*</span></label>
+                            @Html.DropDownList("CarrierServiceId", new List<SelectListItem>(),
+                                new { id = "DeliveryCarrier", onchange = "DeliveryCarrierSelected()" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="main-form__field">
+                            <label class="main-form__label" for="DeliveryCarrierPickupPoint">@SharedResources.CarrierPickupPoint <span>*</span></label>
+                            @Html.DropDownList("PickupPointId", new List<SelectListItem>(),
+                                new { id = "DeliveryCarrierPickupPoint", onchange = "DeliveryCarrierPickupPointSelected()" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="main-form__field">
+                            <label class="main-form__label" for="DeliveryAddress">@SharedResources.Address</label>
+                            @Html.TextBox("AddressLine", "", new { id = "DeliveryAddress", @class = "profile-form__input input" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="main-form__field">
+                            <label class="main-form__label" for="DeliveryReceiver">@SharedResources.Receiver</label>
+                            @Html.TextBox("Receiver.Name", "", new { id = "DeliveryReceiver", @class = "profile-form__input input" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="main-form__field">
+                            <label class="main-form__label" for="DeliveryReceiverEmail">@SharedResources.ReceiverEmail</label>
+                            @Html.TextBox("Receiver.Email", "", new { id = "DeliveryReceiverEmail", @class = "profile-form__input input" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="main-form__field">
+                            <label class="main-form__label" for="DeliveryReceiverPhone">@SharedResources.ReceiverPhone</label>
+                            @Html.TextBox("Receiver.Phone", "", new { id = "DeliveryReceiverPhone", @class = "profile-form__input input" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @*<div class="add-modal__field is-row">
+                <div class="add-modal__caption">
+                    @SharedResources.OnWarehouse: <span id="onWarehouse">10</span>
+                </div>
+                <div class="add-modal__caption">
+                    @SharedResources.SaleMultiplisity = <span id="saleMultiplicity">2</span>
+                </div>
+            </div>*@
+        </div>
+        <div class="add-modal__bottom">
+                <input class="add-modal__btn btn btn--primary" type="submit" value="@SharedResources.Save">
+            </div>
+    </form>
+</div>
+
+<div class="modal-content is-error-message" id="show-message-cart" data-modal-win="show-message-cart">
+    <div class="modal-warning">
+        <div class="modal-warning__heading">Ошибка</div>
+        <p class="modal-warning__desc">Ошибка</p>
+    </div>
+</div>
+
+<div class="modal-content is-error-message" id="show-test" data-modal-win="show-test">
+    <div class="modal-warning">
+        <div class="modal-warning__heading">Test</div>
+        <p class="modal-warning__desc">Test</p>
+    </div>
+</div>
+

@@ -1,0 +1,107 @@
+﻿@using ViewRes
+@model List<Webmall.Model.Entities.Order.OrderPosition>
+
+@{
+    Layout = null;
+}
+
+@if (Model.Any())
+{
+    <header class="stock-mob-table__header">
+        <div class="stock-mob-table__row">
+            <div class="stock-mob-table__cell">
+                <div class="stock-mob-table__checkbox checkbox-label">
+                    <input class="checkbox-label__input js-checked-all-trigger" type="checkbox" name="is-optM-0" id="optM-0">
+                    <label class="checkbox-label__main" for="optM-0"></label>
+                </div>
+            </div>
+            <div class="stock-mob-table__cell">
+                <div class="stock-mob-table__caption">
+                    @SharedResources.WareNumber, @SharedResources._brand
+                </div>
+            </div>
+            <div class="stock-mob-table__cell">
+                <div class="stock-mob-table__caption">@SharedResources.DeliveryDate</div>
+            </div>
+            <div class="stock-mob-table__cell">
+                <div class="stock-mob-table__caption text-center">@SharedResources.Amount</div>
+            </div>
+            <div class="stock-mob-table__cell">
+                <div class="stock-mob-table__caption">@SharedResources.Sum</div>
+            </div>
+            <div class="stock-mob-table__cell">
+                <div class="stock-mob-table__caption">&nbsp;</div>
+            </div>
+        </div>
+    </header>
+    <div class="stock-mob-table__main">
+        @foreach (var item in Model)
+        {
+            var wareUrl = Url.Action("WareCard", "Catalog")?.Replace("WareCard", "") + $"{item.ProducerName}/{item.WareNumber}";
+
+            <div class="stock-mob-table__row js-accordion">
+                    <div class="stock-mob-table__cell">
+                        <div class="stock-mob-table__checkbox checkbox-label">
+                            <input class="checkbox-label__input js-checked-all-item" type="checkbox" name="is-optM-@item.Id" id="optM-@item.Id">
+                            <label class="checkbox-label__main" for="optM-@item.Id"></label>
+                        </div>
+                    </div>
+                    <div class="stock-mob-table__cell">
+                        <div class="stock-mob-table__info">
+                            <a class="stock-mob-table__articul" href="@wareUrl">@item.WareNumber</a>
+                            <div class="stock-mob-table__heading">
+                                <a class="stock-mob-table__heading-link" href="@wareUrl">@item.ProducerName</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stock-mob-table__cell">
+                        <div class="stock-mob-table__text">@item.DeliveryPresentation</div>
+                    </div>
+                    <div class="stock-mob-table__cell text-center">
+                        <div class="stock-mob-table__text">@item.WareQnt</div>
+                    </div>
+                    <div class="stock-mob-table__cell">
+                        <div class="stock-mob-table__prices">
+                            <strong class="stock-mob-table__price-primary">@item.Sum</strong>
+                            @*<span class="stock-mob-table__price-secondary">1000,24</span>*@
+                        </div>
+                    </div>
+                    <div class="stock-mob-table__cell">
+                        <button class="stock-mob-table__mob-toggle js-accordion-trigger" type="button">
+                            <svg class="icon icon-chevron-down stock-mob-table__mob-toggle-icon" width="25" height="25">
+                                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#chevron-down")"></use>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="stock-mob-table__dropdown js-accordion-body" hidden="">
+                        <div class="stock-mob-table__params">
+                            <div class="stock-mob-table__param">
+                                <dt class="stock-mob-table__property">@SharedResources.Name</dt>
+                                <dd class="stock-mob-table__value">@item.WareName</dd>
+                            </div>
+                            <div class="stock-mob-table__param">
+                                <dt class="stock-mob-table__property">@SharedResources.PricePerOne</dt>
+                                <dd class="stock-mob-table__value">@item.Price</dd>
+                            </div>
+                            <div class="stock-mob-table__param is-centered">
+                                <dt class="stock-mob-table__property">@SharedResources.Status</dt>
+                                <dd class="stock-mob-table__value">
+                                    <div class="stock-mob-table__status status-badge is-active">@item.StatusName</div>
+                                </dd>
+                            </div>
+
+                            <div class="stock-mob-table__param">
+                                <dt class="stock-mob-table__property">@SharedResources.Note</dt>
+                                <dd class="stock-mob-table__value">@item.Comment</dd>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div>@SharedResources.NoData</div>
+}
+

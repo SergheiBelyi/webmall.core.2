@@ -1,0 +1,10 @@
+﻿@using Webmall.UI.Core
+
+@{
+    Layout = null;
+}
+
+<ul class="main-nav__list">
+    @{Html.RenderAction("GroupMenu", "Catalog", new { culture = UserPreferences.CurrentCulture });}
+    @{Html.RenderAction("HeaderNav", "Layout", new { mobile = false });}
+</ul>

@@ -1,0 +1,30 @@
+﻿@using ViewRes
+@model Webmall.Model.Entities.Client.Client
+
+@if (Model != null)
+{
+    var managerInfo = Model.ManagerData;
+    <div class="profile__subsection">
+        @if (!string.IsNullOrEmpty(Model.ManagerData?.Name))
+        {
+            <h2 class="profile__subheading secondary-heading">@SharedResources.ClientManager</h2>
+            <div class="profile__params-area">
+                <dl class="profile__params params is-dotted">
+                    <div class="params__param">
+                        <dt class="params__property">@SharedResources.ManagerName</dt>
+                        <dd class="params__value">@managerInfo.Name</dd>
+                    </div>
+                    <div class="params__param">
+                        <dt class="params__property">@SharedResources.Email</dt>
+                        <dd class="params__value">@managerInfo.Email</dd>
+                    </div>
+                    <div class="params__param">
+                        <dt class="params__property">@SharedResources.Phone</dt>
+                        <dd class="params__value">@managerInfo.Phone</dd>
+                    </div>
+                </dl>
+            </div>
+        }
+    </div>
+}
+

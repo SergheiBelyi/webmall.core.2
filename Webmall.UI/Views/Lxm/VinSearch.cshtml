@@ -1,0 +1,39 @@
+﻿@using Webmall.UI.ViewModel
+
+@model Webmall.UI.Models.Laximo.VehicleListModel
+
+@{
+    // ViewBag.Title = ((Model != null && Model.Wares.List != null && Model.Wares.List.Any())) ? SharedResources.Search + ": " + ViewBag.SearchBy ?? SharedResources.byProperties : SharedResources.NothingFound2Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    @{Html.RenderPartial("Components/BreadCrumbsRender", new List<BreadCrumbsModel> { new BreadCrumbsModel { Name = Model.Vin } });}
+
+    <div class="vinsearch-layout">
+        <aside class="vinsearch-layout__aside">
+            <div class="table-responsive media-card-info__wrap">
+                @{ Html.RenderPartial("_VinSearchHistory", Model.SearchHistory); }
+            </div>
+        </aside>
+        <main class="vinsearch-layout__main" role="main">
+            @if (!Model.Vehicles.Any())
+            {
+                <div class="vin-search-hist vin-search-hist-table d-none d-md-block">
+                    @if (TempData["Message"] != null)
+                    {
+                        <h1>@(TempData["Message"])</h1>
+                    }
+                </div>
+            }
+            else
+            {
+                Html.RenderPartial("_VehiclesCards", Model);
+                <br/>
+                <div class="stock-area__mob-table stock-mob-table js-checked-all is-table-mode">
+                    @{ Html.RenderPartial("_VinSearchHistory", Model.SearchHistory); }
+                </div>
+            }
+        </main>
+    </div>
+</div>

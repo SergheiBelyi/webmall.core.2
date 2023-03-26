@@ -1,0 +1,20 @@
+﻿@using Webmall.Model
+@using Webmall.UI.Core
+
+@{
+    var user = SessionHelper.CurrentUser;
+}
+
+@if (user == null)
+{
+    <script src="//www.google.com/recaptcha/api.js?onload=CaptchaCallback&render=explicit" async defer></script>
+
+    <script type="text/javascript">
+            var prevCallBack = CaptchaCallback;
+            var CaptchaCallback = function () {
+                window.grecaptcha.render('RecaptchaQuestionDialog', { 'sitekey': '@ConfigHelper.CaptchaSiteKey' });
+                if (prevCallBack != null)
+                    prevCallBack();
+            };
+    </script>
+}

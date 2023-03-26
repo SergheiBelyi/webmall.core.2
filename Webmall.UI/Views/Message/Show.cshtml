@@ -1,0 +1,34 @@
+﻿@using Webmall.Model
+@using ViewRes
+@{
+    ViewBag.Title = String.IsNullOrEmpty((string)TempData["Title"]) ? SharedResources.Message : TempData["Title"];
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var imageSrc = (string)TempData["MsgImage"];
+}
+
+<div class="container-fluid">
+    <main class="search-result">
+        <h1 class="main-title">@ViewBag.Title</h1>
+        @if (!string.IsNullOrEmpty(imageSrc))
+        {
+            <div class="image-message"> <img src="@imageSrc" alt=""></div>
+        }
+        <div id="message">
+            @{
+                try
+                {
+                    <text>
+                        @(new HtmlString(string.Format((string)TempData["Message"], Url.Content("~"), ConfigHelper.ContactRetailPhone)))
+                    </text>
+                }
+                catch (Exception e)
+                {
+                    <text>
+                        @(new HtmlString(string.Format(SharedResources.ErrorMessage, Url.Content("~"), ConfigHelper.ContactRetailPhone)))
+                    </text>
+                }
+            }
+        </div>
+    </main>
+</div>
+

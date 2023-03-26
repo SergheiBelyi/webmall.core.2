@@ -1,0 +1,148 @@
+﻿@model Webmall.UI.ViewModel.Catalog.CatalogFilterViewModel
+
+@* ReSharper disable once Html.IdNotResolved *@
+
+<script type="text/javascript">
+    $(function() {
+        //let priceRange = document.getElementById('priceRange');
+        //let inputNumberA = document.getElementById('priceMin');
+        //let inputNumberB = document.getElementById('priceMax');
+        //let inputs = [inputNumberA, inputNumberB];
+
+        @*if (priceRange) {
+            noUiSlider.create(priceRange, {
+                start: [@(Model.PriceMin??0), @(Model.PriceMax??0)],
+                connect: true,
+                // tooltips: true,
+                range: {
+                    'min': @(Model.PriceMin??0),
+                    'max': @(Model.PriceMax??0)
+                },
+                format: {
+                    to: function (e) {
+                        return Math.round(e);
+                    },
+                    from: function (e) {
+                        return Number(e);
+                    }
+                }
+            });
+
+            priceRange.noUiSlider.on('update', function (values, handle) {
+                inputs[handle].value = values[handle];
+            });
+
+            inputNumberA.addEventListener('change', function () {
+                priceRange.noUiSlider.set([this.value, null]);
+            });
+
+            inputNumberB.addEventListener('change', function () {
+                priceRange.noUiSlider.set([null, this.value]);
+            });
+        }*@
+        /* Filter-Slider */
+
+        /* Filter-Badge*/
+        $(".filter-badge__remove").click(function() {
+            var id = $(this).data("id");
+            $("#opt-" + id + "").prop('checked', false);
+            $(".filter-badges").find(`[data-id='${id}']`).remove();
+            submitFilter();
+        });
+
+        $("#auto-selection-filter button").click(function (e) {
+
+            var clear = false;
+            if (e.target.type == "button") {
+                clear = true;
+            }
+            var filterForm = document.getElementById("filterForm");
+
+            $(filterForm).children("#markaId").val(clear ? -1 : $('[name="AutoMark"]').val());
+            $(filterForm).children("#modelId").val(clear ? null : $('#AutoModel').combotree('getValue'));
+            var modifId = $('#AutoModif').combotree('getValue');
+            $(filterForm).children("#modif").val(clear ? null : modifId);
+            if (modifId > 0 || window.user_IsGross) {
+                document.getElementById("filterForm").submit();
+            }
+            return false;
+        });
+
+        $("[name='query']").bind("change keyup input paste", filterSection);
+        $("[name='query']").keydown(preventSubmit);
+    });
+
+    function submitFilter(prepareFilter) {
+        @*var filterForm = document.getElementById("filterForm");*@
+
+        if (prepareFilter)
+            prepareFilter();
+
+        let tempArray = document.location.href.split("?");
+        if (tempArray[0].search("/Search") != -1) {
+            var input = document.createElement("input");
+            input.type = "hidden";
+            input.name = "Search";
+            input.value = "@(Model?.Search)";
+            document.getElementById("searchParam").name = "";
+            document.getElementById("filterForm").appendChild(input);
+        }
+
+        document.getElementById("locker").style.display = "block";
+        document.getElementById("filterForm").submit();
+        return false;
+    }
+
+    function resetFilter() {
+        var tempArray = document.location.href.split("?");
+        var urlParams = tempArray[1].split('&');
+        var baseUrl = tempArray[0];
+        var baseUrlParams = '';
+        for (var i = 0; i < urlParams.length; i++) {
+            var pair = urlParams[i].split("=");
+            if ((pair[0] == 'modif' || pair[0] == 'wareGroupId' || pair[0] == 'groupId' || pair[0] == 'markaId' || pair[0] == 'modelId' || pair[0] == 'searchString' || pair[0] == 'searchType' || pair[0] == 'Search') && pair[1] != null && pair[1] != "")
+                baseUrlParams = baseUrlParams + '&' + urlParams[i];
+        }
+        if (baseUrlParams)
+            baseUrl += `?${baseUrlParams.substring(1)}`;
+        document.location.href = baseUrl;
+        return false;
+    }
+
+    function filterSection(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        var value = event.target.value;
+
+        var body = event.target.closest(".filter__body");
+        var elements = $(body).children(".checkbox-label");
+
+        if (!value) {
+            elements.css("display", "");
+            $(body).children('.filter__more-options').show();
+            $(body).children(".checkbox-label._is-field-off").addClass("is-field-off");
+            $(body).children(".checkbox-label._is-field-off").removeClass("_is-field-off");
+            return;
+        }
+        elements.hide();
+        $(body).children(".checkbox-label.is-field-off").addClass("_is-field-off");
+        $(body).children(".checkbox-label.is-field-off").removeClass("is-field-off");
+        $(body).children('.filter__more-options').hide();
+        elements.each(function (index, el) {
+            var label = $(el).children("label")[0];
+            if (label.textContent.toLowerCase().includes(value.toLowerCase())) {
+                $(el).show();
+            }
+        });
+    }
+
+    function preventSubmit(event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            event.target.dispatchEvent(new Event("change"));
+            return false;
+        }
+        return true;
+    }
+
+</script>

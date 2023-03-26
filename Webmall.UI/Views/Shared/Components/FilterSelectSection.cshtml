@@ -1,0 +1,40 @@
+﻿@using ViewRes
+@model Webmall.UI.ViewModel.Filter.SelectViewModel
+
+@if (Model != null)
+{
+    <div class="filter__section @(Model.SectionIsOpened ? "is-opened" : Model.SectionIsHidden ? "hidden" : "")">
+        <div class="filter__title">@Model.Caption</div>
+        <div class="filter__body">
+            @if (Model.IsFilterable)
+            {
+                <div class="filter__search search-form">
+                    <div class="search-form__field">
+                        <input class="search-form__input input" type="search" name="query" placeholder="@Model.FilterTitle">
+                        <button class="search-form__submit" type="button" name="send">
+                            <svg class="icon icon-magnifying-zoom-glass search-form__submit-icon" width="25" height="25">
+                                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#magnifying-zoom-glass")"></use>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            }
+
+            @{ var cnt = 0; }
+            @foreach (var item in Model.Options.OrderByDescending(i => i.Selected).ThenBy(i => i.Text))
+            {
+                <div class="filter__option checkbox-label @(Model.ShowSelectMoreLink && ++cnt > Model.ShowLimit ? "is-field-off" : "")">
+                    <input class="checkbox-label__input" type="checkbox" name="@Model.Name" id="opt-@item.Value" value="@item.Value" @(item.Selected ? "checked" : "")
+                           onchange="@(Model.AutoSubmit ? "return submitFilter()" : "")">
+                    <label class="checkbox-label__main" for="opt-@item.Value">@item.Text</label>
+                </div>
+            }
+            @if (Model.ShowSelectMoreLink && Model.ShowLimit < Model.Options.Count)
+            {
+                <div class="filter__more-options">
+                    <span class="filter__more-options-amount">@SharedResources.ShowAll</span> (@Model.Options.Count)
+                </div>
+            }
+        </div>
+    </div>
+}

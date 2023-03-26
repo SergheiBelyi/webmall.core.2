@@ -1,0 +1,350 @@
+﻿@using ViewRes
+
+@{
+    ViewBag.Title = SharedResources.TiresCalculator;
+}
+
+<div class="content-secondary">
+    <div id="calc">
+        <h2>@SharedResources.TiresCalculator</h2>
+        <p>@Html.Raw(SharedResources.TC_T2_1) @Html.Raw(SharedResources.TC_T2_2)</p>
+        <div class="calc">
+            <form>
+                <table>
+                    <tr>
+                        <td></td>
+                        <td>@SharedResources.TC_Width</td>
+                        <td>@SharedResources.TC_Profile</td>
+                        <td>@SharedResources.TC_InnerD</td>
+                    </tr>
+                    <tr>
+                        <td class="size">@SharedResources.TC_OldMeasures</td>
+                        <td>
+                            <select name="oldWidth" id="oldWidth">
+                                <option value="145">145</option>
+                                <option value="155">155</option>
+                                <option value="165">165</option>
+                                <option value="175">175</option>
+                                <option value="185">185</option>
+                                <option value="195" selected>195</option>
+                                <option value="205">205</option>
+                                <option value="215">215</option>
+                                <option value="225">225</option>
+                                <option value="235">235</option>
+                                <option value="245">245</option>
+                                <option value="255">255</option>
+                                <option value="265">265</option>
+                                <option value="275">275</option>
+                                <option value="285">285</option>
+                                <option value="295">295</option>
+                                <option value="305">305</option>
+                                <option value="315">315</option>
+                                <option value="325">325</option>
+                            </select>
+                            /
+                        </td>
+                        <td>
+                            <select name="oldProfile" id="oldProfile">
+                                <option value="80">/</option>
+                                <option value="25">25</option>
+                                <option value="30">30</option>
+                                <option value="35">35</option>
+                                <option value="40">40</option>
+                                <option value="45">45</option>
+                                <option value="50">50</option>
+                                <option value="55">55</option>
+                                <option value="60">60</option>
+                                <option value="65" selected>65</option>
+                                <option value="70">70</option>
+                                <option value="75">75</option>
+                                <option value="80">80</option>
+                                <option value="85">85</option>
+                            </select>
+                        </td>
+                        <td>R
+                            <select name="oldRadius" id="oldRadius">
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15" selected>15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="size">@SharedResources.TC_NewMeasures</td>
+                        <td>
+                            <select name="newWidth" id="newWidth">
+                                <option value="145">145</option>
+                                <option value="155">155</option>
+                                <option value="165">165</option>
+                                <option value="175">175</option>
+                                <option value="185">185</option>
+                                <option value="195">195</option>
+                                <option value="205" selected>205</option>
+                                <option value="215">215</option>
+                                <option value="225">225</option>
+                                <option value="235">235</option>
+                                <option value="245">245</option>
+                                <option value="255">255</option>
+                                <option value="265">265</option>
+                                <option value="275">275</option>
+                                <option value="285">285</option>
+                                <option value="295">295</option>
+                                <option value="305">305</option>
+                                <option value="315">315</option>
+                                <option value="325">325</option>
+                            </select>
+                            /
+                        </td>
+                        <td>
+                            <select name="newProfile" id="newProfile">
+                                <option value="80">/</option>
+                                <option value="25">25</option>
+                                <option value="30">30</option>
+                                <option value="35">35</option>
+                                <option value="40">40</option>
+                                <option value="45">45</option>
+                                <option value="50">50</option>
+                                <option value="55" selected>55</option>
+                                <option value="60">60</option>
+                                <option value="65">65</option>
+                                <option value="70">70</option>
+                                <option value="75">75</option>
+                                <option value="80">80</option>
+                                <option value="85">85</option>
+                            </select>
+                        </td>
+                        <td>R
+                            <select name="newRadius" id="newRadius">
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16" selected>16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                <div class="right">
+                    <button type="button" class="button-submit" onclick="calculate();">@SharedResources.Calculate</button>
+                </div>
+            </form>
+            <div class="clear-div"> </div>
+            <div class="column-table-tree">
+                <table class="all-product">
+                    <thead>
+                        <tr>
+                            <th>@SharedResources.TC_Measures</th>
+                            <th>@SharedResources.TC_Old</th>
+                            <th>@SharedResources.TC_New</th>
+                            <th>@SharedResources.TC_Difference</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="large">@SharedResources.TC_Width</td>
+                            <td id="oldA" class="center">195</td>
+                            <td id="newA" class="center">205</td>
+                            <td id="difA" class="center">10</td>
+                        </tr>
+                        <tr>
+                            <td class="large">@SharedResources.TC_Profile</td>
+                            <td id="oldB" class="center">127</td>
+                            <td id="newB" class="center">113</td>
+                            <td id="difB" class="center">-14</td>
+                        </tr>
+                        <tr>
+                            <td class="large">@SharedResources.TC_InnerD</td>
+                            <td id="oldC" class="center">381</td>
+                            <td id="newC" class="center">406</td>
+                            <td id="difC" class="center">25</td>
+                        </tr>
+                        <tr>
+                            <td class="large">@SharedResources.TC_ExternalD</td>
+                            <td id="oldD" class="center">635</td>
+                            <td id="newD" class="center">632</td>
+                            <td id="difD" class="center">-3</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>@SharedResources.TC_New_T1_1</p>
+                <p>@SharedResources.TC_New_T1_2</p>
+            </div>
+            <div class="column-table-tree">
+                <table class="all-product">
+                    <thead>
+                        <tr>
+                            <th>@SharedResources.TC_DiscParams</th>
+                            <th>@SharedResources.TC_Old</th>
+                            <th>@SharedResources.TC_New</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="large">@SharedResources.TC_DiscD</td>
+                            <td id="resultDiameterOld" class="center">15</td>
+                            <td id="resultDiameterNew" class="center">16</td>
+                        </tr>
+                        <tr>
+                            <td class="large">@SharedResources.TC_DiscWMin</td>
+                            <td id="resultWidthMinOld" class="center">5.5</td>
+                            <td id="resultWidthMinNew" class="center">7</td>
+                        </tr>
+                        <tr>
+                            <td class="large">@SharedResources.TC_DiscWMax</td>
+                            <td id="resultWidthMaxOld" class="center">7</td>
+                            <td id="resultWidthMaxNew" class="center">8.5</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+                <p>@Html.Raw(SharedResources.TC_T3_2)</p>
+            </div>
+            <div class="column-table-tree">
+                <table class="all-product">
+                    <thead>
+                        <tr>
+                            <th>@SharedResources.TC_Speedometer</th>
+                            <th> </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@SharedResources.TC_SpeedometerValue</td>
+                            <td>
+                                <input id="oldSpeed" type="text" onchange="calculate();" value="90" size="4">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>@SharedResources.TC_RealSpeed</td>
+                            <td id="newSpeed">89.57</td>
+                        </tr>
+                        <tr>
+                            <td>@SharedResources.TC_SpeedDifference</td>
+                            <td id="difSpeed">-0.43</td>
+                        </tr>
+                        <tr class="clirens">
+                            <td><b>@SharedResources.TC_Clearance</b></td>
+                            <td><b id="difClearense">-1.5</b></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>@Html.Raw(SharedResources.TC_New_T3)</p>
+            </div>
+            <div class="clear-div"> </div>
+            <h3>
+                @SharedResources.TC_H1
+            </h3>
+            <p>
+               @(new HtmlString (SharedResources.TC_T1_1))
+            </p><p>
+               @(new HtmlString (SharedResources.TC_T1_2))
+            </p><p>
+               @(new HtmlString (SharedResources.TC_T1_3))
+            </p>
+        </div>
+    </div>
+</div>
+
+<script language="javascript">
+    radiusV = 0;
+    var oldA = document.getElementById('oldA');
+    var newA = document.getElementById('newA');
+    var difA = document.getElementById('difA');
+    var oldB = document.getElementById('oldB');
+    var newB = document.getElementById('newB');
+    var difB = document.getElementById('difB');
+    var oldC = document.getElementById('oldC');
+    var newC = document.getElementById('newC');
+    var difC = document.getElementById('difC');
+    var oldD = document.getElementById('oldD');
+    var newD = document.getElementById('newD');
+    var difD = document.getElementById('difD');
+    var oldWidth = document.getElementById('oldWidth');
+    var newWidth = document.getElementById('newWidth');
+    var oldRadius = document.getElementById('oldRadius');
+    var newRadius = document.getElementById('newRadius');
+    var newProfile = document.getElementById('newProfile');
+    var oldProfile = document.getElementById('oldProfile');
+    var newSpeed = document.getElementById('newSpeed');
+    var oldSpeed = document.getElementById('oldSpeed');
+    var difClearense = document.getElementById('difClearense');
+    var newSpeed = document.getElementById('newSpeed');
+    var difSpeed = document.getElementById('difSpeed');
+    calculate(); 
+
+    function calculate() {
+        oldA.innerHTML = oldWidth.value;
+        newA.innerHTML = newWidth.value;
+        difA.innerHTML = newA.innerHTML - oldA.innerHTML;
+
+        oldC.innerHTML = Math.round(oldRadius.value * 25.4);
+        newC.innerHTML = Math.round(newRadius.value * 25.4);
+        difC.innerHTML = newC.innerHTML - oldC.innerHTML;
+
+        oldD.innerHTML = Math.round(oldWidth.value * oldProfile.value * 0.02
+            + oldRadius.value * 25.4);
+        newD.innerHTML = Math.round(newWidth.value * newProfile.value * 0.02
+            + newRadius.value * 25.4);
+        difD.innerHTML = newD.innerHTML - oldD.innerHTML;
+
+        oldB.innerHTML = Math.round((oldD.innerHTML - oldC.innerHTML) / 2);
+        newB.innerHTML = Math.round((newD.innerHTML - newC.innerHTML) / 2);
+        difB.innerHTML = newB.innerHTML - oldB.innerHTML;
+
+        difClearense.innerHTML = (Math.round(newWidth.value * newProfile.value * 0.02
+            + newRadius.value * 25.4)
+                - Math.round(oldWidth.value * oldProfile.value * 0.02
+                    + oldRadius.value * 25.4)) / 2;
+
+        newSpeed.innerHTML = Math.round((Math.round(newWidth.value * newProfile.value * 0.02
+            + newRadius.value * 25.4)
+            / Math.round(oldWidth.value * oldProfile.value * 0.02
+                + oldRadius.value * 25.4)) * oldSpeed.value * 100) / 100;
+        difSpeed.innerHTML = Math.round((newSpeed.innerHTML - oldSpeed.value) * 100) / 100;
+
+        //newSize.innerHTML = newWidth.value + '/' + newProfile.value + ' R' + newRadius.value;
+
+        var scalar;
+
+        var width = oldWidth.value;
+        var profile = oldProfile.value;
+        var radius = oldRadius.value;
+        if (profile < 50) scalar = 0.85;
+        if (profile >= 50) scalar = 0.7;
+        var rimWidthMin = (Math.round(((width * scalar) * 0.03937) * 2)) / 2;
+        var rimWidthMax = (rimWidthMin + 1.5);
+        document.getElementById('resultWidthMinOld').innerHTML = rimWidthMin;
+        document.getElementById('resultWidthMaxOld').innerHTML = rimWidthMax;
+        document.getElementById('resultDiameterOld').innerHTML = radius;
+
+        var nWidth = newWidth.value;
+        var nProfile = newProfile.value;
+        var nRadius = newRadius.value;
+        if (nProfile < 50) scalar = 0.85;
+        if (nProfile >= 50) scalar = 0.7;
+        rimWidthMin = (Math.round(((nWidth * scalar) * 0.03937) * 2)) / 2;
+        rimWidthMax = (rimWidthMin + 1.5);
+        document.getElementById('resultWidthMinNew').innerHTML = rimWidthMin;
+        document.getElementById('resultWidthMaxNew').innerHTML = rimWidthMax;
+        document.getElementById('resultDiameterNew').innerHTML = nRadius; 
+
+    }
+</script>

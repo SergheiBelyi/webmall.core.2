@@ -1,0 +1,3173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AC6055FA-56C7-403B-AB71-B8C6D24273CB}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Webmall.UI</RootNamespace>
+    <AssemblyName>Webmall.UI</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>7</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=6.4.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.6.4.0\lib\netstandard2.0\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc, Version=6.1.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Mvc5.6.1.0\lib\net472\Autofac.Integration.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.WebApi, Version=6.1.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.WebApi2.6.1.1\lib\net472\Autofac.Integration.WebApi.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper, Version=10.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.10.1.1\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core, Version=5.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.5.1.0\lib\net462\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.3.4.1\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.Core.3.4.1\lib\net40\Common.Logging.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.4.1.12, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.1.4.1\lib\netstandard2.0\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.15\lib\net45\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.7.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=3.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.7.0.0\lib\net462\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.7.0.0\lib\net462\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.Common.10.0.40219.1\lib\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.Common.10.0.40219.1\lib\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.Common.10.0.40219.1\lib\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.WebForms.10.0.40219.1\lib\Microsoft.ReportViewer.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.2.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="MiniProfiler, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b44f9351044011a3, processorArchitecture=MSIL">
+      <HintPath>..\packages\MiniProfiler.4.2.22\lib\net461\MiniProfiler.dll</HintPath>
+    </Reference>
+    <Reference Include="MiniProfiler.EF6, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b44f9351044011a3, processorArchitecture=MSIL">
+      <HintPath>..\packages\MiniProfiler.EF6.4.2.22\lib\net461\MiniProfiler.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="MiniProfiler.Shared, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b44f9351044011a3, processorArchitecture=MSIL">
+      <HintPath>..\packages\MiniProfiler.Shared.4.2.22\lib\net461\MiniProfiler.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="netstandard" />
+    <Reference Include="AdvancedStringBuilder, Version=0.1.0.0, Culture=neutral, PublicKeyToken=e818a2fc08933ddb, processorArchitecture=MSIL">
+      <HintPath>..\packages\AdvancedStringBuilder.0.1.0\lib\net45\AdvancedStringBuilder.dll</HintPath>
+    </Reference>
+    <Reference Include="BeginCollectionItem, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\BeginCollectionItem.1.2.1.0\lib\net35\BeginCollectionItem.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ExcelDataReader, Version=3.6.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.3.6.0\lib\net45\ExcelDataReader.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MiniProfiler.Mvc, Version=3.0.11.0, Culture=neutral, PublicKeyToken=b44f9351044011a3, processorArchitecture=MSIL">
+      <HintPath>..\packages\MiniProfiler.MVC4.3.0.11\lib\net40\MiniProfiler.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="OfficeOpenXml.Core.ExcelPackage, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OfficeOpenXml.Core.ExcelPackage.1.0.0\lib\net46\OfficeOpenXml.Core.ExcelPackage.dll</HintPath>
+    </Reference>
+    <Reference Include="Quartz, Version=3.5.0.0, Culture=neutral, PublicKeyToken=f6b8c98a402cc8a4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Quartz.3.5.0\lib\net472\Quartz.dll</HintPath>
+    </Reference>
+    <Reference Include="RazorGenerator.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\RazorGenerator.Mvc.2.4.9\lib\net40\RazorGenerator.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleImpersonation, Version=4.2.0.0, Culture=neutral, PublicKeyToken=2558a0becb966f83, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleImpersonation.4.2.0\lib\net461\SimpleImpersonation.dll</HintPath>
+    </Reference>
+    <Reference Include="StackExchange.Profiling.DeepProfiling.Autofac, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MiniProfiler.DeepProfiling.Autofac.2.1.0.8\lib\NET40\StackExchange.Profiling.DeepProfiling.Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.7.0.0\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.3.0\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Packaging, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Packaging.7.0.0\lib\net462\System.IO.Packaging.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.9\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Security.Principal.Windows, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Principal.Windows.5.0.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Http, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.9\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.9\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.9\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.9\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Api\Models\DeliveryDto.cs" />
+    <Compile Include="Api\Models\ClientDto.cs" />
+    <Compile Include="Api\Models\OrderDto.cs" />
+    <Compile Include="Api\Models\OrderListItemDto.cs" />
+    <Compile Include="Api\Models\OrderPositionDto.cs" />
+    <Compile Include="Api\Models\OrdersListFilterPayload.cs" />
+    <Compile Include="Api\Models\OrderStatusDto.cs" />
+    <Compile Include="Api\Models\PageSettingsPayload.cs" />
+    <Compile Include="Api\Models\PaymentDto.cs" />
+    <Compile Include="Api\Models\PositionDto.cs" />
+    <Compile Include="Api\Models\RemoveOrderPositionsPayload.cs" />
+    <Compile Include="Api\Models\UpdateOrderPayload.cs" />
+    <Compile Include="Api\Models\UpdateOrderPositionPayload.cs" />
+    <Compile Include="Api\Models\ValuteDto.cs" />
+    <Compile Include="Api\OrdersController.cs" />
+    <Compile Include="App_Start\AutofacConfig.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\MappingConfig.cs" />
+    <Compile Include="App_Start\RazorGeneratorMvcStart.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\VirtualPathConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Test\Controllers\Catalog2Controller.cs" />
+    <Compile Include="Areas\Test\TestAreaRegistration.cs" />
+    <Compile Include="Areas\Test\Views\Catalog2\CatalogList.generated.cs">
+      <DependentUpon>CatalogList.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Areas\Test\Views\Catalog2\CatalogListNoPagination.generated.cs">
+      <DependentUpon>CatalogListNoPagination.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Areas\Test\Views\Catalog2\CatalogFilter.generated.cs">
+      <DependentUpon>CatalogFilter.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Areas\Test\Views\_ViewStart.generated.cs">
+      <DependentUpon>_ViewStart.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Controllers\AccessStatisticsController.cs" />
+    <Compile Include="Controllers\GarageController.cs" />
+    <Compile Include="Controllers\ReviewController.cs" />
+    <Compile Include="Controllers\CatalogServiceController.cs" />
+    <Compile Include="Controllers\CatalogController.cs" />
+    <Compile Include="Controllers\AddressController.cs" />
+    <Compile Include="Core\Helpers\CookieHelper.cs" />
+    <Compile Include="Core\Helpers\PinGenerator.cs" />
+    <Compile Include="Core\Helpers\UrlHelperEx.cs" />
+    <Compile Include="Core\HtmlHelpers\WareUrlHelper.cs" />
+    <Compile Include="Core\HtmlHelpers\ImageUrlHelper.cs" />
+    <Compile Include="Models\Order\CreateOrderModelView.cs" />
+    <Compile Include="Models\Order\SuccessfulOrderModelView.cs" />
+    <Compile Include="Models\PinCode.cs" />
+    <Compile Include="Models\SelectionByAuto\AutoGroupsModel.cs" />
+    <Compile Include="Models\SelectionByAuto\AutoGroupTree.cs" />
+    <Compile Include="Service\Implementations\UserRegistration.cs" />
+    <Compile Include="Service\Interfaces\IImageUrlGenerator.cs" />
+    <Compile Include="Service\Interfaces\IUserRegistration.cs" />
+    <Compile Include="Service\Implementations\LocalFilesImageUrlGenerator.cs" />
+    <Compile Include="Service\ServiceRegistration.cs" />
+    <Compile Include="ViewModel\Address\DeliveryAddressesViewModel.cs" />
+    <Compile Include="ViewModel\Brands\BrandListViewModel.cs" />
+    <Compile Include="ViewModel\Catalog\AllOffersViewModel.cs" />
+    <Compile Include="ViewModel\Catalog\WarePropertiesViewModel.cs" />
+    <Compile Include="ViewModel\Client\ClientViewModel.cs" />
+    <Compile Include="Controllers\LayoutController.cs" />
+    <Compile Include="Controllers\CompareController.cs" />
+    <Compile Include="Controllers\ComparisionActController.cs" />
+    <Compile Include="Controllers\ContentManagementController.cs" />
+    <Compile Include="Controllers\LxmController.cs" />
+    <Compile Include="Controllers\BrandsController.cs" />
+    <Compile Include="Controllers\UploadPriceKrosController.cs" />
+    <Compile Include="Controllers\ValuteController.cs" />
+    <Compile Include="Controllers\UserNotificationsController.cs" />
+    <Compile Include="Controllers\TVController.cs" />
+    <Compile Include="Core\AccessStatistics\AccessInfo.cs" />
+    <Compile Include="Core\AccessStatistics\AccessInfoList.cs" />
+    <Compile Include="Core\AccessStatistics\AccessStatistic.cs" />
+    <Compile Include="Core\Attributes\DisplayNameExAttribute.cs" />
+    <Compile Include="Core\Attributes\FeatureFilterAttribute.cs" />
+    <Compile Include="Core\Attributes\ReferrerFilterAttribute.cs" />
+    <Compile Include="Core\Attributes\ValidateOnlyIncomingValuesAttribute.cs" />
+    <Compile Include="Core\ControllerExtensions.cs" />
+    <Compile Include="Core\CookieNames.cs" />
+    <Compile Include="Core\Extensions.cs" />
+    <Compile Include="Core\GridViewHelper.cs" />
+    <Compile Include="Core\GridViewOptions.cs" />
+    <Compile Include="Core\Helpers\Helpers.cs" />
+    <Compile Include="Core\Helpers\HtmlRemoval.cs" />
+    <Compile Include="Core\HtmlHelpers\LazyPanelHelper.cs" />
+    <Compile Include="Core\ImpersonatingFileResult.cs" />
+    <Compile Include="Core\Jobs\SubscribeProcessJob.cs" />
+    <Compile Include="Core\Localization\Extentions.cs" />
+    <Compile Include="Core\Localization\LocalizationAttribute.cs" />
+    <Compile Include="Core\Localization\MultiLanguageControllerActivator.cs" />
+    <Compile Include="Core\MiniProfiler\MiniProfiler.cs" />
+    <Compile Include="Core\MiniProfiler\MiniProfilerHelper.cs" />
+    <Compile Include="Core\MVCApplicationHandlers.cs" />
+    <Compile Include="Core\Helpers\PhpHelper.cs" />
+    <Compile Include="Core\PresentationHelper.cs" />
+    <Compile Include="Core\QuantityPresenter.cs" />
+    <Compile Include="Core\Renderers\CommonRenderer.cs" />
+    <Compile Include="Core\Renderers\TreeRenderer.cs" />
+    <Compile Include="Core\Reports\ReportModel.cs" />
+    <Compile Include="Core\Reports\ReportResult.cs" />
+    <Compile Include="Core\Reports\ReportViewerCredentials.cs" />
+    <Compile Include="Core\ResourceHelper.cs" />
+    <Compile Include="Core\RouteHandlers\CatalogHttpRootHandler.cs" />
+    <Compile Include="Core\SAMLForm.cs" />
+    <Compile Include="Core\SecurityHelper.cs" />
+    <Compile Include="Core\SessionHelper.cs" />
+    <Compile Include="Core\TreeMenuRenderer.cs" />
+    <Compile Include="Core\UserPreferences.cs" />
+    <Compile Include="Core\CmsHelper.cs" />
+    <Compile Include="Core\UserSession\UserSessionData.cs" />
+    <Compile Include="Core\UserSession\UserSessions.cs" />
+    <Compile Include="Core\UserSession\UserSessionStorage.cs" />
+    <Compile Include="Core\VersionHelper.cs" />
+    <Compile Include="Core\WareListHelper.cs" />
+    <Compile Include="Core\Ware\IWareHelper.cs" />
+    <Compile Include="Core\Ware\WareHelper.cs" />
+    <Compile Include="Mappings\CatalogProfile.cs" />
+    <Compile Include="Mappings\OrderRepositoryProfile.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\PromotionsController.cs" />
+    <Compile Include="Controllers\VINRequestController.cs" />
+    <Compile Include="Controllers\ReportsController.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Controllers\SelectionByAutoController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\ClientsController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImagesController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\MessageController.cs" />
+    <Compile Include="Controllers\OriginalCatalogController.cs" />
+    <Compile Include="Controllers\ArticleController.cs" />
+    <Compile Include="Controllers\SecurityController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccessStatistics\AccessStatisticsDetail.cs" />
+    <Compile Include="Models\AccessStatistics\AccessStatisticsModel.cs" />
+    <Compile Include="Models\Cart\CartModel.cs" />
+    <Compile Include="Models\Cart\ImportModel.cs" />
+    <Compile Include="Models\Cart\OrderPreviewModel.cs" />
+    <Compile Include="Models\Cart\WareAnalogsModel.cs" />
+    <Compile Include="ViewModel\Catalog\CatalogViewModel.cs" />
+    <Compile Include="Models\Catalog\FilterModel.cs" />
+    <Compile Include="Models\Catalog\SearchType.cs" />
+    <Compile Include="Models\Catalog\CatalogWaresModel.cs" />
+    <Compile Include="Models\Clients\DeliveryAddressesModel.cs" />
+    <Compile Include="Models\ComparisionActModel.cs" />
+    <Compile Include="Models\GroupContentInfo.cs" />
+    <Compile Include="Models\Laximo\BaseModel.cs" />
+    <Compile Include="Models\Laximo\CategoriesModel.cs" />
+    <Compile Include="Models\Laximo\CategoryTree.cs" />
+    <Compile Include="Models\Laximo\FilterModel.cs" />
+    <Compile Include="Models\Laximo\GroupDetailsModel.cs" />
+    <Compile Include="Models\Laximo\GroupsModel.cs" />
+    <Compile Include="Models\Laximo\GroupTree.cs" />
+    <Compile Include="Models\Laximo\UnitModel.cs" />
+    <Compile Include="Models\Laximo\VehicleListModel.cs" />
+    <Compile Include="Models\Laximo\WizardModel.cs" />
+    <Compile Include="Models\LogOnModel.cs" />
+    <Compile Include="Models\LoyaltyModel.cs" />
+    <Compile Include="Models\News\NewsAndPromotions.cs" />
+    <Compile Include="Models\Order\DeliveryAddressListItem.cs" />
+    <Compile Include="Models\Order\DeliveryScheduleModel.cs" />
+    <Compile Include="Models\Order\OrderModel.cs" />
+    <Compile Include="ViewModel\Common\BaseFilterViewModel.cs" />
+    <Compile Include="ViewModel\Common\FilterSectionViewModel.cs" />
+    <Compile Include="ViewModel\Filter\RangeViewModel.cs" />
+    <Compile Include="ViewModel\Garage\GarageViewModel.cs" />
+    <Compile Include="ViewModel\Layout\PersonalMenuViewModel.cs" />
+    <Compile Include="ViewModel\News\NewsArticleViewModel.cs" />
+    <Compile Include="ViewModel\News\NewsListViewModel.cs" />
+    <Compile Include="ViewModel\Order\OrderLinesListViewModel.cs" />
+    <Compile Include="ViewModel\Order\OrdersFilterViewModel.cs" />
+    <Compile Include="ViewModel\Order\OrdersDetailModel.cs" />
+    <Compile Include="ViewModel\Order\OrdersListViewModel.cs" />
+    <Compile Include="Models\ExternalCatalogModel.cs" />
+    <Compile Include="Models\ParagraphModel.cs" />
+    <Compile Include="Models\Payments\PaymentModel.cs" />
+    <Compile Include="Models\Payments\ProcessingResponseModel.cs" />
+    <Compile Include="Models\Payments\TopupAccountModel.cs" />
+    <Compile Include="Models\Report\ComparisionActReportModel.cs" />
+    <Compile Include="Models\Report\EventTicketReportModel.cs" />
+    <Compile Include="Models\Report\EventVisitsReportModel.cs" />
+    <Compile Include="Models\Report\InvitationNumbersReportModel.cs" />
+    <Compile Include="Models\Report\InvoicePaymentReportModel.cs" />
+    <Compile Include="Models\Report\PentupDemandReportModel.cs" />
+    <Compile Include="Models\Report\TransmissionActReportModel.cs" />
+    <Compile Include="Models\ReviewModel.cs" />
+    <Compile Include="Models\SelectionByAuto\SelectionByAutoGroups.cs" />
+    <Compile Include="Models\SelectionByAuto\SelectionByAutoMarkModel.cs" />
+    <Compile Include="Models\SelectionByAuto\TiresSelectionModel.cs" />
+    <Compile Include="ViewModel\Catalog\OffersViewModel.cs" />
+    <Compile Include="ViewModel\Catalog\OfferViewModel.cs" />
+    <Compile Include="ViewModel\Catalog\WareCardViewModel.cs" />
+    <Compile Include="ViewModel\BreadCrumbsModel.cs" />
+    <Compile Include="ViewModel\Common\MessageViewModel.cs" />
+    <Compile Include="ViewModel\Security\PasswordRecoveryViewModel.cs" />
+    <Compile Include="ViewModel\SelectionByAuto\AssemblyWaresViewModel.cs" />
+    <Compile Include="ViewModel\Filter\SelectViewModel.cs" />
+    <Compile Include="Models\ServiceBookingModel.cs" />
+    <Compile Include="Models\TV\TVModel.cs" />
+    <Compile Include="Models\TV\VideoInfo.cs" />
+    <Compile Include="Models\TV\WeatherCities.cs" />
+    <Compile Include="Models\UserManagement\UserListModel.cs" />
+    <Compile Include="Models\VinRequest\ExternalRequest.cs" />
+    <Compile Include="Models\VinRequest\NewVINRequestModel.cs" />
+    <Compile Include="Models\WareComparision\ComparisionList.cs" />
+    <Compile Include="Models\WareComparision\ComparisionModel.cs" />
+    <Compile Include="Models\Ware\AnalogsModel.cs" />
+    <Compile Include="Models\Ware\Sticker.cs" />
+    <Compile Include="Models\Ware\WareCard.cs" />
+    <Compile Include="Models\Ware\WareCardList.cs" />
+    <Compile Include="Models\Ware\WareModel.cs" />
+    <Compile Include="Models\Ware\WareOffer.cs" />
+    <Compile Include="Models\Ware\WaresCatalogModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services.asmx.cs">
+      <DependentUpon>Services.asmx</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ViewModel\Cart\ImportCartResultViewModel.cs" />
+    <Compile Include="ViewModel\Catalog\OffersFilterViewModel.cs" />
+    <Compile Include="ViewModel\Catalog\CatalogFilterViewModel.cs" />
+    <Compile Include="ViewModel\Catalog\GroupsListViewModel.cs" />
+    <Compile Include="ViewModel\Common\FooterModel.cs" />
+    <Compile Include="ViewModel\Helpers\FilterHelper.cs" />
+    <Compile Include="ViewModel\Home.cs" />
+    <Compile Include="ViewModel\Layout\Header.cs" />
+    <Compile Include="Views\AccessStatistics\Detail.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Detail.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AccessStatistics\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CatalogService\GetWareImages.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GetWareImages.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CatalogService\OffersFilter.generated.cs">
+      <DependentUpon>OffersFilter.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\CatalogService\_Offers.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_Offers.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Catalog\Search.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Search.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Catalog\WareCard.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WareCard.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Garage\CarDialog.generated.cs">
+      <DependentUpon>CarDialog.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Garage\Index.generated.cs">
+      <DependentUpon>Index.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Address\AddressDialog.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddressDialog.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Address\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Cart\ImportToCartExele.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ImportToCartExele.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Cart\_DesktopCartArea.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_DesktopCartArea.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Cart\_EmptyCart.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_EmptyCart.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Cart\_MobileCartArea.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_MobileCartArea.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CatalogService\OffersTableMob.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OffersTableMob.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CatalogService\ShortPropertiesForTable.generated.cs">
+      <DependentUpon>ShortPropertiesForTable.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\CatalogService\ShortPropertiesForTile.generated.cs">
+      <DependentUpon>ShortPropertiesForTile.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Catalog\CatalogBottom.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CatalogBottom.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Catalog\CatalogBottomControls.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CatalogBottomControls.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Catalog\CatalogBottomControlsMob.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CatalogBottomControlsMob.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Catalog\CatalogHeader.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CatalogHeader.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Catalog\CatalogHeaderControls.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CatalogHeaderControls.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Catalog\CatalogHeaderControlsMob.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CatalogHeaderControlsMob.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Catalog\CatalogTiles.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CatalogTiles.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Clients\ContactDialog.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ContactDialog.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Clients\_ContractCard.generated.cs">
+      <DependentUpon>_ContractCard.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Clients\_Contacts.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_Contacts.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Garage\_CarCard.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_CarCard.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Layout\HeaderBottom.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HeaderBottom.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Layout\HeaderNav.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HeaderNav.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Layout\HeaderNavMobile.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HeaderNavMobile.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Layout\PersonalMenuList.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PersonalMenuList.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\News\ArticleListItem.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ArticleListItem.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Order\Create.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Create.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Order\ListItemProperties.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ListItemProperties.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Order\ListItemPropertiesMob.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ListItemPropertiesMob.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Order\OrderDetailMob.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrderDetailMob.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Order\Partials\OrderDialog.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrderDialog.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Order\OrderFilter.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrderFilter.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Order\OrderListMob.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrderListMob.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Order\PaymentDefault.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PaymentDefault.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Order\PaymentRecitation.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PaymentRecitation.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Order\Successful.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Successful.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Order\Partials\TableCartPosition.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TableCartPosition.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Order\Partials\TableCartPositionMob.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TableCartPositionMob.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Order\_OrderListLayout.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_OrderListLayout.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SelectionByAuto\AssemblyWares.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AssemblyWares.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SelectionByAuto\WaresForModif.generated.cs">
+      <DependentUpon>WaresForModif.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\SelectionByAuto\_SelectionScript.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_SelectionScript.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Components\CommonFilter.generated.cs">
+      <DependentUpon>CommonFilter.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\Components\CatalogNavMobile.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CatalogNavMobile.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Order\CreateDeliveryBlock.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CreateDeliveryBlock.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Components\FilterRangeSection.generated.cs">
+      <DependentUpon>FilterRangeSection.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\Components\FilterRange.generated.cs">
+      <DependentUpon>FilterRange.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\Components\Product.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Product.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Components\TableOrderPosition.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TableOrderPosition.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Components\UserCars.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserCars.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Components\ViewModes.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewModes.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Dialogs\_CommentAddDialog.generated.cs">
+      <DependentUpon>_CommentAddDialog.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Clients\_ContactCard.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_ContactCard.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Order\Detail.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Detail.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Review\Index.generated.cs">
+      <DependentUpon>Index.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Brands\Index1.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Brands\Info.generated.cs">
+      <DependentUpon>Info.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Cart\_ImportToCartHeader.generated.cs">
+      <DependentUpon>_ImportToCartHeader.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Cart\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Cart\Preview.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Preview.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CatalogService\Related.generated.cs">
+      <DependentUpon>Related.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\CatalogService\Sets.generated.cs">
+      <DependentUpon>Sets.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\CatalogService\BestOffers.generated.cs">
+      <DependentUpon>BestOffers.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\CatalogService\GetWarePropsListMain.generated.cs">
+      <DependentUpon>GetWarePropsListMain.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\CatalogService\GetWarePropsListTable.generated.cs">
+      <DependentUpon>GetWarePropsListTable.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\CatalogService\OffersTable.generated.cs">
+      <DependentUpon>OffersTable.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\CatalogService\Applicability.generated.cs">
+      <DependentUpon>Applicability.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\CatalogService\ShortProperties.generated.cs">
+      <DependentUpon>ShortProperties.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Catalog\Brands.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Brands.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Catalog\Catalog.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Catalog.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Catalog\CatalogFilter.generated.cs">
+      <DependentUpon>CatalogFilter.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Catalog\CatalogList.generated.cs">
+      <DependentUpon>CatalogList.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\CatalogService\Properties.generated.cs">
+      <DependentUpon>Properties.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Catalog\GroupsNav.generated.cs">
+      <DependentUpon>GroupsNav.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Catalog\WaresListForGroup.generated.cs">
+      <DependentUpon>WaresListForGroup.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Catalog\WareGroups.generated.cs">
+      <DependentUpon>WareGroups.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Clients\_Contracts.generated.cs">
+      <DependentUpon>_Contracts.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Layout\Authorized.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Authorized.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Layout\CommonDialogs.generated.cs">
+      <DependentUpon>CommonDialogs.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Layout\HeaderBottomMob.generated.cs">
+      <DependentUpon>HeaderBottomMob.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Layout\StickyFooter.generated.cs">
+      <DependentUpon>StickyFooter.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Layout\StickyHeader.generated.cs">
+      <DependentUpon>StickyHeader.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Security\PasswordRecoveryPinCheck.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PasswordRecoveryPinCheck.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Cart\CartDialog.generated.cs">
+      <DependentUpon>CartDialog.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\SyncCartScript.generated.cs">
+      <DependentUpon>SyncCartScript.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\Components\FilterBadges.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FilterBadges.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Components\FilterBadgesSelection.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FilterBadgesSelection.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Layouts\CatalogHeaderControlsMob.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CatalogHeaderControlsMob.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\MessagePage.generated.cs">
+      <DependentUpon>MessagePage.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\_OrderListScripts.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_OrderListScripts.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Clients\ClientPresenters.generated.cs">
+      <DependentUpon>ClientPresenters.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Clients\Index.generated.cs">
+      <DependentUpon>Index.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Clients\_ClientInfo.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_ClientInfo.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Clients\_ClientOptionsDescription.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_ClientOptionsDescription.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Clients\_ClientsScripts.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_ClientsScripts.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Clients\_ClientsScriptsEx.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_ClientsScriptsEx.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Compare\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ComparisionAct\_ComparisionActTable.generated.cs">
+      <DependentUpon>_ComparisionActTable.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\ComparisionAct\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ComparisionAct\_ComparisionActDetail.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_ComparisionActDetail.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ComparisionAct\_ComparisionActDetailMobile.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_ComparisionActDetailMobile.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ComparisionAct\_ComparisionActFilter.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_ComparisionActFilter.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContentManagement\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContentManagement\SiteMap.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SiteMap.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Error\Error404.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Error404.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\Index.generated.cs">
+      <DependentUpon>Index.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Home\Banners.generated.cs">
+      <DependentUpon>Banners.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Home\LazyNewsSection.generated.cs">
+      <DependentUpon>LazyNewsSection.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Home\NewsAndPromotionsSection.generated.cs">
+      <DependentUpon>NewsAndPromotionsSection.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Home\PromoSection.generated.cs">
+      <DependentUpon>PromoSection.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Layout\ContactHeader.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ContactHeader.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Layout\ContactHeaderMob.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ContactHeaderMob.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Layout\MainInformer.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MainInformer.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Layout\TopMenu.generated.cs">
+      <DependentUpon>TopMenu.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Lxm\Categories.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Categories.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Lxm\Filter.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Filter.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Lxm\FilterDialog.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FilterDialog.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Lxm\FindVehicles.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FindVehicles.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Lxm\GroupDetails.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GroupDetails.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Lxm\Groups.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Groups.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Lxm\GroupsAsImages.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GroupsAsImages.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Lxm\SelectionByAutoGroupsAsImages.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SelectionByAutoGroupsAsImages.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Lxm\Unit.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Unit.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Lxm\_VehiclesCards.generated.cs">
+      <DependentUpon>_VehiclesCards.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Lxm\_VehiclesList.generated.cs">
+      <DependentUpon>_VehiclesList.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Lxm\VinSearch.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VinSearch.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Lxm\Wizard.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Wizard.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Lxm\_filteredGroups.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_filteredGroups.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Lxm\_VinSearchHistory.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_VinSearchHistory.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Message\BotDetected.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BotDetected.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Message\Show.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Show.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\News\GetHomeInfo.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GetHomeInfo.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\News\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\News\NewsList.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NewsList.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\News\Show.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Show.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\News\_NewsListCard.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_NewsListCard.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Order\DebtWarningDialog.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DebtWarningDialog.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Order\ExtractOrderDialog.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExtractOrderDialog.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Order\List.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>List.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Order\OrderHeaderPartial.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrderHeaderPartial.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Order\Payment.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Payment.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Order\PaymentConfirmation.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PaymentConfirmation.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Order\PaymentRejection.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PaymentRejection.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Order\PositionAvailability.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PositionAvailability.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Order\Schedules.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Schedules.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Order\Summary.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Summary.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Order\SummaryMail.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SummaryMail.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Order\_SummaryOrderInfo.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_SummaryOrderInfo.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OriginalCatalog\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OriginalCatalog\Show.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Show.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OriginalCatalog\_SideBar.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_SideBar.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Article\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Promotions\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Promotions\PromotionsList.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PromotionsList.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Promotions\Show.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Show.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Promotions\_PromotionsListCard.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_PromotionsListCard.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Security\EditPersonalData.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EditPersonalData.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Security\EditUserData.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EditUserData.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Security\InternalRegistration.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InternalRegistration.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Security\Logon.generated.cs">
+      <DependentUpon>Logon.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Security\Registration.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Registration.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Security\PasswordRecovery.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PasswordRecovery.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Security\UsersManagement.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UsersManagement.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SelectionByAuto\GrossSelection.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GrossSelection.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SelectionByAuto\Info.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Info.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SelectionByAuto\MarkList.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MarkList.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SelectionByAuto\ModelList.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelList.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SelectionByAuto\ModifList.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModifList.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SelectionByAuto\ModifListForView.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModifListForView.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SelectionByAuto\Selection.generated.cs">
+      <DependentUpon>Selection.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\SelectionByAuto\SelectionByWare.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SelectionByWare.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SelectionByAuto\TiresCalculator.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TiresCalculator.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SelectionByAuto\_ModifInfoDialog.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_ModifInfoDialog.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\AddToCartDialog.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddToCartDialog.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\AddToCartScript.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddToCartScript.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\ComparisionMenu.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ComparisionMenu.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\ComparisionPannel.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ComparisionPannel.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Components\AlertNotification.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AlertNotification.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Components\Authorize.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Authorize.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Components\BrandCatalogs.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BrandCatalogs.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Components\BreadCrumbsRender.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BreadCrumbsRender.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Components\CartHeader.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CartHeader.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Components\CustomTopCatalogMenu.generated.cs">
+      <DependentUpon>CustomTopCatalogMenu.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\Components\MobDialogs.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MobDialogs.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Components\MobUtils.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MobUtils.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Components\WareActionLabel.generated.cs">
+      <DependentUpon>WareActionLabel.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\Components\WareImageTable.generated.cs">
+      <DependentUpon>WareImageTable.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\Components\CatalogNav.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CatalogNav.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Components\CategoryNav.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CategoryNav.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Components\Filter.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Filter.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Components\FilterSelectSection.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FilterSelectSection.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Components\FormAuthorize.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FormAuthorize.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Components\GroupsTreeNav.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GroupsTreeNav.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Components\HeaderContacts.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HeaderContacts.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Components\Logo.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Logo.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Components\NewsArticle.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NewsArticle.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Components\Pagination.generated.cs">
+      <DependentUpon>Pagination.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\Components\SearchForm.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SearchForm.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Components\SelectLang.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SelectLang.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Components\SocExpanded.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SocExpanded.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Components\TopHeaderNav.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TopHeaderNav.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Layout\Dialogs\_CallbackDialog.generated.cs">
+      <DependentUpon>_CallbackDialog.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Layout\Dialogs\_AuthorizeDialog.generated.cs">
+      <DependentUpon>_AuthorizeDialog.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Layout\Dialogs\_LocationsDialog.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_LocationsDialog.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\Collection.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Collection.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Error.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Error.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\GridViewFooter.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GridViewFooter.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\GridViewFooterScripts.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GridViewFooterScripts.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Catalog\GroupIcons.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GroupIcons.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Layouts\CatalogHeaderControls.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CatalogHeaderControls.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\NewsSection.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NewsSection.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Layouts\TypesSection.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TypesSection.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Layouts\_Captcha.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_Captcha.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Layout\Footer.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Footer.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Layouts\_Header.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_Header.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Layouts\_TagsAfterBody.generated.cs">
+      <DependentUpon>_TagsAfterBody.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\Layouts\_Tags.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_Tags.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\NewAddress.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NewAddress.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\PersonalMenuList.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PersonalMenuList.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\_CatalogLayout.generated.cs">
+      <DependentUpon>_CatalogLayout.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\_FilterScripts.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_FilterScripts.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\_Inner.generated.cs">
+      <DependentUpon>_Inner.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\_Layout.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_Layout.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\_PersonalLayout.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_PersonalLayout.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\_WareListScriptsEx.generated.cs">
+      <DependentUpon>_WareListScriptsEx.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\_WareListScripts.generated.cs">
+      <DependentUpon>_WareListScripts.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\TV\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TV\Test.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Test.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UploadPriceKros\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserNotifications\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\VINRequest\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\VINRequest\NewRequest.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NewRequest.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\VINRequest\NewRequestPositions.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NewRequestPositions.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\VINRequest\ViewRequest.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewRequest.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\VINRequest\_VinRequestFilter.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_VinRequestFilter.cshtml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\css\old_styles.min.css" />
+    <Content Include="assets\css\styles.min.css" />
+    <Content Include="assets\fonts\lg.svg" />
+    <Content Include="assets\images\404.svg" />
+    <Content Include="assets\images\500.svg" />
+    <Content Include="assets\images\brands-bg.png" />
+    <Content Include="assets\images\car-side.svg" />
+    <Content Include="assets\images\content\apollo-tyres-logo.svg" />
+    <Content Include="assets\images\content\category-1.jpg" />
+    <Content Include="assets\images\content\category-2.jpg" />
+    <Content Include="assets\images\content\category-3.jpg" />
+    <Content Include="assets\images\content\filtron.png" />
+    <Content Include="assets\images\content\illustration.jpg" />
+    <Content Include="assets\images\content\match-1.jpg" />
+    <Content Include="assets\images\content\match-10.jpg" />
+    <Content Include="assets\images\content\match-11.jpg" />
+    <Content Include="assets\images\content\match-12.jpg" />
+    <Content Include="assets\images\content\match-13.jpg" />
+    <Content Include="assets\images\content\match-14.jpg" />
+    <Content Include="assets\images\content\match-15.jpg" />
+    <Content Include="assets\images\content\match-16.jpg" />
+    <Content Include="assets\images\content\match-17.jpg" />
+    <Content Include="assets\images\content\match-18.jpg" />
+    <Content Include="assets\images\content\match-19.jpg" />
+    <Content Include="assets\images\content\match-2.jpg" />
+    <Content Include="assets\images\content\match-20.jpg" />
+    <Content Include="assets\images\content\match-21.jpg" />
+    <Content Include="assets\images\content\match-22.jpg" />
+    <Content Include="assets\images\content\match-23.jpg" />
+    <Content Include="assets\images\content\match-24.jpg" />
+    <Content Include="assets\images\content\match-25.jpg" />
+    <Content Include="assets\images\content\match-26.jpg" />
+    <Content Include="assets\images\content\match-27.jpg" />
+    <Content Include="assets\images\content\match-28.jpg" />
+    <Content Include="assets\images\content\match-29.jpg" />
+    <Content Include="assets\images\content\match-3.jpg" />
+    <Content Include="assets\images\content\match-30.jpg" />
+    <Content Include="assets\images\content\match-31.jpg" />
+    <Content Include="assets\images\content\match-32.jpg" />
+    <Content Include="assets\images\content\match-4.jpg" />
+    <Content Include="assets\images\content\match-5.jpg" />
+    <Content Include="assets\images\content\match-6.jpg" />
+    <Content Include="assets\images\content\match-7.jpg" />
+    <Content Include="assets\images\content\match-8.jpg" />
+    <Content Include="assets\images\content\match-9.jpg" />
+    <Content Include="assets\images\content\match-ill-1.jpg" />
+    <Content Include="assets\images\content\match-ill-10.jpg" />
+    <Content Include="assets\images\content\match-ill-11.jpg" />
+    <Content Include="assets\images\content\match-ill-12.jpg" />
+    <Content Include="assets\images\content\match-ill-13.jpg" />
+    <Content Include="assets\images\content\match-ill-14.jpg" />
+    <Content Include="assets\images\content\match-ill-15.jpg" />
+    <Content Include="assets\images\content\match-ill-16.jpg" />
+    <Content Include="assets\images\content\match-ill-2.jpg" />
+    <Content Include="assets\images\content\match-ill-3.jpg" />
+    <Content Include="assets\images\content\match-ill-4.jpg" />
+    <Content Include="assets\images\content\match-ill-5.jpg" />
+    <Content Include="assets\images\content\match-ill-6.jpg" />
+    <Content Include="assets\images\content\match-ill-7.jpg" />
+    <Content Include="assets\images\content\match-ill-8.jpg" />
+    <Content Include="assets\images\content\match-ill-9.jpg" />
+    <Content Include="assets\images\content\match-item-detail-1.jpg" />
+    <Content Include="assets\images\content\match-item-detail-2.jpg" />
+    <Content Include="assets\images\content\match-item-detail-3.jpg" />
+    <Content Include="assets\images\content\match-item-detail-4.jpg" />
+    <Content Include="assets\images\content\news-1-inner.jpg" />
+    <Content Include="assets\images\content\news-1.jpg" />
+    <Content Include="assets\images\content\news-10-inner.jpg" />
+    <Content Include="assets\images\content\news-2-inner.jpg" />
+    <Content Include="assets\images\content\news-2.jpg" />
+    <Content Include="assets\images\content\news-3.jpg" />
+    <Content Include="assets\images\content\news-4.jpg" />
+    <Content Include="assets\images\content\news-5.jpg" />
+    <Content Include="assets\images\content\news-6.jpg" />
+    <Content Include="assets\images\content\news-7.jpg" />
+    <Content Include="assets\images\content\product-img-1.jpg" />
+    <Content Include="assets\images\content\product-img-2.jpg" />
+    <Content Include="assets\images\content\product-img-3.jpg" />
+    <Content Include="assets\images\content\product-img-4.jpg" />
+    <Content Include="assets\images\content\product-logo-1.png" />
+    <Content Include="assets\images\content\product-logo-2.png" />
+    <Content Include="assets\images\content\product-logo-3.png" />
+    <Content Include="assets\images\content\product-logo-4.png" />
+    <Content Include="assets\images\content\product-logo-5.jpg" />
+    <Content Include="assets\images\content\product-main-promo-slider-1.jpg" />
+    <Content Include="assets\images\content\product-main-promo-slider-2.jpg" />
+    <Content Include="assets\images\content\product-main-promo-slider-3.jpg" />
+    <Content Include="assets\images\content\product-main-promo-slider-4.jpg" />
+    <Content Include="assets\images\content\product-main-promo-slider-5.jpg" />
+    <Content Include="assets\images\content\product-main-promo-slider-6.jpg" />
+    <Content Include="assets\images\content\product-main-promo-slider-7.jpg" />
+    <Content Include="assets\images\content\product-main-promo-thumb-1.jpg" />
+    <Content Include="assets\images\content\product-main-promo-thumb-2.jpg" />
+    <Content Include="assets\images\content\product-main-promo-thumb-3.jpg" />
+    <Content Include="assets\images\content\product-main-promo-thumb-4.jpg" />
+    <Content Include="assets\images\content\product-main-promo-thumb-5.jpg" />
+    <Content Include="assets\images\content\product-main-promo-thumb-6.jpg" />
+    <Content Include="assets\images\content\product-main-promo-thumb-7.jpg" />
+    <Content Include="assets\images\content\product-main-promo-zoom-1.jpg" />
+    <Content Include="assets\images\content\product-main-promo-zoom-2.jpg" />
+    <Content Include="assets\images\content\product-main-promo-zoom-3.jpg" />
+    <Content Include="assets\images\content\product-main-promo-zoom-4.jpg" />
+    <Content Include="assets\images\content\product-main-promo-zoom-5.jpg" />
+    <Content Include="assets\images\content\product-main-promo-zoom-6.jpg" />
+    <Content Include="assets\images\content\product-main-promo-zoom-7.jpg" />
+    <Content Include="assets\images\content\slide-1.jpg" />
+    <Content Include="assets\images\excel.svg" />
+    <Content Include="assets\images\facebook.png" />
+    <Content Include="assets\images\favicon.ico" />
+    <Content Include="assets\images\general\basket-default.png" />
+    <Content Include="assets\images\general\product-default.jpg" />
+    <Content Include="assets\images\google.png" />
+    <Content Include="assets\images\liqpay.png" />
+    <Content Include="assets\images\loading.gif" />
+    <Content Include="assets\images\lock.svg" />
+    <Content Include="assets\images\logo.svg" />
+    <Content Include="assets\images\mastercard.svg" />
+    <Content Include="assets\images\payment-1.svg" />
+    <Content Include="assets\images\payment-2.svg" />
+    <Content Include="assets\images\payment-3.svg" />
+    <Content Include="assets\images\pdf.svg" />
+    <Content Include="assets\images\restore-password.svg" />
+    <Content Include="assets\images\svg\symbol\sprite.svg" />
+    <Content Include="assets\images\svg\user-regular.svg" />
+    <Content Include="assets\images\ua.svg" />
+    <Content Include="assets\images\visa.svg" />
+    <Content Include="assets\js\libs.min.js" />
+    <Content Include="assets\js\main.js" />
+    <Content Include="Content\chosen\chosen-sprite%402x.png" />
+    <Content Include="Content\chosen\chosen-sprite.png" />
+    <Content Include="Content\chosen\chosen.css" />
+    <Content Include="Content\chosen\chosen.jquery.js" />
+    <Content Include="Content\chosen\chosen.jquery.min.js" />
+    <Content Include="Content\chosen\chosen.min.css" />
+    <Content Include="Content\chosen\chosen.proto.js" />
+    <Content Include="Content\chosen\chosen.proto.min.js" />
+    <Content Include="Content\chosen\index.html" />
+    <Content Include="Content\chosen\index.proto.html" />
+    <Content Include="Content\chosen\options.html" />
+    <Content Include="Content\css-skeletons.min.css" />
+    <Content Include="Content\EasyAutocomplete\easy-autocomplete.css" />
+    <Content Include="Content\EasyAutocomplete\easy-autocomplete.min.css" />
+    <Content Include="Content\EasyAutocomplete\easy-autocomplete.themes.css" />
+    <Content Include="Content\EasyAutocomplete\easy-autocomplete.themes.min.css" />
+    <Content Include="Content\EasyAutocomplete\jquery.easy-autocomplete.js" />
+    <Content Include="Content\EasyAutocomplete\jquery.easy-autocomplete.min.js" />
+    <Content Include="Content\fancybox\blank.gif" />
+    <Content Include="Content\fancybox\fancybox-x.png" />
+    <Content Include="Content\fancybox\fancybox-y.png" />
+    <Content Include="Content\fancybox\fancybox.png" />
+    <Content Include="Content\fancybox\fancy_close.png" />
+    <Content Include="Content\fancybox\fancy_loading.png" />
+    <Content Include="Content\fancybox\fancy_nav_left.png" />
+    <Content Include="Content\fancybox\fancy_nav_right.png" />
+    <Content Include="Content\fancybox\fancy_shadow_e.png" />
+    <Content Include="Content\fancybox\fancy_shadow_n.png" />
+    <Content Include="Content\fancybox\fancy_shadow_ne.png" />
+    <Content Include="Content\fancybox\fancy_shadow_nw.png" />
+    <Content Include="Content\fancybox\fancy_shadow_s.png" />
+    <Content Include="Content\fancybox\fancy_shadow_se.png" />
+    <Content Include="Content\fancybox\fancy_shadow_sw.png" />
+    <Content Include="Content\fancybox\fancy_shadow_w.png" />
+    <Content Include="Content\fancybox\fancy_title_left.png" />
+    <Content Include="Content\fancybox\fancy_title_main.png" />
+    <Content Include="Content\fancybox\fancy_title_over.png" />
+    <Content Include="Content\fancybox\fancy_title_right.png" />
+    <Content Include="Content\fancybox\jquery.fancybox-3.5.7.css" />
+    <Content Include="Content\images\award.png" />
+    <Content Include="Content\images\cancel-compare.gif" />
+    <Content Include="Content\images\cito-icon.png" />
+    <Content Include="Content\images\empty.png" />
+    <Content Include="Content\images\favicon.ico" />
+    <Content Include="Content\images\finish.gif" />
+    <Content Include="Content\images\lxm\info.gif" />
+    <Content Include="Content\images\lxm\lmb.png" />
+    <Content Include="Content\images\lxm\mouse.png" />
+    <Content Include="Content\images\lxm\mouse_wheel.png" />
+    <Content Include="Content\images\lxm\move.png" />
+    <Content Include="Content\images\lxm\pointer.png" />
+    <Content Include="Content\images\hot-line-small.gif" />
+    <Content Include="Content\images\question.png" />
+    <Content Include="Content\images\search-void.png" />
+    <Content Include="Content\images\start.gif" />
+    <Content Include="Content\images\STO.jpg" />
+    <Content Include="Content\images\voskl.png" />
+    <Content Include="Content\images\vost-pass.png" />
+    <Content Include="Content\jcarousel\jcarousel.basic.min.css">
+      <DependentUpon>jcarousel.basic.css</DependentUpon>
+    </Content>
+    <Content Include="Content\sounds\announce.mp3" />
+    <Content Include="Content\views\home.css">
+      <DependentUpon>home.less</DependentUpon>
+    </Content>
+    <Content Include="Content\views\home.min.css">
+      <DependentUpon>home.css</DependentUpon>
+    </Content>
+    <Content Include="Content\views\inner.css">
+      <DependentUpon>inner.less</DependentUpon>
+    </Content>
+    <Content Include="Content\views\inner.min.css">
+      <DependentUpon>inner.css</DependentUpon>
+    </Content>
+    <Content Include="Content\views\laximo.css">
+      <DependentUpon>laximo.less</DependentUpon>
+    </Content>
+    <Content Include="Content\views\laximo.min.css">
+      <DependentUpon>laximo.css</DependentUpon>
+    </Content>
+    <Content Include="ExtContent\images\automall-card.png" />
+    <Content Include="ExtContent\images\logo-invoice.png" />
+    <Content Include="ExtContent\modifGroupBanners\88432_1.jpg" />
+    <Content Include="ExtContent\modifGroupBanners\88432_2.jpg" />
+    <Content Include="ExtContent\modifGroupBanners\default.jpg" />
+    <Content Include="ExtContent\TDGroupImages\2753.png" />
+    <Content Include="ExtContent\TDGroupImages\2753_hover.png" />
+    <Content Include="ExtContent\TDGroupImages\default.png" />
+    <Content Include="ExtContent\TDGroupImages\default_hover.png" />
+    <Content Include="Scripts\additional-methods.js" />
+    <Content Include="Scripts\additional-methods.min.js" />
+    <Content Include="Scripts\Dialogs\wareSpecDialog.js" />
+    <Content Include="Scripts\dragscrollable.js" />
+    <Content Include="Content\images\block.png" />
+    <Content Include="Content\images\edit.png" />
+    <Content Include="Content\images\error.jpg" />
+    <Content Include="Content\images\key.jpg" />
+    <Content Include="Content\images\sing-vos.png" />
+    <Content Include="Content\images\vost-pass-send-mail.jpg" />
+    <Content Include="Content\jcarousel\jcarousel.basic.css">
+      <DependentUpon>jcarousel.basic.less</DependentUpon>
+    </Content>
+    <Content Include="Content\jcarousel\jcarousel.responsive.css">
+      <DependentUpon>jcarousel.responsive.less</DependentUpon>
+    </Content>
+    <Content Include="Content\jcarousel\jcarousel.responsive.min.css">
+      <DependentUpon>jcarousel.responsive.css</DependentUpon>
+    </Content>
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\jcarousel\jcarousel.basic.less" />
+    <Content Include="Content\jcarousel\jcarousel.responsive.less" />
+    <Content Include="Content\jcarousel\_notes\jcarousel.basic.less.mno" />
+    <Content Include="Content\jcarousel\_notes\jcarousel.responsive.less.mno" />
+    <Content Include="Content\jcarousel\jcarousel.responsive.css.map">
+      <DependentUpon>jcarousel.responsive.css</DependentUpon>
+    </Content>
+    <Content Include="Content\jcarousel\jcarousel.basic.css.map">
+      <DependentUpon>jcarousel.basic.css</DependentUpon>
+    </Content>
+    <Content Include="Content\views\home.less" />
+    <Content Include="Content\views\laximo.less" />
+    <Content Include="Content\views\laximo.css.map">
+      <DependentUpon>laximo.css</DependentUpon>
+    </Content>
+    <Content Include="assets\fonts\fa-regular-400.woff" />
+    <Content Include="assets\fonts\fa-regular-400.woff2" />
+    <Content Include="assets\fonts\lg.eot" />
+    <Content Include="assets\fonts\lg.ttf" />
+    <Content Include="assets\fonts\lg.woff" />
+    <Content Include="assets\fonts\fa-solid-900.woff" />
+    <Content Include="assets\fonts\fa-solid-900.woff2" />
+    <Content Include="Areas\Test\Views\web.config" />
+    <Content Include="Areas\Test\Views\Catalog2\Index.cshtml" />
+    <Content Include="Areas\Test\Views\Catalog2\Brands.cshtml" />
+    <Content Include="Areas\Test\Views\Catalog2\CatalogList.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>CatalogList.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Test\Views\Catalog2\CatalogListNoPagination.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>CatalogListNoPagination.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Test\Views\Catalog2\CatalogFilter.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>CatalogFilter.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Test\Views\_ViewStart.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_ViewStart.generated.cs</LastGenOutput>
+    </Content>
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
+    <Content Include="Content\chosen\composer.json" />
+    <Content Include="Content\chosen\LICENSE.md" />
+    <Content Include="Content\EasyAutocomplete\maps\easy-autocomplete.css.map" />
+    <Content Include="Content\EasyAutocomplete\maps\easy-autocomplete.min.css.map" />
+    <Content Include="Content\EasyAutocomplete\maps\easy-autocomplete.themes.css.map" />
+    <Content Include="Content\EasyAutocomplete\maps\easy-autocomplete.themes.min.css.map" />
+    <Content Include="Content\views\inner.less" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Scripts\commonOrderScripts.js" />
+    <Content Include="Scripts\default.js" />
+    <Content Include="Scripts\fancybox\jquery.fancybox-3.5.7.js" />
+    <Content Include="Scripts\Fly.js" />
+    <Content Include="Scripts\formToJSON.js" />
+    <Content Include="Scripts\html2canvas.js" />
+    <Content Include="Scripts\jcarousel\jcarousel.basic.js" />
+    <Content Include="Scripts\jcarousel\jcarousel.responsive.js" />
+    <Content Include="Scripts\jcarousel\jquery.jcarousel-autoscroll.js" />
+    <Content Include="Scripts\jcarousel\jquery.jcarousel.min.js" />
+    <Content Include="Scripts\jquery-3.6.1.js" />
+    <Content Include="Scripts\jquery.mousewheel.js" />
+    <Content Include="Scripts\jquery-migrate-1.2.1.min.js.map">
+      <DependentUpon>jquery-migrate-1.2.1.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery.sessionManager.js" />
+    <Content Include="Scripts\jquery-migrate-1.2.1.js" />
+    <Content Include="Scripts\jquery-migrate-1.2.1.min.js" />
+    <Content Include="Scripts\jquery.cookie.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jwplayer\jwplayer.flash.swf" />
+    <Content Include="Scripts\jwplayer\jwplayer.html5.js" />
+    <Content Include="Scripts\jwplayer\jwplayer.js" />
+    <Content Include="Scripts\jwplayer\README.html" />
+    <Content Include="Scripts\localization\messages_ar.js" />
+    <Content Include="Scripts\localization\messages_bg.js" />
+    <Content Include="Scripts\localization\messages_cn.js" />
+    <Content Include="Scripts\localization\messages_cs.js" />
+    <Content Include="Scripts\localization\messages_da.js" />
+    <Content Include="Scripts\localization\messages_de.js" />
+    <Content Include="Scripts\localization\messages_el.js" />
+    <Content Include="Scripts\localization\messages_es.js" />
+    <Content Include="Scripts\localization\messages_fa.js" />
+    <Content Include="Scripts\localization\messages_fi.js" />
+    <Content Include="Scripts\localization\messages_fr.js" />
+    <Content Include="Scripts\localization\messages_he.js" />
+    <Content Include="Scripts\localization\messages_hu.js" />
+    <Content Include="Scripts\localization\messages_it.js" />
+    <Content Include="Scripts\localization\messages_kk.js" />
+    <Content Include="Scripts\localization\messages_lt.js" />
+    <Content Include="Scripts\localization\messages_lv.js" />
+    <Content Include="Scripts\localization\messages_nl.js" />
+    <Content Include="Scripts\localization\messages_no.js" />
+    <Content Include="Scripts\localization\messages_pl.js" />
+    <Content Include="Scripts\localization\messages_ptbr.js" />
+    <Content Include="Scripts\localization\messages_ptpt.js" />
+    <Content Include="Scripts\localization\messages_ro.js" />
+    <Content Include="Scripts\localization\messages_ru.js" />
+    <Content Include="Scripts\localization\messages_se.js" />
+    <Content Include="Scripts\localization\messages_sk.js" />
+    <Content Include="Scripts\localization\messages_tr.js" />
+    <Content Include="Scripts\localization\messages_tw.js" />
+    <Content Include="Scripts\localization\messages_ua.js" />
+    <Content Include="Scripts\localization\messages_uk.js" />
+    <Content Include="Scripts\localization\methods_de.js" />
+    <Content Include="Scripts\localization\methods_nl.js" />
+    <Content Include="Scripts\localization\methods_pt.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\notify.min.js" />
+    <Content Include="Scripts\overlib\overlib_adaptive_width.js" />
+    <Content Include="Scripts\overlib\overlib_mini.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\script.js" />
+    <Content Include="Scripts\ulogin.js" />
+    <Content Include="Scripts\url.js" />
+    <Content Include="Scripts\Views\Catalog\autoFilter.js" />
+    <Content Include="Scripts\Views\gridViewFooter.js" />
+    <Content Include="Scripts\Views\cart.js" />
+    <Content Include="Scripts\Views\home.js" />
+    <Content Include="Scripts\Views\laximo.js" />
+    <Content Include="Scripts\Views\layout.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Services.asmx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Shared\PersonalMenuList.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>PersonalMenuList.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\_PersonalLayout.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_PersonalLayout.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\Shared\Error.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Error.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Article\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Security\Registration.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Registration.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Scripts\respond.min.js.map">
+      <DependentUpon>respond.min.js</DependentUpon>
+    </Content>
+    <Content Include="Views\OriginalCatalog\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Message\BotDetected.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>BotDetected.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Message\Show.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Show.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\NewAddress.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>NewAddress.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Security\PasswordRecovery.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>PasswordRecovery.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Security\EditPersonalData.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>EditPersonalData.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Order\OrderHeaderPartial.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>OrderHeaderPartial.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Order\ExtractOrderDialog.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ExtractOrderDialog.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Order\PositionAvailability.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>PositionAvailability.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\AddToCartScript.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>AddToCartScript.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\AddToCartDialog.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>AddToCartDialog.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\ComparisionMenu.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ComparisionMenu.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\ComparisionPannel.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ComparisionPannel.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Order\List.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>List.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\GridViewFooter.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>GridViewFooter.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\GridViewFooterScripts.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>GridViewFooterScripts.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Order\Schedules.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Schedules.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Order\Summary.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Summary.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Order\SummaryMail.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>SummaryMail.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Order\Payment.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Payment.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Order\_SummaryOrderInfo.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_SummaryOrderInfo.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\_FilterScripts.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_FilterScripts.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Order\DebtWarningDialog.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>DebtWarningDialog.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\SelectionByAuto\TiresCalculator.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>TiresCalculator.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\News\NewsList.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>NewsList.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\News\_NewsListCard.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_NewsListCard.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\News\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\News\Show.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Show.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\ComparisionAct\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Compare\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\SelectionByAuto\ModifList.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ModifList.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\SelectionByAuto\SelectionByWare.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>SelectionByWare.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\SelectionByAuto\Info.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Info.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\SelectionByAuto\MarkList.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>MarkList.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\SelectionByAuto\ModelList.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ModelList.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\SelectionByAuto\ModifListForView.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ModifListForView.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\SelectionByAuto\_ModifInfoDialog.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_ModifInfoDialog.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Error\Error404.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Error404.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\VINRequest\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\VINRequest\NewRequest.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>NewRequest.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\VINRequest\NewRequestPositions.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>NewRequestPositions.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\VINRequest\ViewRequest.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ViewRequest.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\Collection.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Collection.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Security\UsersManagement.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>UsersManagement.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Security\EditUserData.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>EditUserData.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\ContentManagement\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\AccessStatistics\Detail.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Detail.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\AccessStatistics\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Promotions\_PromotionsListCard.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_PromotionsListCard.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Promotions\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Promotions\PromotionsList.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>PromotionsList.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Promotions\Show.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Show.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\OriginalCatalog\Show.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Show.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\ContentManagement\SiteMap.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>SiteMap.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\TV\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\TV\Test.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Test.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Lxm\SelectionByAutoGroupsAsImages.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>SelectionByAutoGroupsAsImages.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\SelectionByAuto\GrossSelection.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>GrossSelection.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Order\PaymentRejection.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>PaymentRejection.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Lxm\VinSearch.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>VinSearch.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Lxm\Categories.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Categories.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Lxm\Unit.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Unit.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Lxm\Groups.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Groups.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Lxm\GroupDetails.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>GroupDetails.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Lxm\GroupsAsImages.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>GroupsAsImages.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Lxm\FilterDialog.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>FilterDialog.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Lxm\Filter.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Filter.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Home\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\ComparisionAct\_ComparisionActFilter.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_ComparisionActFilter.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\ComparisionAct\_ComparisionActDetail.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_ComparisionActDetail.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\ComparisionAct\_ComparisionActDetailMobile.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_ComparisionActDetailMobile.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Clients\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Clients\ClientPresenters.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ClientPresenters.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\ComparisionAct\_ComparisionActTable.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_ComparisionActTable.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Cart\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Cart\Preview.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Preview.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Clients\_ClientInfo.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_ClientInfo.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Clients\_ClientOptionsDescription.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_ClientOptionsDescription.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Lxm\_VinSearchHistory.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_VinSearchHistory.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Clients\_ClientsScripts.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_ClientsScripts.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Clients\_ClientsScriptsEx.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_ClientsScriptsEx.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Lxm\Wizard.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Wizard.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Lxm\_VehiclesList.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_VehiclesList.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Lxm\_VehiclesCards.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_VehiclesCards.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Brands\Info.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Info.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Lxm\_filteredGroups.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_filteredGroups.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Home\NewsAndPromotionsSection.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>NewsAndPromotionsSection.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Home\PromoSection.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>PromoSection.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Home\Banners.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Banners.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Home\LazyNewsSection.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>LazyNewsSection.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Layout\TopMenu.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>TopMenu.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Layout\MainInformer.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>MainInformer.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Brands\Index.cshtml">
+      <LastGenOutput>Index1.generated.cs</LastGenOutput>
+      <Generator>RazorGenerator</Generator>
+    </Content>
+    <Content Include="Views\Layout\ContactHeader.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ContactHeader.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Layout\ContactHeaderMob.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ContactHeaderMob.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\News\GetHomeInfo.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>GetHomeInfo.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Lxm\FindVehicles.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>FindVehicles.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Catalog\Brands.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Brands.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Catalog\CatalogFilter.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>CatalogFilter.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Catalog\CatalogList.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>CatalogList.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Catalog\WareGroups.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>WareGroups.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Catalog\GroupsNav.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>GroupsNav.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Catalog\WaresListForGroup.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>WaresListForGroup.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Catalog\Search.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Search.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Catalog\WareCard.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>WareCard.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\CatalogService\Properties.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Properties.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\CatalogService\BestOffers.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>BestOffers.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\CatalogService\OffersTable.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>OffersTable.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Catalog\Catalog.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Catalog.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\CatalogService\GetWarePropsListTable.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>GetWarePropsListTable.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\CatalogService\GetWarePropsListMain.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>GetWarePropsListMain.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Clients\_Contracts.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_Contracts.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\CatalogService\ShortProperties.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ShortProperties.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\CatalogService\Applicability.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Applicability.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\CatalogService\Sets.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Sets.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\CatalogService\Related.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Related.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Cart\_ImportToCartHeader.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_ImportToCartHeader.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Cart\ImportToCartExele.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ImportToCartExele.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Layout\CommonDialogs.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>CommonDialogs.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Layout\HeaderBottomMob.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>HeaderBottomMob.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Layout\StickyHeader.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>StickyHeader.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Layout\StickyFooter.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>StickyFooter.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Review\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Order\Create.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Create.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Order\Partials\OrderDialog.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>OrderDialog.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Order\Detail.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Detail.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Clients\_ContactCard.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_ContactCard.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Layout\HeaderBottom.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>HeaderBottom.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Layout\HeaderNav.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>HeaderNav.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Layout\HeaderNavMobile.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>HeaderNavMobile.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Dialogs\_CommentAddDialog.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_CommentAddDialog.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Catalog\CatalogBottom.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>CatalogBottom.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Catalog\CatalogBottomControls.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>CatalogBottomControls.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Catalog\CatalogBottomControlsMob.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>CatalogBottomControlsMob.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Catalog\CatalogHeader.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>CatalogHeader.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Catalog\CatalogHeaderControls.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>CatalogHeaderControls.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Catalog\CatalogHeaderControlsMob.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>CatalogHeaderControlsMob.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Catalog\CatalogTiles.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>CatalogTiles.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\News\ArticleListItem.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ArticleListItem.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Address\AddressDialog.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>AddressDialog.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Address\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\CatalogService\ShortPropertiesForTile.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ShortPropertiesForTile.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\CatalogService\OffersTableMob.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>OffersTableMob.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\CatalogService\ShortPropertiesForTable.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ShortPropertiesForTable.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Cart\_DesktopCartArea.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_DesktopCartArea.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Cart\_EmptyCart.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_EmptyCart.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Cart\_MobileCartArea.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_MobileCartArea.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Clients\ContactDialog.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ContactDialog.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Clients\_Contacts.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_Contacts.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Order\ListItemProperties.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ListItemProperties.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Order\OrderFilter.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>OrderFilter.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Order\OrderListMob.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>OrderListMob.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Layout\PersonalMenuList.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>PersonalMenuList.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Order\OrderDetailMob.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>OrderDetailMob.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Order\ListItemPropertiesMob.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ListItemPropertiesMob.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Clients\_ContractCard.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_ContractCard.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Garage\CarDialog.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>CarDialog.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Garage\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Garage\_CarCard.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_CarCard.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\CatalogService\_Offers.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_Offers.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\CatalogService\OffersFilter.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>OffersFilter.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\CatalogService\GetWareImages.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>GetWareImages.generated.cs</LastGenOutput>
+    </Content>
+    <None Include="Views\Order\PaymentConfirmation.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>PaymentConfirmation.generated.cs</LastGenOutput>
+    </None>
+    <Content Include="Views\UserNotifications\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Security\InternalRegistration.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>InternalRegistration.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\UploadPriceKros\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\_Layout.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_Layout.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Layouts\_Header.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_Header.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Layout\Footer.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Footer.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Components\TopHeaderNav.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>TopHeaderNav.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Components\SelectLang.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>SelectLang.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Components\Logo.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Logo.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Components\HeaderContacts.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>HeaderContacts.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Components\Authorize.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Authorize.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Components\FormAuthorize.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>FormAuthorize.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Components\SocExpanded.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>SocExpanded.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Components\CatalogNav.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>CatalogNav.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Components\BrandCatalogs.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>BrandCatalogs.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Components\SearchForm.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>SearchForm.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Layouts\TypesSection.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>TypesSection.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Home\NewsSection.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>NewsSection.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Components\NewsArticle.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>NewsArticle.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\_CatalogLayout.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_CatalogLayout.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\_Inner.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_Inner.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Components\CategoryNav.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>CategoryNav.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Components\Filter.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Filter.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Layouts\CatalogHeaderControls.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>CatalogHeaderControls.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Components\Product.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Product.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Components\Pagination.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Pagination.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\_WareListScripts.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_WareListScripts.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Layouts\CatalogList.cshtml" />
+    <Content Include="Views\OriginalCatalog\_SideBar.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_SideBar.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Components\FilterSelectSection.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>FilterSelectSection.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Components\AlertNotification.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>AlertNotification.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\SelectionByAuto\Selection.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Selection.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Layouts\_Tags.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_Tags.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Layouts\_Captcha.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_Captcha.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Components\GroupsTreeNav.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>GroupsTreeNav.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Catalog\GroupIcons.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>GroupIcons.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Components\BreadCrumbsRender.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>BreadCrumbsRender.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\VINRequest\_VinRequestFilter.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_VinRequestFilter.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Security\Logon.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Logon.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Components\WareImageTable.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>WareImageTable.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Components\WareActionLabel.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>WareActionLabel.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Layout\Dialogs\_CallbackDialog.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_CallbackDialog.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Components\CustomTopCatalogMenu.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>CustomTopCatalogMenu.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Layouts\_TagsAfterBody.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_TagsAfterBody.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\_WareListScriptsEx.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_WareListScriptsEx.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Layouts\CatalogListNoPagination.cshtml" />
+    <Content Include="Views\Shared\Components\MobUtils.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>MobUtils.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Components\CartHeader.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>CartHeader.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Layout\Dialogs\_LocationsDialog.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_LocationsDialog.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Components\MobDialogs.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>MobDialogs.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Layout\Dialogs\_AuthorizeDialog.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_AuthorizeDialog.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Components\FilterBadges.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>FilterBadges.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Components\FilterBadgesSelection.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>FilterBadgesSelection.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Layouts\CatalogHeaderControlsMob.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>CatalogHeaderControlsMob.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Layout\Authorized.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Authorized.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\SyncCartScript.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>SyncCartScript.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Cart\CartDialog.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>CartDialog.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\MessagePage.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>MessagePage.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Security\PasswordRecoveryPinCheck.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>PasswordRecoveryPinCheck.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Order\PaymentDefault.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>PaymentDefault.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Order\PaymentRecitation.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>PaymentRecitation.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Order\Successful.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Successful.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Components\UserCars.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>UserCars.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Components\CatalogNavMobile.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>CatalogNavMobile.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Order\CreateDeliveryBlock.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>CreateDeliveryBlock.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Order\Partials\TableCartPosition.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>TableCartPosition.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Order\Partials\TableCartPositionMob.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>TableCartPositionMob.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Components\TableOrderPosition.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>TableOrderPosition.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Components\ViewModes.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ViewModes.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Order\_OrderListLayout.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_OrderListLayout.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\_OrderListScripts.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_OrderListScripts.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\SelectionByAuto\_SelectionScript.cshtml">
+      <Generator>RazorGenerator</Generator>
+    </Content>
+    <Content Include="Views\SelectionByAuto\WaresForModif.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>WaresForModif.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\SelectionByAuto\AssemblyWares.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>AssemblyWares.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Components\FilterRange.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>FilterRange.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Components\FilterRangeSection.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>FilterRangeSection.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Components\CommonFilter.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>CommonFilter.generated.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\Test\Data\" />
+    <Folder Include="Areas\Test\Views\Shared\" />
+    <Folder Include="Core\Comparision\" />
+    <Folder Include="Views\Reports\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Laximo.Guayaquil.Data\Laximo.Guayaquil.Data.csproj">
+      <Project>{87b556a9-28f0-4676-b942-ef26ec08ceb8}</Project>
+      <Name>Laximo.Guayaquil.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SharedLibrary.EmbededResources\SharedLibrary.EmbededResources.csproj">
+      <Project>{2695a75d-f343-4e6b-9176-8c81e4b4fd37}</Project>
+      <Name>SharedLibrary.EmbededResources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ValmiStore.Model\Webmall.Model.csproj">
+      <Project>{b8938641-3d4c-466a-845d-7d96a4073720}</Project>
+      <Name>Webmall.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ValmiStore.Resources\ValmiStore.Resources.csproj">
+      <Project>{031dd7bb-90dc-4b3f-890d-1e3464f2cc36}</Project>
+      <Name>ValmiStore.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Webmall.Cms.Squidex\Webmall.Cms.Squidex.csproj">
+      <Project>{AC2F0387-800B-4C90-B1C3-7EA00ED9C64B}</Project>
+      <Name>Webmall.Cms.Squidex</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Webmall.Laximo\Webmall.Laximo.csproj">
+      <Project>{C5648DE5-C241-4F97-96AA-F2E353085EFB}</Project>
+      <Name>Webmall.Laximo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Webmall.Model.ERP_1C\Webmall.Model.ERP_1C.csproj">
+      <Project>{c956128e-4e8b-4ad7-a924-39c787dbf14d}</Project>
+      <Name>Webmall.Model.ERP_1C</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Webmall.Model.PriceAggregator\Webmall.Model.PriceAggregator.csproj">
+      <Project>{d0eb77fe-01a2-49a1-8b6a-b222ad0b72e1}</Project>
+      <Name>Webmall.Model.PriceAggregator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Webmall.Model.SecurityDB\Webmall.Model.Database.csproj">
+      <Project>{7FEFB36E-4CB7-4167-AAE9-E8AFBA7788B3}</Project>
+      <Name>Webmall.Model.Database</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Webmall.Model.Test\Webmall.Model.Test.csproj">
+      <Project>{E75AE5ED-566B-4B36-9442-7912CCECF5C3}</Project>
+      <Name>Webmall.Model.Test</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
+  <!-- <Target Name="AfterBuild">
+    &lt;!&ndash;<RemoveDir Directories="$(ProjectDir)/dist/" Condition="Exists('$(ProjectDir)dist')" />
+    <Message Text="Cleaned the output directory" />&ndash;&gt;
+    <Exec Command="npm i" WorkingDirectory="$(ProjectDir)/Client/" />
+    <Message Text="NPM package restore completed." />
+    <Exec Command="npm run build" WorkingDirectory="$(ProjectDir)/Client/" />
+    <Message Text="All Angular apps built." />
+  </Target>-->
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

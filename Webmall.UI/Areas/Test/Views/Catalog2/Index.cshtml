@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "title";
+   // Layout = "_Layout";
+}
+
+<h2>Тестовые страницы магазина</h2>
+
+<ul>
+    <li>@Html.ActionLink("Список товаров", "ShowCatalog")</li>
+    <li>@Html.ActionLink("Поиск товаров", "Search", new {search = "gdb199"} )</li>
+    <li>@Html.ActionLink("Список производителей", "Brands")</li>
+</ul>

@@ -1,0 +1,338 @@
+﻿@* Generator: MvcHelper *@
+
+@using ViewRes
+@using Webmall.UI.Core
+@using ValmiStore.Model.Entities
+@using Webmall.Model
+@model Webmall.UI.Models.Ware.WareCardList
+<div class="catalog-secondary @(Model.InTab ? "tabs__accordeon-body" : "")">
+    <div class="spec d-md-none">
+        <div class="spec__header">
+            <div class="spec__header-title">@SharedResources.Producer / @SharedResources.WareNumber</div>
+            <div class="spec__header-title">@SharedResources.WareName</div>
+        </div>
+        @foreach (var ware in Model)
+        {
+            var isPresent = ware.IsPresent ? "is-present" : "";
+            var isImportant = ware.IsAction || ware.IsSale ? "important" : "";
+            var showOnePrice = ware.OnePrice;
+            <div class="spec__product">
+                <div class="spec__primary">
+                    <div class="spec__primary-info">
+                        <div class="spec__primary-brand"><a href="@ware.Url">@ware.ProducerName</a></div>
+                        <div class="spec__primary-articul">@ware.PartNumber</div>
+                        @{ Html.RenderPartial("Components/WareActionLabel", ware); }
+                    </div>
+                    <div class="spec__primary-details">
+                        <div class="spec__primary-heading @isPresent">@ware.Name</div>
+                    </div>
+                </div>
+                <div class="spec__secondary">
+                    @if (SessionHelper.CurrentUser.CurrentPresenter.CanSeePrices)
+                    {
+                        <div class="spec__secondary-info">
+                            <div class="spec__secondary-heading">@SharedResources.YourPrice</div>
+                        </div>
+                        <div class="spec__secondary-details">
+                            <div class="spec__secondary-price">
+                                <div class="spec__secondary-price-value"><span class="@isPresent @isImportant">@ware.Price </span><b>@ware.ValuteName</b></div>
+                                <div class="spec__secondary-price-label">@SharedResources.YourPrice</div>
+                            </div>
+                            @if (SessionHelper.ShowRetailPrice)
+                            {
+                                <div class="spec__secondary-price">
+                                    <div class="spec__secondary-price-value">@ware.RetailPrice @ware.ValuteName</div>
+                                    <div class="spec__secondary-price-label">@SharedResources.RetailPrice</div>
+                                </div>
+                            }
+                        </div>
+                    }
+
+
+                </div>
+                <div class="spec__footer">
+                    <ul class="spec__footer-list">
+                        <li class="spec__footer-item">
+                            @if (!Model.AreAnalogues)
+                            {
+                                <a class="spec__footer-link" href="#" data-dealer-toggle="similar" data-ware-id="@ware.Id">@SharedResources.Analogues <i class="fa fa-chevron-down"></i></a>
+                            <li class="spec__footer-item"><a class="spec__footer-link" href="#" data-dealer-toggle="spec" data-ware-id="@ware.Id">@SharedResources.Specifications <i class="fa fa-chevron-down"></i></a></li>
+                        }
+                            </li>
+                            <li class="spec__footer-item">
+                                <a class="spec__footer-link" href="#" data-dealer-toggle="add">
+                                    <svg class="icon icon-shopping-cart stock-table__add-icon">
+                                        <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#shopping-cart"+(ware.InCart > 0 ? "-full" : ""))"></use>
+                                    </svg>
+                                    <i class="fa fa-chevron-down"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    @if (!Model.AreAnalogues)
+                    {
+                        <div class="spec__similar" data-dealer="similar">
+                            <div id="div_similar_@ware.Id">@SharedResources.Loading...</div>
+                        </div>
+                        <div class="spec__spec" data-dealer="spec">
+                            <div id="div_spec_@ware.Id">@SharedResources.Loading...</div>
+                        </div>
+                    }
+                    <div class="spec__similar" data-dealer="add">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @SharedResources.Amount
+                                        @if (!showOnePrice)
+                                        {
+                                            if (SessionHelper.CurrentUser.CurrentPresenter.CanSeePrices)
+                                            {
+                                                <div>@SharedResources.YourPrice</div>
+                                            }
+                                        }
+                                    </th>
+                                    <th>@SharedResources.Warehouse</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var offer in ware.Offers.OrderBy(offer => offer.WarehouseId == ware.CurrentWarehouseId ? 0 : 1).ThenBy(offer => offer.Status(Model.AllowCustomOrders)))
+                                {
+                                    var showCart = Model.CanAddToCart && ware.CanAddToCart && offer.Status(Model.AllowCustomOrders) == OfferStatuses.CanAddToCart;
+                                    var isPresentOffer = showCart ? (!offer.DeliveryTerm.HasValue || offer.DeliveryTerm.Value.Date <= DateTime.Now.Date ? "is-present" : "is-transit") : "";
+                                    var isImportantOffer = ware.IsAction || offer.IsSale ? "important" : "";
+                                    <tr>
+                                        <td>
+                                            <div class="prod-amount">@offer.InStockQty</div>
+                                            @if (!showOnePrice)
+                                            {
+                                                <div class="prod-amount @isPresentOffer @isImportantOffer">
+                                                    @if (SessionHelper.CurrentUser.CurrentPresenter.CanSeePrices)
+                                                    {
+                                                        @SessionHelper.PriceFormat(offer.Price)
+                                                    }
+
+                                                </div>
+                                            }
+                                        </td>
+                                        <td>
+                                            <div class="prod-add @(isPresentOffer)">@offer.WarehouseName</div>
+                                        </td>
+                                        <td>
+                                            @if (showCart)
+                                            {
+                                                var viewPrefix = "_M";
+                                                <div class="spec-table__meta">
+                                                    <div class="spec-table__counter">
+                                                        <div class="counter">
+                                                            <button class="counter__btn counter--remove">-</button>
+                                                            <input class="counter__field" type="tel" name="quantity" value="1" max="999" id="@(viewPrefix)_@(ware.IdNorm)_@(offer.Id)">
+                                                            <button class="counter__btn counter--add">+</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="spec-table__controls">
+                                                        @if (ConfigHelper.AllowWaresCompare)
+                                                        {
+                                                            <a class="stock-table__compare" href="#" onclick="AddComparision('@ware.Id'); return false;">
+                                                                <svg class="icon icon-transfer stock-table__compare-icon">
+                                                                    <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#transfer")"></use>
+                                                                </svg>
+                                                            </a>
+                                                        }
+                                                        <a class="stock-table__add" href="#"
+                                                           wareid="@ware.Id" offerid="@(offer.Id)" offertypeid="@(offer.OfferTypeId)" onclick="return UpdateCart(this, '#@(viewPrefix)_@(ware.IdNorm)_@(offer.Id)')">
+                                                            <svg class="icon icon-shopping-cart stock-table__add-icon">
+                                                                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#shopping-cart"+(offer.InCart > 0 ? "-full" : ""))"></use>
+                                                            </svg>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            }
+                                            else if (offer.Status(Model.AllowCustomOrders) == OfferStatuses.Inventory)
+                                            {
+                                                <span class="stock-table__forbidden">@SharedResources.NotAvailable</span>
+                                            }
+                                            else if (ware.OnlyForReservation)
+                                            {
+                                                <span class="stock-table__forbidden">@SharedResources.ForReservation</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="stock-table__forbidden">@SharedResources.NotAvailable</span>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            }
+    </div>
+</div>
+
+<div class="table-responsive d-none d-md-block">
+    <table class="stock-table">
+        <thead class="stock-table__thead">
+            <tr class="stock-table__tr">
+                <th class="stock-table__th">@SharedResources.Photo</th>
+                <th class="stock-table__th">@SharedResources.Brand / @SharedResources.PartNumber / @SharedResources.Name</th>
+                @if (SessionHelper.ShowRetailPrice)
+                {
+                    <th class="stock-table__th">@SharedResources.Retail</th>
+                }
+                <th class="stock-table__th">
+                    @if(SessionHelper.CurrentUser.CurrentPresenter.CanSeePrices)
+                    {
+                        @SharedResources.YourPrice
+                    }
+                </th>
+                <th class="stock-table__th">@SharedResources.Amount / @SharedResources.Stock</th>
+            </tr>
+        </thead>
+        @foreach (var ware in Model)
+        {
+            <tbody class="stock-table__tbody">
+                @{
+                    var isPresent = ware.IsPresent ? "is-present" : "";
+                    var isImportant = ware.IsAction || ware.IsSale ? "important" : "";
+                    var showOnePrice = ware.OnePrice;
+                    var rowspan = "rowspan=" + ware.Offers.Count;
+                    var rowCount = 0;
+                }
+                <tr class="stock-table__tr">
+                    <td class="stock-table__td" @rowspan>
+                        @{Html.RenderPartial("Components/WareImageTable", ware); }
+                    </td>
+                    <td class="stock-table__td" @rowspan>
+                        <div class="stock-table__meta">
+                            @{ Html.RenderPartial("Components/WareActionLabel", ware); }
+                            <a class="stock-table__meta-title" href="@ware.Url">@ware.ProducerName</a> / @SharedResources.PartNumber <span class="stock-table__articul">@ware.PartNumber</span>
+                        </div>
+                        <div class="stock-table__title"><a class="stock-table__title-link @isPresent" href="@ware.Url">@ware.Name</a></div>
+                        @if (!Model.AreAnalogues)
+                        {
+                            <a class="stock-table__docs" href="#">@SharedResources.Specifications</a>
+                            <a class="stock-table__analogs" href="#">@SharedResources.Analogues</a>
+                        }
+                    </td>
+                    <td class="stock-table__td" @rowspan>
+                        @if (SessionHelper.ShowRetailPrice && SessionHelper.CurrentUser.CurrentPresenter.CanSeePrices)
+                        {
+                            <div class="stock-table__retail-price">@ware.RetailPrice @ware.ValuteName</div>
+                        }
+                    </td>
+                    @*<td class="stock-table__td" @(showOnePrice ? rowspan : "")>
+            <div class="stock-table__price @isPresent @isImportant">@ware.Price <span class="stock-table__currency">@ware.ValuteName</span></div>
+        </td>*@
+
+                    @foreach (var offer in ware.Offers.OrderBy(offer => offer.WarehouseId == ware.CurrentWarehouseId ? 0 : 1).ThenBy(offer => offer.Status(Model.AllowCustomOrders)))
+                    {
+                        var showCart = Model.CanAddToCart && ware.CanAddToCart && offer.Status(Model.AllowCustomOrders) == OfferStatuses.CanAddToCart;
+                        var isPresentOffer = showCart ? (!offer.DeliveryTerm.HasValue || offer.DeliveryTerm.Value.Date <= DateTime.Now.Date ? "is-present" : "is-transit") : "";
+                        var isImportantOffer = ware.IsAction || offer.IsSale ? "important" : "";
+                        var tr = "<tr class=\"stock-table__tr\">";
+                        var tre = "</tr>";
+                        rowCount++;
+
+                        if (rowCount > 1)
+                        {
+                            @Html.Raw(tre)
+                            @Html.Raw(tr)
+                        }
+                        if (!showOnePrice || rowCount < 2)
+                        {
+                            <td class="stock-table__td" @(showOnePrice ? rowspan : "")>
+                                @if (SessionHelper.CurrentUser.CurrentPresenter.CanSeePrices)
+                                {
+                                    <div class="stock-table__price @isPresentOffer @isImportantOffer">@SessionHelper.PriceFormat(offer.Price) <span class="stock-table__currency">@ware.ValuteName</span></div>
+                                }
+                            </td>
+                        }
+                        <td class="stock-table__td">
+                            <ul class="stock-table__list">
+                                <li class="stock-table__item">
+                                    <div class="stock-table__amount">@offer.InStockQty</div>
+                                    <div class="stock-table__location @(isPresentOffer)">@offer.WarehouseName</div>
+                                    @if (showCart)
+                                    {
+                                        var viewPrefix = "_D";
+                                        <div class="spec-table__meta">
+                                            <div class="spec-table__counter">
+                                                <div class="counter">
+                                                    <button class="counter__btn counter--remove">-</button>
+                                                    <input class="counter__field" type="tel" name="quantity" value="1" id="@(viewPrefix)_@(ware.IdNorm)_@(offer.Id)">
+                                                    <button class="counter__btn counter--add">+</button>
+                                                </div>
+                                            </div>
+                                            <div class="spec-table__controls">
+                                                @if (ConfigHelper.AllowWaresCompare)
+                                                {
+                                                    <a class="stock-table__compare" href="#" onclick="AddComparision('@ware.Id');return false;">
+                                                        <svg class="icon icon-transfer stock-table__compare-icon">
+                                                            <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#transfer")"></use>
+                                                        </svg>
+                                                    </a>
+                                                }
+                                                <a class="stock-table__add" href="#"
+                                                   wareid="@ware.Id" offerid="@(offer.Id)" offertypeid="@(offer.OfferTypeId)" onclick="return UpdateCart(this, '#@(viewPrefix)_@(ware.IdNorm)_@(offer.Id)')">
+                                                    <svg class="icon icon-shopping-cart stock-table__add-icon">
+                                                        <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#shopping-cart"+(offer.InCart > 0 ? "-full" : ""))"></use>
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    }
+                                    else if (offer.Status(Model.AllowCustomOrders) == OfferStatuses.Inventory)
+                                    {
+                                        <span class="stock-table__forbidden">@SharedResources.NotAvailable</span>
+                                    }
+                                    else if (ware.OnlyForReservation)
+                                    {
+                                        <span class="stock-table__forbidden">@SharedResources.ForReservation</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="stock-table__forbidden">@SharedResources.NotAvailable</span>
+                                    }
+                                </li>
+                            </ul>
+                        </td>
+                    }
+                </tr>
+                <tr class="stock-table__more">
+                    <td colspan="6">
+                        @if (!Model.AreAnalogues)
+                        {
+                            <div class="product-line__manual">
+                                <div class="product-line__manual-body">
+                                    <button class="product-line__manual-close">
+                                        <svg class="icon icon-close product-line__manual-close-icon">
+                                            <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#close")"></use>
+                                        </svg>
+                                    </button>
+                                    <div class="manual-params" data-ware-id="@ware.Id" id="table_spec_@ware.Id">
+                                        @SharedResources.Loading...
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-line__analogs-list">
+                                <div class="product-line__analogs-body">
+                                    <button class="product-line__analogs-close">
+                                        <svg class="icon icon-close product-line__analogs-close-icon">
+                                            <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#close")"></use>
+                                        </svg>
+                                    </button>
+                                    <div class="manual-params" data-ware-id="@ware.Id" id="table_similar_@ware.Id">
+                                        @SharedResources.Loading...
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </td>
+                </tr>
+            </tbody>
+        }
+    </table>
+</div>
+

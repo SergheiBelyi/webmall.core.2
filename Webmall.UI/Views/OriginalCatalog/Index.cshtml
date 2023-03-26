@@ -1,0 +1,60 @@
+﻿@using Webmall.Model
+@using ViewRes
+
+@model Webmall.UI.Models.ExternalCatalogModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var useIframe = ConfigHelper.OriginalCatalogUseIframe;
+    ViewBag.Title = SharedResources.ProdusersCatalogs;
+}
+
+<div class="container-fluid">
+    <div class="primary-content">
+        @{ Html.RenderPartial("_SideBar", Model); }
+        <main class="main-content">
+            <h1 class="main-title">@SharedResources.ProdusersCatalogs</h1>
+            <div class="table-responsive">
+                <table class="brands-table table">
+                    <thead>
+                        <tr>
+                            <th>@SharedResources.Producer</th>
+                            <th>@SharedResources.Description</th>
+                            <th class="text-center">@SharedResources.Download</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.SelectedItem.Items)
+                        {
+                            if (string.IsNullOrWhiteSpace(item.Url) && string.IsNullOrWhiteSpace(item.FileUrl)) { continue; }
+                            var url = Url.Content((!string.IsNullOrWhiteSpace(item.Url)) ? item.Url : item.FileUrl);
+
+                            <tr>
+                                <td><strong> @(string.IsNullOrWhiteSpace(item.Name) ? url : item.Name)</strong></td>
+                                <td>@item.LinkText</td>
+                                <td>
+                                    @if (!string.IsNullOrWhiteSpace(item.Url))
+                                    {
+                                        <a href="@(useIframe && !item.Url.StartsWith("#") ? Url.Action("Show", new { id = item.Id }) : item.Url.TrimStart('#'))" rel="nofollow">
+                                            <svg class="icon icon-globe">
+                                                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#globe")"></use>
+                                            </svg>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        var icon = item.Icon;
+                                        <a href="@Url.Content(item.FileUrl)" target="_blank">
+                                            <svg class="icon icon-@icon">
+                                                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#"+icon)"></use>
+                                            </svg>
+                                        </a>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</div>

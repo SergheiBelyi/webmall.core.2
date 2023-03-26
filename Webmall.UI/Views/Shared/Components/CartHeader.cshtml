@@ -1,0 +1,26 @@
+﻿@using Webmall.UI.Core
+
+@{ 
+    var count = 0;
+    decimal price = 0;
+    if (SessionHelper.CurrentUser != null) {
+        count = SessionHelper.Cart.Count;
+        foreach(var item in SessionHelper.Cart) {
+            price += item.ClientPrice * item.WareQnt;
+        }
+    }
+}
+
+<div class="header-utilities">
+    <div class="header-utility">
+        <div class="header-utility__main">
+            <a class="header-utility__link" href="@Url.Action("Index", "Cart")">
+                <svg class="icon icon-shopping-cart-main header-utility__icon">
+                    <use href="~/assets/images/svg/symbol/sprite.svg#shopping-cart-main"></use>
+                </svg>
+                <span class="header-utility__count cart-counter">@count</span>
+                <span class="header-utility__text cart-text">@(price == 0 ? "0" : SessionHelper.PriceFormat(price)) @SessionHelper.CurrentValute.Code</span>
+            </a>
+        </div>
+    </div>
+</div>

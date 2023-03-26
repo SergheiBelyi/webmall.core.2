@@ -1,0 +1,169 @@
+﻿@using ViewRes
+@model Webmall.Model.Entities.Auto.AutoModification
+
+@{
+    Layout = null;
+}
+
+<table class="all-product">
+    @if (Model.DateBegin.HasValue)
+    {
+        <tr>
+            <td>@SharedResources.ProduceStartDateFull</td>
+            <td>@($"{Model.DateBegin:dd.MM.yyyy}")</td>
+        </tr>
+    }
+    @if (Model.DateEnd.HasValue)
+    {
+        <tr>
+            <td>@SharedResources.ProduceEndDateFull</td>
+            <td>@($"{Model.DateEnd:dd.MM.yyyy}")</td>
+        </tr>
+    }
+    @if (!string.IsNullOrEmpty(Model.ModifRem))
+    {
+        <tr>
+            <td>@SharedResources.Comment</td>
+            <td>@Model.ModifRem</td>
+        </tr>
+    }
+    @if (Model.KW.HasValue)
+    {
+        <tr>
+            <td>@SharedResources.PowerKw</td>
+            <td>@Model.KW</td>
+        </tr>
+    }
+    @if (Model.PS.HasValue)
+    {
+        <tr>
+            <td>@SharedResources.PowerHp</td>
+            <td>@Model.PS</td>
+        </tr>
+    }
+    @if (Model.CcmTech.HasValue)
+    {
+        <tr>
+            <td>@SharedResources.VolumeCm<sup>3</sup></td>
+            <td>@Model.CcmTech</td>
+        </tr>
+    }
+    @if (Model.Zyl.HasValue)
+    {
+        <tr>
+            <td>@SharedResources.CylinderNumber</td>
+            <td>@Model.Zyl</td>
+        </tr>
+    }
+    @if (Model.Tueren.HasValue)
+    {
+        <tr>
+            <td>@SharedResources.ValveNumber</td>
+            <td>@Model.Tueren</td>
+        </tr>
+    }
+    @if (Model.TankInhalt.HasValue)
+    {
+        <tr>
+            <td>@SharedResources.TankVolume</td>
+            <td>@Model.TankInhalt</td>
+        </tr>
+    }
+    @if (Model.Spannung.HasValue)
+    {
+        <tr>
+            <td>@SharedResources.VoltageV</td>
+            <td>@Model.Spannung</td>
+        </tr>
+    }
+    <tr>
+        <td>@SharedResources.ABSPresence</td>
+        <td>@(Model.ABS ? SharedResources.Yes : SharedResources.No)</td>
+    </tr>
+    @if (Model.ASR.HasValue)
+    {
+        <tr>
+            <td>@SharedResources.ASRPresence</td>
+            <td>
+                @(Model.ASR.Value ? SharedResources.Yes : SharedResources.No)
+            </td>
+        </tr>
+    }
+    @if (!string.IsNullOrEmpty(Model.EngineType))
+    {
+        <tr>
+            <td>@SharedResources.EngineType</td>
+            <td>@Model.EngineType</td>
+        </tr>
+    }
+    @if (!string.IsNullOrEmpty(Model.EngineCode))
+    {
+        <tr>
+            <td>@SharedResources.EngineCode</td>
+            <td>@Model.EngineCode</td>
+        </tr>
+    }
+    @if (!string.IsNullOrEmpty(Model.VehType))
+    {
+        <tr>
+            <td>@SharedResources.AutoType</td>
+            <td>@Model.VehType</td>
+        </tr>
+    }
+    @if (!string.IsNullOrEmpty(Model.DriveType))
+    {
+        <tr>
+            <td>@SharedResources.DriveType</td>
+            <td>@Model.DriveType</td>
+        </tr>
+    }
+    @if (!string.IsNullOrEmpty(Model.BrakeType))
+    {
+        <tr>
+            <td>@SharedResources.BrakeType</td>
+            <td>@Model.BrakeType</td>
+        </tr>
+    }
+    @if (!string.IsNullOrEmpty(Model.BrakeSysType))
+    {
+        <tr>
+            <td>@SharedResources.BrakeSystem</td>
+            <td>@Model.BrakeSysType</td>
+        </tr>
+    }
+    @if (!string.IsNullOrEmpty(Model.FuelType))
+    {
+        <tr>
+            <td>@SharedResources.FuelType</td>
+            <td>@Model.FuelType</td>
+        </tr>
+    }
+    @if (!string.IsNullOrEmpty(Model.CatalystType))
+    {
+        <tr>
+            <td>@SharedResources.Catalizator</td>
+            <td>@Model.CatalystType</td>
+        </tr>
+    }
+    @if (!string.IsNullOrEmpty(Model.TransType))
+    {
+        <tr>
+            <td>@SharedResources.TransmissionType</td>
+            <td>@Model.TransType</td>
+        </tr>
+    }
+    @if (!string.IsNullOrEmpty(Model.BodyTypeName))
+    {
+        <tr>
+            <td>@SharedResources.BodyType</td>
+            <td>@Model.BodyTypeName</td>
+        </tr>
+    }
+    @if (!string.IsNullOrEmpty(Model.AxleForm))
+    {
+        <tr>
+            <td>@SharedResources.WheelFormula</td>
+            <td>@Model.AxleForm</td>
+        </tr>
+    }
+</table>

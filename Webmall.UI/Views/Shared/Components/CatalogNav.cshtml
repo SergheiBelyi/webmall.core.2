@@ -1,0 +1,40 @@
+﻿@using ViewRes
+@using Webmall.UI.Core
+@model List<Webmall.Model.Entities.Catalog.Group>
+
+@{
+    Layout = null;
+    var currentParentLink = UserPreferences.CurrentCultureLink + "/catalog/";
+}
+<button class="catalog-nav-toggle d-md-none btn btn--primary">
+    <svg class="icon icon-burger catalog-nav-toggle__icon">
+        <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#burger")"></use>
+    </svg>
+    <svg class="icon icon-close catalog-nav-toggle__icon">
+        <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#close")"></use>
+    </svg>
+</button>
+
+<nav class="main-nav">
+    <ul class="main-nav__point-container">
+        <li class="main-nav__point-item js-dropdown">
+            <div class="main-nav__point-link btn btn--primary js-dropdown-toggle">
+                <svg class="icon icon-burger main-nav__icon">
+                    <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#burger")"></use>
+                </svg><span class="main-nav__point-link-text">@SharedResources.AllWareCategories</span>
+                <div class="main-nav__close-nav-wrap">
+                    <svg class="icon icon-close main-nav__close-nav">
+                        <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#close")"></use>
+                    </svg>
+                </div>
+            </div>
+            <div class="main-nav__container">
+                <ul class="main-nav__list">
+                    @{ Html.RenderPartial("Components/CustomTopCatalogMenu"); }
+                    @Html.GroupMenuElements(Model, currentParentLink, this, 1)
+                </ul>
+            </div>
+           
+        </li>
+    </ul>
+</nav>

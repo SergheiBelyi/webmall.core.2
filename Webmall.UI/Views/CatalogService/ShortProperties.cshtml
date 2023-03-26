@@ -1,0 +1,27 @@
+﻿@using ViewRes
+@model Webmall.UI.ViewModel.Catalog.WarePropertiesViewModel
+@{
+    Layout = null;
+}
+
+<dl class="product-info__props-main props">
+    @if (Model.List.Any())
+    {
+        foreach (var el in Model.List)
+        {
+            <div class="props__prop">
+                <dt class="props__property">@el.Name</dt>
+                <dd class="props__value">@el.Value</dd>
+            </div>
+        }
+    }
+    else
+    {
+        <div>@SharedResources.NoData</div>
+    }
+</dl>
+@if (Model.Total > Model.List.Count)
+{
+    <button class="product-info__props-more" type="button" data-goto-tab="#section-2">Еще</button>
+}
+

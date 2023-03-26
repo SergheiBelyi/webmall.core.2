@@ -1,0 +1,11 @@
+﻿@model Webmall.UI.ViewModel.Filter.RangeViewModel
+
+@if (Model != null)
+{
+    <div class="filter__section is-opened">
+        <div class="filter__title">@Model.Caption</div>
+        <div class="filter__body">
+            @{ Html.RenderPartial("Components/FilterRange", Model); }
+        </div>
+    </div>
+}

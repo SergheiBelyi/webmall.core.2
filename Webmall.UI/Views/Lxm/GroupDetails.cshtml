@@ -1,0 +1,143 @@
+﻿@using ViewRes
+@using Webmall.Laximo.Core
+@using Webmall.UI.Models.Laximo
+
+@model GroupDetailsModel
+
+@{
+    Layout = null;
+}
+
+<div class="match-area-products">
+    @foreach (var cat in Model.Categories)
+    {
+        var baseModel = Model.Clone();
+        baseModel.CategoryId = cat.Id;
+
+        <div class="match-area-products__product match-area-section">
+            <div class="match-area-section__header">
+                <div class="match-area-section__heading"><a href="@Url.Action("Categories", baseModel)">@cat.Name</a></div>
+            </div>
+            <div class="match-area-section__main">
+                @foreach (var unit in cat.Units)
+                {
+                    baseModel.UnitId = unit.Id;
+                    baseModel.Ssd = unit.Ssd;
+                    var sd = string.Join(",", unit.Details.Where(i => !string.IsNullOrEmpty(i.Match)).Select(i => i.CodeOnImage));
+                    var unitUrl = Url.Action("Unit", new { Model.VehicleId, Model.CatalogId, Model.CategoryId, UnitId = unit.Id, unit.Ssd, Model.Type, sd });
+
+                    <div class="match-area-section__item">
+                        <!-- media-card-info-->
+                        <div class="media-card-info">
+                            <a class="media-card-info__card media-card" href="@unitUrl">
+                                <figure class="media-card__main">
+                                    <div class="media-card__img-wrap">
+                                        <img class="media-card__img" src="@unit.GetImageUrl("250")" alt="" width="120" height="175">
+                                    </div>
+                                    <figcaption class="media-card__info">
+                                        <div class="media-card__caption">@unit.Code: @unit.Name</div>
+                                    </figcaption>
+                                </figure>
+                            </a>
+                            <div class="media-card-info__main">
+                                <div class="media-card-info__info">
+                                    <!-- kit-table-->
+                                    <div class="table-responsive media-card-info__wrap">
+                                        <table class="kit-table media-card-info__table is-dark">
+                                            <thead>
+                                                <tr>
+                                                    <th id="c_toggle" style="display: none;">&nbsp;</th>
+                                                    <th id="c_pnc">@SharedResources.Number</th>
+                                                    <th id="c_oem">OEM</th>
+                                                    <th id="c_name">@SharedResources.Name</th>
+                                                    @foreach (var i in unit.ExtAttrTitles)
+                                                    {
+                                                        <th id="c_@i.Key" style="display: none">@i.Value</th>
+                                                    }
+                                                    <th id="c_tooltip">&nbsp;</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var detail in unit.Details.Where(i => !string.IsNullOrEmpty(i.Match)))
+                                                {
+                                                    var detUrl = !string.IsNullOrEmpty(detail.Oem) ? Url.Action("Index", "SearchOem", new { oem = detail.Oem }, null) : "#";
+
+                                                    <tr name="@detail.CodeOnImage"
+                                                        onmouseout="hl(this, 'out');"
+                                                        onmouseover="hl(this, 'in');">
+                                                        <td name="c_pnc" class="hd"><span><a href="@detUrl" target="_blank">@detail.CodeOnImage</a></span></td>
+                                                        <td name="c_oem" class="hd"><span><a href="@detUrl" target="_blank">@detail.Oem</a></span></td>
+                                                        <td name="c_name" class="hd"><a class="illustration-title" href="@detUrl" target="_blank">@detail.Name</a></td>
+                                                        @foreach (var i in unit.ExtAttrTitles)
+                                                        {
+                                                            <td name="c_@i.Key" class="hd" style="display: none">@detail.ExtAttributes.GetValue(i.Key)</td>
+                                                        }
+                                                        <td name="c_tooltip">
+                                                            <div class="kit-table__info group-tippy text-right" id="@detail.Oem">
+                                                                <svg class="icon icon-info kit-table__info-icon" width="25" height="25">
+                                                                    <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#info")"></use>
+                                                                </svg>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div><!-- /kit-table-->
+                                    <!-- kit-area-->
+                                    <div class="media-card-info__data kit-products">
+                                        @foreach (var detail in unit.Details.Where(i => !string.IsNullOrEmpty(i.Match)))
+                                        {
+                                            var detUrl = !string.IsNullOrEmpty(detail.Oem) ? Url.Action("Index", "SearchOem", new { oem = detail.Oem }, null) : "#";
+
+                                            <!-- kit-product-->
+                                            <div class="kit-products__item kit-product js-accordion is-active">
+                                                <div class="kit-product__header js-accordion-trigger">
+                                                    <div class="kit-product__heading">@SharedResources.Name</div>
+                                                </div>
+                                                <div class="kit-product__main js-accordion-body">
+                                                    <div class="kit-product__subsection">
+                                                        <dl class="kit-product__props">
+                                                            <div class="kit-product__prop">
+                                                            <dt class="kit-product__property">@SharedResources.Number</dt>
+                                                            <dd class="kit-product__value">
+                                                                <a class="kit-product__link" href="#">@detail.CodeOnImage</a>
+                                                            </dd>
+                                                    </div>
+                                                    <div class="kit-product__prop">
+                                                        <dt class="kit-product__property">OEM</dt>
+                                                        <dd class="kit-product__value">@detail.Oem</dd>
+                                                    </div>
+                                                    </dl>
+                                                </div>
+                                                <div class="kit-product__bottom">
+                                                    <span class="kit-product__info group-tippy-mobile" data-id="@detail.Oem">
+                                                        @SharedResources.Details
+                                                        <svg class="icon icon-info kit-product__info-icon" width="25" height="25">
+                                                            <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#info")"></use>
+                                                        </svg>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /kit-product-->
+                                    }
+                                    </div><!-- /kit-area-->
+                                </div>
+                                <div class="media-card-info__bottom">
+                                    <a class="media-card-info__btn btn btn--primary-reverse btn--sm" href="@unitUrl">@SharedResources.LxmOtherDetails +</a>
+                                </div>
+                            </div>
+                        </div><!-- /media-card-info-->
+                    </div>
+                }
+            </div>
+        </div>
+        <!-- /media-area-section-->
+    }
+
+    @if (!Model.Categories.Any())
+    {
+        @SharedResources.NothingFound3
+    }
+    </div>

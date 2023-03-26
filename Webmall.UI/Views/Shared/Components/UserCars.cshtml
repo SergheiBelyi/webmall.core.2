@@ -1,0 +1,134 @@
+﻿@using ViewRes
+@using Webmall.UI.Core
+@using Webmall.UI.Core.HtmlHelpers
+
+@model Webmall.UI.ViewModel.Garage.GarageViewModel
+
+<div class="header-utilities__util header-utility js-dropdown is-lock has-overlay">
+    <div class="header-utility__main">
+        <button class="header-utility__link js-dropdown-toggle" type="button">
+            <svg class="icon icon-garage header-utility__icon" width="25" height="25">
+                <use href=@Url.Content("~/assets/images/svg/symbol/sprite.svg#garage")></use>
+            </svg>
+            @if (SessionHelper.CurrentUser != null)
+            {
+                <span class="header-utility__counter">@(Model.Cars?.Count ?? 0)</span>
+                @*<span class="header-utility__counter">@(string.Format("{0:d}", breef.CarsPositionsCount))</span>*@
+            }
+            else
+            {
+                @*<span class="header-utility__counter"></span>*@
+            }
+
+        </button>
+        <div class="header-utility__body">
+            <div class="header-utility__garage garage-widget">
+                @if (string.IsNullOrEmpty(SessionHelper.CurrentClientId))
+                {
+                    <div class="garage-widget__header">
+                        <div class="garage-widget__heading">@SharedResources.YouAreNotAuthorized</div>
+                        <button class="garage-widget__close js-dropdown-toggle" type="button">
+                            <svg class="icon icon-close garage-widget__close-icon" width="25" height="25">
+                                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#close")"></use>
+                            </svg>
+                        </button>
+                    </div>
+                }
+                else
+                {
+                    <div class="garage-widget__header">
+                        <div class="garage-widget__heading">@SharedResources.MyGarage</div>
+                        @*<a class="garage-widget__remove" href="#">Удалить все авто</a>*@
+                        <button class="garage-widget__close js-dropdown-toggle" type="button">
+                            <svg class="icon icon-close garage-widget__close-icon" width="25" height="25">
+                                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#close")"></use>
+                            </svg>
+                        </button>
+                    </div>
+                    if (Model?.Cars != null)
+                    {
+                        <div class="garage-widget__main">
+                            @foreach (var item in Model.Cars)
+                            {
+                                <div class="garage-widget__item car-item" id="user-car-@item.Id">
+                                    <div class="car-item__radio radio-label">
+                                        <input class="radio-label__input" type="radio" name="car" id="car-@item.Id" onchange="selectCar(@item.Id)"
+                                              @(item.IsSelected ? "checked=\"checked\"" : "")>
+                                        <label class="radio-label__main" for="car-@item.Id"></label>
+                                    </div>
+                                    <div class="car-item__main">
+                                        <div class="car-item__header">
+                                            <img class="car-item__img" src="@(Url.MarkaImage(item.Marka))" alt="" width="36" height="36">
+                                            <ul class="car-item__controls car-controls">
+                                                <li class="car-controls__control">
+                                                    <a class="car-controls__link" title="@SharedResources.VINSearch" href="@Url.Action("VinSearch", "Lxm", new { vin=item.Vin })">
+                                                        <svg class="icon icon-search-glass car-controls__icon" width="25" height="25">
+                                                            <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#search-glass")"></use>
+                                                        </svg>
+                                                    </a>
+                                                </li>
+                                                <li class="car-controls__control">
+                                                    <a class="car-controls__link" title="@SharedResources.Delete" href="" onclick="removeCar(@item.Id)">
+                                                        <svg class="icon icon-trash car-controls__icon" width="25" height="25">
+                                                            <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#trash")"></use>
+                                                        </svg>
+                                                    </a>
+                                                </li>
+                                                <li class="car-controls__control">
+                                                    <a class="car-controls__link" title="@SharedResources.Edit" href="@Url.Action("Index", "Garage", new { edit = item.Id })">
+                                                        <svg class="icon icon-edit car-controls__icon" width="25" height="25">
+                                                            <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#edit")"></use>
+                                                        </svg>
+                                                    </a>
+                                                </li>
+                                                <li class="car-controls__control">
+                                                    <a class="car-controls__link" title="@SharedResources.VINRequest" href="@Url.Action("Index", "VINRequest", new { add=item.Id })">
+                                                        <svg class="icon icon-vin-bubble car-controls__icon" width="25" height="25">
+                                                            <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#vin-bubble")"></use>
+                                                        </svg>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="car-item__info">
+                                            <div class="car-item__heading">@item.Marka @item.Model</div>
+                                            <dl class="car-item__params">
+                                                <div class="cart-item__param">
+                                                <dt class="car-item__property">VIN:</dt>
+                                                <dd class="car-item__value">@item.Vin</dd>
+                                        </div>
+                                        <div class="cart-item__param">
+                                            <dt class="car-item__property">@SharedResources.YearOfProduce:</dt>
+                                            <dd class="car-item__value">@item.Year</dd>
+                                        </div>
+                                        <div class="cart-item__param">
+                                            <dt class="car-item__property">@SharedResources.Engine:</dt>
+                                            <dd class="car-item__value">@item.Modification</dd>
+                                        </div>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        </div>
+                    }
+                    
+                    <div class="garage-widget__footer">
+                        <a class="garage-widget__btn btn btn--primary btn--sm" href="#">
+                            <span class="btn__text">@SharedResources.NewCar</span>
+                            <svg class="icon icon-chevron-right btn__icon" width="25" height="25">
+                                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#chevron-right")"></use>
+                            </svg>
+                        </a>
+                        <a class="garage-widget__btn btn btn--primary-reverse btn--sm" href="@Url.Action("Index", "Garage")">
+                            <span class="btn__text">@SharedResources.GotoGarage</span>
+                            <svg class="icon icon-chevron-right btn__icon" width="25" height="25">
+                                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#chevron-right")"></use>
+                            </svg>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

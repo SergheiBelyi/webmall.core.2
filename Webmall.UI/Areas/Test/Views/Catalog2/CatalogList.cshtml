@@ -1,0 +1,10 @@
+﻿@using Webmall.UI.Core.Core
+
+@model Webmall.UI.Models.Catalog.CatalogWaresModel
+@{
+    //var wareList = WareListHelper.WareToWareCardList(Model, Request, Url);
+}
+
+@{Html.RenderPartial("CatalogListNoPagination", Model); }
+
+@{Html.RenderPartial("Components/Pagination", Model.Wares);}

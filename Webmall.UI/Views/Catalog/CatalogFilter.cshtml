@@ -1,0 +1,123 @@
+﻿@using ViewRes
+@using Webmall.UI.Core
+@model Webmall.UI.ViewModel.Catalog.CatalogFilterViewModel
+
+@* filter *@
+<form class="filter catalog-layout__filter" id="filterForm" name="filterForm" method="get">
+    <div class="filter__mob-header">
+        <div class="filter__mob-heading filter__close">@SharedResources.Filters</div>
+        <button class="filter__collapse">@SharedResources.CollapseAll</button>
+    </div>
+
+    @if (Model.ShowSearchFilter)
+    {
+        <div class="filter__aside-search search-form">
+            <div class="search-form__field" @(!Model.ShowSearchFilter ? "d-none" : "")>
+                <input class="search-form__input input" type="search" name="addQuery" placeholder="Поиск по результату">
+                <button class="search-form__submit" type="button" name="send">
+                    <svg class="icon icon-magnifying-zoom-glass search-form__submit-icon" width="25" height="25">
+                        <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#magnifying-zoom-glass")"></use>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    }
+    <div class="filter__header">
+        <div class="filter__heading">@SharedResources.Filters</div><span class="filter__collapse">@SharedResources.CollapseAll</span>
+    </div>
+
+    <div class="filter__main">
+        <div class="filter__sections">
+            @if (Model.ShowPriceFilter)
+            {
+
+                <div class="filter__section is-opened">
+                    @*<div class="filter__title">@SharedResources.Price, <span>@SessionHelper.CurrentValute.Code</span></div>
+                    <div class="filter__body">
+                        <div class="price-range filter__range">
+                            <div class="price-range__values">
+                                <div class="price-range__field">
+                                    <input class="price-range__input input" type="text" name="a">
+                                </div>
+                                <div class="price-range__field">
+                                    <input class="price-range__input input" type="text" name="b">
+                                </div>
+                            </div>
+                            <div class="price-range__slider js-range-slider noUi-target noUi-ltr noUi-horizontal noUi-txt-dir-ltr"
+                                 data-step="10" data-from="@Model.PriceMin" data-to="@Model.PriceMax">
+                            </div>
+                        </div>
+                    </div>*@
+
+                    <!--<div class="filter__title">@SharedResources.Price <span>/ @SessionHelper.CurrentValute.Code</span></div>
+
+                    <div class="filter__body" data-simplebar="init">
+                        <div class="simplebar-wrapper" style="margin: 0px -15px;">
+                            <div class="simplebar-height-auto-observer-wrapper">
+                                <div class="simplebar-height-auto-observer"></div>
+                            </div>
+                            <div class="simplebar-mask">
+                                <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
+                                    <div class="simplebar-content-wrapper" style="height: auto; overflow: hidden;">
+                                        <div class="simplebar-content" style="padding: 0px 15px;">
+                                            -->
+                                            @*@if (ConfigHelper.AllowWareOnlyInPresenceSelection && !UserPreferences.CurrentTrend.OnlyOnStockOff)
+                                                {
+                                                    <div class="filter__option checkbox-label">
+                                                        <input class="checkbox-label__input" type="checkbox" name="OnlyOnStock" value="true" id="opt-avail" @(Model.OnlyOnStock == true ? "checked" : "") onchange="@(autoSubmit ? "return submitFilter()" : "")">
+                                                        <label class="checkbox-label__main" for="opt-avail">@SharedResources.OnlyOnStock</label>
+                                                    </div>
+                                                }*@
+                                            @*@if (UserPreferences.CurrentTrend.AllowPromotionsMenu)
+                                                {
+                                                    <div class="filter__option checkbox-label">
+                                                        <input class="checkbox-label__input" type="checkbox" name="OnlySpecials" value="true" id="opt-discount" @(Model.OnlyActions == true ? "checked" : "") onchange="@(Model.AutoSubmit ? "return submitFilter()" : "")">
+                                                        <label class="checkbox-label__main" for="opt-discount">@SharedResources.Specials</label>
+                                                    </div>
+                                                    <div class="filter__option checkbox-label">
+                                                        <input class="checkbox-label__input" type="checkbox" name="OnlySales" value="true" id="opt-sale" @(Model.OnlySales == true ? "checked" : "") onchange="@(Model.AutoSubmit ? "return submitFilter()" : "")">
+                                                        <label class="checkbox-label__main" for="opt-sale">@SharedResources.Sale</label>
+                                                    </div>
+                                                }*@
+                                        <!--</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="simplebar-placeholder" style="width: auto; height: 103px;"></div>
+                        </div>
+                        <div class="simplebar-track simplebar-horizontal" style="visibility: hidden;">
+                            <div class="simplebar-scrollbar simplebar-visible" style="width: 0px; display: none;"></div>
+                        </div>
+                        <div class="simplebar-track simplebar-vertical">
+                            <div class="simplebar-scrollbar simplebar-visible" style="height: 0px; display: none;"></div>
+                        </div>
+                    </div>-->
+                </div>
+            }
+            @if (Model.GroupSection.Options.Any())
+            {
+                Html.RenderPartial("Components/FilterSelectSection", Model.GroupSection);
+            }
+            @if (Model.BrandSection.Options.Any())
+            {
+                Html.RenderPartial("Components/FilterSelectSection", Model.BrandSection);
+            }
+            @foreach (var section in Model.PropertySections)
+            {
+                Html.RenderPartial("Components/FilterSelectSection", section);
+            }
+        </div>
+        <div class="filter__footer">
+            <a class="filter__btn-reset btn btn--primary-reverse btn--sm" href="#" onclick="return resetFilter()">
+                <svg class="icon icon-close btn__icon" width="25" height="25">
+                    <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#close")"></use>
+                </svg><span class="btn__text">@SharedResources.Reset</span>
+            </a>
+            @if (!Model.AutoSubmit)
+            {
+                <a class="filter__btn-accept btn btn--primary btn--sm" href="" onclick="return submitFilter()">@SharedResources.Apply</a>
+            }
+        </div>
+    </div>
+
+</form>

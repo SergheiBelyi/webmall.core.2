@@ -1,0 +1,24 @@
+﻿@model Webmall.UI.Models.Laximo.GroupsModel
+
+@{ Layout = null; }
+
+<div class="media-grid">
+    @foreach (var group in (Model.SelectedGroup != null) ? Model.SelectedGroup.Children : Model.Groups)
+    {
+        var imgUrl = $"~/ExtContent/LxmGroupImages/{group.Id}.png";
+        if (!File.Exists(Server.MapPath(imgUrl)))
+        {
+            imgUrl = "~/ExtContent/LxmGroupImages/default.png";
+        }
+        <a class="media-grid__item media-card" href="@(Url.Action("Groups", "Lxm", new { groupId = group.Id, Model.VehicleId, Model.CatalogId, Model.CategoryId, Model.Ssd, Model.Type}))">
+            <figure class="media-card__main">
+                <div class="media-card__img-wrap">
+                    <img class="media-card__img" src="@Url.Content(imgUrl)" alt="" width="120" height="175">
+                </div>
+                <figcaption class="media-card__info">
+                    <div class="media-card__caption">@group.Name</div>
+                </figcaption>
+            </figure>
+        </a>
+    }
+</div>

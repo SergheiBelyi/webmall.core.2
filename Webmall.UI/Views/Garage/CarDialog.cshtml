@@ -1,0 +1,77 @@
+﻿@using ViewRes
+
+@model Webmall.UI.ViewModel.Garage.GarageViewModel
+
+<div class="modal-content" data-modal-win="address-detail" hidden>
+    <form class="add-modal" method="POST" action="@Url.Action("SaveCar")" name="product-add">
+        <div class="modal-content">
+            <div class="modal-content__header">
+                <div class="modal-content__heading">@SharedResources.AutoData</div>
+            </div>
+            <div class="managed managed-delivery-address">
+                <div class="row">
+                    <input type="hidden" id ="CarId" name="Id"/>
+                    <div class="col-sm-2">
+                        <div class="main-form__field">
+                            <label class="main-form__label" for="Marka">@SharedResources.AutoMarka <span>*</span></label>
+                            @Html.DropDownList("MarkaId", Model.AutoMarks.Select(i => new SelectListItem {Value = i.Id, Text = i.Name}),
+                                new {id = "Marka", @class = "", onchange = "MarkaSelected()"})
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="main-form__field">
+                            <label class="main-form__label" for="Model">@SharedResources.AutoModel <span>*</span></label>
+                            @Html.DropDownList("ModelId", new List<SelectListItem>(),
+                                new {id = "Model", onchange = "ModelSelected()"})
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="main-form__field">
+                            <label class="main-form__label" for="Modification">@SharedResources.AutoModification <span>*</span></label>
+                            @Html.DropDownList("ModificationId", new List<SelectListItem>(),
+                                new {id = "Modification"})
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="main-form__field">
+                            <label class="main-form__label" for="Vin">@SharedResources.AutoVINCode</label>
+                            @Html.TextBox("Vin", "", new {id = "Vin", @class = "profile-form__input input"})
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="main-form__field">
+                            <label class="main-form__label" for="Year">@SharedResources.YearOfProduce</label>
+                            @Html.TextBox("Year", "", new {id = "Year", @class = "profile-form__input input", type = "number"})
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="main-form__field">
+                            <label class="main-form__label" for="Comment">@SharedResources.Note</label>
+                            @Html.TextBox("Comment", "", new {id = "Comment", @class = "profile-form__input input"})
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="main-form__field">
+                            <label class="main-form__label" for="Contacts">@SharedResources.ContactInfo</label>
+                            @Html.TextBox("Contacts", "", new {id = "Contacts", @class = "profile-form__input input"})
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="add-modal__bottom">
+                <input class="add-modal__btn btn btn--primary" type="submit" value="@SharedResources.Save">
+            </div>
+    </form>
+</div>

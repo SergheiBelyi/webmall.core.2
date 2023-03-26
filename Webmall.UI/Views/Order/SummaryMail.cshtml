@@ -1,0 +1,158 @@
+﻿@using System.Linq
+@using Webmall.Model
+@using System.Diagnostics
+@using ValmiStore.Model.Entities.Order
+@using Webmall.Model.Repositories.Abstract
+@using ViewRes
+@using Webmall.UI.Core
+
+@model Order
+
+@{
+    Debug.Assert(Request.Url != null, "Request.Url != null");
+    var rootUrl = Request.Url.AbsoluteUri.Replace(Request.Url.LocalPath, "");
+    if (!string.IsNullOrEmpty(Request.Url.Query))
+    {
+        rootUrl = rootUrl.Replace(Request.Url.Query, "");
+    }
+    var selfDelivery = Model.Delivery == null || ((Model.Delivery.Id == null || Model.Delivery.Id == -1) && Model.Delivery.DeliveryAddressId == null);
+    Layout = null;
+    var valute = SessionHelper.CurrentValute;
+    var rate = (SessionHelper.Valutes.Count() > 1) ? valute.Rate : 1;
+    var referenceRepository = DependencyResolver.Current.GetService<IReferenceRepository>();
+}
+<html>
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
+    <title>@ViewBag.Title</title>
+</head>
+
+@* ReSharper disable Html.Obsolete *@
+@* ReSharper disable CssBrowserCompatibility *@
+<body>
+    <table width="545" border="0" cellspacing="0" cellpadding="0" align="center">
+        <tr>
+            <td>
+                <div style="margin:0 auto; width:545px; font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;">
+
+                    <div style="padding: 15px; border-radius: 5px; border: 1px solid #ECECFB;">
+
+
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+                            <tr>
+                                <td style="padding-top:9px;"><a><img src="@(rootUrl + Url.Content("~/ExtContent/images/logo-invoice.png"))" alt=""> </a></td>
+                                <td style="text-align:right;">
+                                    <h2 style="margin-top: 40px; font-size: 27px;">
+                                        @SharedResources.ThanksForPurchase
+                                    </h2>
+                                </td>
+                            </tr>
+                        </table>
+                        @(new HtmlString(string.Format(SharedResources.SummaryTitle2, Model.Id, (string.IsNullOrEmpty(Model.ResponsibleName)) ? ConfigHelper.SummaryManager : Model.ResponsibleName, "<img src=\"" + rootUrl + Url.Content("~/Content/images/hot-line-small.gif") + "\" width=\"23\" height=\"21\" />" + ConfigHelper.SummaryManagerPhone)))
+
+                        <table class="all-product clients cart" style="border-collapse:collapse;">
+                            <thead>
+                                <tr>
+                                    <th width="220" style=" font: normal 13px 'Trebuchet MS', Arial, Helvetica, sans-serif; line-height: 15px; text-align: left; vertical-align: top; background: #a1a1a1;  color: #ffffff; padding:5px;">Номер</th>
+                                    <th width="200" style="font: normal 13px 'Trebuchet MS', Arial, Helvetica, sans-serif; line-height: 15px; text-align: left; vertical-align: top;  background: #aaaaaa;  border-left: 1px solid #cecece; border-right: 1px solid #cecece; color: #ffffff;padding:5px;">Наименование заказа</th>
+                                    <th width="45" style="font: normal 13px 'Trebuchet MS', Arial, Helvetica, sans-serif; line-height: 15px; text-align: left; vertical-align: top; background: #a1a1a1;  color: #ffffff; padding:5px;">Бренд</th>
+                                    <th width="45" style="font: normal 13px 'Trebuchet MS', Arial, Helvetica, sans-serif; line-height: 15px; text-align: left; vertical-align: top; background: #aaaaaa;  border-left: 1px solid #cecece; border-right: 1px solid #cecece; color: #ffffff;padding:5px;">Цена за ед.</th>
+                                    <th width="45" style="font: normal 13px 'Trebuchet MS', Arial, Helvetica, sans-serif; line-height: 15px; text-align: left; vertical-align: top; background: #a1a1a1;   color: #ffffff;padding:5px;">Кол-во</th>
+                                    <th width="45" style="font: normal 13px 'Trebuchet MS', Arial, Helvetica, sans-serif; line-height: 15px; text-align: left; vertical-align: top; background: #aaaaaa;  border-left: 1px solid #cecece; border-right: 1px solid #cecece; color: #ffffff;padding:5px;">Сумма, @valute.Code</th>
+                                    <th width="45" style="font: normal 13px 'Trebuchet MS', Arial, Helvetica, sans-serif; line-height: 15px; text-align: left; vertical-align: top; background: #aaaaaa;  border-left: 1px solid #cecece; border-right: 1px solid #cecece; color: #ffffff;padding:5px;">@SharedResources.FromWarehouse</th>
+                                </tr>
+                            </thead>
+                            @{ var sum = (Model.Delivery.Cost.HasValue) ? Model.Delivery.Cost.Value : decimal.Zero; }
+                            @foreach (var pos in Model.Positions)
+                            {
+                                sum += pos.Sum;
+                                <tr>
+                                    <td style="font: normal 13px 'Trebuchet MS', Arial, Helvetica, sans-serif; line-height: 15px; text-align: left; vertical-align: top; border-bottom: 1px solid #e7e7e7;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         padding: 5px; background:#f6f6f6">
+                                        @pos.WareNumber
+                                    </td>
+                                    <td style="font: normal 13px 'Trebuchet MS', Arial, Helvetica, sans-serif; line-height: 15px; text-align: left; vertical-align: top; border-bottom: 1px solid #e7e7e7;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  padding: 5px;">
+                                        <span>@pos.WareName</span>
+                                    </td>
+                                    <td style="font: normal 13px 'Trebuchet MS', Arial, Helvetica, sans-serif; line-height: 15px; text-align: left; vertical-align: top; border-bottom: 1px solid #e7e7e7;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        padding: 5px;  background:#f6f6f6;">
+                                        @pos.ProducerName
+                                    </td>
+                                    <td style="font: normal 13px 'Trebuchet MS', Arial, Helvetica, sans-serif; line-height: 15px; text-align: left; vertical-align: top; border-bottom: 1px solid #e7e7e7;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   padding: 5px;">
+                                        @SessionHelper.PriceFormat(pos.Price / rate)
+                                    </td>
+                                    <td style="font: normal 13px 'Trebuchet MS', Arial, Helvetica, sans-serif; line-height: 15px; text-align: left; vertical-align: top; border-bottom: 1px solid #e7e7e7;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         padding: 5px;">
+                                        @SessionHelper.PriceFormat(pos.WareQnt)
+                                    </td>
+                                    <td style="font: normal 13px 'Trebuchet MS', Arial, Helvetica, sans-serif; line-height: 15px; text-align: left; vertical-align: top; border-bottom: 1px solid #e7e7e7;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               padding: 5px;  background:#f6f6f6">
+                                        @SessionHelper.PriceFormat(pos.Sum / rate)
+                                    </td>
+                                    <td style="font: normal 13px 'Trebuchet MS', Arial, Helvetica, sans-serif; line-height: 15px; text-align: left; vertical-align: top; border-bottom: 1px solid #e7e7e7;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               padding: 5px;  background:#f6f6f6">
+                                        @*@(string.IsNullOrEmpty(pos.WarehouseName) ? pos.Placement : pos.WarehouseName)*@
+                                    </td>
+                                </tr>
+                            }
+                            <tr>
+                                <td colspan="9" style=" background:#fef9e3 ;font: normal 13px 'Trebuchet MS', Arial, Helvetica, sans-serif; line-height: 15px; text-align: left; vertical-align: top; border-bottom: 1px solid #e7e7e7; padding: 5px;  border-bottom: none;border-top: 2px solid #ffffff; padding-right: 35px; text-align: right;">
+                                    @if (Model.Delivery.Cost > 0)
+                                    {
+                                        <span style="margin-left: 15px;">@SharedResources.Delivery <b>@(SessionHelper.PriceFormat((Model.Delivery.Cost.HasValue) ? Model.Delivery.Cost.Value : decimal.Zero))</b> @SessionHelper.DefaultValute.Code</span>
+                                    }
+                                    <span style="margin-left: 15px;">@SharedResources.OrderSum <b>@SessionHelper.PriceFormat(sum / rate)</b> @SessionHelper.DefaultValute.Code</span>
+                                </td>
+                            </tr>
+                        </table>
+                        <p><b>@SharedResources.PaymentConditions:</b> @(string.IsNullOrEmpty(Model.PayDelayName) ? string.Format("{0} {1}", Model.PayDelayDays, SharedResources.days) : Model.PayDelayName)</p>
+                        <p><b>@SharedResources.PaymentForm:</b> @(Model.PaymentConditionsId == (int)PaymentConditions.Cash ? SharedResources.Cash : SharedResources.Cashless)</p>
+                        <p><b>@SharedResources.DeliveryType:</b> @(selfDelivery ? SharedResources.SelfDelivery + ", " + SharedResources.OrderIsAvailableForShipment + " " + Model.AvailabilityDatePresenter : SharedResources.Delivery + " " + Model.Delivery.DeliveryTypeId)</p>
+                        <p>
+                            <b>@SharedResources.DeliveryAddress:</b>
+                            @* ReSharper disable PossibleNullReferenceException *@
+                            @{
+                                var address = "";
+                                if (selfDelivery)
+                                {
+                                    var warehouses = referenceRepository.GetWarehouses(SessionHelper.CurrentClientId, UserPreferences.CurrentCulture);
+                                    var warehouse = warehouses.FirstOrDefault(i => i.Id == Model.WarehouseId);
+                                    address = warehouse == null ? Model.WarehouseName : warehouse.Address;
+                                }
+                                else
+                                {
+                                    address = Model.Delivery.Address;
+                                }
+                            }
+                            @(address)
+                            @* ReSharper restore PossibleNullReferenceException *@
+                        </p>
+                        @if (!string.IsNullOrWhiteSpace(Model.HtmlComment))
+                        {
+                            <p>
+                                <b>@SharedResources.Comment:</b>
+                                @* ReSharper disable PossibleNullReferenceException *@
+                                @Model.HtmlComment
+                                @* ReSharper restore PossibleNullReferenceException *@
+                            </p>
+                        }
+                        <div style="background: #FEF9E3; padding: 10px; border-radius: 5px; border: 1px solid #FAF3D1;">
+                            <p>@(new HtmlString(SharedResources.SummaryFooter))</p>
+                            <p>
+                                <span style="color:#ff0000;">@SharedResources.Date: @DateTime.Now.Date.ToShortDateString()</span>
+                            </p>
+                        </div>
+                    </div>
+                    <p style="margin-left: 15px;  color: #B1B1B1;  font-size: 12px;  margin-top: 12px;">@SharedResources.OrderMadeBy: <span>@SessionHelper.CurrentUser.FullName (@SessionHelper.CurrentUser.Login)</span></p>
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+@* ReSharper restore CssBrowserCompatibility *@
+@* ReSharper restore Html.Obsolete *@
+</html>

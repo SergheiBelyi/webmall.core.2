@@ -1,0 +1,46 @@
+﻿[
+  {
+    "outputFile": "Content/styles.css",
+    "inputFile": "Content/styles.less"
+  },
+  {
+    "outputFile": "Content/components-jQuery.UI.css",
+    "inputFile": "Content/components-jQuery.UI.less"
+  },
+  {
+    "outputFile": "Content/styles-for-tables.css",
+    "inputFile": "Content/styles-for-tables.less"
+  },
+  {
+    "outputFile": "Content/jquery.multiselect.css",
+    "inputFile": "Content/jquery.multiselect.less"
+  },
+  {
+    "outputFile": "Content/views/customerService.css",
+    "inputFile": "Content/views/customerService.less"
+  },
+  {
+    "outputFile": "Content/drop-menu.css",
+    "inputFile": "Content/drop-menu.less"
+  },
+  {
+    "outputFile": "Content/views/home.css",
+    "inputFile": "Content/views/home.less"
+  },
+  {
+    "outputFile": "Content/views/laximo.css",
+    "inputFile": "Content/views/laximo.less"
+  },
+  {
+    "outputFile": "assets/styles/styles.css",
+    "inputFile": "assets/styles/styles.scss"
+  },
+  {
+    "outputFile": "Content/views/inner.css",
+    "inputFile": "Content/views/inner.less"
+  },
+  {
+    "outputFile": "Content/views/serviceBooking.css",
+    "inputFile": "Content/views/serviceBooking.less"
+  }
+]

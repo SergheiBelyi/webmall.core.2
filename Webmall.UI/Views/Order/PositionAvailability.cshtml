@@ -1,0 +1,48 @@
+﻿@using System.Linq
+@using ValmiStore.Model.Entities.Order
+@using ViewRes
+@using Webmall.UI.Core
+@model WareAvailabilityWrapper
+
+@if (Model != null)
+{
+    if (Model.list.Any())
+    {
+        foreach (var wr in Model.list)
+        {
+            var cnt = 0;
+            <p class="@(cnt++ > 0 ? "dotted" : "")">
+                <span>@(SessionHelper.IsGross ? wr.WarehouseName : wr.CityName) </span>
+                <b> @string.Format("{0:0}", wr.Quantity)</b>
+                <i>@wr.AvailablePresentator</i>
+            </p>
+
+                @*<tr>
+                    <td>
+                        @(SessionHelper.IsGross ? wr.WarehouseName : wr.CityName)
+                    </td>
+                    <td @((!Model.IsEnough) ? "style=\"background-color:Red!important\"" : "")>
+                        @string.Format("{0:0}", wr.Quantity)
+                    </td>
+                    <td @((!Model.IsEnough) ? "style=\"background-color:Red!important\"" : "")>
+                        @wr.AvailablePresentator
+                    </td>
+                </tr>*@
+        }
+    }
+    else if (!Model.IsEnough)
+    {
+        <span style="color: Red !important">@SharedResources.NotAvailable</span>
+    }
+    else
+    {
+        @SharedResources.OnStock
+    }
+    @Html.Hidden("availableQnt" + Model.WareId, Model.Total)
+    @Html.Hidden("availableDate" + Model.WareId, Model.MaxTerm.ToString(Order.PresenterPattern))
+    @Html.Hidden("enough" + Model.WareId, Model.IsEnough)
+}
+else
+{
+    @SharedResources.OnStock
+}

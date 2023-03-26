@@ -1,0 +1,526 @@
+﻿@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+@using ViewRes
+@using Webmall.UI.Core.Helpers
+@using Webmall.UI.Core.HtmlHelpers
+@using Webmall.UI.ViewModel
+@model Webmall.Model.Entities.Catalog.Producer
+
+<div class="container-fluid">
+    @{Html.RenderPartial("Components/BreadCrumbsRender", new List<BreadCrumbsModel> { new BreadCrumbsModel { Name = Model.Name } });}
+    <div class="brand-detail">
+        <h1 class="brand-detail__heading main-heading is-leading">@Model.Name</h1>
+        <div class="brand-detail__main">
+            <div class="brand-detail__preview">
+                <div class="brand-detail__img-wrap">
+                    <img class="brand-detail__img" src="@Url.ProducerImage(Model.Name)" width="130" height="130" alt="">
+                    @if (Model.IsAction)
+                    {
+                        <span class="brand-detail__badge sticker is-action">@SharedResources.Action</span>
+                    }
+                </div>
+            </div>
+            <div class="brand-detail__params">
+                <dl class="brand-detail__props props">
+                    <div class="props__prop">
+                    <dt class="props__property">@SharedResources.Site:</dt>
+                    <dd class="props__value">
+                        <a href="@(this.ToLocalizedUrl(Model.SiteUrl))" @this.LikAttrs(Model.SiteUrl)>@Model.SiteUrl</a>
+                    </dd>
+            </div>
+            <div class="props__prop">
+                <dt class="props__property">@SharedResources.ProducerCountry:</dt>
+                <dd class="props__value">@(Model.Country)</dd>
+            </div>
+            </dl>
+        </div>
+        <div class="brand-detail__control">
+            <a class="brand-detail__btn btn btn--primary btn--sm" href="@Url.Action("Search", "Catalog", new { Producers = Model.Id })">
+                <span class="btn__text">@SharedResources.GotoCatalog</span>
+                <svg class="icon icon-chevron-right btn__icon" width="25" height="25">
+                    <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#chevron-right")"></use>
+                </svg>
+            </a>
+        </div>
+    </div>
+    @if (Model.Brand?.Features.Current.Length > 0)
+    {
+        <div class="brand-detail__features">
+            @foreach (var item in Model.Brand.Features.Current)
+            {
+                <figure class="brand-detail__feature brand-feature">
+                    <div class="brand-feature__img-wrap">
+                        <img class="brand-feature__img" src="@Url.Content("~/assets/images/feature-logo.svg")" alt="" width="40" height="35">
+                    </div>
+                    <figcaption class="brand-feature__desc">@Html.Raw(item.Feature)</figcaption>
+                </figure>
+            }
+        </div>
+    }
+</div><!-- brand-detail-->
+</div><!-- brand-gallery-section-->
+<section class="section brand-gallery-section">
+    <div class="container-fluid">
+        <div class="brand-gallery">
+            <div class="brand-gallery__main">
+                <div class="js-brands-promo-main js-gallery swiper">
+                    <div class="swiper-wrapper">
+                        @foreach (var item in Model.Brand.Gallery.Current)
+                        {
+                            <div class="swiper-slide">
+                                <div class="brand-gallery-card">
+                                    <div class="brand-gallery-card__heading">@item.Title</div>
+                                    <a class="brand-gallery-card__preview-wrap" href="@item.Image[0]" data-sub-html="@item.Title">
+                                        <img class="brand-gallery-card__preview" src="@item.Image[0]" alt="" width="730" height="430">
+                                    </a>
+                                    <div class="brand-gallery-card__content">
+                                        @Html.Raw(item.Text)
+                                    </div>
+                                    @*<a class="brand-gallery-card__more btn btn--primary-reverse" href="#">
+                                            <span class="btn__text">Показать больше</span>
+                                            <svg class="icon icon-chevron-right btn__icon" width="25" height="25">
+                                                <use href="assets/images/svg/symbol/sprite.svg#chevron-right"></use>
+                                            </svg>
+                                        </a>*@
+                                </div>
+                            </div>
+                        }
+                        <div class="swiper-slide">
+                            <div class="brand-gallery-card">
+                                <div class="brand-gallery-card__heading">Ми робимо все, що від нас залежить, та навіть більше</div>
+                                <a class="brand-gallery-card__preview-wrap" href="@Url.Content("~/assets/images/media/brand-gallery-2-lg.jpg")" data-sub-html="Caption of the image">
+                                    <img class="brand-gallery-card__preview" src="@Url.Content("~/assets/images/media/brand-gallery-2-md.jpg")" alt="" width="730" height="430">
+                                </a>
+                                <div class="brand-gallery-card__content">
+                                    <p>Так, сезон шиномонтажу вже фактично закінчився, але ж ми знаємо, що є ті, хто ще не встиг попіклуватися з тих чи інших причин про свого «залізного коня» та власну безпеку:)</p>
+                                </div>
+                                <a class="brand-gallery-card__more btn btn--primary-reverse" href="#">
+                                    <span class="btn__text">Показать больше</span>
+                                    <svg class="icon icon-chevron-right btn__icon" width="25" height="25">
+                                        <use href="assets/images/svg/symbol/sprite.svg#chevron-right"></use>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="brand-gallery-card">
+                                <div class="brand-gallery-card__heading">Ми робимо все, що від нас залежить, та навіть більше</div>
+                                <a class="brand-gallery-card__preview-wrap" href="@Url.Content("~/assets/images/media/brand-gallery-3-lg.jpg")" data-sub-html="Caption of the image">
+                                    <img class="brand-gallery-card__preview" src="@Url.Content("~/assets/images/media/brand-gallery-3-md.jpg")" alt="" width="730" height="430">
+                                </a>
+                                <div class="brand-gallery-card__content">
+                                    <p>Саме тому Автосервіс від АвтоНова-Д пропонує автовласникам «перевзути» автомобіль на зимову гуму зі знижкою у 40%!</p>
+                                    <p>Попереду – вихідні, і це дуже гарний шанс, щоб присвяти трішки часу задля того, щоб підготувати автомобіль до зими.</p>
+                                </div>
+                                <a class="brand-gallery-card__more btn btn--primary-reverse" href="#">
+                                    <span class="btn__text">Показать больше</span>
+                                    <svg class="icon icon-chevron-right btn__icon" width="25" height="25">
+                                        <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#chevron-right")"></use>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="brand-gallery-card">
+                                <div class="brand-gallery-card__heading">Ми робимо все, що від нас залежить, та навіть більше</div>
+                                <a class="brand-gallery-card__preview-wrap" href="@Url.Content("~/assets/images/media/brand-gallery-4-lg.jpg")" data-sub-html="Caption of the image">
+                                    <img class="brand-gallery-card__preview" src="@Url.Content("~/assets/images/media/brand-gallery-4-md.jpg")" alt="" width="730" height="430">
+                                </a>
+                                <div class="brand-gallery-card__content">
+                                    <p>Саме тому Автосервіс від АвтоНова-Д пропонує автовласникам «перевзути» автомобіль на зимову гуму зі знижкою у 40%!</p>
+                                    <p>Попереду – вихідні, і це дуже гарний шанс, щоб присвяти трішки часу задля того, щоб підготувати автомобіль до зими.</p>
+                                </div>
+                                <a class="brand-gallery-card__more btn btn--primary-reverse" href="#">
+                                    <span class="btn__text">Показать больше</span>
+                                    <svg class="icon icon-chevron-right btn__icon" width="25" height="25">
+                                        <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#chevron-right")"></use>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="brand-gallery-card">
+                                <div class="brand-gallery-card__heading">Ми робимо все, що від нас залежить, та навіть більше</div>
+                                <a class="brand-gallery-card__preview-wrap" href="@Url.Content("~/assets/images/media/brand-gallery-5-lg.jpg")" data-sub-html="Caption of the image">
+                                    <img class="brand-gallery-card__preview" src="@Url.Content("~/assets/images/media/brand-gallery-5-md.jpg")" alt="" width="730" height="430">
+                                </a>
+                                <div class="brand-gallery-card__content">
+                                    <p>Так, сезон шиномонтажу вже фактично закінчився, але ж ми знаємо, що є ті, хто ще не встиг попіклуватися з тих чи інших причин про свого «залізного коня» та власну безпеку:)</p>
+                                    <p>Саме тому Автосервіс від АвтоНова-Д пропонує автовласникам «перевзути» автомобіль на зимову гуму зі знижкою у 40%!</p>
+                                    <p>Попереду – вихідні, і це дуже гарний шанс, щоб присвяти трішки часу задля того, щоб підготувати автомобіль до зими.</p>
+                                </div>
+                                <a class="brand-gallery-card__more btn btn--primary-reverse" href="#">
+                                    <span class="btn__text">Показать больше</span>
+                                    <svg class="icon icon-chevron-right btn__icon" width="25" height="25">
+                                        <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#chevron-right")"></use>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="brand-gallery-card">
+                                <div class="brand-gallery-card__heading">Ми робимо все, що від нас залежить, та навіть більше</div>
+                                <a class="brand-gallery-card__preview-wrap" href="@Url.Content("~/assets/images/media/brand-gallery-6-lg.jpg")" data-sub-html="Caption of the image">
+                                    <img class="brand-gallery-card__preview" src="@Url.Content("~/assets/images/media/brand-gallery-6-md.jpg")" alt="" width="730" height="430">
+                                </a>
+                                <div class="brand-gallery-card__content">
+                                    <p>Так, сезон шиномонтажу вже фактично закінчився, але ж ми знаємо, що є ті, хто ще не встиг попіклуватися з тих чи інших причин про свого «залізного коня» та власну безпеку:)</p>
+                                    <p>Саме тому Автосервіс від АвтоНова-Д пропонує автовласникам «перевзути» автомобіль на зимову гуму зі знижкою у 40%!</p>
+                                    <p>Попереду – вихідні, і це дуже гарний шанс, щоб присвяти трішки часу задля того, щоб підготувати автомобіль до зими.</p>
+                                </div>
+                                <a class="brand-gallery-card__more btn btn--primary-reverse" href="#">
+                                    <span class="btn__text">Показать больше</span>
+                                    <svg class="icon icon-chevron-right btn__icon" width="25" height="25">
+                                        <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#chevron-right")"></use>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="brand-gallery-card">
+                                <div class="brand-gallery-card__heading">Ми робимо все, що від нас залежить, та навіть більше</div>
+                                <a class="brand-gallery-card__preview-wrap" href="assets/images/media/brand-gallery-1-lg.jpg" data-sub-html="Caption of the image">
+                                    <img class="brand-gallery-card__preview" src="assets/images/media/brand-gallery-1-md.jpg" alt="" width="730" height="430">
+                                </a>
+                                <div class="brand-gallery-card__content">
+                                    <p>Так, сезон шиномонтажу вже фактично закінчився, але ж ми знаємо, що є ті, хто ще не встиг попіклуватися з тих чи інших причин про свого «залізного коня» та власну безпеку:)</p>
+                                    <p>Саме тому Автосервіс від АвтоНова-Д пропонує автовласникам «перевзути» автомобіль на зимову гуму зі знижкою у 40%!</p>
+                                    <p>Попереду – вихідні, і це дуже гарний шанс, щоб присвяти трішки часу задля того, щоб підготувати автомобіль до зими.</p>
+                                </div>
+                                <a class="brand-gallery-card__more btn btn--primary-reverse" href="#">
+                                    <span class="btn__text">Показать больше</span>
+                                    <svg class="icon icon-chevron-right btn__icon" width="25" height="25">
+                                        <use href="assets/images/svg/symbol/sprite.svg#chevron-right"></use>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="brand-gallery-card">
+                                <div class="brand-gallery-card__heading">Ми робимо все, що від нас залежить, та навіть більше</div>
+                                <a class="brand-gallery-card__preview-wrap" href="assets/images/media/brand-gallery-2-lg.jpg" data-sub-html="Caption of the image">
+                                    <img class="brand-gallery-card__preview" src="assets/images/media/brand-gallery-2-md.jpg" alt="" width="730" height="430">
+                                </a>
+                                <div class="brand-gallery-card__content">
+                                    <p>Так, сезон шиномонтажу вже фактично закінчився, але ж ми знаємо, що є ті, хто ще не встиг попіклуватися з тих чи інших причин про свого «залізного коня» та власну безпеку:)</p>
+                                    <p>Саме тому Автосервіс від АвтоНова-Д пропонує автовласникам «перевзути» автомобіль на зимову гуму зі знижкою у 40%!</p>
+                                    <p>Попереду – вихідні, і це дуже гарний шанс, щоб присвяти трішки часу задля того, щоб підготувати автомобіль до зими.</p>
+                                </div>
+                                <a class="brand-gallery-card__more btn btn--primary-reverse" href="#">
+                                    <span class="btn__text">Показать больше</span>
+                                    <svg class="icon icon-chevron-right btn__icon" width="25" height="25">
+                                        <use href="assets/images/svg/symbol/sprite.svg#chevron-right"></use>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="brand-gallery-card">
+                                <div class="brand-gallery-card__heading">Ми робимо все, що від нас залежить, та навіть більше</div>
+                                <a class="brand-gallery-card__preview-wrap" href="assets/images/media/brand-gallery-3-lg.jpg" data-sub-html="Caption of the image">
+                                    <img class="brand-gallery-card__preview" src="assets/images/media/brand-gallery-3-md.jpg" alt="" width="730" height="430">
+                                </a>
+                                <div class="brand-gallery-card__content">
+                                    <p>Так, сезон шиномонтажу вже фактично закінчився, але ж ми знаємо, що є ті, хто ще не встиг попіклуватися з тих чи інших причин про свого «залізного коня» та власну безпеку:)</p>
+                                    <p>Саме тому Автосервіс від АвтоНова-Д пропонує автовласникам «перевзути» автомобіль на зимову гуму зі знижкою у 40%!</p>
+                                    <p>Попереду – вихідні, і це дуже гарний шанс, щоб присвяти трішки часу задля того, щоб підготувати автомобіль до зими.</p>
+                                </div>
+                                <a class="brand-gallery-card__more btn btn--primary-reverse" href="#">
+                                    <span class="btn__text">Показать больше</span>
+                                    <svg class="icon icon-chevron-right btn__icon" width="25" height="25">
+                                        <use href="assets/images/svg/symbol/sprite.svg#chevron-right"></use>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- brand thumbs-->
+            <div class="brand-gallery__thumbs">
+                <div class="js-brands-thumbs-list swiper">
+                    <div class="swiper-wrapper">
+                        @foreach (var item in Model.Brand.Gallery.Current)
+                        {
+                            <div class="swiper-slide">
+                                <span class="brand-gallery__thumb">
+                                    <img class="brand-gallery__thumb-img" src="@item.Image[0]" alt="" width="190" height="130">
+                                </span>
+                            </div>
+                        }
+                        <div class="swiper-slide">
+                            <span class="brand-gallery__thumb">
+                                <img class="brand-gallery__thumb-img" src="@Url.Content("~/assets/images/media/brand-gallery-2-sm.jpg")" alt="" width="190" height="130">
+                            </span>
+                        </div>
+                        <div class="swiper-slide">
+                            <span class="brand-gallery__thumb">
+                                <img class="brand-gallery__thumb-img" src="@Url.Content("~/assets/images/media/brand-gallery-3-sm.jpg")" alt="" width="190" height="130">
+                            </span>
+                        </div>
+                        <div class="swiper-slide">
+                            <span class="brand-gallery__thumb">
+                                <img class="brand-gallery__thumb-img" src="@Url.Content("~/assets/images/media/brand-gallery-4-sm.jpg")" alt="" width="190" height="130">
+                            </span>
+                        </div>
+                        <div class="swiper-slide">
+                            <span class="brand-gallery__thumb">
+                                <img class="brand-gallery__thumb-img" src="@Url.Content("~/assets/images/media/brand-gallery-5-sm.jpg")" alt="" width="190" height="130">
+                            </span>
+                        </div>
+                        <div class="swiper-slide">
+                            <span class="brand-gallery__thumb">
+                                <img class="brand-gallery__thumb-img" src="@Url.Content("~/assets/images/media/brand-gallery-6-sm.jpg")" alt="" width="190" height="130">
+                            </span>
+                        </div>
+                        <div class="swiper-slide">
+                            <span class="brand-gallery__thumb">
+                                <img class="brand-gallery__thumb-img" src="@Url.Content("~/assets/images/media/brand-gallery-1-sm.jpg")" alt="" width="190" height="130">
+                            </span>
+                        </div>
+                        <div class="swiper-slide">
+                            <span class="brand-gallery__thumb">
+                                <img class="brand-gallery__thumb-img" src="@Url.Content("~/assets/images/media/brand-gallery-2-sm.jpg")" alt="" width="190" height="130">
+                            </span>
+                        </div>
+                        <div class="swiper-slide">
+                            <span class="brand-gallery__thumb">
+                                <img class="brand-gallery__thumb-img" src="@Url.Content("~/assets/images/media/brand-gallery-3-sm.jpg")" alt="" width="190" height="130">
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <button class="brand-gallery__thumbs-prev js-brands-thumbs-list-prev" type="button">
+                    <svg class="icon icon-chevron-left brand-gallery__thumbs-prev-icon" width="25" height="25">
+                        <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#chevron-left")"></use>
+                    </svg>
+                </button>
+                <button class="brand-gallery__thumbs-next js-brands-thumbs-list-next" type="button">
+                    <svg class="icon icon-chevron-right brand-gallery__thumbs-next-icon" width="25" height="25">
+                        <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#chevron-right")"></use>
+                    </svg>
+                </button>
+            </div>
+            <div class="js-brands-thumbs-list-pagination"></div><!-- /brand thumbs-->
+        </div>
+    </div>
+</section><!-- /brand-gallery-section-->
+<!-- links-section-->
+<section class="section links-section">
+    <div class="container-fluid">
+        <h2 class="links-section__heading main-heading">@SharedResources.CatalogsAndDocs</h2>
+        <div class="links-section__main">
+            @{
+                var docs = Model.Brand.Docs.Current.ToList();
+            }
+
+            <ul class="links-section__list list">
+                @foreach (var item in docs.Where(i => docs.IndexOf(i) % 2 ==0))
+                {
+                    <li class="list__item">
+                        <a class="list__link" href="@item.File[0]">@item.Title</a>
+                    </li>
+                }
+                <li class="list__item">
+                    <a class="list__link" href="#">Инструкции по установке для автомобилей PSA 2020</a>
+                </li>
+                <li class="list__item">
+                    <a class="list__link" href="#">Коды свечей для VAG 2010-2015</a>
+                </li>
+                <li class="list__item">
+                    <a class="list__link" href="#">Инструкции по установке для автомобилей VAG 2020</a>
+                </li>
+            </ul>
+            <ul class="links-section__list list">
+                @foreach (var item in docs.Where(i => docs.IndexOf(i) % 2 == 1))
+                {
+                    <li class="list__item">
+                        <a class="list__link" href="@item.File[0]">@item.Title</a>
+                    </li>
+                }
+                <li class="list__item">
+                    <a class="list__link" href="#">Популярные и редкие позиции</a>
+                </li>
+                <li class="list__item">
+                    <a class="list__link" href="#">Инструкции по установке для автомобилей PSA 2020</a>
+                </li>
+                <li class="list__item">
+                    <a class="list__link" href="#">Коды свечей для VAG 2010-2015</a>
+                </li>
+                <li class="list__item">
+                    <a class="list__link" href="#">Инструкции по установке для автомобилей VAG 2020</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section><!-- /links-section-->
+<!-- docs-section-->
+<section class="section docs-section">
+    <div class="container-fluid">
+        <div class="docs-section__header">
+            <h2 class="docs-section__heading main-heading">@SharedResources.Warranty</h2>
+            <div class="docs-section__intro">
+                @Html.Raw(Model.Brand.WarrantyTitle)
+            </div>
+        </div>
+        <div class="docs-section__main">
+            <div class="docs-section__carousel swiper js-docs-carousel js-gallery">
+                <div class="swiper-wrapper">
+                    @foreach (var item in Model.Brand.WarrantyImages)
+                    {
+                        <div class="swiper-slide">
+                            <a class="doc" href="@item" data-sub-html="Caption of the doc">
+                                <img class="doc__img" src="@item" alt="" width="200" height="280">
+                            </a>
+                        </div>
+                    }
+                    <div class="swiper-slide">
+                        <a class="doc" href="@Url.Content("~/assets/images/media/doc-lg.jpg")" data-sub-html="Caption of the doc">
+                            <img class="doc__img" src="@Url.Content("~/assets/images/media/doc.jpg")" alt="" width="200" height="280">
+                        </a>
+                    </div>
+                    <div class="swiper-slide">
+                        <a class="doc" href="@Url.Content("~/assets/images/media/doc-lg.jpg")" data-sub-html="Caption of the doc">
+                            <img class="doc__img" src="@Url.Content("~/assets/images/media/doc.jpg")" alt="" width="200" height="280">
+                        </a>
+                    </div>
+                    <div class="swiper-slide">
+                        <a class="doc" href="@Url.Content("~/assets/images/media/doc-lg.jpg")" data-sub-html="Caption of the doc">
+                            <img class="doc__img" src="@Url.Content("~/assets/images/media/doc.jpg")" alt="" width="200" height="280">
+                        </a>
+                    </div>
+                    <div class="swiper-slide">
+                        <a class="doc" href="@Url.Content("~/assets/images/media/doc-lg.jpg")" data-sub-html="Caption of the doc">
+                            <img class="doc__img" src="@Url.Content("~/assets/images/media/doc.jpg")" alt="" width="200" height="280">
+                        </a>
+                    </div>
+                    <div class="swiper-slide">
+                        <a class="doc" href="@Url.Content("~/assets/images/media/doc-lg.jpg")" data-sub-html="Caption of the doc">
+                            <img class="doc__img" src="@Url.Content("~/assets/images/media/doc.jpg")" alt="" width="200" height="280">
+                        </a>
+                    </div>
+                    <div class="swiper-slide">
+                        <a class="doc" href="@Url.Content("~/assets/images/media/doc-lg.jpg")" data-sub-html="Caption of the doc">
+                            <img class="doc__img" src="@Url.Content("~/assets/images/media/doc.jpg")" alt="" width="200" height="280">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <button class="docs-section__prev js-docs-carousel-prev" type="button">
+                <svg class="icon icon-chevron-left docs-section__icon" width="25" height="25">
+                    <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#chevron-left")"></use>
+                </svg>
+            </button>
+            <button class="docs-section__next js-docs-carousel-next" type="button">
+                <svg class="icon icon-chevron-right docs-section__icon" width="25" height="25">
+                    <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#chevron-right")"></use>
+                </svg>
+            </button>
+            <div class="docs-section__pagination js-docs-carousel-pagination"></div>
+        </div>
+    </div>
+</section><!-- /docs-section-->
+<!-- recent-section-->
+<section class="section recent-section">
+    <div class="container-fluid">
+        <h2 class="recent-section__heading main-heading">@SharedResources.News</h2>
+        <div class="recent-section__main">
+            <div class="recent-section__list recents">
+                @foreach (var item in Model.Brand.News.Current.OrderByDescending(i=>i.DateAsDate).Take(10))
+                {
+                    <div class="recents__item">
+                        <time class="recents__date">@item.DateAsDate.ToShortDateString()</time>
+                        <div class="recents__title">
+                            @Html.Raw(item.Title)
+                        </div>
+                    </div>
+                }
+                @*<div class="recents__item">
+                    <time class="recents__date">29.11.22</time>
+                    <div class="recents__title">
+                        Обновлены <a href="#">сертификаты соответствия и сертификат официального импортера</a>
+                    </div>
+                </div>
+                <div class="recents__item">
+                    <time class="recents__date">29.11.22</time>
+                    <div class="recents__title">
+                        Добавлены <a href="#">коды на автомобили PSA 2015</a>
+                    </div>
+                </div>*@
+            </div>
+        </div>
+    </div>
+</section><!-- /recent-section-->
+<!-- brand-categories-section-->
+@if (Model.Brand != null)
+{
+    <section class="section brand-categories-section">
+        <div class="container-fluid">
+            <div class="brand-categories-section__main">
+                <div class="brand-categories-section__col brand-category">
+                    <h2 class="brand-category__heading main-heading">@SharedResources.VehicleTypes:</h2>
+                    <ul class="brand-category__list list">
+                        @foreach (var item in Model.Brand.VehicleTypes.ToTags())
+                        {
+                            <li class="list__item">
+                                <a class="list__link">@item</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <div class="brand-categories-section__col brand-category">
+                    <h2 class="brand-category__heading main-heading">@SharedResources.AutoMarka:</h2>
+                    <ul class="brand-category__list list">
+                        @foreach (var item in Model.Brand.Marks.ToTags())
+                        {
+                            <li class="list__item">
+                                <a class="list__link">@item</a>
+                            </li>
+                        }
+                    </ul>
+                    @*<a class="brand-category__btn btn btn--primary-reverse" href="#">
+                            <span class="btn__text">Показать больше</span>
+                            <svg class="icon icon-chevron-right btn__icon" width="25" height="25">
+                                <use href="assets/images/svg/symbol/sprite.svg#chevron-right"></use>
+                            </svg>
+                        </a>*@
+                </div>
+                <div class="brand-categories-section__col brand-category">
+                    <h2 class="brand-category__heading main-heading">@SharedResources.Assemblies:</h2>
+                    <ul class="brand-category__list list">
+                        @foreach (var item in Model.Brand.Assemblies.ToTags())
+                        {
+                            <li class="list__item">
+                                <a class="list__link">@item</a>
+                            </li>
+                        }
+                    </ul>
+                    @*<a class="brand-category__btn btn btn--primary-reverse" href="#">
+                            <span class="btn__text">Показать больше</span>
+                            <svg class="icon icon-chevron-right btn__icon" width="25" height="25">
+                                <use href="assets/images/svg/symbol/sprite.svg#chevron-right"></use>
+                            </svg>
+                        </a>*@
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /brand-categories-section-->
+}
+
+@section styles {
+@*    @Styles.Render("~/Content/fancybox/fancy")*@
+}
+@section scripts
+{
+    @*@Scripts.Render("~/bundles/fancy")
+    <script>
+        $("a[rel=images].fancy").fancybox({
+            'transitionIn': 'elastic',
+            'transitionOut': 'elastic',
+            'titlePosition': 'inside',
+            'titleFormat': function (title, currentArray, currentIndex, currentOpts) {
+                var url = $(currentArray[currentIndex]).attr('url');
+                return "<span id='fancybox-title-inside' class='hand' onclick=document.location.href='" + url + "'>" + title + "</span>";
+            }
+        });
+    </script>*@
+}

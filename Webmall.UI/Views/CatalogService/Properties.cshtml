@@ -1,0 +1,19 @@
+﻿@using ViewRes
+@model List<Webmall.Model.Entities.Catalog.WareProperty>
+@{
+    Layout = null;
+}
+@if (Model.Any())
+{
+    foreach (var el in Model)
+    {
+        <dl class="manual-params__param">
+            <dt class="manual-params__value">@el.Name</dt>
+            <dd class="manual-params__property">@el.Value</dd>
+        </dl>
+    }
+}
+else
+{
+    <div>@SharedResources.NoData</div>
+}

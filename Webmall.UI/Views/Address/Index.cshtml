@@ -1,0 +1,293 @@
+﻿@using ViewRes
+@using Webmall.Model.CoreHelpers
+@model Webmall.UI.ViewModel.Address.DeliveryAddressesViewModel
+
+@{
+    Layout = "~/Views/Shared/_PersonalLayout.cshtml";
+    ViewBag.Title = SharedResources.DeliveryAddresses;
+}
+
+<div class="addresses">
+    <h1 class="page-intro__heading main-heading">@ViewBag.Title</h1>
+    @*<div class="addresses__notification notification is-success is-block text-center">Основной адрес установлен</div>*@
+    <div class="addresses__header">
+        <a class="addresses__btn btn btn--primary" href="#" data-modal-win-trigger="address-detail"
+           id="addr-0" data-close-outside="false" data-after-open="UpdateAddressDialog();"
+           data-id="0" data-data="">@SharedResources.NewDeliveryAddress</a>
+    </div>
+
+    <div class="addresses__main">
+        @foreach (var item in Model.Addresses.Addresses)
+        {
+            <article class="addresses__address address-card" id="cont-@item.AddressId">
+                <div class="address-card__heading">@item.LocalityName, @(item.CarrierService?.Name)</div>
+                <div class="params__param">
+                    <dt class="params__property">@(item.PickupPoint?.Name ?? "-")</dt>
+                    @*<dd class="params__value">ул. Пушкина дом 42 кв. 19</dd>*@
+                </div>
+                <div class="address-card__main">
+                    <dl class="address-card__params params">
+                        <div class="params__param">
+                        <dt class="params__property">@(item.CanTakeMoney ? SharedResources.COD : "")</dt>
+                        @*<dd class="params__value">1000</dd>*@
+                </div>
+                <div class="params__param">
+                    <dt class="params__property">@SharedResources.Address:</dt>
+                    <dd class="params__value">@(item.FullAddress)</dd>
+                </div>
+                </dl>
+                <dl class="address-card__params params">
+                    <div class="params__param">
+                    <dt class="params__property">@SharedResources.Receiver:</dt>
+                    <dd class="params__value">@(item.Receiver?.Name)</dd>
+        </div>
+        <div class="params__param">
+            <dt class="params__property">@SharedResources.Phone:</dt>
+            <dd class="params__value"><a class="user-contacts__contact-link" href="tel:@(item.Receiver?.Phone)">@(item.Receiver?.Phone)</a></dd>
+        </div>
+        @if (!string.IsNullOrEmpty(item.Receiver?.Email))
+        {
+            <div class="params__param">
+                <dt class="params__property">@SharedResources.Email:</dt>
+                <dd class="params__value">@item.Receiver.Email</dd>
+            </div>
+        }
+        </dl>
+    </div>
+                <div class="address-card__bottom">
+                    <div class="address-card__controls">
+                        <a class="address-card__control btn btn--primary" href="#">
+                            <svg class="icon icon-pen btn__icon" width="25" height="25">
+                                <use href="assets/images/svg/symbol/sprite.svg#pen"></use>
+                            </svg>
+                            <span class="btn__text" data-modal-win-trigger="address-detail"
+                                  id="addr-@item.AddressId" data-close-outside="false" data-after-open="UpdateAddressDialog('@item.AddressId');"
+                                  data-id="@(item.AddressId)" data-data="@item.ToJson()">@SharedResources.Edit</span>
+                        </a>
+                        @if (!item.IsDeletePossible)
+                        {
+                            <a class="address-card__control btn btn--gray" href="#">
+                                <svg class="icon icon-bin btn__icon" width="25" height="25">
+                                    <use href="assets/images/svg/symbol/sprite.svg#bin"></use>
+                                </svg>
+                                <span class="btn__text" onclick="deleteAddress('@item.AddressId')">@SharedResources.Delete</span>
+                            </a>
+                        }
+                    </div>
+                    <div class="address-card__current">
+                        <svg class="icon icon-check-circle address-card__current-icon" width="25" height="25">
+                            <use href="assets/images/svg/symbol/sprite.svg#check-circle"></use>
+                        </svg>
+                        <span class="address-card__current-text">Основной адрес</span>
+                    </div>
+                </div>
+            </article>
+        }
+    </div>
+</div>
+@*
+    <div class="users__subsection">
+        <!-- users-data-->
+        <div class="users__main users-data">
+            <div class="users-data__header">
+                @*<!-- header-controls-->
+                    <div class="users-data__controls header-controls">
+                        <div class="header-control">
+                            <div class="header-control__dropdown">
+                                <div class="header-control__dropdown-main custom-dropdown js-dropdown">
+                                    <div class="custom-dropdown__header js-dropdown-toggle">
+                                        <div class="custom-dropdown__heading">Всех пользователей</div>
+                                    </div>
+                                    <ul class="custom-dropdown__items">
+                                        <li class="custom-dropdown__item">
+                                            <a class="custom-dropdown__link" href="#">Всех пользователей</a>
+                                        </li>
+                                        <li class="custom-dropdown__item">
+                                            <a class="custom-dropdown__link" href="#">Только менеджеры</a>
+                                        </li>
+                                        <li class="custom-dropdown__item">
+                                            <a class="custom-dropdown__link" href="#">Только администраторы</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="header-control__dropdown-text">Отображать</div>
+                            </div>
+                        </div>
+                    </div><!-- /header-controls-->
+                * @
+            </div>
+            <div class="users-data__main">
+                <!-- users-table-->
+                <div class="users-data__table users-table">
+                    <div class="users-table__header">
+                        <div class="users-table__row">
+                            <div class="users-table__cell">
+                                <div class="users-table__caption">@(SharedResources.FIO + "/" + SharedResources.RegistrationDate)</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="users-table__main">
+                        <div class="users-table__row">
+                            <div class="users-table__cell">
+                                <ul class="users-table__contacts user-contacts">
+                                    <li class="user-contacts__contact">
+                                        <div class="stock-mob-table__counter-trigger input" data-modal-win-trigger="address-detail"
+                                             id="addr-0" data-close-outside="false" data-after-open="UpdateAddressDialog();"
+                                             data-id="0" data-data="">@SharedResources.NewDeliveryAddress</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            @foreach (var item in Model.Addresses.Addresses)
+                            {
+                                <div class="users-table__row" id="cont-@item.AddressId">
+                                    <div class="users-table__cell">
+                                        <ul class="users-table__contacts user-contacts">
+                                            <li class="user-contacts__contact">
+                                                @item.LocalityName, @(item.CarrierService?.Name)
+                                            </li>
+                                            <li class="user-contacts__contact">
+                                                @(item.PickupPoint?.Name ?? "-")
+                                            </li>
+                                            <li class="user-contacts__contact">
+                                                @(item.CanTakeMoney ? SharedResources.COD : "")
+                                            </li>
+                                            <li class="user-contacts__contact">
+                                                @SharedResources.Address: @(item.FullAddress)
+                                            </li>
+                                            <li class="user-contacts__contact">
+                                                @SharedResources.Receiver: @(item.Receiver?.Name)
+                                            </li>
+                                            <li class="user-contacts__contact">
+                                                @SharedResources.Phone: <a class="user-contacts__contact-link" href="tel:@(item.Receiver?.Phone)">@(item.Receiver?.Phone)</a>
+                                            </li>
+                                            @if (!string.IsNullOrEmpty(item.Receiver?.Email))
+                                            {
+                                                <li class="user-contacts__contact">
+                                                    @SharedResources.Email: @item.Receiver.Email
+                                                </li>
+                                            }
+                                            <li class="user-contacts__contact">
+                                                <div class="stock-mob-table__counter-trigger input" data-modal-win-trigger="address-detail"
+                                                     id="addr-@item.AddressId" data-close-outside="false" data-after-open="UpdateAddressDialog('@item.AddressId');"
+                                                     data-id="@(item.AddressId)" data-data="@item.ToJson()">@SharedResources.Edit</div>
+
+                                                </li>
+                                                @if (!item.IsDeletePossible)
+                                                {
+                                                    <li class="user-contacts__contact">
+                                                        <div class="stock-mob-table__counter-trigger input" onclick="deleteAddress('@item.AddressId')">@SharedResources.Delete</div>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    </div>
+                                }
+                        </div>
+                    </div><!-- /users-table-->
+                </div>
+            </div><!-- /users-data-->
+        </div>
+    *@
+    @section scripts
+{
+        <script>
+        var deliveryRegion, deliveryLocality, deliveryCarrier, deliveryCarrierPickupPoint;
+        var addressData;
+
+        $(function() {
+            deliveryRegion = new Choices(document.querySelector('#DeliveryRegion'));
+            deliveryLocality = new Choices(document.querySelector('#DeliveryLocality'));
+            deliveryCarrier = new Choices(document.querySelector('#DeliveryCarrier'));
+            deliveryCarrierPickupPoint = new Choices(document.querySelector('#DeliveryCarrierPickupPoint'));
+        });
+
+        function UpdateAddressDialog(addressId) {
+            var el = document.getElementById("addr-" + addressId);
+            if (el && el.dataset.data) {
+                addressData = JSON.parse(el.dataset.data);
+            } else
+                addressData = { isNew: true };
+
+            deliveryRegion.setChoiceByValue(addressData.RegionId);
+            DeliveryRegionSelected();
+            if (addressData.isNew) {
+                document.getElementById("AddressId").value = "";
+                document.getElementById("DeliveryAddress").value = "";
+                document.getElementById("DeliveryReceiver").value = "";
+                document.getElementById("DeliveryReceiverEmail").value = "";
+                document.getElementById("DeliveryReceiverPhone").value = "";
+            } else {
+                document.getElementById("AddressId").value = addressData.AddressId;
+                document.getElementById("DeliveryAddress").value = addressData.AddressLine;
+                document.getElementById("DeliveryReceiver").value = addressData.Receiver.Name;
+                document.getElementById("DeliveryReceiverEmail").value = addressData.Receiver.Email;
+                document.getElementById("DeliveryReceiverPhone").value = addressData.Receiver.Phone;
+            }
+        }
+
+        function DeliveryRegionSelected(obj) {
+            deliveryLocality.clearChoices();
+            deliveryLocality.setValue([""]);
+            $.getJSON("@(Url.Action("GetLocalities", "Address"))?withCarrier=true" + "&regionId=" + $("#DeliveryRegion").val()).done(function(data) {
+                if (data)
+                    deliveryLocality.setChoices(data, 'id', 'value', true);
+                if (addressData.LocalityId) {
+                    deliveryLocality.setChoiceByValue(addressData.LocalityId);
+                    addressData.LocalityId = null;
+                }
+                DeliveryLocalitySelected();
+            });
+        }
+
+        function DeliveryLocalitySelected(obj) {
+            deliveryCarrier.setValue([""]);
+            deliveryCarrier.clearChoices();
+            $.getJSON("@Url.Action("GetCarriers", "Address")?localityId=" + $("#DeliveryLocality").val()).done(function(data) {
+                if (data)
+                    deliveryCarrier.setChoices(data, 'id', 'value', true);
+                if (addressData.CarrierServiceId) {
+                    deliveryCarrier.setChoiceByValue(addressData.CarrierServiceId);
+                    addressData.CarrierServiceId = null;
+                }
+                DeliveryCarrierSelected();
+            });
+        }
+
+        function DeliveryCarrierSelected(obj) {
+            deliveryCarrierPickupPoint.setValue([""]);
+            deliveryCarrierPickupPoint.clearChoices();
+            $.getJSON("@Url.Action("GetCarrierPickupPoints", "Address")?localityId=" + $("#DeliveryLocality").val() + "&carrierId=" + $("#DeliveryCarrier").val()).done(function(data) {
+                if (data)
+                    deliveryCarrierPickupPoint.setChoices(data, 'id', 'value', true);
+                if (addressData.PickupPointId) {
+                    deliveryCarrierPickupPoint.setChoiceByValue(addressData.PickupPointId);
+                    addressData.PickupPointId = null;
+                }
+                DeliveryCarrierPickupPointSelected();
+            });
+        }
+
+        function DeliveryCarrierPickupPointSelected(obj) {
+        }
+
+        function deleteAddress(addressId) {
+            if (!confirm('@SharedResources.AreYouSure')) return;
+
+            $.post('@Url.Action("Delete")?id=' + addressId, null, function (content) {
+                $('#cont-'+addressId).remove();
+            });
+        }
+
+        </script>
+    }
+@section BreadCrumbs
+{
+    <ul class="breadcrumbs"></ul>
+}
+    
+
+    @section dialogs
+    {
+        @{ Html.RenderPartial("AddressDialog", Model); }
+    }

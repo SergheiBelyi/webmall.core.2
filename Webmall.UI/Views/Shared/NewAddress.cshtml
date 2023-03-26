@@ -1,0 +1,490 @@
+﻿@using Webmall.Model
+@using ViewRes
+@using Webmall.UI.Core
+@model Webmall.Model.Entities.Address.Address
+<style>
+    #delivery-addresses-container.progress {
+        opacity: .3;
+        pointer-events: none;
+    }
+    .ui-autocomplete-loading {
+        background: white url("/Content/images/ui-anim_basic_16x16.gif") right center no-repeat;
+    }
+</style>
+
+@{
+    var latinOnly = ConfigHelper.UserNameLatinOnly;
+}
+<div id="dlgAddress" title="@SharedResources.NewDeliveryAddress" style="display: none">
+    @using (Html.BeginForm((string)ViewBag.NewAddressAction, (string)ViewBag.NewAddressController, FormMethod.Post, new { id = "newAddress-form" }))
+    {
+        <label class="long" hidden>
+            @SharedResources.Region<br>
+            @Html.TextBoxFor(m => m.RegionName)
+            @Html.HiddenFor(m => m.RegionId)
+        </label>
+        <label class="long">
+            @SharedResources.Locality
+            <span class="star">*</span> <br>
+            @Html.TextBoxFor(m => m.LocalityName)
+            @Html.HiddenFor(m => m.LocalityId)
+        </label>
+        <label class="long">
+            @SharedResources.Street @(latinOnly ? SharedResources.latin_only : "")
+            <span class="star">*</span><br>
+            @Html.TextBoxFor(m => m.StreetName, new { onkeyup = latinOnly ? "Latin(this);" : "" })
+            @Html.HiddenFor(m => m.StreetId)
+        </label>
+        <label class="long" id="DistrictRow" style="display: none">
+            @SharedResources.CityDistrict <br>
+            @Html.DropDownList("DistrictId", new List<SelectListItem>())
+        </label>
+        <label class="short">
+            @SharedResources.House <span class="star">*</span> <br>
+            @Html.TextBoxFor(m => m.House)
+        </label>
+        <label class="short no-margin">
+            @SharedResources.Apartment <br>
+            @Html.TextBoxFor(m => m.Flat)
+        </label>
+        <label class="long">
+            @SharedResources.Comment <br>
+            <span id="commentLength">
+                @SharedResources.Remain:
+                <span id="rest">100</span>
+            </span>
+            @Html.TextAreaFor(m => m.Comment)
+        </label>
+        <label class="long"><span class="star">* Поля обязательного заполнения</span></label>
+        @Html.Button(SharedResources.Save, new { @class = "button-submit", onclick = ViewBag.NewAddressOnSaveClick ?? "upsertDeliveryaddress()" })
+
+        @Html.HiddenFor(m => m.AddressId)
+    }
+</div>
+
+<script type="text/javascript">
+
+    function upsertDeliveryaddress() {
+
+        if (!$("#newAddress-form").valid()) return false;
+
+        $("#dlgAddress").dialog('close');
+        $('#delivery-addresses-container').addClass('progress');
+
+        var form = $("#dlgAddress > form");
+        var url = '@Url.Action("SaveAddress", "Clients")';
+        var data = form.serialize();
+        $.post(url, data, function(content) {
+            $('#delivery-addresses-container').html(content);
+            $('#delivery-addresses-container').removeClass('progress');
+            $('#delivery-addresses-container').trigger('updated');
+            if (window.addressEditCallback)
+                window.addressEditCallback();
+        });
+
+        return false;
+    }
+
+    function deleteAddress(addressId) {
+        if (!confirm('@SharedResources.AreYouSure')) return;
+
+        $('#delivery-addresses-container').addClass('progress');
+        $.post('@Url.Action("Delete", "Clients")?id='+addressId, null, function(content) {
+            $('#delivery-addresses-container').html(content);
+            $('#delivery-addresses-container').removeClass('progress');
+            $('#delivery-addresses-container').trigger('updated');
+        });
+    }
+
+    
+
+ 
+    function jqSelector(str)
+    { 
+      return str.replace(/([;&,\.\+\*\~':"\!\^#$%\[\]\(\)=>\|])/g, '\\$1'); 
+    }
+
+    $(function () {
+        $("#dlgAddress").dialog({
+            id: 'dlgAddress',
+            modal: true,
+            resizable: false,
+            autoOpen: false,
+            width: 'auto',
+            height: 'auto',
+            draggable: true,
+            close: function (event, ui) {
+                //$('.ac_results').hide();
+                return true;
+            }
+        });
+
+        $.expr[':'].textEquals = function (a, i, m) {
+            return $(a).text().toLowerCase().match("^" + m[3].toLowerCase() + "$");
+        };
+
+
+
+        $('#RegionName').autocomplete({
+            source: '@Url.Action("GetRegions", "Clients")',
+            select: function (event, ui) {
+                $('#RegionId').val(ui.item.id);
+                $('#LocalityName').val('');
+                $('#LocalityId').val(null);
+                $("#StreetName").val('');
+                $("#StreetId").val(null);
+                return true;
+            },
+            change: function (event, ui) {
+                var items = $(".ui-autocomplete li:textEquals('" + jqSelector( $(this).val()) + "')");
+                if (items.size() != 1) {
+                    $(this).val('');
+
+                } else {
+                    $('#RegionId').val(items.data("ui-autocomplete-item").id);
+                    $('#RegionName').val(items.data("ui-autocomplete-item").value);
+                    $('#LocalityName').val('');
+                    $('#LocalityId').val(null);
+                    $("#StreetName").val('');
+                    $("#StreetId").val(null);
+                }
+            }
+        });
+
+        $('#LocalityName').autocomplete({
+            source: //'@Url.Action("UILocalities", "Clients")',
+                function (request, response) {
+                    $.ajax({
+                        url: '@Url.Action("UILocalities", "Clients")',
+                        dataType: "json",
+                        data: {
+                            term: request.term,
+                            regionId: function () { return $('#RegionId').val(); }
+                        },
+                        success: function (data) {
+                            response(data);
+                        },
+                    });
+                },
+            search: function () {
+                // custom minLength
+                var term = this.value;
+                if (term.length < 3) {
+                    return false;
+                }
+            },
+            minLength: 1,
+            delay: 500,
+            select: function (event, ui) {
+                $('#LocalityId').val(ui.item.id);
+                $("#StreetName").val('');
+                $("#StreetId").val(null);
+                return true;
+            },
+            change: function (event, ui) {
+                var items = $(".ui-autocomplete li:textEquals('" + jqSelector($(this).val()) + "')");
+                if (items.size() != 1) {
+                    $(this).val('');
+
+                } else {
+                    $('#LocalityId').val(items.data("ui-autocomplete-item").id);
+                    $('#LocalityName').val(items.data("ui-autocomplete-item").value);
+                    $("#StreetName").val('');
+                    $("#StreetId").val(null);
+                }
+            }
+        });
+
+        $('#StreetName').autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: '@Url.Action("UIAddresses", "Clients")',
+                    dataType: "json",
+                    data: {
+                        term: request.term,
+                        cityId: function () { return $('#LocalityId').val(); }
+                    },
+                    success: function (data) {
+                        response(data);
+                    },
+                });
+            },
+            select: function (event, ui) {
+                setStreetData(ui.item);
+            },
+            change: function (event, ui) {
+                var items = $(".ui-autocomplete li:textEquals('" + jqSelector($(this).val()) + "')");
+                //if (items.size() != 1) {
+                //    $(this).val('');
+
+                //} else {
+                    setStreetData(items.data("ui-autocomplete-item"));
+                //}
+            }
+        });
+
+        $("#newAddress-form").data(this[0], "validator", null);
+        $("#newAddress-form").validate({
+            rules: {
+                LocalityName: {
+                    required: true
+                },
+                StreetName: {
+                    required: true
+                },
+                House: {
+                    required: true
+                },
+                Comment: {
+                    maxlength: 100
+                }
+            }
+        });
+
+        setInterval('commentChanged();', 250);
+    });
+
+    function setStreetData(item) {
+        if (item) {
+            $('#StreetId').val(item.id);
+            $('#StreetName').val(item.value);
+
+            if (item.HaveDistricts) {
+                $('#DistrictRow').show();
+                //$("#DistrictName").rules("add", { required: true });
+                $("#DistrictId").rules("add", { required: true });
+                NewAddressStreetSelect($('#LocalityId').val(), item.id);
+            } else {
+                $('#DistrictRow').hide();
+                //$("#DistrictName").rules("remove");
+                $("#DistrictId").rules("remove");
+                //$("#DistrictId").val(null);
+                $("#DistrictId").text('');
+            }
+        }
+    }
+
+    function NewAddressStreetSelect(cityId, streetId) {
+        // var addressId = $('#AddressId').val();
+        //var streetyId = $('#DeliveryLocalityId').val();
+        var url = '@Url.Action("Districts", "Clients")?cityId=' + cityId + '&streetId=' + streetId + '&limit=100&q=';
+        $.getJSON(url, { date: (new Date().getTime()) }, function (items) {
+            $('#DistrictId').text('');
+            $.each(items, function () {
+                $('#DistrictId').append('<option value="' + this.Id + '">' + this.Name + '</option>');
+            });
+        });
+    }
+
+    function commentChanged() {
+        var length = $('#Comment').val().length;
+        if (length > 100) {
+            $('#Comment').val($('#Comment').val().substr(0, 100));
+            length = 100;
+        }
+        $('#rest').text(100 - length);
+    }
+
+    @if (latinOnly)
+    {
+        <text>
+        function Latin(obj) {
+        if (/^[a-zA-Z0-9 ,.\-:"()]*?$/.test(obj.value)) {
+            $("#lat_msg").hide();
+            obj.defaultValue = obj.value;
+        }
+        else {
+            $("#lat_msg").show();
+            obj.value = obj.defaultValue;
+        }
+    }
+    </text>
+    }
+
+
+    (function ($) {
+        $.widget("custom.combobox", {
+            _create: function () {
+                this.wrapper = $("<span>")
+                  .addClass("custom-combobox")
+                  .insertAfter(this.element);
+
+                this.element.hide();
+                this._createAutocomplete();
+                this._createShowAllButton();
+            },
+
+            _createAutocomplete: function () {
+                var selected = this.element.children(":selected"),
+                  value = selected.val() ? selected.text() : "";
+
+                this.input = $("<input>")
+                  .appendTo(this.wrapper)
+                  .val(value)
+                  .attr("title", "")
+                  .addClass("custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left")
+                  .autocomplete({
+                      delay: 0,
+                      minLength: 0,
+                      source: $.proxy(this, "_source")
+                  })
+                  .tooltip({
+                      tooltipClass: "ui-state-highlight"
+                  });
+
+                this._on(this.input, {
+                    autocompleteselect: function (event, ui) {
+                        ui.item.option.selected = true;
+                        this._trigger("select", event, {
+                            item: ui.item.option
+                        });
+                    },
+
+                    autocompletechange: "_removeIfInvalid"
+                });
+            },
+
+            _createShowAllButton: function () {
+                var input = this.input,
+                  wasOpen = false;
+
+                $("<a>")
+                  .attr("tabIndex", -1)
+                  .attr("title", "Show All Items")
+                  .tooltip()
+                  .appendTo(this.wrapper)
+                  .button({
+                      icons: {
+                          primary: "ui-icon-triangle-1-s"
+                      },
+                      text: false
+                  })
+                  .removeClass("ui-corner-all")
+                  .addClass("custom-combobox-toggle ui-corner-right")
+                  .mousedown(function () {
+                      wasOpen = input.autocomplete("widget").is(":visible");
+                  })
+                  .click(function () {
+                      input.focus();
+
+                      // Close if already visible
+                      if (wasOpen) {
+                          return;
+                      }
+
+                      // Pass empty string as value to search for, displaying all results
+                      input.autocomplete("search", "");
+                  });
+            },
+
+            _source: function (request, response) {
+                var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i");
+                response(this.element.children("option").map(function () {
+                    var text = $(this).text();
+                    if (this.value && (!request.term || matcher.test(text)))
+                        return {
+                            label: text,
+                            value: text,
+                            option: this
+                        };
+                }));
+            },
+
+            _removeIfInvalid: function (event, ui) {
+
+                // Selected an item, nothing to do
+                if (ui.item) {
+                    return;
+                }
+
+                // Search for a match (case-insensitive)
+                var value = this.input.val(),
+                  valueLowerCase = value.toLowerCase(),
+                  valid = false;
+                this.element.children("option").each(function () {
+                    if ($(this).text().toLowerCase() === valueLowerCase) {
+                        this.selected = valid = true;
+                        return false;
+                    }
+                });
+
+                // Found a match, nothing to do
+                if (valid) {
+                    return;
+                }
+
+                // Remove invalid value
+                this.input
+                  .val("")
+                  .attr("title", value + " didn't match any item")
+                  .tooltip("open");
+                this.element.val("");
+                this._delay(function () {
+                    this.input.tooltip("close").attr("title", "");
+                }, 2500);
+                this.input.autocomplete("instance").term = "";
+            },
+
+            _destroy: function () {
+                this.wrapper.remove();
+                this.element.show();
+            }
+        });
+    })(jQuery);
+
+</script>
+
+
+<script>
+    function editAddress(el, id, localityId, localityName, streetId, streetName, house, flat, zip, comment, editCallback) {
+        $('#dlgAddress #AddressId').val(id);
+
+        $('#dlgAddress #LocalityId').val(localityId);
+        $('#dlgAddress #LocalityName').val(localityName);
+        $('#dlgAddress #StreetId').val(streetId);
+        $('#dlgAddress #StreetName').val(streetName);
+
+        $('#dlgAddress #House').val(house);
+        $('#dlgAddress #Flat').val(flat);
+        $('#dlgAddress #Zip').val(zip);
+
+        $('#dlgAddress #Comment').val(comment);
+
+        $('#dlgAddress').dialog('open');
+
+        $('#dlgAddress').dialog("widget").position({
+            my: "right top",
+            at: "right bottom",
+            of: el
+        });
+
+        window.addressEditCallback = editCallback;
+
+        return false;
+    }
+
+    function newAddress() {
+        $('#dlgAddress #AddressId').val(null);
+
+        $('#dlgAddress #LocalityId').val(null);
+        $('#dlgAddress #LocalityName').val('');
+        $('#dlgAddress #StreetId').val(null);
+        $('#dlgAddress #StreetName').val('');
+
+        $('#dlgAddress #House').val('');
+        $('#dlgAddress #Flat').val('');
+        $('#dlgAddress #Zip').val('');
+        $('#dlgAddress #Comment').val('');
+
+
+        $('#dlgAddress').dialog('open');
+
+        $('#dlgAddress').dialog("widget").position({
+            my: "right top",
+            at: "right bottom",
+            of: "#opener"
+        });
+
+        return false;
+    }
+</script>

@@ -1,0 +1,25 @@
+﻿@using ViewRes
+@model Webmall.UI.Models.SelectionByAuto.SelectionByAutoMarkModel
+
+<div class="content-secondary">
+    <h2>@SharedResources.SelectModel</h2>
+    <table class="all-product fiting-select">
+        <thead>
+            <tr>
+                <th>@SharedResources.AutoModel</th>
+                <th>@SharedResources.StartYear</th>
+                <th>@SharedResources.EndYear</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var mod in Model.AutoModelList)
+            {
+                <tr>
+                    <td><a href=@("../Auto/" + Model.AutoMarkaObj.UrlName + "/" + mod.UrlName)>@mod.Name</a></td>
+                    <td style="text-align: center"><a href="@Url.Content("~/Auto/" + Model.AutoMarkaObj.UrlName + "/" + mod.UrlName)">@(mod.DateBegin.HasValue ? mod.DateBegin.Value.Year.ToString() : "")</a></td>
+                    <td style="text-align: center"><a href="@Url.Content("~/Auto/" + Model.AutoMarkaObj.UrlName + "/" + mod.UrlName)">@(mod.DateEnd.HasValue ? mod.DateEnd.Value.Year.ToString() : "")</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,12 @@
+﻿@using Webmall.UI.Core
+@{
+    //ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_PersonalLayout.cshtml";
+}
+
+<aside id="catalog-content">
+    @using (Html.BeginForm("SiteMapGenerate", "ContentManagement", FormMethod.Post))
+    {
+        @Html.SubmitButton("OK")
+    }
+</aside>

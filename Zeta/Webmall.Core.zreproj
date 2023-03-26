@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='utf-8'?>
+<project>
+  <configuration createBackupFiles="False" hideEmptyRows="False" hideTranslatedRows="False" useSpellChecker="True" resXIndentChar="	" neutralLanguageCode="en-us" languagesToDisplay="">
+    <globalSetting name="Filter-ResourceEditorGrid">&lt;XtraSerializer version="1.0" application="View"&gt;
+  &lt;property name="#LayoutVersion" /&gt;
+  &lt;property name="#LayoutScaleFactor"&gt;@1,Width=1@1,Height=1&lt;/property&gt;
+  &lt;property name="ActiveFilterString" /&gt;
+&lt;/XtraSerializer&gt;</globalSetting>
+    <globalSetting name="Sort-ResourceEditorGrid">&lt;XtraSerializer version="1.0" application="View"&gt;
+  &lt;property name="#LayoutVersion" /&gt;
+  &lt;property name="#LayoutScaleFactor"&gt;@1,Width=1@1,Height=1&lt;/property&gt;
+&lt;/XtraSerializer&gt;</globalSetting>
+    <globalSetting name="ReadOnlyFileOverwriteBehaviour">0</globalSetting>
+    <globalSetting name="OmitEmptyItems">True</globalSetting>
+    <globalSetting name="ShowCommentsColumnInGrid">False</globalSetting>
+    <globalSetting name="IgnoreWindowsFormsResourcesWithDesignerFiles">True</globalSetting>
+    <globalSetting name="HideInternalDesignerRows">True</globalSetting>
+    <globalSetting name="UseShallowGridDataCumulation">True</globalSetting>
+    <globalSetting name="HideFileGroupFilesInTree">True</globalSetting>
+    <globalSetting name="DisplayFileGroupWithoutFolder">False</globalSetting>
+    <globalSetting name="NeutralLanguageFileNamePattern">[basename][optionaldefaulttypes].[extension]</globalSetting>
+    <globalSetting name="NonNeutralLanguageFileNamePattern">[basename][optionaldefaulttypes].[languagecode].[extension]</globalSetting>
+    <globalSetting name="BaseNameDotCount">0</globalSetting>
+    <globalSetting name="DefaultFileTypesToIgnore">.aspx;.ascx;.asmx;.master;.sitemap</globalSetting>
+    <globalSetting name="Project-PersistGridSettings">True</globalSetting>
+    <globalSetting name="ColorifyNullCells">True</globalSetting>
+    <globalSetting name="EnableExcelExportSnapshots">True</globalSetting>
+    <globalSetting name="KeepFolderStructureOnImport">False</globalSetting>
+    <globalSetting name="CreateNewFileForm.prefixTextBox.Text">####</globalSetting>
+    <globalSetting name="CreateNewFileForm.prefixCheckBox.Checked">False</globalSetting>
+    <globalSetting name="CreateNewFileForm.referenceLanguageComboBox.SelectedIndex">0</globalSetting>
+    <globalSetting name="CreateNewFileForm.newLanguageComboBox.SelectedIndex">-1</globalSetting>
+    <globalSetting name="CreateNewFileForm.copyTextsCheckBox.Checked">False</globalSetting>
+    <globalSetting name="CreateNewFileForm.automaticallyTranslateCheckBox.Checked">False</globalSetting>
+    <globalSetting name="projectMruItems">&lt;?xml version='1.0' encoding='utf-8'?&gt;&lt;items&gt;&lt;item type="2" checksum="3400032807" /&gt;&lt;item type="2" checksum="4418991783" /&gt;&lt;/items&gt;</globalSetting>
+    <userSetting name="andrei.boiko@WSERVER.filesInitialDir">D:\Motex\Webmall.Core\ValmiStore.Resources</userSetting>
+    <userSetting name="andrei.boiko@WSERVER.FindText">
+    </userSetting>
+    <userSetting name="andrei.boiko@WSERVER.RecentFiles">D:\Motex\Webmall.Core\ValmiStore.Resources\SharedResources.resx;D:\Motex\Webmall.Core\ValmiStore.Resources\SharedResources.en-US.resx;D:\Motex\Webmall.Core\ValmiStore.Resources\SharedResources.ky-KG.resx;D:\Motex\Webmall.Core\ValmiStore.Resources\SharedResources.ro-RO.resx;D:\Motex\Webmall.Core\ValmiStore.Resources\SharedResources.uk-UA.resx###***###D:\Motex\Webmall.Core\ValmiStore.Resources\SecurityResources.resx;D:\Motex\Webmall.Core\ValmiStore.Resources\SecurityResources.en-US.resx;D:\Motex\Webmall.Core\ValmiStore.Resources\SecurityResources.ky-KG.resx;D:\Motex\Webmall.Core\ValmiStore.Resources\SecurityResources.ro-RO.resx;D:\Motex\Webmall.Core\ValmiStore.Resources\SecurityResources.uk-UA.resx</userSetting>
+    <description>
+    </description>
+  </configuration>
+  <fileGroups>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="d87b4d23-2637-4b14-a33f-f4ba4c04d413">
+      <file filePath="..\ValmiStore.Resources\SharedResources.resx" absoluteFilePath="D:\Motex\Webmall.Core\ValmiStore.Resources\SharedResources.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="..\ValmiStore.Resources\SharedResources.en-US.resx" absoluteFilePath="D:\Motex\Webmall.Core\ValmiStore.Resources\SharedResources.en-US.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="..\ValmiStore.Resources\SharedResources.ky-KG.resx" absoluteFilePath="D:\Motex\Webmall.Core\ValmiStore.Resources\SharedResources.ky-KG.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="..\ValmiStore.Resources\SharedResources.ro-RO.resx" absoluteFilePath="D:\Motex\Webmall.Core\ValmiStore.Resources\SharedResources.ro-RO.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="..\ValmiStore.Resources\SharedResources.uk-UA.resx" absoluteFilePath="D:\Motex\Webmall.Core\ValmiStore.Resources\SharedResources.uk-UA.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="6aef3f60-a454-46e8-bff1-20a64eece5d6">
+      <file filePath="..\ValmiStore.Resources\SecurityResources.resx" absoluteFilePath="D:\Motex\Webmall.Core\ValmiStore.Resources\SecurityResources.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="..\ValmiStore.Resources\SecurityResources.en-US.resx" absoluteFilePath="D:\Motex\Webmall.Core\ValmiStore.Resources\SecurityResources.en-US.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="..\ValmiStore.Resources\SecurityResources.ky-KG.resx" absoluteFilePath="D:\Motex\Webmall.Core\ValmiStore.Resources\SecurityResources.ky-KG.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="..\ValmiStore.Resources\SecurityResources.ro-RO.resx" absoluteFilePath="D:\Motex\Webmall.Core\ValmiStore.Resources\SecurityResources.ro-RO.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="..\ValmiStore.Resources\SecurityResources.uk-UA.resx" absoluteFilePath="D:\Motex\Webmall.Core\ValmiStore.Resources\SecurityResources.uk-UA.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+  </fileGroups>
+  <projectFolders />
+</project>

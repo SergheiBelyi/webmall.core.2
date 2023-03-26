@@ -1,0 +1,19 @@
+﻿@using ViewRes
+@model List<Webmall.Model.Entities.VinSearch.VinSearchHistoryItem>
+    <h3>@SharedResources.SearchHistory</h3>
+    <table class="kit-table media-card-info__table is-dark">
+        <tbody>
+            @foreach (var i in Model)
+            {
+                <tr>
+                    <td>@i.Date.ToString("dd-MM-yyyy HH:mm")</td>
+                    <td><a href="@Url.Action("VinSearch", new {vin=i.VIN})">@i.VIN</a></td>
+                </tr>
+                <tr>
+                    <td colspan="2">@i.AutoName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+

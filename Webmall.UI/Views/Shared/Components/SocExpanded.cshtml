@@ -1,0 +1,56 @@
+﻿@model string[]
+
+<div style="display: inline-block" id="uLogin@(Model[0])" data-ulogin="display=@Model[1];theme=flat;fields=first_name,last_name,email;optional=phone;providers=facebook,vkontakte,google,mailru;hidden=twitter,odnoklassniki,yandex,linkedin;redirect_uri=@Url.Action("Logon", "Security", null, Request.Url.Scheme, null);mobilebuttons=1;"></div>
+
+
+@*<ul class="soc">
+    <li class="soc__item">
+        <a class="soc__link soc__link--fb" href="#">
+            <svg class="icon icon-facebook-f soc__icon">
+                <use href="~/assets/images/svg/symbol/sprite.svg#facebook-f"></use>
+            </svg>
+        </a>
+    </li>
+    <li class="soc__item">
+        <a class="soc__link soc__link--tw" href="#">
+            <svg class="icon icon-twitter soc__icon">
+                <use href="~/assets/images/svg/symbol/sprite.svg#twitter"></use>
+            </svg>
+        </a>
+    </li>
+    <li class="soc__item">
+        <a class="soc__link soc__link--vk" href="#">
+            <svg class="icon icon-vk soc__icon">
+                <use href="~/assets/images/svg/symbol/sprite.svg#vk"></use>
+            </svg>
+        </a>
+    </li>
+    <li class="soc__item">
+        <a class="soc__link soc__link--gg" href="#">
+            <svg class="icon icon-google soc__icon">
+                <use href="~/assets/images/svg/symbol/sprite.svg#google"></use>
+            </svg>
+        </a>
+    </li>
+    <li class="soc__item soc__item--expand">
+        <a class="soc__link" href="#">
+            <svg class="icon icon-chevron-down soc__icon">
+                <use href="~/assets/images/svg/symbol/sprite.svg#chevron-down"></use>
+            </svg>
+        </a>
+    </li>
+    <li class="soc__item" style="display: none">
+        <a class="soc__link soc__link--yt" href="#">
+            <svg class="icon icon-youtube soc__icon">
+                <use href="~/assets/images/svg/symbol/sprite.svg#youtube"></use>
+            </svg>
+        </a>
+    </li>
+    <li class="soc__item" style="display: none">
+        <a class="soc__link soc__link--ok" href="#">
+            <svg class="icon icon-odnoklassniki soc__icon">
+                <use href="~/assets/images/svg/symbol/sprite.svg#odnoklassniki"></use>
+            </svg>
+        </a>
+    </li>
+</ul>*@

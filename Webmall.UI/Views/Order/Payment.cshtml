@@ -1,0 +1,85 @@
+﻿@using Webmall.Model
+@using ValmiStore.Model.Entities.Order
+@using ViewRes
+@using Webmall.UI.Core
+
+@{
+    ViewBag.Title = SharedResources.Payment;
+    Layout = "~/Views/Shared/_PersonalLayout.cshtml";
+}
+
+@model Order
+
+<aside id="catalog-content">
+    @{ Html.RenderPartial("OrderHeaderPartial", Model); }
+
+    <ul class="breadcrumbs" id="pageBreadscrumbs">
+        <li><span id="bs1">@SharedResources.WareSelection</span></li>
+        <li>&#8250;</li>
+        <li><span id="bs2">@SharedResources.PaymentForm</span></li>
+        <li>&#8250;</li>
+        <li><span id="bs3">@SharedResources.Delivery</span></li>
+        <li>&#8250;</li>
+        <li><span id="bs4" class="current">@SharedResources.OrderCompleting</span></li>
+    </ul>
+
+    <div class="clear-div"> </div>
+    <div class="invoice-wrapper">
+        <div class="invoice">
+            <div class="invoice-border">
+                <a id="logo-small"><img src="@Url.Content("~/ExtContent/images/logo-invoice.png")" alt=""> </a>
+                <h2>@SharedResources.OrderPayment</h2>
+                <div class="clear-div"> </div>
+                @(new HtmlString(string.Format(SharedResources.PaymentTitle2, Model.Id, (string.IsNullOrEmpty(Model.ResponsibleName)) ? ConfigHelper.SummaryManager : Model.ResponsibleName, ConfigHelper.SummaryManagerPhone)))
+
+                @{ Html.RenderPartial("_SummaryOrderInfo", Model); }
+
+                <div class="clear-div"> </div>
+
+                @if (Model.PaymentType == (int)PaymentTypes.Visa)
+                {
+                    <span class="center" style="margin-top:20px; display:inline-block;">
+                        @Html.Button(SharedResources.VisaPayment, new { onclick = "return VisaPaymentExecute()", id = "VisaPaymentButton" })
+                    </span>
+                }
+                @if (Model.PaymentType == (int)PaymentTypes.LiqPay)
+                {
+                    <span class="center" style="margin-top:20px; display:inline-block;">
+                        @Html.Button(SharedResources.LiqPayment, new { onclick = "return VisaPaymentExecute()", id = "LiqPaymentButton" })
+                    </span>
+                }
+                @if (Model.PaymentType == (int) PaymentTypes.Invoice)
+                {
+                    <a class="pdf-big clickable" onclick="return InvoicePaymentExecute('PDF')">@SharedResources.GetPDFInvoice</a>
+                    <a class="xls-big clickable" onclick="return InvoicePaymentExecute('EXCEL')">@SharedResources.GetExcelInvoice</a>
+                }
+                <div class="clear-div"> </div>
+
+            </div>
+            <div class="right">
+                <input type="button" class="button-submit" value="@SharedResources.Next" onclick="window.location='@Url.Action("Summary", "Order", new { orderId = Model.Id, paymentId=Model.PaymentType })'">
+            </div>
+        </div>
+        @{ Html.RenderPartial("_SummaryVidgets"); }
+    </div>
+</aside>
+
+@section scripts
+{
+    <script type="text/javascript">
+        function InvoicePaymentExecute(reportFormat) {
+            var orderId = '@Model.Id';
+            var url = "@Url.Action("InvoicePayment", "Reports")";
+            var params = "?orderId=" + orderId + "&reportFormat=" + reportFormat;
+            window.open(url + params);
+            return false;
+        }
+
+        function VisaPaymentExecute() {
+            var orderId = '@Model.Id';
+            var url = "@(Url.Action("Payment", "Order"))?orderId=" + orderId;
+            document.location.href = url;
+            return false;
+        }
+    </script>
+}

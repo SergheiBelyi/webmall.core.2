@@ -1,0 +1,169 @@
+﻿@using Webmall.Model
+@using ViewRes
+
+@model Webmall.Model.Entities.User.User
+
+@{
+    Layout = "~/Views/Shared/_PersonalLayout.cshtml";
+    ViewBag.Title = SharedResources.PersonalDataChange;
+}
+
+<h1 class="main-title">@SharedResources.Profile</h1>
+
+@using (Html.BeginForm("EditPersonalData", "Security", FormMethod.Post, new { id = "EditPersonalData-form", @class = "profile" }))
+{
+    <div class="profile__subsections">
+        <div class="profile__subsection">
+            <h2 class="profile__subheading secondary-heading">@SharedResources.PersonalData</h2>
+            @Html.ValidationSummary(SharedResources.ErrorsFound)
+            <div class="profile__params-area">
+                <dl class="profile__params params is-dotted">
+                    <div class="params__param">
+                    <dt class="params__property">@SharedResources.Name / @SharedResources.FIO</dt>
+                    <dd class="params__value">@Html.TextBoxFor(m => m.FullName, new { @class = "profile-form__input input" })</dd>
+                </div>
+                <div class="params__param">
+                <dt class="params__property">@SharedResources.Email</dt>
+                <dd class="params__value">@Model.Email</dd>
+                </div>
+                <div class="params__param">
+                <dt class="params__property">@SharedResources.MobilePhone</dt>
+                <dd class="params__value">@Html.TextBoxFor(m => m.PhoneMobile, new { @class = "profile-form__input input" })</dd>
+                </div>
+                <div class="params__param">
+                <dt class="params__property">@SharedResources.FixedPhone</dt>
+                <dd class="params__value">@Html.TextBoxFor(m => m.PhoneHome, new { @class = "profile-form__input input" })</dd>
+                </div>
+            </dl>
+            @*<div class="profile__params-bottom text-right">
+                <a class="profile__edit btn" href="" id="changeLoginButton">
+                    <svg class="icon icon-pen btn__icon" width="25" height="25">
+                        <use href="assets/images/svg/symbol/sprite.svg#pen"></use>
+                    </svg>
+                    <span class="btn__text">@SharedResources.Change</span>
+                </a>
+            </div>*@
+            </div>
+        </div>
+    <div class="profile__subsection">
+        <h2 class="profile__subheading secondary-heading">@SharedResources.ChangePassword_Cap</h2>
+        <div class="profile__forms profile-form">
+            <div class="profile-form__fields">
+                <div class="profile-form__field">
+                    <label class="profile-form__caption" for="OldPassword">@SharedResources.CurrentPassword <span>*</span></label>
+                    <input class="profile-form__input input" type="password" name="OldPassword" id="OldPassword">
+                </div>
+                <div class="profile-form__field">
+                    <label class="profile-form__caption" for="Password">@SharedResources.NewPassword <span>*</span></label>
+                    <input class="profile-form__input input" type="password" name="Password" id="Password">
+                </div>
+                <div class="profile-form__field">
+                    <label class="profile-form__caption" for="Password2">@SharedResources.RepeatNewPassword <span>*</span></label>
+                    <input class="profile-form__input input" type="password" name="Password2" id="Password2">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="profile__subsection">
+        <h2 class="profile__subheading secondary-heading">@SharedResources.Settings</h2>
+        <ul class="profile__notifications">
+            <li class="profile__notification">
+                <div class="profile____option checkbox-label">
+                    <input class="checkbox-label__input" type="checkbox" name="ShowRetailPrice" id="ShowRetailPrice" value="true" @(Model.Configuration.ShowRetailPrice ? "checked" : "")>
+                    <label class="checkbox-label__main" for="ShowRetailPrice">
+                        <span class="checkbox-label__main-text">@SharedResources.ShowRetailPricesWareCard</span>
+                    </label>
+                    @Html.Hidden("ShowRetailPrice", "false")
+                </div>
+            </li>
+            <li class="profile__notification">
+                <div class="profile____option checkbox-label">
+                    <input class="checkbox-label__input" type="checkbox" name="SendResume" id="SendResume" value="true" @(Model.Configuration.SendOrderResume ? "checked" : "")>
+                    <label class="checkbox-label__main" for="SendResume">
+                        <span class="checkbox-label__main-text">@SharedResources.SubscribeForOrderInfo</span>
+                    </label>
+                    @Html.Hidden("SendResume", "false")
+                </div>
+            </li>
+        </ul>
+    </div>
+        <div class="profile__bottom">
+            <input class="profile__btn btn btn--primary" type="submit" name="" value="@SharedResources.Save">
+        </div>
+    </div>
+
+
+
+
+
+    @*<div class="section-area">
+        <div class="section-area__heading">@SharedResources.Settings</div>
+
+        @if (ConfigHelper.AllowActionsSubscription)
+        {
+            <div class="section-area__checkbox checkbox-label">
+                @Html.CheckBoxFor(m => m.SubscribeForPromotions, new { @class = "checkbox-label__input" })
+                <label class="checkbox-label__main" for="SubscribeForPromotions">@SharedResources.SubscribeForActionInformations</label>
+            </div>
+        }
+        <div class="section-area__footer">
+            <input class="btn btn--main" type="submit" name="send-data" value="@SharedResources.Save">
+        </div>
+    </div>*@
+    @Html.HiddenFor(m => m.Login)
+}
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $("#EditPersonalData-form").validate({
+                errorClass: "error__desc",
+                errorElement: "small",
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass(errorClass).removeClass(validClass);
+                    $(element).parent().addClass('error');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass(errorClass).addClass(validClass);
+                    $(element).parent().removeClass('error');
+                },
+                rules: {
+                    FirstName: {
+                        required: true,
+                        maxlength: 50
+                    },
+                    LastName: {
+                        required: true,
+                        maxlength: 50
+                    },
+                    PhoneMobile: {
+                        required: true,
+                        digits: true,
+                        maxlength: @ConfigHelper.MaxPhoneLength,
+                        minlength: @ConfigHelper.MinPhoneLength
+                    },
+                    PhoneHome: {
+                        required: false,
+                        maxlength: @ConfigHelper.MaxFixedPhoneLength,
+                        minlength: @ConfigHelper.MinFixedPhoneLength
+                    },
+                    OldPassword: {
+                        maxlength: 25,
+                        minlength: 4
+                    },
+                    Password: {
+                        maxlength: 25,
+                        minlength: 4
+                    },
+                    Password2: {
+                        equalTo: "#Password",
+                        maxlength: 25,
+                        minlength: 4
+                    }
+
+                }
+            });
+        });
+    </script>
+}

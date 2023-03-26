@@ -1,0 +1,17 @@
+﻿@using ViewRes
+
+<div class="alert-notification">
+    <div class="container-fluid">
+        <a href="@Url.Action("Index", "ComparisionAct")">
+            <svg class="icon icon-information alert-notification__info">
+                <use href="~/assets/images/svg/symbol/sprite.svg#information"></use>
+            </svg>
+            <div class="alert-notification__desc">@SharedResources.DebtWarningMessageBrief</div>
+        </a>
+        <a class="alert-notification__close" href="#">
+            <svg class="icon icon-close alert-notification__close-icon">
+                <use href="~/assets/images/svg/symbol/sprite.svg#close"></use>
+            </svg>
+        </a>
+    </div>
+</div>

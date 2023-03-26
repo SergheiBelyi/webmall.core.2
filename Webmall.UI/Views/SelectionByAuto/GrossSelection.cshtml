@@ -1,0 +1,200 @@
+﻿@using System.Globalization
+@using ViewRes
+@using Webmall.UI.Core.Helpers
+@using Webmall.UI.Core
+
+@model Webmall.UI.Models.SelectionByAuto.SelectionByAutoMarkModel
+
+<div class="content-secondary">
+    <h2>@SharedResources.SelectionByAuto</h2>
+    <div class="select-auto-filter">
+        <table>
+            <tr>
+                <td class="filter-title">@SharedResources.AutoMarka (<a href="@Url.Content("~/Auto")" onclick="@string.Format("$.cookie('{0}', '', {{ expires: 365, path:'/' }})", CommonHelpers.LASTAUTO_COOKIENAME)">@SharedResources.AllBrands</a>)</td>
+                <td class="filter-value">
+                    @Html.DropDownListFor(m => m.AutoMark, Model.AutoMarkList.Select(i => new SelectListItem { Value = i.Id.ToString(CultureInfo.InvariantCulture), Text = i.Name }),
+                             new
+                             {
+                                 @class = "easyui-combobox autocompletecombobox",
+                                 data_options = "onSelect: AutoMarkSelected, onHidePanel: AutoMarkHidePannel",
+                                 style = "display:none;"
+                             })
+                </td>
+                <td class="filter-title second-col">@SharedResources.FuelType</td>
+                <td class="filter-value">
+                    @Html.DropDownList("fuelType", Model.FuelTypes,
+                             new
+                             {
+                                 @class = "easyui-combobox",
+                                 data_options = string.Format("valueField: 'Value', textField: 'Text', onSelect: FilterUpdate, panelHeight: 'auto', url: '{0}'", Url.Action("GetFuelTypes", "SelectionByAuto")),
+                                 style = "display:none;"
+                             })
+                </td>
+            </tr>
+            <tr>
+                <td class="filter-title">@SharedResources.AutoModel</td>
+                <td class="filter-value">@Html.DropDownListFor(m => m.AutoModel, Model.AutoModelList.Select(i => new SelectListItem { Value = i.Id.ToString(CultureInfo.InvariantCulture), Text = i.Name }), new { style = "display:none;" })</td>
+                <td class="filter-title second-col">@SharedResources.Power</td>
+                <td class="filter-value power">
+                    @Html.TextBox("Power", null, new { onchange = "FilterUpdate()" }) @Html.DropDownList("powerMU",
+new List<SelectListItem>
+{
+                                                    new SelectListItem {Text = SharedResources._HP, Value = "0", Selected = true},
+                                                    new SelectListItem {Text = SharedResources._kWt, Value = "1", Selected = false}
+}, new { @class = "easyui-combobox", style = "display: none; width:80px;", data_options = "onSelect: FilterUpdate, panelHeight: 'auto'" })
+                    <label><input type="checkbox" checked="checked" id="powerPercent" name="powerPercent" value="10" onchange="FilterUpdate()">+/- 10%</label>
+                </td>
+
+            </tr>
+            <tr>
+                <td class="filter-title">@SharedResources.YearOfProduce</td>
+                <td class="filter-value">@Html.TextBox("YearOfProduce", null, new { onchange = "FilterUpdate()" })</td>
+                <td class="filter-title second-col"></td>
+                <td class="filter-value"></td>
+            </tr>
+            <tr>
+                <td class="filter-title">@SharedResources.Volume</td>
+                <td class="filter-value">
+                    @Html.TextBox("Volume", null, new { onchange = "FilterUpdate()" }) <span>/@SharedResources.cm3</span>
+                    <label><input type="checkbox" checked="checked" id="volumePercent" name="volumePercent" value="10" onchange="FilterUpdate()">+/- 10%</label>
+                </td>
+                <td class="filter-title second-col"></td>
+                <td class="filter-value"></td>
+            </tr>
+        </table>
+    </div>
+    <div id="modifications">
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/easyui")
+
+    @* ReSharper disable once InconsistentNaming *@
+    <script>
+        $(function() {
+
+            $('#@Html.GetFullHtmlFieldNameFor(m => m.AutoModel)').combogrid({
+                width: 300,
+                panelWidth: 550,
+                value: '@(Model.AutoModel.HasValue ? Model.AutoModel : 0)',
+                mode: 'local',
+                loadMsg: "Loading..",
+                idField: 'Id',
+                textField: 'Name',
+                valueField: "Id",
+                url: '@Url.Action("GetModelListByMark", "SelectionByAuto")',
+                queryParams: { markId: '@(Model.AutoMark?.ToString() ?? Model.AutoMarkList.First().Id)' },
+                fitColumns: true,
+                columns: [
+                    [
+                        { field: 'Id', title: 'Id', hidden: true },
+                        { field: 'Name', title: '@SharedResources.ModelOfCar', width: 326 },
+                        { field: 'Start', title: '@SharedResources.StartYear', width: 101 },
+                        { field: 'End', title: '@SharedResources.EndYear', width: 101 }
+                    ]
+                ],
+                onShowPanel: function() {
+                    this.oldValue = @(Model.AutoModel.HasValue ? Model.AutoModel : 0);
+                    if (!window.wasEmptied && ((this.oldValue == 0 && $(this).combogrid("getText") == '@SharedResources.SelectModel')
+                        || (this.oldValue != 0 && this.oldValue == $(this).combogrid("getValue")))) {
+                        this.oldText = $(this).combogrid("getText");
+                        $(this).combogrid("setText", String.Empty);
+                        window.wasEmptied = true;
+                    }
+                },
+                onHidePanel: function() {
+                    window.wasEmptied = false;
+                    var newValue = $(this).combogrid("getValue");
+                    if (newValue != this.oldValue) {
+                        return false;
+                    }
+                    if (this.oldValue == 0) {
+                        $(this).combogrid("setText", this.oldText);
+                    }
+                    return false;
+                },
+                onSelect: AutoModelSelected
+            });
+
+            @if (Model.AutoModel.HasValue)
+            {
+                <text>
+        AutoModelSelected();
+        </text>
+            }
+        });
+
+        function AutoMarkSelected(obj) {
+            var grid = $('#@Html.GetFullHtmlFieldNameFor(m => m.AutoModel)').combogrid('grid');
+            grid.datagrid({
+                queryParams: {
+                    markId: obj.value,
+                }
+            });
+            $('#@Html.GetFullHtmlFieldNameFor(m => m.AutoModel)').combogrid('setValue', 0);
+            return false;
+        }
+
+        function AutoMarkHidePannel() {
+            var data = $('#AutoMark').combobox('getData');
+            var value = $('#AutoMark').combobox('getValue');
+            data.forEach(function(item) {
+                if (item.value == value) {
+                    AutoMarkSelected(item);
+                }
+            });
+            return false;
+        }
+
+        function AutoModelSelected() {
+            $('input[name="fuelType"]').val("");
+            FilterUpdate();
+
+            var modelId = $('#@Html.GetFullHtmlFieldNameFor(m => m.AutoModel)').combotree('getValue');
+            $('#fuelType').combobox({
+                queryParams: {
+                    modelId: modelId,
+                }
+            });
+
+            return false;
+        }
+
+        function FilterUpdate() {
+            var modelId = $('#@Html.GetFullHtmlFieldNameFor(m => m.AutoModel)').combotree('getValue');
+            var markId = $('#@Html.GetFullHtmlFieldNameFor(m => m.AutoMark)').val();
+
+            var yearOfProduce = $('#YearOfProduce').val();
+            var volume = $('#Volume').val();
+            var volumePercent = $('#volumePercent').prop("checked") ? $('#volumePercent').val() : 0;
+            var fuelType = $('input[name="fuelType"]').val();
+            var power = $('#Power').val();
+            var powerMU = $('input[name="powerMU"]').val();
+            var powerPercent = $('#powerPercent').prop("checked") ? $('#powerPercent').val() : 0;
+
+            var url = '@Url.Action("ModifList")' + '?markId=' + markId + '&modelId=' + modelId;
+            url += (yearOfProduce) ? "&yearOfProduce=" + yearOfProduce : "";
+            url += (volume) ? "&volume=" + volume : "";
+            url += (volumePercent) ? "&volumePercent=" + volumePercent : "";
+            url += (fuelType) ? "&fuelType=" + fuelType : "";
+            url += (power) ? "&power=" + power : "";
+            url += (powerMU) ? "&powerMU=" + powerMU : "";
+            url += (powerPercent) ? "&powerPercent=" + powerPercent : "";
+
+            updatePannel(url, 'modifications');
+        }
+
+    </script>
+}
+
+@section styles
+{
+    @Styles.Render("~/Content/easyuicss")
+}
+
+@section dialogs
+{
+    @Html.Partial("_ModifInfoDialog")
+}

@@ -1,0 +1,108 @@
+﻿@using ViewRes
+@using Webmall.UI.Core
+@model Webmall.UI.ViewModel.Catalog.CatalogFilterViewModel
+<!-- filter-->
+<div class="filter">
+    <div class="filter__heading h3">
+        @SharedResources.Filters
+        <button class="filter__close d-md-none">
+            <svg class="icon icon-close filter__close-icon">
+                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#close")"></use>
+            </svg>
+        </button>
+    </div>
+    <div class="filter__main">
+        <form id="filterForm" name="filterForm" method="get">
+            @*@Html.Hidden("modif", waresCatalog.ModifId)*@
+
+            @if (!string.IsNullOrEmpty(Model.Search))
+            {
+                @Html.Hidden("search", Model.Search)
+            }
+
+            @*@if (waresCatalog.IsAutoFilter)
+            {
+                @Html.Hidden("markaId", waresCatalog.MarkaId)
+                @Html.Hidden("modelId", waresCatalog.ModelId)
+            }
+            @if (waresCatalog.IsSelectionByAuto)
+            {
+                @Html.Hidden("wareGroupId", waresCatalog.GroupId)
+                @Html.Hidden("groupId", waresCatalog.Groups.Where(i => i.WareGroupId == waresCatalog.GroupId).Select(i => i.Id).FirstOrDefault())
+                //@Html.Hidden("wareGroupId", waresCatalog.WareGroupId)
+            }*@
+            @*@Html.Hidden("all", waresCatalog.ShowAllWares)*@
+            <div class="filter__section is-opened">
+                @if (Model.ShowPriceFilter)
+                {
+                    <div class="filter__title">@SharedResources.Price <span>/ @SessionHelper.CurrentValute.Code</span></div>
+                }
+                else
+                {
+                    <div class="filter__title">@SharedResources.Presence</div>
+                }
+                <div class="filter__body filter__body--free-space">
+                    @*@if (Model.ShowPriceFilter)
+                    {
+                        <div class="price-range">
+                            <div class="price-range__values">
+                                <div class="price-range__field">
+                                    <input class="price-range__input" id="priceMin" name="PriceMin" value="@Model.PriceMin">
+                                </div>
+                                <div class="price-range__separator">-</div>
+                                <div class="price-range__field">
+                                    <input class="price-range__input" id="priceMax" name="PriceMax" value="@Model.PriceMax">
+                                </div>
+                            </div>
+                            <div class="price-range__slider" id="priceRange"></div>
+                        </div>
+                    }*@
+                    @*@if (ConfigHelper.AllowWareOnlyInPresenceSelection && !UserPreferences.CurrentTrend.OnlyOnStockOff)
+                    {
+                        <div class="filter__option checkbox-label">
+                            <input class="checkbox-label__input" type="checkbox" name="OnlyOnStock" value="true" id="opt-avail" @(Model.OnlyOnStock == true ? "checked" : "") onchange="@(autoSubmit ? "return submitFilter()" : "")">
+                            <label class="checkbox-label__main" for="opt-avail">@SharedResources.OnlyOnStock</label>
+                        </div>
+                    }*@
+                    @*@if (UserPreferences.CurrentTrend.AllowPromotionsMenu)
+                    {
+                        <div class="filter__option checkbox-label">
+                            <input class="checkbox-label__input" type="checkbox" name="OnlySpecials" value="true" id="opt-discount" @(Model.OnlyActions == true ? "checked" : "") onchange="@(Model.AutoSubmit ? "return submitFilter()" : "")">
+                            <label class="checkbox-label__main" for="opt-discount">@SharedResources.Specials</label>
+                        </div>
+                        <div class="filter__option checkbox-label">
+                            <input class="checkbox-label__input" type="checkbox" name="OnlySales" value="true" id="opt-sale" @(Model.OnlySales == true ? "checked" : "") onchange="@(Model.AutoSubmit ? "return submitFilter()" : "")">
+                            <label class="checkbox-label__main" for="opt-sale">@SharedResources.Sale</label>
+                        </div>
+                    }*@
+                </div>
+            </div>
+            @if (Model.GroupSection.Options.Any())
+            {
+                Html.RenderPartial("Components/FilterSelectSection", Model.GroupSection);
+            }
+            @if (Model.BrandSection.Options.Any())
+            {
+                Html.RenderPartial("Components/FilterSelectSection", Model.BrandSection);
+            }
+            @foreach (var section in Model.PropertySections)
+            {
+                Html.RenderPartial("Components/FilterSelectSection", section);
+            }
+            <div class="filter__footer">
+                <div class="filter__btns">
+                    @if (!Model.AutoSubmit)
+                    {
+                        <a class="filter__btn-reset btn btn--reverse btn--radius" href="" onclick="return submitFilter()">@SharedResources.Apply</a>
+                    }
+                    <a class="filter__btn-accept btn btn--ghost" href="" onclick="return resetFilter()">
+                        <svg class="icon icon-update-arrow filter__btn-icon">
+                            <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#update-arrow")"></use>
+                        </svg>@SharedResources.Reset
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- /filter-->

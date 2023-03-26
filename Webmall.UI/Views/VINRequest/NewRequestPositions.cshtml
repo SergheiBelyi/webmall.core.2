@@ -1,0 +1,31 @@
+﻿@using ViewRes
+@using Webmall.UI.Core
+    @{
+        Layout = null;
+        var list = SessionHelper.CurrentUser.VINRequestPositions;
+    }
+<div id="reqPos" class="table-responsive">
+    @if (list.Count > 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>@SharedResources.Name</th>
+                    <th>@SharedResources.Amount</th>
+                    <th></th>
+                </tr>
+            </thead>
+            @foreach (var mark in list)
+            {
+                <tr>
+                    <td>@mark.Description</td>
+                    <td>@mark.Quantity</td>
+                    <td class="left">
+                        <img alt="@SharedResources.Delete" title="@SharedResources.Delete" class="clickable"
+                             src="@Url.Content("~/Content/images/cancel-compare.gif")" width="11" height="11" onclick="updatePositionsPanel('@mark.Description', 0, 'd');return false;">
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+</div>

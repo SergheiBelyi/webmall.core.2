@@ -1,0 +1,96 @@
+﻿@using System.Linq
+@using ViewRes
+@using Webmall.UI.Core
+
+@{
+    Layout = "~/Views/Shared/_PersonalLayout.cshtml";
+    var valuteName = SessionHelper.DefaultValute.Code;
+}
+
+@model IEnumerable<Webmall.UI.Models.Cart.OrderPreviewModel>
+
+<aside id="catalog-content">
+    <h2>@SharedResources.OrderPreview</h2>
+    @(new HtmlString (SharedResources.OrderPreviewComment))
+    @using (Html.BeginForm("Create", "Order", FormMethod.Post, new { @class = "shopping-cart-form" }))
+    {
+        int i = 0;
+        foreach (var item in Model)
+        {
+            var groupId = string.Format("group_{0}", i);
+            <h3>@string.Format(SharedResources.Order + " № {0}", i + 1)</h3>
+            <ul>
+                <li><b>@SharedResources.Amount:</b> @item.Positions.Count() @SharedResources.positions </li>
+                <li><b>@SharedResources.Sum:</b> @SessionHelper.PriceFormat(item.Positions.Sum(pos => pos.ClientPrice * pos.WareQnt)) @valuteName</li>
+                <li><b>@SharedResources.Client:</b> @item.Term@*@((string.IsNullOrEmpty(item.Term)) ? SharedResources.now : item.Term)*@</li>
+            </ul>
+            <table class="all-product clients cart">
+                <thead>
+                    <tr>
+                        <th width="18"><input id="@groupId" type="checkbox" checked="checked" onclick="@string.Format("Group({0})", i)" /></th>
+                        <th width="220">@SharedResources.Number</th>
+                        <th width="200">@SharedResources.WareName</th>
+                        <th width="60">@SharedResources.Brand</th>
+                        <th width="80">@SharedResources.UnitPrice</th>
+                        <th width="45">@SharedResources.Amount</th>
+                        <th width="80">@SharedResources.Sum,@valuteName</th>
+                    </tr>
+                </thead>
+                @foreach (var pos in item.Positions)
+                {
+                <tr>
+                    <td>
+                        <input id="@string.Format("position_{0}", pos.Id)" name="@string.Format("subgroup_{0}", i)" type="checkbox" checked="checked" value="@pos.Id"
+                               onclick="@string.Format("SubGroup({0})", i)" />
+                    </td>
+                    <td>@pos.WareNum</td>
+                    <td>@pos.WareName</td>
+                    <td>@pos.ProducerName</td>
+                    <td>@pos.ClientPrice</td>
+                    <td class="cantity">@pos.WareQnt</td>
+                    <td>@(string.Format("{0:0.00}", pos.Sum))</td>
+                </tr>
+                }
+            </table>
+            @*<h5 class="comment-order">@SharedResources.AddCommentToOrder</h5>
+            <textarea> </textarea>*@
+
+            i++;
+        }
+        @*<span class="checkbox-container" style="margin: 15px 0">
+            <label style="font-weight: bold">@Html.CheckBox("InOneOrder") @SharedResources.UnionInOneOrder <i>(@SharedResources.UnionInOneOrderComment)</i></label>
+        </span>*@
+        <div class="right">
+            @Html.SubmitButton(SharedResources.SubmitOrder)
+        </div>
+        <div class="clear-div"> </div>
+        <p class="atention"><b>@SharedResources.Total:</b> @SharedResources._amount: <b>@Model.Sum(g => g.Positions.Count())</b> @SharedResources.positions, @SharedResources._sum: <b>@Model.Sum(g => g.Positions.Sum(pos => pos.ClientPrice * pos.WareQnt))</b> @valuteName.</p>
+    }
+</aside>
+
+@section scripts
+{
+    <script type="text/javascript">
+
+        function Group(id) {
+            var checked = $("#group_" + id).is(':checked');
+            var subGroupName = 'subgroup_' + id;
+            if (checked) {
+                $("input[name=" + subGroupName + "]").prop('checked', 'checked');
+            } else {
+                $("input[name=" + subGroupName + "]").removeAttr('checked');
+            }
+        }
+
+        function SubGroup(id) {
+            var groupName = '#group_' + id;
+            var subGroupName = 'subgroup_' + id;
+            if ($("input[name=" + subGroupName + "]:checked").length == $('input[name=' + subGroupName + ']').length
+                && (!$(groupName).is(':checked'))) {
+                $(groupName).prop('checked', 'checked');
+            } else {
+                $(groupName).removeAttr('checked');
+            }
+        }
+    </script>
+}

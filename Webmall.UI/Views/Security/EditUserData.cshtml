@@ -1,0 +1,514 @@
+﻿@using Webmall.Model;
+@using Webmall.Model.Entities.User;
+@using ViewRes
+@using Webmall.UI.Core
+@model User
+@{
+    Layout = "~/Views/Shared/_PersonalLayout.cshtml";
+    ViewBag.Title = SharedResources.PersonalDataChange;
+}
+
+@using (Html.BeginForm("EditUserData", "Security", FormMethod.Post, new { id = "EditPersonalData-form", @class = "profile" }))
+{
+    <div class="profile__subsections">
+        <div class="profile__subsection">
+            <h2 class="profile__subheading secondary-heading">@SharedResources.PersonalData</h2>
+            <div class="profile__params-area">
+                <dl class="profile__params params is-dotted">
+                    <div class="params__param">
+                    <dt class="params__property">@SharedResources.Name / @SharedResources.FIO</dt>
+                    <dd class="params__value">@Model.FullName</dd>
+            </div>
+            <div class="params__param">
+                <dt class="params__property">@SharedResources.Email</dt>
+                <dd class="params__value">@Model.Email</dd>
+            </div>
+            <div class="params__param">
+                <dt class="params__property">@SharedResources.MobilePhone</dt>
+                <dd class="params__value">@Model.PhoneMobile</dd>
+            </div>
+            <div class="params__param">
+                <dt class="params__property">@SharedResources.FixedPhone</dt>
+                <dd class="params__value">@Model.PhoneHome</dd>
+            </div>
+            <div class="params__param">
+                <dt class="params__property">@SharedResources.ExternalUserCode</dt>
+                <dd class="params__value">@Html.TextBoxFor(m => m.ExternalSystemCode, new { @class = "profile-form__input input" })</dd>
+            </div>
+            </dl>
+            <div class="profile__params-bottom text-right">
+                <a class="profile__edit btn" href="" id="changeLoginButton">
+                    <svg class="icon icon-pen btn__icon" width="25" height="25">
+                        <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#pen")"></use>
+                    </svg>
+                    <span class="btn__text">@SharedResources.Change</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="profile__subsection">
+        <ul class="profile__notifications">
+            <li class="profile__notification">
+                <div class="profile____option checkbox-label">
+                    <input class="checkbox-label__input" type="checkbox" name="isBlocked" @(Model.Status.IsFlagSet((long)UserStatuses.Blocked) ? "checked" : "") id="isBlocked" value="true">
+                    <label class="checkbox-label__main" for="isBlocked">
+                        <span class="checkbox-label__main-text">@SharedResources.IsBlocked</span>
+                    </label>
+                    <input name="isBlocked" type="hidden" value="false">
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="profile__subsection">
+        <h2 class="profile__subheading secondary-heading" id="changePasswordButton">@SharedResources.ChangePassword_Cap</h2>
+        <div class="profile__forms profile-form">
+            <div class="profile-form__fields">
+                @*<div class="profile-form__field">
+                    <label class="profile-form__caption" for="OldPassword">@SharedResources.CurrentPassword <span>*</span></label>
+                    <input class="profile-form__input input" type="password" name="OldPassword" id="OldPassword">
+                </div>*@
+                <div class="profile-form__field">
+                    <label class="profile-form__caption" for="Password">@SharedResources.NewPassword <span>*</span></label>
+                    <input class="profile-form__input input" type="password" name="Password" id="Password">
+                </div>
+                <div class="profile-form__field">
+                    <label class="profile-form__caption" for="Password2">@SharedResources.RepeatNewPassword <span>*</span></label>
+                    <input class="profile-form__input input" type="password" name="Password2" id="Password2">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="profile__subsection">
+        <h2 class="profile__subheading secondary-heading">@SharedResources.RolesInSystem</h2>
+        <ul class="profile__notifications">
+            @{
+                var roles = Model.UserRolesList();
+            }
+            @foreach (var roleItem in roles)
+            {
+                <li class="profile__notification">
+                    <div class="profile____option checkbox-label">
+                        <input class="checkbox-label__input" type="checkbox" name="selectedRoles" value="@roleItem.Value"
+                               id="@("roleItem" + roleItem.Value)" @(roleItem.Selected ? "checked=checked" : "")>
+                        <label class="checkbox-label__main" for="@("roleItem" + roleItem.Value)">
+                            <span class="checkbox-label__main-text">@roleItem.Text</span>
+                        </label>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="profile__subsection">
+        <h2 class="profile__subheading secondary-heading">@SharedResources.VINSearch</h2>
+        <ul class="profile__notifications">
+            <li class="profile__notification">
+                <div class="profile____option checkbox-label">
+                    <input class="checkbox-label__input" type="checkbox" name="IsVinSearchUnlimited" id="IsVinSearchUnlimited" value="true" @(Model.IsVinSearchUnlimited ? "checked" : "")>
+                    <label class="checkbox-label__main" for="IsVinSearchUnlimited">
+                        <span class="checkbox-label__main-text">@SharedResources.Unlimited</span>
+                    </label>
+                    @Html.Hidden("IsVinSearchUnlimited", "false")
+                </div>
+            </li>
+            <li class="profile__notification">
+                <div class="profile____option checkbox-label">
+                    <input class="checkbox-label__input" type="checkbox" name="IsVinSearchDefaultLimit" id="IsVinSearchDefaultLimit" value="true" @(Model.IsVinSearchDefaultLimit ? "checked" : "")>
+                    <label class="checkbox-label__main" for="IsVinSearchDefaultLimit">
+                        <span class="checkbox-label__main-text">@SharedResources.Default</span>
+                    </label>
+                    @Html.Hidden("IsVinSearchDefaultLimit", "false")
+                </div>
+            </li>
+        </ul>
+        <div class="profile__params-area">
+            <dl class="profile__params params is-dotted">
+                <div class="params__param" name="limitCounter">
+                <dt class="params__property">@SharedResources.MaxRequestsPerDay</dt>
+                <dd class="params__value">@Html.TextBoxFor(m => m.VinSearchLimitCounter, new { @class = "profile-form__input input" })</dd>
+        </div>
+        <div class="params__param" name="limitCounter">
+            <dt class="params__property">@SharedResources.ValabilityTerm</dt>
+            <dd class="params__value">@Html.TextBoxFor(m => m.VinSearchLimitDate, new { type = "date", @class = "profile-form__input input" })</dd>
+        </div>
+        </dl>
+    </div>
+    </div>
+
+    <div class="profile__subsection">
+        <h2 class="profile__subheading secondary-heading">@SharedResources.Representations</h2>
+        @*<div class="client-options-wrap">
+            <div class="client-options">
+                <div class="row">
+                    <div class="col-6 col-sm-3">
+                        <a class="client-option" href="#">
+                            <figure class="client-option__main">
+                                <div class="client-option__img-wrap">
+                                    <svg class="icon icon-key client-option__img">
+                                        <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#key")"></use>
+                                    </svg>
+                                </div>
+                                <figcaption class="client-option__heading">@SharedResources.KeyUser</figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="col-6 col-sm-3">
+                        <a class="client-option" href="#">
+                            <figure class="client-option__main">
+                                <div class="client-option__img-wrap">
+                                    <svg class="icon icon-contacts client-option__img">
+                                        <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#contacts")"></use>
+                                    </svg>
+                                </div>
+                                <figcaption class="client-option__heading">@SharedResources.AllOrderUser</figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="col-6 col-sm-3">
+                        <a class="client-option" href="#">
+                            <figure class="client-option__main">
+                                <div class="client-option__img-wrap">
+                                    <svg class="icon icon-file client-option__img">
+                                        <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#file")"></use>
+                                    </svg>
+                                </div>
+                                <figcaption class="client-option__heading">@SharedResources.ComparisionActUser</figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="col-6 col-sm-3">
+                        <a class="client-option" href="#">
+                            <figure class="client-option__main">
+                                <div class="client-option__img-wrap">
+                                    <svg class="icon icon-shopping-cart client-option__img">
+                                        <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#shopping-cart")"></use>
+                                    </svg>
+                                </div>
+                                <figcaption class="client-option__heading">@SharedResources.TradeUser</figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+        <div class="client-detail">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>@SharedResources.Client</th>
+                            <th>&nbsp;</th>
+                            <th class="text-center">
+                                <svg class="icon icon-key">
+                                    <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#key")"></use>
+                                </svg>
+                            </th>
+                            <th class="text-center">
+                                <svg class="icon icon-contacts">
+                                    <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#contacts")"></use>
+                                </svg>
+                            </th>
+                            <th class="text-center">
+                                <svg class="icon icon-file">
+                                    <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#file")"></use>
+                                </svg>
+                            </th>
+                            <th class="text-center">
+                                <svg class="icon icon-shopping-cart">
+                                    <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#shopping-cart")"></use>
+                                </svg>
+                            </th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Presenters.Where(i => !i.IsManaged && i.Client != null))
+                        {
+                            <tr>
+                                <td>@item.Client.Name</td>
+                                <td>
+                                    @if (!item.IsAccepted)
+                                    {
+                                        <a class="vos" href="@Url.Action("Approve", "Clients", new {id = item.Id})" title="@SharedResources.Approve"> </a>
+                                    }
+                                </td>
+                                <td>
+                                    <div class="checkbox-label">
+                                        <input represent="true" class="checkbox-label__input" type="checkbox" id="@string.Format("{0}_{1}", RepresentativeRole.KeyRepresentative, item.Id)"
+                                               name="prd" value="@(item.Roles)" @((item.Roles.IsFlagSet((long)RepresentativeRole.KeyRepresentative)) ? "checked=checked" : "")
+                                               @((item.User.Id == SessionHelper.CurrentUser.Id) ? "disabled = disabled" : "")>
+                                        <label class="checkbox-label__main" for="@string.Format("{0}_{1}", RepresentativeRole.KeyRepresentative, item.Id)"></label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="checkbox-label">
+                                        <input represent="true" class="checkbox-label__input" type="checkbox" id="@string.Format("{0}_{1}", RepresentativeRole.AllOrders, item.Id)"
+                                               name="prd" value="@(item.Roles)" @((item.Roles.IsFlagSet((long)RepresentativeRole.AllOrders)) ? "checked=checked" : "")
+                                               @((item.User.Id == SessionHelper.CurrentUser.Id && !item.Roles.IsFlagSet((long)RepresentativeRole.KeyRepresentative)) ? "disabled = disabled" : "")>
+                                        <label class="checkbox-label__main" for="@string.Format("{0}_{1}", RepresentativeRole.AllOrders, item.Id)"></label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="checkbox-label">
+                                        <input represent="true" class="checkbox-label__input" type="checkbox" id="@string.Format("{0}_{1}", RepresentativeRole.Verification, item.Id)"
+                                               name="prd" value="@(item.Roles)" @((item.Roles.IsFlagSet((long)RepresentativeRole.Verification)) ? "checked=checked" : "")
+                                               @((item.User.Id == SessionHelper.CurrentUser.Id && !item.Roles.IsFlagSet((long)RepresentativeRole.KeyRepresentative)) ? "disabled = disabled" : "")>
+                                        <label class="checkbox-label__main" for="@string.Format("{0}_{1}", RepresentativeRole.Verification, item.Id)"></label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="checkbox-label">
+                                        <input represent="true" class="checkbox-label__input" type="checkbox" id="@string.Format("{0}_{1}", RepresentativeRole.Trade, item.Id)"
+                                               name="prd" value="@(item.Roles)" @((item.Roles.IsFlagSet((long)RepresentativeRole.Trade)) ? "checked=checked" : "")
+                                               @((item.User.Id == SessionHelper.CurrentUser.Id && !item.Roles.IsFlagSet((long)RepresentativeRole.KeyRepresentative)) ? "disabled = disabled" : "")>
+                                        <label class="checkbox-label__main" for="@string.Format("{0}_{1}", RepresentativeRole.Trade, item.Id)"></label>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <a class="user-status-remove" title="@SharedResources.Delete"
+                                       href="@Url.Action("DeleteRepresentation", "Clients", new {id = item.Id, clientId = item.Client.Id, isMy = (item.User.Id == SessionHelper.CurrentUser.Id), onclick="return confirm('@SharedResources.AreYouSure');"})">
+                                        <svg class="icon icon-close">
+                                            <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#close")"></use>
+                                        </svg>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="section-area">
+        @*<div class="section-area__heading">@SharedResources.PersonalData</div>*@
+        @*<div class="manual-params manual-params--bigger">
+            <dl class="manual-params__param">
+                <dt class="manual-params__value">@SharedResources.FIO</dt>
+                <dd class="manual-params__property">@Model.FullName</dd>
+            </dl>
+            <dl class="manual-params__param">
+                <dt class="manual-params__value">@SharedResources.MobilePhone</dt>
+                <dd class="manual-params__property">@Model.PhoneMobile</dd>
+            </dl>
+            <dl class="manual-params__param">
+                <dt class="manual-params__value">@SharedResources.FixedPhone</dt>
+                <dd class="manual-params__property">@Model.PhoneHome</dd>
+            </dl>
+            <dl class="manual-params__param">
+                <dt class="manual-params__value">@SharedResources.EmailAsLogin</dt>
+                <dd class="manual-params__property">@Model.Email</dd>
+            </dl>
+            <dl class="manual-params__param login">
+                <dt class="manual-params__value">@SharedResources.Login</dt>
+                <dd class="manual-params__property">@Html.TextBox("NewLogin")</dd>
+                <dd class="manual-params__property"><label id="LoginCheck"></label></dd>
+            </dl>
+            <dl class="manual-params__param login">
+                <dt class="manual-params__value">@SharedResources.ExternalUserCode</dt>
+                <dd class="manual-params__property">@Html.TextBoxFor(m => m.ExternalSystemCode)</dd>
+            </dl>
+            <a class="manual-params__edit" href="" id="changeLoginButton">
+                <svg class="icon icon-pen manual-params__edit-icon">
+                    <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#pen")"></use>
+                </svg>@SharedResources.Change
+            </a>
+        </div>*@
+        <!--<div class="section-area__bordered">
+        <div class="row">-->
+        @*<div class="col-sm-4">
+            <div class="section-area__field">
+                <label class="section-area__label" for="bl-log">Логин</label>
+                <input class="section-area__input" type="text" name="block-login" id="bl-log">
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="section-area__field">
+                <label class="section-area__label" for="bl-code">Код пользователя</label>
+                <input class="section-area__input" type="text" name="block-code" id="bl-code">
+            </div>
+        </div>*@
+        <!--<div class="col-sm-4 align-self-center">
+                <div class="checkbox-label">
+                    <input class="checkbox-label__input" type="checkbox" name="isBlocked" @(Model.Status.IsFlagSet((long)UserStatuses.Blocked) ? "checked" : "") id="isBlocked" value="true">
+                    <label class="checkbox-label__main" for="isBlocked">@SharedResources.IsBlocked</label>
+                    <input name="isBlocked" type="hidden" value="false">
+                </div>
+            </div>
+        </div>
+    </div>-->
+        <!--<div class="section-area">
+        <div class="section-area__heading"><a href="" id="changePasswordButton">@SharedResources.ChangePassword_Cap</a></div>
+        <div class="section-area__bordered password">
+            <div class="row">-->
+        @*<div class="col-sm-4">
+            <div class="section-area__field">
+                <label class="section-area__label" for="cr-psw">Текущий пароль <span>*</span></label>
+                <input class="section-area__input" type="password" name="current-password" id="cr-psw">
+            </div>
+        </div>*@
+        <!--<div class="col-sm-4">
+            <div class="section-area__field">
+                <label class="section-area__label" for="Password">@SharedResources.NewPassword <span>*</span></label>
+                <input class="section-area__input section-area__input--gray" type="password" name="Password" id="Password">
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="section-area__field">
+                <label class="section-area__label" for="Password2">@SharedResources.RepeatNewPassword <span>*</span></label>
+                <input class="section-area__input section-area__input--gray" type="password" name="Password2" id="Password2">
+            </div>
+        </div>
+    </div>-->
+        @*<a class="section-area__save-psw" href="#">
+            <svg class="icon icon-save section-area__save-psw-icon">
+                <use href="assets/images/svg/symbol/sprite.svg#save"></use>
+            </svg>Сохранить изменения пароля
+        </a>*@
+        <!--</div>
+    </div>-->
+        @*<div class="section-area">
+            <div class="section-area__heading">@SharedResources.RolesInSystem</div>
+            <div class="section-area__bordered">
+                <div class="row">
+                    <div class="col-sm-6">
+                        @{
+                            var roles = Model.UserRolesList();
+                            var rolesCount = roles.Count();
+                            var firstColumCount = rolesCount / 2 + rolesCount % 2;
+                            var secondColumCount = rolesCount - firstColumCount;
+                        }
+                        @foreach (var roleItem in roles.Take(firstColumCount))
+                        {
+                            <div class="section-area__checkbox checkbox-label">
+                                <input class="checkbox-label__input" type="checkbox" name="selectedRoles" value="@roleItem.Value"
+                                       id="@("roleItem" + roleItem.Value)" @(roleItem.Selected ? "checked=checked" : "")>
+                                <label class="checkbox-label__main" for="@("roleItem" + roleItem.Value)">@roleItem.Text</label>
+                            </div>
+                        }
+                    </div>
+                    <div class="col-sm-6">
+                        @foreach (var roleItem in roles.Skip(firstColumCount).Take(secondColumCount))
+                        {
+                            <div class="section-area__checkbox checkbox-label">
+                                <input class="checkbox-label__input" type="checkbox" name="selectedRoles" value="@roleItem.Value"
+                                       id="@("roleItem" + roleItem.Value)" @(roleItem.Selected ? "checked=checked" : "")>
+                                <label class="checkbox-label__main" for="@("roleItem" + roleItem.Value)">@roleItem.Text</label>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>*@
+        @*<div class="section-area">
+            <div class="section-area__heading">@SharedResources.VINSearch</div>
+            <div class="section-area__bordered">
+                <div class="row">
+                    <div class="col-sm-3 align-self-center">
+                        <div class="checkbox-label">
+                            <input class="checkbox-label__input" type="checkbox" name="IsVinSearchUnlimited" id="IsVinSearchUnlimited" value="true" checked>
+                            <label class="checkbox-label__main" for="IsVinSearchUnlimited">@SharedResources.Unlimited</label>
+                            @Html.Hidden("IsVinSearchUnlimited", "false")
+                        </div>
+                    </div>
+                    <div class="col-sm-3 align-self-center" name="default">
+                        <div class="checkbox-label">
+                            <input class="checkbox-label__input" type="checkbox" name="IsVinSearchDefaultLimit" id="IsVinSearchDefaultLimit" value="true">
+                            <label class="checkbox-label__main" for="IsVinSearchDefaultLimit">@SharedResources.Default</label>
+                            @Html.Hidden("IsVinSearchDefaultLimit", "false")
+                        </div>
+                    </div>
+                    <div class="col-sm-3" name="limitCounter">
+                        <div class="section-area__field">
+                            <label class="section-area__label" for="VinSearchLimitCounter">@SharedResources.MaxRequestsPerDay</label>
+                            <input class="section-area__input" type="text" name="VinSearchLimitCounter" id="VinSearchLimitCounter" value="@Model.VinSearchLimitCounter">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="section-area__field">
+                            <label class="section-area__label" for="VinSearchLimitDate">@SharedResources.ValabilityTerm</label>
+                            <input class="section-area__input" type="date" name="VinSearchLimitDate" id="VinSearchLimitDate">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+        <div class="profile__bottom">
+            @Html.HiddenFor(m => m.Id)
+            @Html.HiddenFor(m => m.Login)
+            @Html.Hidden("changePassword", "false")
+            @Html.Hidden("returnURL", (string)ViewBag.ReturnURL)
+            <a class="btn btn--black" href="@(ViewBag.ReturnURL ?? Url.Action("UsersManagement"))">@SharedResources.Cancel</a>
+            @*<input class="btn btn--main" type="submit" name="send-data" value="@SharedResources.SaveChanges">*@
+            <input class="profile__btn btn btn--primary" type="submit" name="" value="@SharedResources.Save">
+        </div>
+    </div>
+}
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+
+            $('input[represent]:checkbox').change(function () {
+                changeRepresentationRole($(this).attr('id'), $(this).is(":checked"));
+            });
+
+            $("#EditPersonalData-form").validate({
+                rules: {
+                    Password2: {
+                        required: false,
+                        minlength: 4,
+                        equalTo: "#Password"
+                    },
+                    NewLogin: {
+                        email: true,
+                        remote: '@Url.Action("IsNewLoginAvailable", "Security")'
+                    },
+
+                }
+            });
+
+            $('input[name="IsVinSearchUnlimited"]:checkbox, input[name="IsVinSearchDefaultLimit"]:checkbox').change(function (e) {
+                setVinSearchState();
+            });
+            setVinSearchState();
+        });
+
+        function setVinSearchState() {
+            if ($('input[name="IsVinSearchUnlimited"]:checkbox')[0].checked) {
+                $('[name="default"], [name="limitCounter"]').hide();
+            } else {
+                $('[name="default"]').show();
+                if ($('input[name="IsVinSearchDefaultLimit"]:checkbox')[0].checked) {
+                    $('[name="limitCounter"]').hide();
+                } else {
+                    $('[name="limitCounter"]').show();
+                }
+            }
+        }
+
+        function changeRepresentationRole(id, state) {
+            var url = "@(Url.Action("ChangeRepresentationRole", "Clients"))" + "?id=" + id + "&state=" + state;
+            $.get(url, function () { });
+        }
+
+        $("#changePasswordButton").on("click", function () {
+            $('.password').toggle('slow');
+            var changePassElement = $("#changePassword");
+            changePassElement.val(changePassElement.val() != 'true');
+            return false;
+        });
+
+        $("#changeLoginButton").on("click", function (event) {
+            if ($("#NewLogin").is(":visible")) { $("#NewLogin").val(""); $("#changeLoginButton").prop("innerText", "@SharedResources.Change") ;  }
+            else { $("#changeLoginButton").prop("innerText", "@SharedResources.Cancel"); }
+            $('.login').toggle('slow');
+            return false;
+        });
+
+        $('.password').hide();
+        $('.login').hide();
+    </script>
+}

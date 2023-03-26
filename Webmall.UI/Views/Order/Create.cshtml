@@ -1,0 +1,272 @@
+﻿@using ViewRes
+
+@model Webmall.UI.Models.Order.CreateOrderModelView
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <main class="content">
+        <div class="page-intro">
+            <h1 class="page-intro__heading main-heading">@SharedResources.Checkout</h1>
+        </div>
+        @using (Html.BeginForm("Checkout", "Order", FormMethod.Post, new { id = "CreateForm", @class = "checkout" }))
+        {
+            @*@Html.HiddenFor(m => m.ClientId)
+            @Html.HiddenFor(m => m.AuthorId)
+            @Html.HiddenFor(m => m.AuthorName)
+            @Html.HiddenFor(m => m.WarehouseId)
+            <input name="Delivery.DeliveryTypeId" value="1" type="hidden" />*@
+
+            @* Список позиций заказа *@
+            <section class="checkout__subsection product-detail-section js-accordion is-active">
+                <div class="product-detail-section__header js-accordion-trigger">
+                    <div class="product-detail-section__heading">@SharedResources.OrderDetails</div>
+                </div>
+
+                <div class="product-detail-section__main js-accordion-body">
+                    <div class="product-detail-section__stock stock-area">
+
+                        <div class="stock-area__table">
+                            <div class="stock-table stock-area__table-main scrollbar is-checkout">
+                                @{ Html.RenderPartial("Partials/TableCartPosition", Model.Positions);}
+                                <div class="stock-table__bottom">
+                                    <div class="stock-table__row">
+                                        <div class="stock-table__summary">
+                                            <div class="stock-table__summary-info">
+                                                @SharedResources.MinimumDeliveryAmount: <strong>Пока нет 0 р.</strong>
+                                            </div>
+                                            <div class="stock-table__summary-total">
+                                                @SharedResources.Quantity: <strong>@Model.TotalQnt </strong><strong>@SharedResources.Things.</strong> / @SharedResources.TotalSelectedSum: <strong><span>@Model.TotalPrice</span> <span>@Model.ValuteName</span></strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="stock-area__mob-table stock-mob-table is-checkout">
+                            <header class="stock-mob-table__header">
+                                <div class="stock-mob-table__row">
+                                    <div class="stock-mob-table__cell">
+                                        <div class="stock-mob-table__caption">@SharedResources.WareNumber, @SharedResources._brand</div>
+                                    </div>
+                                    <div class="stock-mob-table__cell">
+                                        <div class="stock-mob-table__caption">@SharedResources.Term</div>
+                                    </div>
+                                    <div class="stock-mob-table__cell">
+                                        <div class="stock-mob-table__caption" style="justify-content: center;">@SharedResources.Amount</div>
+                                    </div>
+                                    <div class="stock-mob-table__cell">
+                                        <div class="stock-mob-table__caption">@SharedResources.Sum</div>
+                                    </div>
+                                    <div class="stock-mob-table__cell">
+                                        <div class="stock-mob-table__caption">&nbsp;</div>
+                                    </div>
+                                </div>
+                            </header>
+                            @{ Html.RenderPartial("Partials/TableCartPositionMob", Model.Positions);}
+                            <div class="stock-mob-table__footer">
+                                <div class="stock-mob-table__summary summary-list">
+                                    <div class="summary-list__param">
+                                        <dt class="summary-list__property">@SharedResources.MinimumDeliveryAmount</dt>
+                                        <dd class="summary-list__value">3343 </dd>
+                                    </div>
+                                    <div class="summary-list__param">
+                                        <dt class="summary-list__property">@SharedResources.Quantity</dt>
+                                        <dd class="summary-list__value">@Model.TotalQnt @SharedResources.Things.</dd>
+                                    </div>
+                                    <div class="summary-list__param">
+                                        <dt class="summary-list__property">@SharedResources.TotalSelectedSum</dt>
+                                        <dd class="summary-list__value">@Model.TotalPrice @Model.ValuteName.</dd>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="stock-area__check check-order">
+                            <div class="check-order__option checkbox-label">
+                                <input class="checkbox-label__input" type="checkbox" name="Options.NeedToCheck" id="Options.NeedToCheck">
+                                <label class="checkbox-label__main" for="Options.NeedToCheck">
+                                    <span class="checkbox-label__main-text">@SharedResources.CheckOrderManager</span>
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            @* Дополнительная информация *@
+            <section class="checkout__subsection checkout-subsection">
+                <header class="checkout-subsection__header">
+                    <h2 class="checkout-subsection__heading secondary-heading">@SharedResources.AdditionalInformation</h2>
+                    <p class="checkout-subsection__intro">@Html.Raw(Model.InfoAdditional.Description)</p>
+                </header>
+                <div class="checkout-subsection__main">
+                    <div class="checkout-subsection__user-info user-addresses">
+                        <div class="user-addresses__field">
+                            @Html.DropDownList("Options.ContactId", new SelectList(Model.Contacts, "Value", "Text"), new { @class = "user-addresses__input select", name = "ContactId" })
+                        </div>
+
+                        <button class="user-addresses__btn btn-add" type="button" data-modal-win-trigger="phone-add">
+                            <span class="btn-add__icon-wrap">
+                                <svg class="icon icon-plus btn-add__icon" width="25" height="25">
+                                    <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#plus")"></use>
+                                </svg>
+                            </span>
+                            <span class="btn-add__text">@SharedResources.Add</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            @* Доставка *@
+            <section class="checkout__subsection checkout-subsection">
+                @Html.Hidden("Delivery.DeliveryTypeId")
+                <header class="checkout-subsection__header">
+                    <h2 class="checkout-subsection__heading secondary-heading">@SharedResources.Delivery</h2>
+                    <p class="checkout-subsection__intro">@Html.Raw(Model.InfoDelivery.Description)</p>
+                </header>
+                <div class="checkout-subsection__main">
+                    <div class="checkout-subsection__tabs tabs js-tabs has-dots">
+                        <div class="tabs__header">
+                            <ul class="tabs__list delivery-tab">
+                                <li class="tabs__item">
+                                    <a class="tabs__link js-tabs-trigger is-active" href="#delivery-1" data-typeId="1">
+                                        <span class="tabs__link-text">@SharedResources.SelfDelivery</span>
+                                    </a>
+                                </li>
+                                @*<li class="tabs__item delivery-tab">
+                                    <a class="tabs__link js-tabs-trigger" href="#delivery-2" data-typeId="2">
+                                        <span class="tabs__link-text">@SharedResources.ClientsDelivery</span>
+                                    </a>
+                                </li>*@
+                            </ul>
+                        </div>
+                        <div class="tabs__panes">
+                            <div class="tabs__pane js-tabs-pane is-opened is-active">
+                                <div class="tabs__accordion-toggle js-tabs-accordion-toggle" id="delivery-1">@SharedResources.SelfDelivery</div>
+                                <div class="tabs__accordion-body">
+                                    <!-- check-order-->
+                                    <!--<div class="tabs__check check-order is-accent">
+                                    <div class="check-order__option checkbox-label">
+                                        <input class="checkbox-label__input" type="checkbox" name="Delivery.PickUpPayload.DeliverAvailable" id="deliverAvailable">
+                                        <label class="checkbox-label__main" for="deliverAvailable">
+                                            <span class="checkbox-label__main-text">@SharedResources.DeliveryAsAvailable</span>
+                                        </label>
+                                    </div>
+                                </div>-->
+                                    <!-- /check-order-->
+                                    <p>@SharedResources.SelfDeliveryDescription</p>
+                                </div>
+                            </div>
+                            @*@{ Html.RenderPartial("CreateDeliveryBlock");}*@
+
+                        </div>
+                    </div>
+                </div>
+                <div class="checkout-subsection__subtotal">
+                    @SharedResources.Total: <strong><span id="totalSum">@Model.TotalPrice</span> @Model.ValuteName</strong>
+                </div>
+            </section>
+
+            @* Оплата *@
+            <section class="checkout__subsection checkout-subsection">
+                <header class="checkout-subsection__header">
+                    <h2 class="checkout-subsection__heading secondary-heading">@SharedResources.Payment</h2>
+                    <p class="checkout-subsection__intro">@Html.Raw(Model.InfoPayment.Description)</p>
+                </header>
+                <div class="checkout-subsection__main">
+                    <!-- tabs-->
+                    <div class="checkout-subsection__tabs tabs js-tabs has-dots">
+
+                        @if (Model.OrderPayment.Count != 0)
+                        {
+                            <div class="tabs__header">
+                                @Html.Hidden("Payment.PaymentTypeId")
+                                <ul class="tabs__list payment-tab">
+                                    @foreach (var item in Model.OrderPayment)
+                                    {
+                                        <li class="tabs__item">
+                                            <a class="tabs__link js-tabs-trigger @(item==Model.OrderPayment.First() ? "is-active" : "")" href="#payment-section-@Model.OrderPayment.IndexOf(item)" data-typeId="@item.PaymentTypeId">
+                                                <span class="tabs__link-text">@item.Name</span>
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                            <div class="tabs__panes">
+                                @foreach (var item in Model.OrderPayment)
+                                {
+                                    <div class="tabs__pane js-tabs-pane is-opened @(item == Model.OrderPayment.First() ? "is-active" : "")">
+                                        <div class="tabs__accordion-toggle js-tabs-accordion-toggle" id="payment-section-@Model.OrderPayment.IndexOf(item)">@item.Name</div>
+                                        <div class="tabs__accordion-body">
+                                            @if (!string.IsNullOrEmpty(item.ViewName))
+                                            {
+                                                Html.RenderPartial(item.ViewName, item);
+                                            }
+                                            else
+                                            {
+                                                Html.RenderPartial("PaymentDefault", item);
+                                            }
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+
+                    </div><!-- /tabs-->
+                </div>
+
+                <div class="checkout-subsection__summary user-order-notification">
+                    @Html.Raw(Model.InfoAttention.Description)
+                    <textarea class="user-order-notification__message input" name="Options.Comment" rows="2" placeholder="@SharedResources.CommentToOrderForManager"></textarea>
+                </div>
+
+            </section>
+
+            <footer class="checkout__bottom text-right">
+                <div class="checkout__btns">
+                    <a class="checkout__btn btn btn--gray" href="@Url.Action("Index", "Cart")">@SharedResources.Previous</a>
+                    <button class="checkout__btn btn btn--primary js-privacy-state-btn" type="submit" disabled name="send">@SharedResources.SendToWork</button>
+                </div>
+            </footer>
+        }
+    </main>
+</div>
+
+@section scripts{
+    <script>
+        $("#CreateForm").submit(() => {
+            $(".payment-tab li a.is-active").each(function(index, value) {
+                    document.getElementById('Payment_PaymentTypeId').value = value.dataset.typeid;
+            });
+            $(".delivery-tab li a.is-active").each(function (index, value) {
+                    document.getElementById('Delivery_DeliveryTypeId').value = value.dataset.typeid;
+            });
+        });
+
+        const checkboxSubmitStatus = document.querySelector('.js-submit-active');
+
+        checkboxSubmitStatus.addEventListener('change', ({ currentTarget }) => {
+            const submitBtn = document.querySelector('.checkout-subsection__btn[type="submit"]');
+
+            if ($('.tabs__tab-pane.is-active').find('.js-paymentCheckbox-active').length !== 0) {
+                if ($('.js-paymentCheckbox-active:checkbox:checked').length == $('.js-paymentCheckbox-active').length) {
+                    submitBtn.disabled = !currentTarget.checked;
+                } else {
+                    currentTarget.checked = false;
+                }
+            } else {
+                submitBtn.disabled = !currentTarget.checked;
+            }
+        });
+    </script>
+
+    @Scripts.Render("~/bundles/cart");
+}
+
+@section dialogs {
+    @{ Html.RenderPartial("Partials/OrderDialog"); }
+}

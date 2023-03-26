@@ -1,0 +1,157 @@
+﻿@using ViewRes
+
+@model Webmall.UI.ViewModel.Order.OrdersListViewModel
+
+@{
+    Layout = null;
+    ViewBag.Title = SharedResources.Orders;
+}
+
+<div class="stock-area__mob-table stock-mob-table js-checked-all is-table-mode">
+    <header class="stock-mob-table__header">
+        <div class="stock-mob-table__row">
+            <div class="stock-mob-table__cell">
+                <div class="stock-mob-table__checkbox checkbox-label">
+                    <input class="checkbox-label__input js-checked-all-trigger" type="checkbox" name="is-opt-16" id="opt-16">
+                    <label class="checkbox-label__main" for="opt-16"></label>
+                </div>
+            </div>
+            <div class="stock-mob-table__cell">
+                <div class="stock-mob-table__caption">Номер заказа</div>
+            </div>
+            <div class="stock-mob-table__cell">
+                <div class="stock-mob-table__caption">
+                    Дата,
+                    <br> Время заказа
+                </div>
+            </div>
+            <div class="stock-mob-table__cell">
+                <div class="stock-mob-table__caption text-center">Статус</div>
+            </div>
+            <div class="stock-mob-table__cell">
+                <div class="stock-mob-table__caption">&nbsp;</div>
+            </div>
+        </div>
+    </header>
+    <div class="stock-mob-table__main">
+        @foreach (var item in Model.Orders.List) {
+            var status = Model.Statuses.FirstOrDefault(i => i.StatusId == item.StatusId);
+            <div class="stock-mob-table__row js-accordion">
+                <div class="stock-mob-table__cell">
+                    <div class="stock-mob-table__checkbox checkbox-label">
+                        <input class="checkbox-label__input js-checked-all-item" type="checkbox" name="is-opt-@item.Id" id="opt-mob-@item.Id">
+                        <label class="checkbox-label__main" for="opt-mob-@item.Id"></label>
+                    </div>
+                </div>
+                <div class="stock-mob-table__cell">
+                    <div class="stock-mob-table__text">
+                        <a class="stock-table__articul" href="@Url.Action("Detail", "Order", new { orderId = item.Id })">@item.Number</a>
+                    </div>
+                </div>
+                <div class="stock-mob-table__cell">
+                    <time class="stock-table__date" datetime="@item.OrderDate.Date.ToString(CultureInfo.CurrentUICulture) @item.OrderDate.ToString("HH:mm")">
+                        @item.OrderDate.Date.ToString(CultureInfo.CurrentUICulture)
+                        <span>@item.OrderDate.ToString("HH:mm")</span>
+                    </time>
+                </div>
+                <div class="stock-mob-table__cell text-center">
+                    <div class="stock-mob-table__text">
+                        <div class="stock-mob-table__status status-badge" style="background-color: @(status?.WebColor)">@item.StatusName</div>
+                    </div>
+                </div>
+                <div class="stock-mob-table__cell">
+                    <button class="stock-mob-table__mob-toggle js-accordion-trigger" type="button">
+                        <svg class="icon icon-chevron-down stock-mob-table__mob-toggle-icon" width="25" height="25">
+                            <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#chevron-down")"></use>
+                        </svg>
+                    </button>
+                </div>
+                <div class="stock-mob-table__dropdown js-accordion-body" hidden>
+                    <div class="stock-mob-table__utils">
+                        <div class="stock-mob-table__util badge" data-tippy-gray-content="Ожидается оплата">
+                            <svg class="badge__icon" width="26" height="17" viewBox="0 0 26 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2 4C2 2.89543 2.89543 2 4 2H17C18.1046 2 19 2.89543 19 4V12C19 13.1046 18.1046 14 17 14H4C2.89543 14 2 13.1046 2 12V4Z" fill="#F79E1B"></path>
+                                <rect x="2" y="4" width="17" height="1" fill="white"></rect>
+                                <path d="M19.0172 14C19.0172 14.1971 19.133 14.3758 19.3128 14.4563C19.4927 14.5369 19.7031 14.5043 19.8501 14.3731L24.3329 10.3731C24.4392 10.2782 24.5 10.1425 24.5 10C24.5 9.85751 24.4392 9.7218 24.3329 9.62693L19.8501 5.62693C19.7031 5.49572 19.4927 5.46313 19.3128 5.54368C19.133 5.62424 19.0172 5.80293 19.0172 6V7.65385H14C13.7239 7.65385 13.5 7.8777 13.5 8.15385V11.8462C13.5 12.1223 13.7239 12.3462 14 12.3462H19.0172V14Z" fill="#F79E1B" stroke="white" stroke-linejoin="round"></path>
+                            </svg>
+                        </div>
+                        <div class="stock-mob-table__util badge" data-tippy-gray-content="">
+                            <svg class="icon icon-truck badge__icon" width="25" height="25">
+                                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#truck")"></use>
+                            </svg>
+                            <div data-tippy-gray-content-template="">
+                                <strong>Водитель:</strong>
+                                <p>Иванов Петр Сергеевич Нет в модели этих данных</p>
+                                <strong>Телефон:</strong>
+                                <p>05674088786</p>
+                            </div>
+                        </div>
+                        <div class="stock-mob-table__util badge" data-tippy-gray-content="">
+                            <svg class="icon icon-info badge__icon" width="25" height="25">
+                                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#info")"></use>
+                            </svg>
+                            <div data-tippy-gray-content-template="">
+                                <strong>@SharedResources.OrderAuthor:</strong>
+                                <p>@item.UserName</p>
+                            </div>
+                        </div>
+                        <div class="stock-mob-table__util badge" data-tippy-dropdown-content="" aria-expanded="false">
+                            <svg class="icon icon-dots badge__icon" width="25" height="25">
+                                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#dots")"></use>
+                            </svg>
+                            <div data-tippy-dropdown-content-template="">
+                                <ul class="tooltip-nav">
+                                    <li class="tooltip-nav__item">
+                                        <a class="tooltip-nav__link" href="#">@SharedResources.DeleteOrder</a>
+                                    </li>
+                                    <li class="tooltip-nav__item">
+                                        <a class="tooltip-nav__link" href="#">@SharedResources.RepeatOrder</a>
+                                    </li>
+                                    <li class="tooltip-nav__item">
+                                        <a class="tooltip-nav__link" href="#">@SharedResources.PrintAPP</a>
+                                    </li>
+                                    <li class="tooltip-nav__item">
+                                        <a class="tooltip-nav__link" href="#">@SharedResources.ExportToExcel</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stock-mob-table__params">
+                        <div class="stock-mob-table__param">
+                            <dt class="stock-mob-table__property">@SharedResources.Sum</dt>
+                            <dd class="stock-mob-table__value">@item.Sum</dd>
+                        </div>
+                        <div class="stock-mob-table__param">
+                            <dt class="stock-mob-table__property">@SharedResources.DeliveryDate</dt>
+                            <dd class="stock-mob-table__value">@item.OrderDate.ToString("dd.MM.yyy")</dd>
+                        </div>
+                    </div>
+
+                    <div class="stock-mob-table__inner js-inner-table">
+                        <button class="stock-mob-table__inner-trigger is-first js-inner-table-trigger btn" onclick="OpenOrderItemPropMob(@item.Id)">
+                            <span class="btn__text">@SharedResources.ShowOrderItems</span>
+                            <svg class="icon icon-chevron-down btn__icon" width="25" height="25">
+                                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#chevron-down")"></use>
+                            </svg>
+                        </button>
+                        <div class="stock-mob-table js-checked-all is-detail is-dark" data-loaded="false" data-orderIdMob="@item.Id" >
+                            <div id="updateBlockMob-@item.Id">
+                                <p>@SharedResources.Loading</p>
+                            </div>
+                        </div>
+                        <button class="stock-mob-table__inner-trigger is-last js-inner-table-trigger btn">
+                            <span class="btn__text">@SharedResources.ShowOrderItems</span>
+                            <svg class="icon icon-chevron-down btn__icon" width="25" height="25">
+                                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#chevron-down")"></use>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

@@ -1,0 +1,21 @@
+﻿@using ViewRes
+
+<div class="modal-content" data-modal-win="comment-edit" hidden>
+    <div class="modal-content__header">
+        <div class="modal-content__heading">@SharedResources.Comment2</div>
+    </div>
+    <div class="modal-content__body">
+        @using (Html.BeginForm("SaveComment", "Cart", FormMethod.Post, new { id = "editCommentDialog"}))
+        {
+            <input type="hidden" id="positionId"/>
+            <div class="modal-form__fields">
+                <div class="modal-form__field">
+                    <input id="commentText" class="modal-form__input input" type="text" placeholder="@SharedResources.Comment2" name="comment">
+                </div>
+            </div>
+            <div class="modal-form__bottom">
+                <input class="modal-form__btn btn btn--primary btn--block" type="submit" value="@SharedResources.Save">
+            </div>
+        }
+    </div>
+</div>

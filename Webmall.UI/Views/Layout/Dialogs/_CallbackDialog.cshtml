@@ -1,0 +1,64 @@
+﻿@using ViewRes
+@using Webmall.UI.Core
+
+<div class="modal-content" data-modal-win="callback-modal" hidden>
+    <div class="modal-content__header">
+        <div class="modal-content__heading">@SharedResources.AskManager</div>
+    </div>
+    <div class="modal-content__body">
+        @using (Html.BeginForm("OnlineHelp", "Security", FormMethod.Post, new { id = "askForm", @class = "callback-form", onsubmit = "openQuestionDialog();" }))
+        {
+            @*<div class="callback-form__title">@SharedResources.AskManager</div>*@
+            <div class="modal-form__fields">
+                <div class="modal-form__field">
+                    <div class="callback-form__field">
+                        <label class="modal-form__label label" for="f1">@SharedResources.YourName <span class="callback-form__label-required">*</span></label>
+                        <input class="modal-form__input input" id="f1" type="text" name="userName">
+                    </div>
+                </div>
+                <div class="modal-form__field">
+                    <div class="callback-form__field">
+                        <label class="modal-form__label label" for="f2">@SharedResources.ReplyAddress <span class="callback-form__label-required">*</span></label>
+                        <input class="modal-form__input input" id="f2" type="text" name="userContacts">
+                    </div>
+                </div>
+                <div class="modal-form__field">
+                    <label class="modal-form__label label" for="f3">@SharedResources.Question <span class="callback-form__label-required">*</span></label>
+                    <textarea class="modal-form__input input" id="f3" rows="3" name="userMessage"></textarea>
+                </div>
+            </div>
+
+            if (SessionHelper.CurrentUser == null)
+            {
+                <div class="modal-form__fields">
+                    <div class="modal-form__field">
+                        <label class="modal-form__label label">
+                            @SecurityResources.ConfirmYouAreNotRobot
+                            <div id="RecaptchaQuestionDialog"></div>
+                        </label>
+                    </div>
+                </div>
+            }
+            <div class="modal-form__bottom">
+                <input class="modal-form__btn btn btn--primary btn--block" type="submit" value="@SharedResources.Send">
+            </div>
+
+            @Html.Hidden("redirectUrl", ViewContext.RequestContext.HttpContext.Request.RawUrl)
+            @*@Html.Hidden("img")*@
+        }
+    </div>
+</div>
+
+@*<script>
+        function openQuestionDialog(errorDialog) {
+            html2canvas(document.body, {
+                onrendered: function (canvas) {
+                    var data = canvas.toDataURL('image/png').replace(/data:image\/png;base64,/, '');
+                    $('#img').val(data);
+                    //все возникшие проблемы решились удалением canvas
+                    $('canvas').remove();
+                }
+            });
+            return true;
+        }
+    </script>*@

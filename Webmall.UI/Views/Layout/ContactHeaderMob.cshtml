@@ -1,0 +1,85 @@
+﻿@using ViewRes
+@using Webmall.UI.Core.Helpers
+@model  Webmall.UI.ViewModel.Layout.Header
+
+@{
+    Layout = null;
+}
+
+<div class="mob-nav d-md-none">
+    <nav class="mob-nav__nav">
+        <ul class="mob-nav__list">
+            @foreach (var item in Model.Menu)
+            {
+                <li class="mob-nav__item @(item.Level2.Count > 0 ? "has-dropdown" : "")">
+                    <a class="mob-nav__link" href="@this.ToLocalizedUrl(item.Url)">@item.Title 
+                        @if (item.Level2.Count > 0)
+                        {
+                            <svg class="icon icon-chevron-down" width="25" height="25">
+                                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#chevron-down")"></use>
+                            </svg>
+                        }
+                    </a>
+                    @if (item.Level2.Count > 0)
+                    {
+                        <ul class="mob-nav__sublist">
+                            @foreach (var level2 in item.Level2)
+                            {
+                                <li class="mob-nav__subitem">
+                                    <a class="mob-nav__sublink" href="@this.ToLocalizedUrl(level2.Url)">@level2.Title</a>
+                                </li>
+                            }
+                        </ul>
+                    }
+                </li>
+            }
+        </ul>
+    </nav>
+</div>
+
+<div class="header-mob-contacts">
+    <div class="header-mob-contacts__close">
+        <svg class="icon icon-close header-mob-contacts__close-icon">
+            <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#close")"></use>
+        </svg>
+    </div>
+    <div class="header-mob-contacts__phone">
+        <a class="header-mob-contacts__phone-link" href="tel:">
+            <svg class="icon icon-phone-rounded header-mob-contacts__phone-link-icon">
+                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#phone-rounded")"></use>
+            </svg><span class="header-mob-contacts__phone-link-text">@SharedResources.Call</span>
+        </a>
+    </div><a class="header-mob-contacts__btn btn btn--main" href="#" data-modal-win-trigger="callback-modal">@SharedResources.RequestCall</a>
+</div>
+<div class="mob-regions">
+    <div class="mob-regions__header">
+        <button class="mob-regions__close" type="button">
+            <svg class="icon icon-close mob-regions__close-icon">
+                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#close")"></use>
+            </svg>
+        </button>
+        <dl class="mob-regions__params">
+            <div class="mob-regions__param">
+            <dt class="mob-regions__property">@SharedResources.Address:</dt>
+            <dd class="mob-regions__value">@Model.ContactInfo.MainOffice</dd>
+            </div>
+    <div class="mob-regions__param">
+        <dt class="mob-regions__property">@SharedResources.Schedule:</dt>
+        @foreach (var item in Model.ContactInfo.Schedule.Current)
+        {
+            <dd class="mob-regions__value">@item.Timetable</dd>
+        }
+
+    </div>
+    </dl>
+    </div>
+    <div class="mob-regions__main">
+        <div class="mob-regions__heading">@SharedResources.StoreSelection</div>
+        <div class="mob-regions__subsection">
+            <div class="mob-regions__subheading">@SharedResources.PickupNearestShops</div>
+            <ul class="mob-regions__list mob-city-list" id="mob-locations-list">
+            </ul>
+        </div>
+
+    </div>
+</div>

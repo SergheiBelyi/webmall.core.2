@@ -1,0 +1,40 @@
+﻿@model Webmall.UI.ViewModel.Catalog.CatalogViewModel
+
+@{
+    Layout = null;
+}
+
+
+@*@if (Model.WaresCatalog.IsSelectionByAuto)
+{
+    <div class="filter">
+        <div class="filter__heading">
+            <span class="filter__heading-text d-md-none">@Model.WaresCatalog.ModifName</span>
+            <button class="filter__close d-md-none">
+                <svg class="icon icon-close filter__close-icon">
+                    <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#close")"></use>
+                </svg>
+            </button>
+        </div>
+        <div class="filter__main">
+            <div class="filter__auto-categories">
+                <div class="tree-nav-section is-opened">
+                    <div class="tree-nav-section__header">
+                        <div class="tree-nav-section__heading">
+                            @Model.WaresCatalog.ModifName
+                            @@*<svg class="icon icon-chevron-up tree-nav-section__heading-icon">
+                                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#chevron-up")"></use>
+                            </svg>* @
+                        </div>
+                    </div>
+                    <div class="tree-nav-section__body">
+                        <nav class="tree-nav">
+                            @{ Html.RenderAction("SelectionByAutoGroups", "Catalog", new { Model.WaresCatalog.ModifId, onlySpecial = Model.WaresCatalog.IsAction, groupId = Model.WaresCatalog.GroupId }); }
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}*@

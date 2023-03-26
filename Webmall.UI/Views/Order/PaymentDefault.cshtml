@@ -1,0 +1,24 @@
+﻿@model Webmall.Model.Entities.Cms.Order.OrderPayment
+@{
+    Layout = null;
+}
+
+@if (!String.IsNullOrEmpty(Model.Description))
+{
+    <p>@Model.Description</p>
+}
+
+<div class="payment-terms">
+    @foreach (var check in Model.Checkbox.ToLObjectGeneric())
+    {
+        <div class="payment-terms__term" bis_skin_checked="1">
+            <div class="payment-terms__checkbox checkbox-label" bis_skin_checked="1">
+                <input class="checkbox-label__input js-paymentCheckbox-active" type="checkbox" name="is_accept-@Model.Checkbox.ToLObjectGeneric().IndexOf(check)" id="is-accept-@Model.Checkbox.ToLObjectGeneric().IndexOf(check)">
+                <label class="checkbox-label__main" for="is-accept-@Model.Checkbox.ToLObjectGeneric().IndexOf(check)">
+                    @(new HtmlString(@check.Name))
+                </label>
+            </div>
+        </div>
+    }
+</div>
+

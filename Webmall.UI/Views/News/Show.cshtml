@@ -1,0 +1,115 @@
+﻿@using Webmall.Model
+@using ViewRes
+
+@model Webmall.UI.ViewModel.News.NewsArticleViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = Model.Article.Header;
+    var article = Model.Article;
+}
+
+<div class="container-fluid">
+    @{Html.RenderPartial("Components/BreadCrumbsRender", Model.BreadCrumbs);}
+    <main class="content">
+        <!-- page-intro-->
+        <div class="page-intro is-blog">
+            <h1 class="page-intro__heading main-heading">@SharedResources.News</h1>
+            <div class="page-intro__categories categories-dropdown js-dropdown has-overlay is-desktop-hidden">
+                <button class="categories-dropdown__btn js-dropdown-toggle btn btn--primary" type="button">
+                    <span class="btn__text">@SharedResources.Categories</span>
+                    <svg class="icon icon-chevron-down btn__icon" width="25" height="25">
+                        <use href="assets/images/svg/symbol/sprite.svg#chevron-down"></use>
+                    </svg>
+                </button>
+                <div class="categories-dropdown__body">
+                    <ul class="categories-dropdown__list">
+                        @foreach (var item in Model.Categories)
+                        {
+                            <li class="categories-dropdown__item @(Model.Category == item ? "is-active" : "")">
+                                <a class="categories-dropdown__link" href="@Url.Action("Index", "News", new { category=item.Slug})">@item.Name</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div><!-- /page-intro-->
+        <div class="primary">
+            <aside class="primary__sidebar is-mob-hidden">
+                <div class="primary__sidebar-main">
+                    <!-- category-nav-->
+                    <nav class="category-nav is-gray">
+                        <ul class="category-nav__list">
+                            @foreach (var item in Model.Categories)
+                            {
+                                <li class="category-nav__item @(Model.Category == item ? "is-active" : "")">
+                                    <a class="category-nav__link" href="@Url.Action("Index", "News", new { category=item.Slug})"><span class="category-nav__link-text">@item.Name</span></a>
+                                </li>
+                            }
+                        </ul>
+                    </nav><!-- /category-nav-->
+                </div>
+            </aside>
+            <main class="primary__main">
+                <!-- article-->
+                <article class="article">
+                    <header class="article__header">
+                        <time class="article__date" datetime="@article.Date.ToShortDateString()">@article.Date.ToShortDateString()</time>
+                        <div class="article__cover-wrap">
+                            <img class="article__cover" src="@article.ImageUrl" srcset="@article.ImageUrl 2x" alt="" width="800" height="300">
+                        </div>
+                        <h1 class="article__heading">@article.Header</h1>
+                    </header>
+                    <div class="article__main">
+                        <div class="article__content post-entry">
+                            @Html.Raw(article.FullText)
+                        </div>
+                        @if (ConfigHelper.AllowSocialShare)
+                        {
+                            <div class="article__share">
+                                <a class="article__share-link share-link" href="">
+                                    <script src="https://yastatic.net/share2/share.js"></script>
+                                    <div class="ya-share2" data-curtain data-size="m" data-shape="round" data-services="facebook,telegram,twitter"></div>
+                                    @*<script type="text/javascript" src="//yastatic.net/share/share.js" charset="utf-8"></script>
+                                    <span class="yashare-auto-init" data-size="l" data-yasharel10n="ru" data-yasharetype="none" data-yasharequickservices="facebook, twitter, vkontakte"></span>*@
+                                    @*<svg class="icon icon-facebook share-link__icon" width="25" height="25">
+                                            <use href="assets/images/svg/symbol/sprite.svg#facebook"></use>
+                                        </svg>*@
+                                    <span class="share-link__text">&nbsp; @SharedResources.DoYouLikeShare</span>
+                                </a>
+                            </div>
+                        }
+
+                    </div>
+                    <footer class="article__bottom">
+                        @if (article.PrevId != null)
+                        {
+                            <a class="article__btn btn btn--white" href="@Url.Action("Index", "News", new { category = Model.Category?.Slug, id = article.PrevId })">
+                                <svg class="icon icon-prev btn__icon" width="25" height="25">
+                                    <use href="assets/images/svg/symbol/sprite.svg#prev"></use>
+                                </svg>
+                                <span class="btn__text">@SharedResources.PrevNews</span>
+                            </a>
+                        }
+                        @if (article.NextId != null)
+                        {
+                            <a class="article__btn btn btn--white" href="@Url.Action("Index", "News", new { category = Model.Category?.Slug, id = article.NextId })">
+                                <span class="btn__text">@SharedResources.NextNews</span>
+                                <svg class="icon icon-next btn__icon" width="25" height="25">
+                                    <use href="assets/images/svg/symbol/sprite.svg#next"></use>
+                                </svg>
+                            </a>
+                        }
+                    </footer>
+                </article><!-- /article-->
+            </main>
+        </div>
+    </main>
+</div>
+@section styles {
+    @Styles.Render("~/Content/fancybox/fancy")
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/fancy")
+}

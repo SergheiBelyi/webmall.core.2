@@ -1,0 +1,23 @@
+﻿@using ValmiStore.Model.Entities.Order
+@using ViewRes
+
+@model Order
+
+@{
+    var draftSatuses = new[] { (int)OrderStatuses.Draft, (int)OrderStatuses.SendedToProcess };
+    var onStockSatuses = new[] { (int)OrderStatuses.Packaging, (int)OrderStatuses.ReadyForDelivery };
+}
+
+<h2>@SharedResources.Order № @Model.Id</h2>
+@*<ul class="breadcrumbs">
+    <li><span class="@((draftSatuses.Contains(Model.Status)) ? "current" : "")">@SharedResources.Draft</span></li>
+    <li>&#8250;</li>
+    <li><span class="@((Model.Status == (int)OrderStatuses.Processing) ? "current" : "")" title="@Model.StatusName ">@SharedResources.Processing</span></li>
+    <li>&#8250;</li>
+    <li><span class="@((onStockSatuses.Contains(Model.Status)) ? "current" : "")" title="@Model.StatusName ">@SharedResources.OnStock</span></li>
+    <li>&#8250;</li>
+    <li><span class="@((Model.Status == (int)OrderStatuses.Delivery) ? "current" : "")" title="@Model.StatusName ">@SharedResources.Delivery</span></li>
+    <li>&#8250;</li>
+    <li><span class="@((Model.Status == (int)OrderStatuses.Finished) ? "current" : "")">@SharedResources.Finished</span></li>
+</ul>*@
+<div class="clear-div"> </div>

@@ -1,0 +1,196 @@
+﻿@using ViewRes
+
+@model Webmall.UI.Models.SelectionByAuto.SelectionByAutoMarkModel
+
+@* ReSharper disable once InconsistentNaming *@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <ul class="breadcrumbs"></ul>
+    <main class="content">
+        <div class="page-intro">
+            <h1 class="page-intro__heading main-heading">@SharedResources.SelectionByAuto</h1>
+        </div>
+        <div class="select-car">
+            <div class="select-car__aside">
+                <div class="select-car__tabs tabs js-tabs">
+                    <div class="tabs__header">
+                        <ul class="tabs__list">
+                            <li class="tabs__item js-tabs-item">
+                                <a class="tabs__link js-tabs-trigger is-active" href="#type-1">@SharedResources.SiteDataSelection</a>
+                            </li>
+                            @if (Model.AllowTrackSelection)
+                            {
+                                <li class="tabs__item js-tabs-item">
+                                    <a class="tabs__link js-tabs-trigger" href="#type-2">@SharedResources.SiteTrackDataSelection</a>
+                                </li>
+                            }
+                            @if (Model.AllowLaximoAutoSelection)
+                            {
+                                <li class="tabs__item js-tabs-item">
+                                    <a class="tabs__link js-tabs-trigger" href="#type-3">@SharedResources.LaximoDataSelection</a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="tabs__panes">
+                        <div class="tabs__pane js-tabs-pane is-active">
+                            <!-- select-picker-->
+                            <div class="select-picker">
+                                <div class="select-picker__main">
+                                    <div class="select-picker__stages">
+                                        <div class="select-picker__stage">
+                                            <div class="input-field">
+                                                @Html.DropDownListFor(m => m.AutoMark, Model.AutoMarkList.Select(i => new SelectListItem { Value = i.Id.ToString(CultureInfo.InvariantCulture), Text = i.Name }),
+                                                    new
+                                                    {
+                                                        @class = "js-select-car"
+                                                    })
+                                            </div>
+                                        </div>
+                                        <div class="select-picker__stage">
+                                            <div class="input-field">
+                                                <select id="AutoModel" class="js-select-car" name="car-model" onchange="AutoModelSelected()">
+                                                    <option placeholder>@SharedResources.SelectModel</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="select-picker__stage">
+                                            <div class="input-field">
+                                                <select class="js-select-car" name="fuelType" id="fuelType" onchange="FilterUpdate()">
+                                                    <option placeholder value="">@SharedResources.FuelType</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="select-picker__stage">
+                                            <div class="input-field">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="select-picker__fields is-grid">
+                                        <div class="select-picker__field">
+                                            <input class="select-picker__input input" type="text" placeholder="@SharedResources.VolumeCm" name="volume" id="volume" onchange="FilterUpdate()">
+                                        </div>
+                                        <div class="select-picker__field has-control">
+                                            <input class="select-picker__input input" type="text" placeholder="@SharedResources.Power" name="power" id="power" onchange="FilterUpdate()">
+                                            <select class="js-select-default" name="powerUnit" id="powerUnit" onchange="FilterUpdate()">
+                                                <option value="0">@SharedResources._HP</option>
+                                                <option value="1">@SharedResources._kWt</option>
+                                            </select>
+                                        </div>
+                                        <div class="select-picker__field">
+                                            <div class="select-picker__option checkbox-label">
+                                                <input class="checkbox-label__input" type="checkbox" value="10" name="volumePercent" id="volumePercent" onchange="FilterUpdate()">
+                                                <label class="checkbox-label__main" for="volumePercent">+/- 10%</label>
+                                            </div>
+                                        </div>
+                                        <div class="select-picker__field">
+                                            <div class="select-picker__option checkbox-label">
+                                                <input class="checkbox-label__input" type="checkbox" value="10" name="powerPercent" id="powerPercent" onchange="FilterUpdate()">
+                                                <label class="checkbox-label__main" for="powerPercent">+/- 10%</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- /select-picker-->
+                        </div>
+                        <div class="tabs__pane js-tabs-pane">
+                            <!-- select-picker-->
+                            <div class="select-picker">
+                                <div class="select-picker__main">
+                                    <div class="select-picker__stages">
+                                        <div class="select-picker__stage">
+                                            <div class="input-field">
+                                                @Html.DropDownList("LxmCatalog", Model.LaximoCatalogList.Select(i => new SelectListItem { Value = i.Key, Text = i.Value }), new { @class = "js-select-lxm", id = "LxmCatalog" })
+                                            </div>
+                                            <div id="WizardPannel"></div>
+                                            <div id="WizardPannelLoader" class="pannel-loader">
+                                                Loading...
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- /select-picker-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="modifications" class="select-car__main"></div>
+        </div>
+        @*
+            <div class="inner-section__body inner-section__body--no-gutters">
+                <div class="tabs-section">
+                    <div class="tabs">
+                        <div class="tabs__header">
+                            <ul class="tabs__list">
+                                <li class="tabs__item"><a class="tabs__link is-active" href="#section-1">@SharedResources.SiteDataSelection</a></li>
+                                @if (Model.AllowTrackSelection)
+                                {
+                                    <li class="tabs__item"><a class="tabs__link" href="#section-2">@SharedResources.SiteTrackDataSelection</a></li>
+                                }
+                                @if (Model.AllowLaximoAutoSelection)
+                                {
+                                    <li class="tabs__item"><a class="tabs__link" href="#section-3">@SharedResources.LaximoDataSelection</a></li>
+                                }
+                            </ul>
+                        </div>
+                        <div class="tabs__panes">
+                            <div class="tabs__tab-pane is-active">
+                                <div class="tabs__accordeon-body">
+                                    <div class="tabs__accordeon-wrap">
+                                        <div class="car-selection js-car-selection-type-1">
+
+                                        </div>
+                                    </div>
+                                    <div class="inner-section__type-img-wrap"><img class="inner-section__type-img img-responsive" src="@Url.Content("~/assets/images/general/car-type.png")" width="600" height="400"></div>
+                                </div>
+                            </div>
+                            @if (Model.AllowLaximoAutoSelection)
+                            {
+                                <div class="tabs__tab-pane">
+                                    <div class="tabs__accordeon-body">
+                                        <div class="tabs__accordeon-wrap">
+                                            <div class="car-selection js-car-selection-type-3">
+                                                <div class="car-selection__field">
+                                                    @Html.DropDownList("LxmCatalog", Model.LaximoCatalogList.Select(i => new SelectListItem { Value = i.Key, Text = i.Value }), new { @class = "js-select-lxm", id = "LxmCatalog" })
+                                                </div>
+                                                <div id="WizardPannel"></div>
+                                                <div id="WizardPannelLoader" class="pannel-loader">
+                                                    Loading...
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="inner-section__type-img-wrap"><img class="inner-section__type-img img-responsive" src="@Url.Content("~/assets/images/general/laximo-type.png")" width="600" height="400"></div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        *@
+    </main>
+</div>
+@*<div class="container-fluid tabs__item_ex tabs__item_ex-1">
+        <div class="card-specification-section card-specification-section--offset" id="modifications">
+        </div>
+    </div>
+    <div class="container-fluid tabs__item_ex tabs__item_ex-2">
+        <div class="card-specification-section card-specification-section--offset" id="lxmAutos">
+        </div>
+    </div>*@
+@section styles {
+    @Styles.Render("~/Content/views/laximo")
+}
+
+@section scripts
+{
+    @{ Html.RenderPartial("_SelectionScript"); }
+    @Scripts.Render("~/bundles/laximo")
+}
+@section dialogs
+{
+    @*@Html.Partial("_ModifInfoDialog")*@
+}

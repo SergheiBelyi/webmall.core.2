@@ -1,0 +1,166 @@
+﻿@using ViewRes
+@using Webmall.UI.ViewModel.News
+
+@model Webmall.UI.ViewModel.News.NewsListViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    //var title = ViewBag.NewsType;
+    //var news = Model.Data.List;
+}
+
+<div class="container-fluid">
+    @{Html.RenderPartial("Components/BreadCrumbsRender", Model.BreadCrumbs);}
+
+    <main class="content">
+        <!-- page-intro-->
+        <div class="page-intro is-blog">
+            <h1 class="page-intro__heading main-heading">@SharedResources.News</h1>
+            <div class="page-intro__categories categories-dropdown js-dropdown has-overlay is-desktop-hidden">
+                <button class="categories-dropdown__btn js-dropdown-toggle btn btn--primary" type="button">
+                    <span class="btn__text">@SharedResources.Categories</span>
+                    <svg class="icon icon-chevron-down btn__icon" width="25" height="25">
+                        <use href="assets/images/svg/symbol/sprite.svg#chevron-down"></use>
+                    </svg>
+                </button>
+                <div class="categories-dropdown__body">
+                    <ul class="categories-dropdown__list">
+                        @foreach (var item in Model.Categories)
+                        {
+                            <li class="categories-dropdown__item @(Model.Category == item ? "is-active" : "")">
+                                <a class="categories-dropdown__link" href="@Url.Action("Index", "News", new { category=item.Slug})">@item.Name</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div><!-- /page-intro-->
+        <div class="primary">
+            <aside class="primary__sidebar is-mob-hidden">
+                <div class="primary__sidebar-main">
+                    <!-- category-nav-->
+                    <nav class="category-nav is-gray">
+                        <ul class="category-nav__list">
+                            @foreach (var item in Model.Categories)
+                            {
+                                <li class="category-nav__item @(Model.Category == item ? "is-active" : "")">
+                                    <a class="category-nav__link" href="@Url.Action("Index", "News", new { category=item.Slug})"><span class="category-nav__link-text">@item.Name</span></a>
+                                </li>
+                            }
+                        </ul>
+                    </nav><!-- /category-nav-->
+                </div>
+            </aside>
+            <main class="primary__main">
+                <div class="blog">
+                    <div class="blog__main">
+                        @foreach (var item in Model.Data.List)
+                        {
+                            Html.RenderPartial("ArticleListItem", new NewsArticleViewModel { Article = item, Category = Model.Category });
+                        }
+                    </div>
+                    <div class="blog__bottom">
+                        <div class="blog__pagination pagination">
+                            @{Html.RenderPartial("Components/Pagination", Model.Data);}
+
+                            @*<a class="pagination__first" href="#">
+                                <svg class="pagination__first-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12.5 6.93038V13.0618L7.90139 9.97312L12.5 6.93038Z"/>
+                                    <line x1="5.5" y1="5.71429" x2="5.5" y2="14.2857"/>
+                                </svg>
+                            </a>
+                            <a class="pagination__prev" href="#">
+                                <svg class="pagination__prev-icon" width="6" height="8" viewBox="0 0 6 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6 8L0 3.97L6 0V8Z"/>
+                                </svg>
+                            </a>
+                            <ul class="pagination__list">
+                                <li class="pagination__item">
+                                    <a class="pagination__link" href="#">1</a>
+                                </li>
+                                <li class="pagination__item">
+                                    <a class="pagination__link" href="#">2</a>
+                                </li>
+                                <li class="pagination__item">
+                                    <a class="pagination__link active" href="#">3</a>
+                                </li>
+                                <li class="pagination__item">
+                                    <a class="pagination__link" href="#">4</a>
+                                </li>
+                                <li class="pagination__item">
+                                    <a class="pagination__link" href="#">5</a>
+                                </li>
+                            </ul>
+                            <a class="pagination__next" href="#">
+                                <svg class="pagination__next-icon" width="6" height="8" viewBox="0 0 6 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M0 8L6 3.97L0 0V8Z"/>
+                                </svg>
+                            </a>
+                            <a class="pagination__last" href="#">
+                                <svg class="pagination__last-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7.5 6.93038V13.0618L12.0986 9.97312L7.5 6.93038Z"/>
+                                    <line y1="-0.5" x2="8.57143" y2="-0.5" transform="matrix(0 1 1 0 15 5.71429)"/>
+                                </svg>
+                            </a>*@
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </main>
+</div>
+
+@*
+
+
+<div class="container-fluid">
+    <ul class="breadcrumbs">
+        <li class="breadcrumbs__item"><a class="breadcrumbs__link" href="@Url.Content("~")">@SharedResources.MainPage</a></li>
+        <li class="breadcrumbs__item">@title</li>
+    </ul>
+    <div class="inner-section__header">
+        <h1 class="inner-section__heading">@SharedResources.News</h1><a class="inner-section__link" href="#">@title</a>
+    </div>
+    <div class="primary-content">
+        <div class="sidebar">
+            <div class="category-nav d-none d-md-block">
+                <ul class="category-nav__list">
+                    <li class="category-nav__item"><a class="category-nav__link" href="@Url.Action("Index", "News")">@SharedResources.News</a></li>
+                    <li class="category-nav__item"><a class="category-nav__link" href="@Url.Action("Index", "Promotions")">@SharedResources.Promotions</a></li>
+                </ul>
+            </div>
+        </div>
+        <main class="main-content">
+            <div class="inner-news">
+                <a class="news-wrap" href="#">
+                    @{ViewBag.FirstNews = true;}
+                    @{Html.RenderPartial("Components/NewsArticle", news.First());}
+                </a>
+                <section class="news-section news-section--column">
+                    @{ViewBag.FirstNews = false;}
+                    @for (int i = 1; i < news.Count; i++)
+                    {
+                        if (i > 4) { break; }
+                        Html.RenderPartial("Components/NewsArticle", news[i]);
+                    }
+                </section>
+                <section class="news-section news-section--row">
+                    @for (int i = 5; i < news.Count; i++)
+                    {
+                        Html.RenderPartial("Components/NewsArticle", news[i]);
+                    }
+                </section>
+
+                @{Html.RenderPartial("Components/Pagination", Model.Data);}
+
+            </div>
+        </main>
+    </div>
+</div>
+*@
+
+@section scripts
+{
+    @{ Html.RenderPartial("GridViewFooterScripts", Model.Data); }
+}
+

@@ -1,0 +1,36 @@
+﻿@using ViewRes
+@using Webmall.UI.Core
+
+@*@model Webmall.UI.Models.Order.OrderModel*@
+           
+@{
+   // var debtWarningPhones = ConfigHelper.DebtWarningPhones;
+}
+
+<div id="dlgDebtWarning" style="display:none; " title="@SharedResources.Warning">
+    
+    @Model.DebtMessage
+    <br />
+    @SharedResources.ThankForUnderstanding
+    <br /> 
+    @Html.SubmitButton(SharedResources.Close, new { onclick = "return OkDebtWarning()" })
+</div>
+
+
+<script type="text/javascript">
+    $(function () {
+        $('#dlgDebtWarning').dialog({
+            modal: true,
+            resizable: false,
+            autoOpen: false,
+            width: 'auto'
+        });
+
+        $('#dlgDebtWarning').dialog('open');
+    });
+
+    function OkDebtWarning() {
+        $("#dlgDebtWarning").dialog("close");
+    }
+
+</script>

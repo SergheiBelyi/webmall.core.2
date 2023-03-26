@@ -1,0 +1,201 @@
+﻿@using ViewRes
+@using Webmall.UI.Core.Helpers
+
+@model  Webmall.UI.ViewModel.Layout.Header
+
+@{
+    Layout = null;
+
+    var user = Model.User;
+    var client = Model.User.CurrentPresenter.Client;
+}
+
+<div class="logged-in is-wide">
+    <div class="logged-in__user-data">
+        <div class="logged-in__header">
+            <div class="logged-in__user-data-avatar">
+                <div class="logged-in__user-data-avatar-img-wrap">
+                </div>
+            </div>
+            <div class="logged-in__user-data-info">
+                <div class="logged-in__username">
+                    <span style="white-space: break-spaces;
+                                 max-height: 36px;
+                                 display: inline-block;
+                                 overflow: hidden;
+                                 margin: -12px 0px;
+                             ">@client.Name</span><i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </div>
+        <div class="logged-in__body">
+            <div class="logged-in__profile auth-profile">
+                <div class="auth-profile__header">
+                    <div class="auth-profile__user">
+                        <svg class="auth-profile__user-icon" width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 5C10 7.5 8.5 9.5 7 9.5C5.5 9.5 4 7.5 4 5C4 2.5 5 1 7 1C9 1 10 2.5 10 5ZM1 14.5H13C13 10 10 9.5 7 9.5C4 9.5 1 10 1 14.5Z" stroke="#525252" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg><span class="auth-profile__user-text">@Model.User.FullName</span>
+                    </div>
+                    <div class="auth-profile__select">
+                        <div class="select-choice">
+                            <select class="js-select-default">
+                                @foreach (var item in client.Valutes)
+                                {
+                                    <option value="@item.Id" @(item.Id == client.CurrentValute ? "selected=\"selected\"" : "")>@item.Code: @($"{item.Rate:n2}")</option>
+                                }
+                                <option value="opt">EUR: 1,00</option>
+                                <option value="opt">USD</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="auth-profile__controls">
+                    <div class="select-choice">
+                        <label class="select-choice__caption" for="select-1">Активная карточка</label>
+                        <select class="js-select-default" id="select-1">
+                            @foreach (var pres in user.ActivePresenters)
+                            {
+                            <option value="@pres.Client.Id" @(pres == user.CurrentPresenter ? "selected" : "")>@pres.Client.Code: @pres.Client.Name</option>
+                            }
+                            @*<option placeholder>25433667 Клиент 1</option>
+                            <option value="opt">25433667 Клиент 1</option>
+                            <option value="opt">25433667 Клиент 1</option>
+                            <option value="opt">25433667 Клиент 1</option>*@
+                        </select>
+                        <p class="select-choice__info">@client.Code (Информация о клиенте, опционально)</p>
+                    </div>
+                    <div class="select-choice">
+                        <label class="select-choice__caption" for="select-2">Активный договор</label>
+                        <select class="js-select-default" id="select-2">
+                            @foreach (var item in client.Contracts)
+                            {
+                                <option value="@item.Id" @(item.Id == client.CurrentContractId ? "selected" : "")>
+                                    @item.Name (@(!string.IsNullOrEmpty(item.PayDelayName) ? item.PayDelayName : $"{item.PayDelayDays} дней"))
+                                </option>
+                            }
+                            @*<option placeholder>Контракт №1</option>
+                            <option value="opt">Контракт №1</option>
+                            <option value="opt">Контракт №1</option>
+                            <option value="opt">Контракт №1</option>*@
+                        </select>
+                        @if (!string.IsNullOrEmpty(client.Breefing.Data.DebtMessage))
+                        {
+                            <p class="select-choice__info is-danger">@($"Просроченная задолженность - {client.Breefing.Data.DebtMessage}")</p>
+                        }
+                    </div>
+                    <div class="select-choice">
+                        <label class="select-choice__caption" for="select-3">Адрес доставки</label>
+                        <select class="js-select-default" id="select-3">
+                            @*@foreach (var item in client)
+                            {
+                                <option value="@item.Id" @(item.Id == client.CurrentContractId ? "selected" : "")>
+                                    @item.Name (@(!string.IsNullOrEmpty(item.PayDelayName) ? item.PayDelayName : $"{item.PayDelayDays} дней")
+                                </option>
+                            }*@
+                            <option placeholder>Улица Пушкина</option>
+                            <option value="opt">Улица Пушкина</option>
+                            <option value="opt">Улица Пушкина</option>
+                            <option value="opt">Улица Пушкина</option>
+                        </select>
+                        <p class="select-choice__info">Почта Белорусии, отделение 12</p>
+                    </div>
+                </div>
+
+                @*<div class="auth-profile__header">
+            <div class="auth-profile__user">
+                <span class="auth-profile__user-text location-city"> <i class="fas fa-location-dot"></i>@SharedResources.NothingChecked</span>
+                <div class="location-details__bottom" data-modal-win-trigger="modal-locations">
+                    <div class="location-details__bottom-text"><i class="fas fa-location-dot"></i>@SharedResources.ChooseStore</div>
+                </div>
+            </div>
+            <div class="auth-profile__select">
+                <div class="tiny-contacts">
+                    <a class="tiny-contacts__wrap" href="tel:@phone">
+                        <i class="fas fa-location-dot"></i>
+                        <span class="tiny-contacts__phone">@phone</span>
+                    </a>
+                </div>
+            </div>
+        </div>*@
+                @{
+                    var maxCols = Model.PersonalMenu.Max(i=>i.ColumnNumber);
+                    var percent = 100 / maxCols;
+                    var percents = "";
+                    for (var i = 0; i < maxCols; i++)
+                    {
+                        percents += $" {percent}%";
+                    }
+                    var template = $"grid-template-columns: {percents}"; //25% 25% 25%;
+                }
+
+                <div class="auth-profile__main" style="@template">
+                    
+                    @for (var col = 1; col <= maxCols; col++)
+                    {
+                        <nav class="auth-nav auth-profile__nav is-full">
+                            <ul class="auth-nav__list">
+                                @foreach (var menuItem in Model.PersonalMenu.Where(i => i.ColumnNumber == col))
+                                {
+                                    <li class="auth-nav__item">
+                                        <a class="auth-nav__link" href="@(this.ToLocalizedUrl(menuItem.Link))" @this.LikAttrs(menuItem.Link)>
+                                            @if (!string.IsNullOrEmpty(menuItem.Image))
+                                            {
+                                                <img class="auth-nav__link-icon" width="22" height="27" src="@menuItem.Image" />
+                                            }
+                                            <span class="auth-nav__link-text">@menuItem.Name</span>
+                                        </a>
+                                        @if (menuItem.Children.Count > 0)
+                                        {
+                                            <ul class="auth-nav__sublist">
+                                                @foreach (var child in menuItem.Children)
+                                                {
+                                                    <li class="auth-nav__subitem">
+                                                        <a class="auth-nav__sublink" href="@(this.ToLocalizedUrl(child.Link))" @this.LikAttrs(child.Link)>
+                                                            @child.Name
+                                                        </a>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        }
+                                    </li>
+                                }
+                            </ul>
+                        </nav>
+                    }
+
+                    @*<nav class="auth-nav auth-profile__nav">
+                        <ul class="auth-nav__list">
+                            <li class="auth-nav__item">
+                                <a class="auth-nav__link important" href="@Url.Action("Index", "Promotions")">@SharedResources.Promotions</a>
+                            </li>
+                            @foreach (var item in Model.PersonalMenu)
+                            {
+                                <li class="auth-nav__item">
+                                    <a class="auth-nav__link" href="@item.Link">@item.Name</a>
+
+                                    @if (item.Children.Count > 0)
+                                    {
+                                        <ul class="auth-nav__sublist">
+                                            @foreach (var child in item.Children)
+                                            {
+                                                <li class="auth-nav__subitem">
+                                                    <a class="auth-nav__sublink" href="@child.Link">@child.Name</a>
+                                                </li>
+                                            }
+                                        </ul>
+                                    }
+                                </li>
+                            }
+                        </ul>
+                    </nav>*@
+                </div>
+                <div class="auth-profile__footer">
+                    <a class="auth-profile__btn btn btn btn--main" href="@Url.Action("Logout", "Security")">@SharedResources.Exit</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

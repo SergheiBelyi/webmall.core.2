@@ -1,0 +1,181 @@
+﻿@using ViewRes
+@using Webmall.UI.Core
+
+@model Webmall.UI.Models.Order.SuccessfulOrderModelView
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var textParam = Model.SuccessPageText;
+}
+
+<div class="container-fluid">
+    <ul class="breadcrumbs">
+    </ul>
+    <main class="content">
+
+        <div class="page-intro">
+            <h1 class="page-intro__heading main-heading">@Html.Raw(textParam.HeaderTitle)</h1>
+            @Html.Raw(string.Format(textParam.HeaderDescription, Model.OrderId))
+        </div>
+
+        <div class="stock-area">
+        <div class="stock-area-header">
+            <h2 class="stock-area__heading">@Html.Raw(textParam.TableTitle)</h2>
+            <dl class="stock-area__params">
+                <div class="stock-area__param">
+                    <dt class="stock-area__property">@SharedResources.OrderNumber:</dt>
+                    <dd class="stock-area__value">@Model.OrderId</dd>
+                </div>
+                <div class="stock-area__param">
+                    <dt class="stock-area__property">@SharedResources.OrderDate:</dt>
+                    <dd class="stock-area__value">@Model.DataCreateOrder.ToString("dd.MM.yyyy HH:mm")</dd>
+                </div>
+                <div class="stock-area__param">
+                    <dt class="stock-area__property">@SharedResources.OrderAuthor:</dt>
+                    <dd class="stock-area__value">@Model.Name</dd>
+                </div>
+                <div class="stock-area__param">
+                    <dt class="stock-area__property">@SharedResources.StatusOrder:</dt>
+                    <dd class="stock-area__value">@Model.StatusOrder</dd>
+                </div>
+            </dl>
+
+            <div class="stock-area__table">
+                <div class="stock-table stock-area__table-main scrollbar is-summary">
+                    <div class="stock-table__header">
+                        <div class="stock-table__row">
+                            <div class="stock-table__cell">
+                                <div class="stock-table__caption">@SharedResources.PartNumber, @SharedResources.Brand</div>
+                            </div>
+                            <div class="stock-table__cell">
+                                <div class="stock-table__caption">@SharedResources.Name</div>
+                            </div>
+                            <div class="stock-table__cell text-center">
+                                <div class="stock-table__caption">@SharedResources.Note</div>
+                            </div>
+                            <div class="stock-table__cell text-center">
+                                <div class="stock-table__caption">@SharedResources.DeliveryDate</div>
+                            </div>
+                            <div class="stock-table__cell text-center">
+                                <div class="stock-table__caption">@SharedResources.ReturnPeriod</div>
+                            </div>
+                            <div class="stock-table__cell text-center">
+                                <div class="stock-table__caption">@SharedResources.PricePerOne</div>
+                            </div>
+                            <div class="stock-table__cell text-center">
+                                <div class="stock-table__caption">@SharedResources.Amount</div>
+                            </div>
+                            <div class="stock-table__cell text-center">
+                                <div class="stock-table__caption">@SharedResources.Sum</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stock-table__main">
+                        @foreach (var item in Model.Positions)
+                        {
+                            var wareUrl = Url.Action("WareCard", "Catalog")?.Replace("WareCard", "") + $"{item.ProducerName}/{item.WareNumber}";
+                            <div class="stock-table__row">
+                                <div class="stock-table__cell">
+                                    <div class="stock-table__meta">
+                                        <a class="stock-table__articul" href="@wareUrl">@item.WareNumber</a>
+                                        <a class="stock-table__brand" href="@wareUrl">@item.ProducerName</a>
+                                    </div>
+                                </div>
+                                <div class="stock-table__cell">
+                                    <div class="stock-table__heading">
+                                        <a class="stock-table__heading-link" href="@wareUrl">@item.WareName</a>
+                                    </div>
+                                </div>
+                                <div class="stock-table__cell">
+                                    <div class="stock-table__comment custom-comment" data-modal-win-trigger="comment-edit">
+                                        <div class="custom-comment__text">@item.Comment</div>
+                                    </div>
+                                </div>
+                                <div class="stock-table__cell text-center">
+                                    <div class="stock-table__accent" data-tippy-gray-content="">
+                                        05.02.2022
+                                        <div data-tippy-gray-content-template="">
+                                            <div class="tooltip-dates-ranges">
+                                                <div class="tooltip-dates-range">
+                                                    Получение <span>до 10:50 23.09.2021</span>
+                                                </div>
+                                                <div class="tooltip-dates-range">
+                                                    при заказе <span>до 20:15 22.09.2021</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="stock-table__cell text-center">
+                                    <div class="stock-table__text">
+                                        <a class="orders-list__delivery-date" href="#" data-tippy-gray-content="@SharedResources.TermDays">
+                                            @(item.DeliveryInfo.PickUpPayload.PickupTime?.ToString("dd.MM.yyyy HH:mm") ?? "Не указано") / @(item.DeliveryInfo.DeliveryPayload.DeliveryTime != null ? item.DeliveryInfo.DeliveryPayload.DeliveryTime.Description : "Не указано")
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="stock-table__cell text-center">
+                                    <div class="stock-table__text" data-tippy-gray-content="@SharedResources.PurchasePriceForOneUnit">@SessionHelper.PriceFormat(item.Price)</div>
+                                </div>
+                                <div class="stock-table__cell text-center">
+                                    <div class="stock-table__text">@string.Format("{0:0}", item.WareQnt)</div>
+                                </div>
+                                <div class="stock-table__cell text-center">
+                                    <strong class="stock-table__text">@SessionHelper.PriceFormat(item.Price * item.WareQnt)</strong>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="stock-table__bottom">
+                        <div class="stock-table__row">
+                            <div class="stock-table__summary">
+                                <div class="stock-table__summary-total">
+                                    @SharedResources.Quantity: <strong>@Model.TotalQnt </strong><strong>@SharedResources.Things.</strong> / @SharedResources.TotalSelectedSum: <strong><span>@Model.TotalPrice</span> <span>@Model.ValuteName</span></strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stock-area__summary order-summary">
+                <h2 class="order-summary__heading secondary-heading">@SharedResources.AdditionalInformation:</h2>
+                <div class="order-summary__subsections">
+                    <div class="order-summary__subsection">
+                        <dl class="order-summary__params params">
+                            <div class="params__param">
+                                <dt class="params__property">@SharedResources.OrderAuthor:</dt>
+                                <dd class="params__value">@Model.Name</dd>
+                            </div>
+                            <div class="params__param">
+                                <dt class="params__property">@SharedResources.Phone:</dt>
+                                <dd class="params__value">@Model.Phone</dd>
+                            </div>
+                            <div class="params__param">
+                                <dt class="params__property">@SharedResources.Note:</dt>
+                                <dd class="params__value">@Model.Comment</dd>
+                            </div>
+                        </dl>
+                    </div>
+                    <div class="order-summary__subsection">
+                        <dl class="order-summary__params params">
+                            <div class="params__param">
+                                <dt class="params__property">@SharedResources.Delivery: </dt>
+                                <dd class="params__value">@Model.DeliveryType</dd>
+                            </div>
+                            <div class="params__param">
+                                <dt class="params__property">@SharedResources.DeliveryAddress: </dt>
+                                <dd class="params__value">@Model.DeliveryAddress</dd>
+                            </div>
+                        </dl>
+                        <div class="order-summary__comment">
+                            @Html.Raw(textParam.FooterTitle)
+                        </div>
+                    </div>
+                </div>
+                <div class="order-summary__bottom text-right">
+                    <a class="order-summary__btn btn btn--primary" href="@Url.Action("List")">@SharedResources.ToOrderList</a>
+                </div>
+            </div>
+        </div>
+        </div>
+    </main>
+</div>

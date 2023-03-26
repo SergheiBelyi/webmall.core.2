@@ -1,0 +1,13 @@
+﻿@using Webmall.UI.Models.Ware
+@using Webmall.UI.Core
+
+@model WareCard
+@{
+    Layout = null;
+}
+<div class="stock-table__product-promo">
+    @*<img class="stock-table__product-logo" src="@ware.ImgUrl" alt="@ware.Name">*@
+    <a class="stock-table__product-img-wrap" href="@Model.Url">
+        <img class="stock-table__product-img" src="@Model.ImgUrl" alt="@Model.Name">
+    </a>
+</div>

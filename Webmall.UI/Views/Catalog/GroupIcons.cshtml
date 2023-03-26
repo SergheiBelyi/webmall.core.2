@@ -1,0 +1,27 @@
+﻿@using Webmall.UI.Core
+@model IEnumerable<Webmall.Model.Entities.Catalog.Group>
+@{
+    var currentParentLink = "~/" + UserPreferences.CurrentCultureLink + "Catalog/";
+}
+
+@* Рисование подгруппы в виде иконок *@
+<div class="match-items">
+    <div class="row">
+        @foreach (var group in Model)
+        {
+            var imgUrl = $"~/ExtContent/GroupImages/{group.Id}.png";
+            if (!File.Exists(Server.MapPath(imgUrl)))
+            {
+                imgUrl = "~/ExtContent/GroupImages/default.png";
+            }
+            <div class="col-6 col-sm-4 col-md-3">
+                <a class="match-item" href="@Url.Content(currentParentLink + group.Url)">
+                    <figure class="match-item__main">
+                        <div class="match-item__img-wrap"><img class="match-item__img img-responsive" src="@Url.Content(imgUrl)" alt=""></div>
+                        <figcaption class="match-item__caption">@group.Name</figcaption>
+                    </figure>
+                </a>
+            </div>
+        }
+    </div>
+</div>

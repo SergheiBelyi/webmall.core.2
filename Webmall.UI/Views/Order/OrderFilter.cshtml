@@ -1,0 +1,218 @@
+﻿@using ViewRes
+@model Webmall.UI.ViewModel.Order.OrdersFilterViewModel
+@using (Html.BeginForm("List", "Order", FormMethod.Get, new {@class = "filter", id = "filterForm", name = "filterForm2"}))
+{
+        <div class="filter__mob-header">
+            <div class="filter__mob-heading filter__close">@SharedResources.Filters</div>
+            <button class="filter__collapse" type="button">@SharedResources.CollapseAll</button>
+        </div>
+        <div class="filter__header">
+            <div class="filter__heading">@SharedResources.Filters</div>
+            <span class="filter__collapse">@SharedResources.CollapseAll</span>
+        </div>
+        <div class="filter__main">
+            <div class="filter__sections">
+                <div class="filter__section is-opened">
+                    <div class="filter__title">@SharedResources.OrderDate</div>
+                    <div class="filter__body">
+                        <div class="filter__option">
+                            <div class="filter__picker date-picker">
+                                <input class="date-picker__input input js-date-picker flatpickr-input" type="text" name="DateFrom" placeholder="@SharedResources.from" readonly="readonly" value="@(Model.FilterOptions.DateFrom)">
+                                <svg class="icon icon-calendar date-picker__icon" width="25" height="25">
+                                    <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#calendar")"></use>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="filter__option">
+                            <div class="filter__picker date-picker">
+                                <input class="date-picker__input input js-date-picker flatpickr-input" type="text" name="DateTo" placeholder="@SharedResources.to" readonly="readonly" value="@(Model.FilterOptions.DateTo)">
+                                <svg class="icon icon-calendar date-picker__icon" width="25" height="25">
+                                    <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#calendar")"></use>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="filter__section">
+                    <div class="filter__title">@SharedResources.DeliveryDate</div>
+                    <div class="filter__body">
+                        <div class="filter__option">
+                            <div class="filter__picker date-picker">
+                                <input class="date-picker__input input js-date-picker flatpickr-input" type="text" name="DeliveryDateFrom" placeholder="@SharedResources.from" readonly="readonly" value="@(Model.FilterOptions.DeliveryDateFrom)">
+                                <svg class="icon icon-calendar date-picker__icon" width="25" height="25">
+                                    <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#calendar")"></use>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="filter__option">
+                            <div class="filter__picker date-picker">
+                                <input class="date-picker__input input js-date-picker flatpickr-input" type="text" name="DeliveryDateTo" placeholder="@SharedResources.to" readonly="readonly" value="@(Model.FilterOptions.DeliveryDateTo)">
+                                <svg class="icon icon-calendar date-picker__icon" width="25" height="25">
+                                    <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#calendar")"></use>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="filter__section">
+                    <div class="filter__title">@SharedResources.AdditionalInformation</div>
+                    <div class="filter__body">
+                        <div class="filter__option">
+                            <input class="filter__input input" type="tel" name="OrderId" placeholder="@SharedResources.Number" value="@Model.FilterOptions.OrderId">
+                        </div>
+                        <div class="filter__option">
+                            <select class="filter__input js-select-default select" name="StatusId">
+                                <option value="" selected="" disabled="" hidden="">@SharedResources.Status</option>
+                                @foreach (var item in Model.Statuses)
+                                {
+                                    <option value="@item.StatusId" @(item.StatusId == Model.FilterOptions.StatusId ? "selected=\"selected\"" : "")>@item.StatusName</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="filter__option">
+                            <input class="filter__input input" type="text" name="Article" placeholder="@SharedResources.WareNumber" value="@Model.FilterOptions.Article">
+                        </div>
+                        <div class="filter__option">
+                            <input class="filter__input input" type="text" name="Brand" placeholder="@SharedResources.Producer" value="@Model.FilterOptions.Brand">
+                        </div>
+                        <div class="filter__option">
+                            <input class="filter__input input" type="text" name="WareName" placeholder="@SharedResources.WareName" value="@Model.FilterOptions.WareName">
+                        </div>
+                        @*<div class="filter__option">
+            <select class="filter__input select" name="payment">
+                <option value="" selected="" disabled="" hidden="">Форма оплаты</option>
+                <option value="payment_1">Наличные</option>
+                <option value="payment_2">Дебетовая карта</option>
+                <option value="payment_3">Онлайн</option>
+                <option value="payment_4">При получении</option>
+            </select>
+        </div>*@
+                        @*<div class="filter__option">
+            <select class="filter__input select" name="delivery">
+                <option value="" selected="" disabled="" hidden="">Тип доставки</option>
+                <option value="delivery_1">Самовывоз</option>
+                <option value="delivery_2">Курьер</option>
+                <option value="delivery_3">Почта</option>
+            </select>
+        </div>*@
+                        <div class="filter__option">
+                            <input class="filter__input input" type="text" name="Author" placeholder="@SharedResources.OrderAuthor" value="@Model.FilterOptions.Author">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="filter__footer">
+                <a class="filter__btn-reset btn btn--primary-reverse btn--sm" href="@Url.Action("List")">
+                    <svg class="icon icon-close btn__icon" width="25" height="25">
+                        <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#close")"></use>
+                    </svg><span class="btn__text">@SharedResources.Reset</span>
+                </a>
+                @if (!Model.AutoSubmit)
+                {
+                    <input type="submit" class="filter__btn-accept btn btn--primary btn--sm" value="@SharedResources.Apply">
+                }
+            </div>
+        </div>
+}
+
+
+@* filter *@
+@*
+<form class="filter catalog-layout__filter" id="filterForm" name="filterForm" method="get">
+    <div class="filter__mob-header">
+        <div class="filter__mob-heading filter__close">@SharedResources.Filters</div>
+        <button class="filter__collapse">@SharedResources.CollapseAll</button>
+    </div>
+
+    <div class="filter__header">
+        <div class="filter__heading">@SharedResources.Filters</div><span class="filter__collapse">@SharedResources.CollapseAll</span>
+    </div>
+
+    <div class="filter__main">
+        <div class="search-form__field" @(!Model.ShowSearchFilter ? "d-none" : "")>
+            <input class="search-form__input input" type="search" name="addQuery" value="@Model.AddQuery" placeholder="Поиск по результату">
+            <button class="search-form__submit" type="button" name="send">
+                <svg class="icon icon-magnifying-zoom-glass search-form__submit-icon" width="25" height="25">
+                    <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#magnifying-zoom-glass")"></use>
+                </svg>
+            </button>
+        </div>
+
+        <div class="filter__sections">
+            @if (Model.ShowPriceFilter)
+            {
+
+                <div class="filter__section is-opened">
+                    <div class="filter__title">@SharedResources.Price, <span>@SessionHelper.CurrentValute.Code</span></div>
+                    <div class="filter__body">
+                        <div class="price-range filter__range">
+                            <div class="price-range__values">
+                                <div class="price-range__field">
+                                    <input class="price-range__input input" type="text" name="a">
+                                </div>
+                                <div class="price-range__field">
+                                    <input class="price-range__input input" type="text" name="b">
+                                </div>
+                            </div>
+                            <div class="price-range__slider js-range-slider noUi-target noUi-ltr noUi-horizontal noUi-txt-dir-ltr"
+                                 data-step="10" data-from="@Model.PriceMin" data-to="@Model.PriceMax">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--<div class="filter__title">@SharedResources.Price <span>/ @SessionHelper.CurrentValute.Code</span></div>
+
+                    <div class="filter__body" data-simplebar="init">
+                        <div class="simplebar-wrapper" style="margin: 0px -15px;">
+                            <div class="simplebar-height-auto-observer-wrapper">
+                                <div class="simplebar-height-auto-observer"></div>
+                            </div>
+                            <div class="simplebar-mask">
+                                <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
+                                    <div class="simplebar-content-wrapper" style="height: auto; overflow: hidden;">
+                                        <div class="simplebar-content" style="padding: 0px 15px;">
+                                            @if (Model.ShowPriceFilter)
+                                            {
+                                                <div class="price-range">
+                                                    <div class="price-range__values">
+                                                        <div class="price-range__field">
+                                                            <input class="price-range__input" id="priceMin" name="PriceMin" value="@Model.PriceMin" type="text">
+                                                        </div>
+                                                        <div class="price-range__field">
+                                                            <input class="price-range__input" id="priceMax" name="PriceMax" value="@Model.PriceMax" type="text">
+                                                        </div>
+                                                    </div>
+                                                    <div class="price-range__slider noUi-target noUi-ltr noUi-horizontal noUi-txt-dir-ltr" id="priceRange">
+
+                                                    </div>
+                                                </div>
+                                            }-->
+                </div>
+            }
+            @if (Model.GroupSection.Options.Any())
+            {
+                Html.RenderPartial("Components/FilterSection", Model.GroupSection);
+            }
+            @if (Model.BrandSection.Options.Any())
+            {
+                Html.RenderPartial("Components/FilterSection", Model.BrandSection);
+            }
+            @foreach (var section in Model.PropertySections)
+            {
+                Html.RenderPartial("Components/FilterSection", section);
+            }
+        </div>
+        <div class="filter__footer">
+            <a class="filter__btn-reset btn btn--primary-reverse btn--sm" href="#" onclick="return resetFilter()">
+                <svg class="icon icon-close btn__icon" width="25" height="25">
+                    <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#close")"></use>
+                </svg><span class="btn__text">@SharedResources.Reset</span>
+            </a>
+            @if (!Model.AutoSubmit)
+            {
+                <a class="filter__btn-accept btn btn--primary btn--sm" href="" onclick="return submitFilter()">@SharedResources.Apply</a>
+            }
+        </div>
+    </div>
+
+</form>*@

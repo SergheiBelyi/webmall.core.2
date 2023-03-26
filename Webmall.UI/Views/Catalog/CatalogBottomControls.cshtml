@@ -1,0 +1,40 @@
+﻿@using ViewRes
+@model Webmall.UI.Models.Catalog.CatalogWaresModel
+@{
+    var pageSizes = new [] { 12, 24, 36, 50 };
+}
+
+<div class="catalog__bottom-controls header-controls">
+    <div class="header-control">
+        @if (Model.Wares.AllowPagging && Model.Wares.AllowPageSizeSelection)
+        {
+            Html.RenderPartial("Components/Pagination", Model.Wares);
+        }
+    </div>
+    <div class="header-control">
+        @if (Model.Wares.AllowPagging && Model.Wares.AllowPageSizeSelection)
+        {
+            <div class="header-control__dropdown">
+                <div class="header-control__dropdown-main custom-dropdown js-dropdown">
+                    <div class="custom-dropdown__header js-dropdown-toggle">
+                        <div class="custom-dropdown__heading">@Model.Wares.PageSize</div>
+                    </div>
+                    <ul class="custom-dropdown__items">
+                        @foreach (var item in pageSizes)
+                        {
+                            <li class="custom-dropdown__item">
+                                <a class="custom-dropdown__link" href="#">@item</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <div class="header-control__dropdown-text">@SharedResources.ProductsPerPage</div>
+            </div>
+        }
+    </div>
+    <div class="header-control">
+        <div class="header-control__progress">
+            @SharedResources.Products <strong>@(Model.Wares.Skip+1) - @(Model.Wares.Skip+Model.Wares.List.Count)</strong> @SharedResources.of <strong>@Model.TotalAmountWares</strong>
+        </div>
+    </div>
+</div>

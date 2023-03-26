@@ -1,0 +1,35 @@
+﻿@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+@model Webmall.Model.Entities.Cms.HomePage.CustomerReview
+
+<div class="container-fluid">
+    <div class="primary-content">
+        <main>
+            @if (!string.IsNullOrEmpty(Model.CustomerName))
+            {
+                <h1 class="main-title">@Model.CustomerName</h1>
+            }
+            <div class="post">
+                @(new HtmlString(Model.FullText))
+            </div>
+        </main>
+    </div>
+</div>
+@section styles {
+    @Styles.Render("~/Content/fancybox/fancy")
+}
+@section scripts
+{
+    @Scripts.Render("~/bundles/fancy")
+    <script>
+        $("a[rel=images].fancy").fancybox({
+            'transitionIn': 'elastic',
+            'transitionOut': 'elastic',
+            'titlePosition': 'inside',
+            'titleFormat': function (title, currentArray, currentIndex, currentOpts) {
+                var url = $(currentArray[currentIndex]).attr('url');
+                return "<span id='fancybox-title-inside' class='hand' onclick=document.location.href='" + url + "'>" + title + "</span>";
+            }
+        });
+    </script>
+}

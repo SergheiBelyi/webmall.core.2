@@ -1,0 +1,56 @@
+﻿@using ViewRes
+@model Webmall.UI.Core.GridViewModel<Webmall.Model.Entities.Cms.NewsData.NewsArticle>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var type = ViewBag.NewsType;
+    var news = Model.List;
+}
+<div class="container-fluid">
+    <ul class="breadcrumbs">
+        <li class="breadcrumbs__item"><a class="breadcrumbs__link" href="@Url.Content("~")">@SharedResources.MainPage</a></li>
+        <li class="breadcrumbs__item">@type</li>
+    </ul>
+    <div class="inner-section__header">
+        <h1 class="inner-section__heading">@SharedResources.Promotions</h1><a class="inner-section__link" href="#">@type</a>
+    </div>
+    <div class="primary-content">
+        <div class="sidebar">
+            <div class="category-nav d-none d-md-block">
+                <ul class="category-nav__list">
+                    <li class="category-nav__item"><a class="category-nav__link" href="@Url.Action("Index", "News")">@SharedResources.News</a></li>
+                    <li class="category-nav__item"><a class="category-nav__link" href="@Url.Action("Index", "Promotions")">@SharedResources.Promotions</a></li>
+                </ul>
+            </div>
+        </div>
+        <main class="main-content">
+            @if (news.Any())
+            {
+                <div class="inner-news">
+                    <a class="news-wrap" href="#">
+                        @{ViewBag.FirstNews = true;}
+                        @{Html.RenderPartial("Components/NewsArticle", news.First());}
+                    </a>
+                    <section class="news-section news-section--column">
+                        @{ViewBag.FirstNews = false;}
+                        @for (int i = 1; i < news.Count; i++)
+                        {
+                            if (i > 4) { break; }
+                            Html.RenderPartial("Components/NewsArticle", news[i]);
+                        }
+                    </section>
+                    <section class="news-section news-section--row">
+                        @for (int i = 5; i < news.Count; i++)
+                        {
+                            Html.RenderPartial("Components/NewsArticle", news[i]);
+                        }
+                    </section>
+                    @{Html.RenderPartial("Components/Pagination", Model);}
+                </div>
+            }
+        </main>
+    </div>
+</div>
+@section scripts
+{
+    @{ Html.RenderPartial("GridViewFooterScripts", Model); }
+}

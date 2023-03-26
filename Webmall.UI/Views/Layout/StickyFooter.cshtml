@@ -1,0 +1,58 @@
+﻿@using Webmall.UI.Core
+@using Webmall.Model;
+@using System.Globalization;
+
+@{
+    Layout = null;
+    var count = 0;
+    decimal price = 0;
+    var user = SessionHelper.CurrentUser;
+    if (user != null)
+    {
+        var cart = SessionHelper.Cart;
+        count = cart.Count;
+    }
+}
+
+<div class="bottom-controls" bis_skin_checked="1">
+    <div class="bottom-controls__utils header-utilities" bis_skin_checked="1">
+        <div class="header-utilities__util header-utility" bis_skin_checked="1">
+            <div class="header-utility__main" bis_skin_checked="1">
+                <a class="header-utility__link" href="tel:11111111">
+                    <svg class="icon icon-call header-utility__icon" width="25" height="25">
+                        <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#call")"></use>
+                    </svg>
+                </a>
+            </div>
+        </div>
+        <div class="header-utilities__util header-utility" bis_skin_checked="1">
+            <div class="header-utility__main" bis_skin_checked="1">
+                <a class="header-utility__link" href="#">
+                    <svg class="icon icon-user header-utility__icon" width="25" height="25">
+                        <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#user")"></use>
+                    </svg>
+                </a>
+            </div>
+        </div>
+        <div class="header-utilities__util header-utility" bis_skin_checked="1">
+            <div class="header-utility__main" bis_skin_checked="1">
+                <button class="header-utility__link" type="button">
+                    <svg class="icon icon-garage header-utility__icon" width="25" height="25">
+                        <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#garage")"></use>
+                    </svg>
+                    <span class="header-utility__counter">0</span>
+                </button>
+            </div>
+        </div>
+        <div class="header-utilities__util header-utility" bis_skin_checked="1">
+            <div class="header-utility__main" bis_skin_checked="1">
+                <a class="header-utility__link @(count != 0 ? "has-value" : "")" href="@Url.Action("Index", "Cart")">
+                    <svg class="icon icon-shopping-cart header-utility__icon" width="25" height="25">
+                        <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#shopping-cart")"></use>
+                    </svg>
+                    <span class="header-utility__counter">@($"{count:d}")</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

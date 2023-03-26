@@ -1,0 +1,1755 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="metadata">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" />
+							</xsd:sequence>
+							<xsd:attribute name="name" use="required" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="assembly">
+						<xsd:complexType>
+							<xsd:attribute name="alias" type="xsd:string" />
+							<xsd:attribute name="name" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="ActiveOrdersFilter" xml:space="preserve">
+    <value>[Currently active orders]</value>
+  </data>
+	<data name="active" xml:space="preserve">
+    <value>active</value>
+  </data>
+	<data name="ComparisionAct" xml:space="preserve">
+    <value>Reconciliation act</value>
+  </data>
+	<data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+	<data name="DeliveryTableComment" xml:space="preserve">
+    <value>Add the order to one of the existing shippings</value>
+  </data>
+	<data name="AddToOrder" xml:space="preserve">
+    <value>Add to Order</value>
+  </data>
+	<data name="AddWareFromCart" xml:space="preserve">
+    <value>Add Item from Your Cart</value>
+  </data>
+	<data name="AddNewDeliveryAddress" xml:space="preserve">
+    <value>Add New Delivery Address</value>
+  </data>
+	<data name="ShippingAddress" xml:space="preserve">
+    <value>Shipping Address</value>
+  </data>
+	<data name="ReplyAddress" xml:space="preserve">
+    <value>Reply address</value>
+  </data>
+	<data name="DeliveryAddress" xml:space="preserve">
+    <value>Delivery address</value>
+  </data>
+	<data name="NewDeliveryAddress" xml:space="preserve">
+    <value>New delivery address</value>
+  </data>
+	<data name="DeliveryAddresses" xml:space="preserve">
+    <value>Delivery Addresses</value>
+  </data>
+	<data name="ShowPrices" xml:space="preserve">
+    <value>Show prices</value>
+  </data>
+	<data name="Select" xml:space="preserve">
+    <value>Select</value>
+  </data>
+	<data name="AddNewDelivery" xml:space="preserve">
+    <value>New shipping checkout</value>
+  </data>
+	<data name="SelectModel" xml:space="preserve">
+    <value>select a model</value>
+  </data>
+	<data name="SelectionByAuto" xml:space="preserve">
+    <value>Select by car</value>
+  </data>
+	<data name="YearOfProduce" xml:space="preserve">
+    <value>Year of production</value>
+  </data>
+	<data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+	<data name="Apartment" xml:space="preserve">
+    <value>Flat</value>
+  </data>
+	<data name="ApplyFilter" xml:space="preserve">
+    <value>Apply filter</value>
+  </data>
+	<data name="Approve" xml:space="preserve">
+    <value>Approve</value>
+  </data>
+	<data name="Show" xml:space="preserve">
+    <value>Show</value>
+  </data>
+	<data name="ShowImages" xml:space="preserve">
+    <value>Show thumbnails</value>
+  </data>
+	<data name="ascending" xml:space="preserve">
+    <value>ascending</value>
+  </data>
+	<data name="WaitingToApprove" xml:space="preserve">
+    <value>Waiting for approval</value>
+  </data>
+	<data name="WheelFormula" xml:space="preserve">
+    <value>Axle type</value>
+  </data>
+	<data name="Block" xml:space="preserve">
+    <value>Blockage</value>
+  </data>
+	<data name="IsBlocked" xml:space="preserve">
+    <value>Blocked</value>
+  </data>
+	<data name="Brand" xml:space="preserve">
+    <value>Brand</value>
+  </data>
+	<data name="PersonalCabinet" xml:space="preserve">
+    <value>My account</value>
+  </data>
+	<data name="_amount" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+	<data name="PackQnt" xml:space="preserve">
+    <value>Quantity of items in one lot</value>
+  </data>
+	<data name="Amount" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+	<data name="AutoModification" xml:space="preserve">
+    <value>Engine capacity</value>
+  </data>
+	<data name="House" xml:space="preserve">
+    <value>House number</value>
+  </data>
+	<data name="Catalizator" xml:space="preserve">
+    <value>Catalyst converter</value>
+  </data>
+	<data name="ProdusersCatalogs" xml:space="preserve">
+    <value>Manufacturers' catalogues</value>
+  </data>
+	<data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+	<data name="NewRequest" xml:space="preserve">
+    <value>New request</value>
+  </data>
+	<data name="NewRequestByAuto" xml:space="preserve">
+    <value>New request by car type</value>
+  </data>
+	<data name="KeyUser" xml:space="preserve">
+    <value>Key</value>
+  </data>
+	<data name="Client" xml:space="preserve">
+    <value>Client</value>
+  </data>
+	<data name="Clients" xml:space="preserve">
+    <value>Clients</value>
+  </data>
+	<data name="Code" xml:space="preserve">
+    <value>Code</value>
+  </data>
+	<data name="ClientCode" xml:space="preserve">
+    <value>Client fisc. code</value>
+  </data>
+	<data name="Order" xml:space="preserve">
+    <value>Order</value>
+  </data>
+	<data name="OrderIsAvailable" xml:space="preserve">
+    <value>Order is available</value>
+  </data>
+	<data name="Comment" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+	<data name="Orders" xml:space="preserve">
+    <value>Orders</value>
+  </data>
+	<data name="Reconciliate" xml:space="preserve">
+    <value>Reconciliate</value>
+  </data>
+	<data name="PaymentConditions" xml:space="preserve">
+    <value>Delay of payment, days</value>
+  </data>
+	<data name="SubmitOrder" xml:space="preserve">
+    <value>Confirm order</value>
+  </data>
+	<data name="Confirmation" xml:space="preserve">
+    <value>Confirmation</value>
+  </data>
+	<data name="Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+	<data name="Agreement" xml:space="preserve">
+    <value>Agreement</value>
+  </data>
+	<data name="Cart" xml:space="preserve">
+    <value>Cart</value>
+  </data>
+	<data name="WithResponce" xml:space="preserve">
+    <value>With response</value>
+  </data>
+	<data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+	<data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+	<data name="WantedDeliveryDate" xml:space="preserve">
+    <value>Preferred delivery date</value>
+  </data>
+	<data name="ProduceEndDateFull" xml:space="preserve">
+    <value>Date of the end of production</value>
+  </data>
+	<data name="ProduceStartDateFull" xml:space="preserve">
+    <value>Date of the start of production</value>
+  </data>
+	<data name="RequestDate" xml:space="preserve">
+    <value>Request date</value>
+  </data>
+	<data name="PersonalData" xml:space="preserve">
+    <value>Personal information</value>
+  </data>
+	<data name="debt" xml:space="preserve">
+    <value>debt</value>
+  </data>
+	<data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+	<data name="WareName" xml:space="preserve">
+    <value>Item name</value>
+  </data>
+	<data name="Stock" xml:space="preserve">
+    <value>Warehouse</value>
+  </data>
+	<data name="ShippingStock" xml:space="preserve">
+    <value>Shipping Stock</value>
+  </data>
+	<data name="Download" xml:space="preserve">
+    <value>Download</value>
+  </data>
+	<data name="descending" xml:space="preserve">
+    <value>descending</value>
+  </data>
+	<data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+	<data name="Expand" xml:space="preserve">
+    <value>Expand</value>
+  </data>
+	<data name="from" xml:space="preserve">
+    <value>from</value>
+  </data>
+	<data name="Availability" xml:space="preserve">
+    <value>Availability</value>
+  </data>
+	<data name="byProperties" xml:space="preserve">
+    <value>By the characteristics</value>
+  </data>
+	<data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+	<data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+	<data name="DeleteWare" xml:space="preserve">
+    <value>Delete item</value>
+  </data>
+	<data name="DeleteSelectedPositions" xml:space="preserve">
+    <value>Delete selected items?</value>
+  </data>
+	<data name="EmailAsLogin" xml:space="preserve">
+    <value>Email (Login)</value>
+  </data>
+	<data name="EmailPhone" xml:space="preserve">
+    <value>Email, phone number</value>
+  </data>
+	<data name="NeedTaxInvoice" xml:space="preserve">
+    <value>Fiscal invoice required</value>
+  </data>
+	<data name="WithoutResponce" xml:space="preserve">
+    <value>No answer</value>
+  </data>
+	<data name="FIO" xml:space="preserve">
+    <value>First Name, Last Name</value>
+  </data>
+	<data name="PaymentForm" xml:space="preserve">
+    <value>Payment method</value>
+  </data>
+	<data name="MakeOrder" xml:space="preserve">
+    <value>Make an order</value>
+  </data>
+	<data name="ClientManagementTitle" xml:space="preserve">
+    <value>Client Relationship Management</value>
+  </data>
+	<data name="SiteManagement" xml:space="preserve">
+    <value>Site management</value>
+  </data>
+	<data name="UsersManagement" xml:space="preserve">
+    <value>User management</value>
+  </data>
+	<data name="InCart" xml:space="preserve">
+    <value>To the Cart</value>
+  </data>
+	<data name="WareHeight" xml:space="preserve">
+    <value>Item height, mm</value>
+  </data>
+	<data name="Information" xml:space="preserve">
+    <value>Information</value>
+  </data>
+	<data name="Registration" xml:space="preserve">
+    <value>Registration</value>
+  </data>
+	<data name="ReturnWareToCart" xml:space="preserve">
+    <value>Return item to the cart</value>
+  </data>
+	<data name="ReturnToRequests" xml:space="preserve">
+    <value>Return to Requests</value>
+  </data>
+	<data name="Enter" xml:space="preserve">
+    <value>Login</value>
+  </data>
+	<data name="AskManager" xml:space="preserve">
+    <value>Ask our Manager</value>
+  </data>
+	<data name="Question" xml:space="preserve">
+    <value>Question</value>
+  </data>
+	<data name="OnStock" xml:space="preserve">
+    <value>In stock</value>
+  </data>
+	<data name="PackWidth" xml:space="preserve">
+    <value>Package width, mm</value>
+  </data>
+	<data name="WareWidth" xml:space="preserve">
+    <value>Item width, mm</value>
+  </data>
+	<data name="ToOrderList" xml:space="preserve">
+    <value>To Orders</value>
+  </data>
+	<data name="NeedPartList" xml:space="preserve">
+    <value>List of required items</value>
+  </data>
+	<data name="Delivery" xml:space="preserve">
+    <value>Delivery</value>
+  </data>
+	<data name="SelfDelivery" xml:space="preserve">
+    <value>Self-delivery</value>
+  </data>
+	<data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+	<data name="PackLength" xml:space="preserve">
+    <value>Package lenght, mm</value>
+  </data>
+	<data name="WareLength" xml:space="preserve">
+    <value>Item length, mm</value>
+  </data>
+	<data name="AutoMarka" xml:space="preserve">
+    <value>Car Brand</value>
+  </data>
+	<data name="WareWasAddedToCart" xml:space="preserve">
+    <value>Item added to cart</value>
+  </data>
+	<data name="PackWeight" xml:space="preserve">
+    <value>Package weight, kg</value>
+  </data>
+	<data name="WareGrossWeight" xml:space="preserve">
+    <value>Gross Weight, kg</value>
+  </data>
+	<data name="ModelOfCar" xml:space="preserve">
+    <value>Model of car</value>
+  </data>
+	<data name="AutoModel" xml:space="preserve">
+    <value>Car Model</value>
+  </data>
+	<data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+	<data name="NothingChecked" xml:space="preserve">
+    <value>You didn't checked any position</value>
+  </data>
+	<data name="NoData" xml:space="preserve">
+    <value>No data</value>
+  </data>
+	<data name="Number" xml:space="preserve">
+    <value>Number</value>
+  </data>
+	<data name="ValveNumber" xml:space="preserve">
+    <value>Valve number</value>
+  </data>
+	<data name="CylinderNumber" xml:space="preserve">
+    <value>Number of Cylinders</value>
+  </data>
+	<data name="ContactPhone" xml:space="preserve">
+    <value>Phone number</value>
+  </data>
+	<data name="SelectedPartNumbersFull" xml:space="preserve">
+    <value>Catalogue number corresponding to the request</value>
+  </data>
+	<data name="FirstName" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+	<data name="LastName" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+	<data name="YourName" xml:space="preserve">
+    <value>Your name</value>
+  </data>
+	<data name="PartName" xml:space="preserve">
+    <value>Part name</value>
+  </data>
+	<data name="SelectedPartNumbers" xml:space="preserve">
+    <value>Selected catalogue numbers</value>
+  </data>
+	<data name="DocNumber" xml:space="preserve">
+    <value>Document Nr.</value>
+  </data>
+	<data name="WareNumber" xml:space="preserve">
+    <value>Item Nr.</value>
+  </data>
+	<data name="hours" xml:space="preserve">
+    <value>hours</value>
+  </data>
+	<data name="Locality" xml:space="preserve">
+    <value>Town</value>
+  </data>
+	<data name="to" xml:space="preserve">
+    <value>to</value>
+  </data>
+	<data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+	<data name="CurrentPassword" xml:space="preserve">
+    <value>Current Password</value>
+  </data>
+	<data name="NewPassword" xml:space="preserve">
+    <value>New password</value>
+  </data>
+	<data name="ForPeriod" xml:space="preserve">
+    <value>For the period</value>
+  </data>
+	<data name="Payment" xml:space="preserve">
+    <value>Payment</value>
+  </data>
+	<data name="positions" xml:space="preserve">
+    <value>items</value>
+  </data>
+	<data name="Price" xml:space="preserve">
+    <value>Price</value>
+  </data>
+	<data name="RetailPrice" xml:space="preserve">
+    <value>Retail price</value>
+  </data>
+	<data name="YourPrice" xml:space="preserve">
+    <value>Your price</value>
+  </data>
+	<data name="UnitPrice" xml:space="preserve">
+    <value>Price per unit</value>
+  </data>
+	<data name="ABSPresence" xml:space="preserve">
+    <value>ABS presence</value>
+  </data>
+	<data name="ASRPresence" xml:space="preserve">
+    <value>ASR Presence</value>
+  </data>
+	<data name="StartYear" xml:space="preserve">
+    <value>Beginning of production</value>
+  </data>
+	<data name="EndYear" xml:space="preserve">
+    <value>End of production</value>
+  </data>
+	<data name="PowerHp" xml:space="preserve">
+    <value>Power, HP</value>
+  </data>
+	<data name="PowerKw" xml:space="preserve">
+    <value>Power, kWt</value>
+  </data>
+	<data name="Responce" xml:space="preserve">
+    <value>Answers</value>
+  </data>
+	<data name="RepeatPassword" xml:space="preserve">
+    <value>Repeat password again</value>
+  </data>
+	<data name="RepeatNewPassword" xml:space="preserve">
+    <value>Repeat new password</value>
+  </data>
+	<data name="Representations" xml:space="preserve">
+    <value>Offices</value>
+  </data>
+	<data name="PropertySearchResult" xml:space="preserve">
+    <value>Search results by properties</value>
+  </data>
+	<data name="RolesInSystem" xml:space="preserve">
+    <value>Roles in the system</value>
+  </data>
+	<data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+	<data name="SaveChanges" xml:space="preserve">
+    <value>Save changes</value>
+  </data>
+	<data name="ChangeWare" xml:space="preserve">
+    <value>Change item</value>
+  </data>
+	<data name="PersonalDataChange" xml:space="preserve">
+    <value>Change personal data</value>
+  </data>
+	<data name="MaxCartPositionMessage" xml:space="preserve">
+    <value>Maximum 1000 items allowed</value>
+  </data>
+	<data name="SelectStatus" xml:space="preserve">
+    <value>Select status</value>
+  </data>
+	<data name="Analogues" xml:space="preserve">
+    <value>Substitutes</value>
+  </data>
+	<data name="VINRequests" xml:space="preserve">
+    <value>VIN requests</value>
+  </data>
+	<data name="orderBy" xml:space="preserve">
+    <value>sort by</value>
+  </data>
+	<data name="Specifications" xml:space="preserve">
+    <value>Specifications</value>
+  </data>
+	<data name="ForPayment" xml:space="preserve">
+    <value>To be payed</value>
+  </data>
+	<data name="Street" xml:space="preserve">
+    <value>Street</value>
+  </data>
+	<data name="_sum" xml:space="preserve">
+    <value>Sum</value>
+  </data>
+	<data name="Sum" xml:space="preserve">
+    <value>Sum</value>
+  </data>
+	<data name="ErrorsFound" xml:space="preserve">
+    <value>Errors found</value>
+  </data>
+	<data name="AreYouSure" xml:space="preserve">
+    <value>Are you sure?</value>
+  </data>
+	<data name="Phones" xml:space="preserve">
+    <value>Phone numbers</value>
+  </data>
+	<data name="FixedPhone" xml:space="preserve">
+    <value>Landline</value>
+  </data>
+	<data name="MobilePhone" xml:space="preserve">
+    <value>Cell phone </value>
+  </data>
+	<data name="TermDays" xml:space="preserve">
+    <value>Term</value>
+  </data>
+	<data name="Time" xml:space="preserve">
+    <value>Time</value>
+  </data>
+	<data name="DocType" xml:space="preserve">
+    <value>Document Type</value>
+  </data>
+	<data name="AutoType" xml:space="preserve">
+    <value>Car Type</value>
+  </data>
+	<data name="BodyType" xml:space="preserve">
+    <value>Car body type </value>
+  </data>
+	<data name="FuelType" xml:space="preserve">
+    <value>Fuel type</value>
+  </data>
+	<data name="BrakeSystem" xml:space="preserve">
+    <value>Brake type</value>
+  </data>
+	<data name="EngineType" xml:space="preserve">
+    <value>Engine type</value>
+  </data>
+	<data name="BrakeType" xml:space="preserve">
+    <value>Brake transmission type</value>
+  </data>
+	<data name="DriveType" xml:space="preserve">
+    <value>Wheel drive</value>
+  </data>
+	<data name="TransmissionType" xml:space="preserve">
+    <value>Transmission type</value>
+  </data>
+	<data name="All" xml:space="preserve">
+    <value>All</value>
+  </data>
+	<data name="AllBrands" xml:space="preserve">
+    <value>All Brands</value>
+  </data>
+	<data name="Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+	<data name="Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
+	<data name="SendToWork" xml:space="preserve">
+    <value>Approve</value>
+  </data>
+	<data name="SendResponce" xml:space="preserve">
+    <value>Send the Reply</value>
+  </data>
+	<data name="SendRequest" xml:space="preserve">
+    <value>Send the Request</value>
+  </data>
+	<data name="AutoVINCode" xml:space="preserve">
+    <value>VIN Code</value>
+  </data>
+	<data name="AllOrderUser" xml:space="preserve">
+    <value>Order Preview</value>
+  </data>
+	<data name="OrderPreview" xml:space="preserve">
+    <value>Order Preview</value>
+  </data>
+	<data name="ViewRequesByAuto" xml:space="preserve">
+    <value>View request by car</value>
+  </data>
+	<data name="TradeUser" xml:space="preserve">
+    <value>Order preview</value>
+  </data>
+	<data name="ComparisionActUser" xml:space="preserve">
+    <value>Reconciliation preview</value>
+  </data>
+	<data name="VoltageV" xml:space="preserve">
+    <value>Voltage, V</value>
+  </data>
+	<data name="VolumeCm" xml:space="preserve">
+    <value>Volume, cm</value>
+  </data>
+	<data name="TankVolume" xml:space="preserve">
+    <value>Tank volume</value>
+  </data>
+	<data name="days" xml:space="preserve">
+    <value>days</value>
+  </data>
+	<data name="Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+	<data name="City" xml:space="preserve">
+    <value>City</value>
+  </data>
+	<data name="Email" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+	<data name="Phone" xml:space="preserve">
+    <value>Phone number</value>
+  </data>
+	<data name="OrderNotExist" xml:space="preserve">
+    <value>Данный заказ не существует.</value>
+  </data>
+	<data name="_delivery" xml:space="preserve">
+    <value>delivery</value>
+  </data>
+	<data name="AcceptedPayment" xml:space="preserve">
+    <value>Accepted&lt;br /&gt;payment</value>
+  </data>
+	<data name="AddToCartErrorMessage" xml:space="preserve">
+    <value>Error in adding a product to the basket</value>
+  </data>
+	<data name="AnotherPresentations" xml:space="preserve">
+    <value>Other clients' representatives</value>
+  </data>
+	<data name="Attention" xml:space="preserve">
+    <value>Attention</value>
+  </data>
+	<data name="AutoSpareParts" xml:space="preserve">
+    <value>Spare Parts</value>
+  </data>
+	<data name="AvailabilityOnOtherStock" xml:space="preserve">
+    <value>Availability on other stocks</value>
+  </data>
+	<data name="AvailabilityOnShippingStock" xml:space="preserve">
+    <value>Availability on shipping stocks</value>
+  </data>
+	<data name="BlockingSendOrderResumeErrorMessage" xml:space="preserve">
+    <value>Failed to unsubscribe from newsletters on information about the orders placed. Use "{0}" section of your personal account.</value>
+  </data>
+	<data name="BlockingSendOrderResumeSuccessMessage" xml:space="preserve">
+    <value>You have successfully unsubscribed from the mailing information on orders placed. To resume the the subscription, use  "{0}" section of your personal account.</value>
+  </data>
+	<data name="Calculate" xml:space="preserve">
+    <value>Calculate</value>
+  </data>
+	<data name="Cash" xml:space="preserve">
+    <value>Cash</value>
+  </data>
+	<data name="Cashless" xml:space="preserve">
+    <value>Cashless</value>
+  </data>
+	<data name="CashPayment" xml:space="preserve">
+    <value>Cashless</value>
+  </data>
+	<data name="CashPaymentComment" xml:space="preserve">
+    <value>Cash payment</value>
+  </data>
+	<data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+	<data name="CommentForOrder" xml:space="preserve">
+    <value>Comment for order</value>
+  </data>
+	<data name="ComparisionActPeriodError" xml:space="preserve">
+    <value>Period is invalid</value>
+  </data>
+	<data name="Cost" xml:space="preserve">
+    <value>Cost</value>
+  </data>
+	<data name="DeliveryScheduleTime" xml:space="preserve">
+    <value>Order delivery schedule time</value>
+  </data>
+	<data name="DeliveryType" xml:space="preserve">
+    <value>Delivery type</value>
+  </data>
+	<data name="Engine" xml:space="preserve">
+    <value>engine</value>
+  </data>
+	<data name="EngineNumber" xml:space="preserve">
+    <value>Engine number</value>
+  </data>
+	<data name="ErrorMessage" xml:space="preserve">
+    <value>&lt;p&gt; Something went wrong and we were unable to process your request. &lt;/p&gt; &lt;p&gt; Try to go to the &lt;a href="{0}"&gt;  main page &lt;/a&gt;and repeat the request or contact number  &lt;b&gt; {1} &lt;/ b&gt; &lt;/ p&gt;</value>
+  </data>
+	<data name="Finish" xml:space="preserve">
+    <value>Finish</value>
+  </data>
+	<data name="FixedShippingMessage" xml:space="preserve">
+    <value>To pick up your order, you need to come to our office at the address indicated below. Please note the time at which the order will be available.</value>
+  </data>
+	<data name="FromWarehouse" xml:space="preserve">
+    <value>from warehouse</value>
+  </data>
+	<data name="GetExcelInvoice" xml:space="preserve">
+    <value>Invoice in Excel</value>
+  </data>
+	<data name="GetPDFInvoice" xml:space="preserve">
+    <value>Invoice in PDF</value>
+  </data>
+	<data name="GroupContentManagement" xml:space="preserve">
+    <value>Group content</value>
+  </data>
+	<data name="InvoicePayment" xml:space="preserve">
+    <value>Transfer payment</value>
+  </data>
+	<data name="InvoicePaymentComment" xml:space="preserve">
+    <value>When paying by transfer it is necessary to transfer the money to the account of the store. Bill for payment may be obtained after selecting the delivery.</value>
+  </data>
+	<data name="IsRequired" xml:space="preserve">
+    <value>Required field</value>
+  </data>
+	<data name="latin_only" xml:space="preserve">
+    <value>(Latin)</value>
+  </data>
+	<data name="Limit" xml:space="preserve">
+    <value>Limit</value>
+  </data>
+	<data name="LiqPayment" xml:space="preserve">
+    <value>Payment via LiqPay system</value>
+  </data>
+	<data name="LiqPaymentComment" xml:space="preserve">
+    <value>Service of accepting payments from credit card offers &lt;a href="https://www.liqpay.com"&gt;LiqPAY&lt;/a&gt; от &lt;a href="http://privatbank.ua"&gt;PrivateBank&lt;/a&gt;</value>
+  </data>
+	<data name="MultComment" xml:space="preserve">
+    <value>The number of goods must comply with the multiplicity of sale</value>
+  </data>
+	<data name="News" xml:space="preserve">
+    <value>News</value>
+  </data>
+	<data name="NextNews" xml:space="preserve">
+    <value>Next</value>
+  </data>
+	<data name="NotAvailable" xml:space="preserve">
+    <value>Not available</value>
+  </data>
+	<data name="NotAvailableDeliveries" xml:space="preserve">
+    <value>No available deliveries</value>
+  </data>
+	<data name="NotOurTransporComment" xml:space="preserve">
+    <value>Please note that this option does not ensure the order delivery "to the door". The order will be transmitted by regular transport. Our staff will contact you on the phone and tell you where and when you will need to meet the order.</value>
+  </data>
+	<data name="OnlyOnStock" xml:space="preserve">
+    <value>Only On Stock</value>
+  </data>
+	<data name="OrderConfirmDialogTitle" xml:space="preserve">
+    <value>To form and reserve the order</value>
+  </data>
+	<data name="OrderDate" xml:space="preserve">
+    <value>Order date</value>
+  </data>
+	<data name="OrderError" xml:space="preserve">
+    <value>Error sending order for processing</value>
+  </data>
+	<data name="OrderErrorText" xml:space="preserve">
+    <value>There is a ware in your order that we can not draw up. (&lt;b&gt;{0}&lt;/b&gt;). &lt;br&gt;  Click on the "back to  the order" and remove  goods marked in red from the order. </value>
+  </data>
+	<data name="Ordering" xml:space="preserve">
+    <value>details</value>
+  </data>
+	<data name="OrderIsAvailableForShipment" xml:space="preserve">
+    <value>the order is available for pick up at </value>
+  </data>
+	<data name="OrderMadeBy" xml:space="preserve">
+    <value>The order is made by</value>
+  </data>
+	<data name="OrderNumber" xml:space="preserve">
+    <value>Order number</value>
+  </data>
+	<data name="OrderPreviewComment" xml:space="preserve">
+    <value>&lt;p&gt; Your order has been automatically divided into several sub-orders, according to the time of availability of goods. &lt;/p&gt; &lt;p&gt; If you want to combine them into one order, please tick the box "Merge into one order". &lt;/p&gt;&lt;p&gt; Otherwise clicking "Confirm order", you will be taking to draw up No 1 order. For the rest of the orders drafts will be drawn up in "Orders" section. You will have to draw up them separately.&lt;/p&gt;</value>
+  </data>
+	<data name="Original" xml:space="preserve">
+    <value>Original</value>
+  </data>
+	<data name="PageCreationTime" xml:space="preserve">
+    <value>Page creation time</value>
+  </data>
+	<data name="PageHeader" xml:space="preserve">
+    <value>Page header</value>
+  </data>
+	<data name="Presence" xml:space="preserve">
+    <value>Availability</value>
+  </data>
+	<data name="Previous" xml:space="preserve">
+    <value>Back</value>
+  </data>
+	<data name="PrevNews" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+	<data name="Producer" xml:space="preserve">
+    <value>Producer</value>
+  </data>
+	<data name="Profile" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+	<data name="RegistrationDate" xml:space="preserve">
+    <value>Registration date</value>
+  </data>
+	<data name="RequestError" xml:space="preserve">
+    <value>Error request</value>
+  </data>
+	<data name="ReturningType" xml:space="preserve">
+    <value>Returning type</value>
+  </data>
+	<data name="ReturnToOrder" xml:space="preserve">
+    <value>Back in Order</value>
+  </data>
+	<data name="SaleMultiplisity" xml:space="preserve">
+    <value>Sale multiplisity</value>
+  </data>
+	<data name="SelectService" xml:space="preserve">
+    <value>Select auto center</value>
+  </data>
+	<data name="ServiceBooking" xml:space="preserve">
+    <value>Online booking for technical and maintenance service</value>
+  </data>
+	<data name="ServiceBookingSubmit" xml:space="preserve">
+    <value>Register for technical and maintenance service</value>
+  </data>
+	<data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+	<data name="SummaryFooter" xml:space="preserve">
+    <value>For information about your order status, you can check on the page "My Account" in the "Orders" tab. &lt;br /&gt; The text of the form is sent to your e-mail provided at the registration.</value>
+  </data>
+	<data name="TC_Clearance" xml:space="preserve">
+    <value>Changing clearance (mm)</value>
+  </data>
+	<data name="TC_Difference" xml:space="preserve">
+    <value>Comparing</value>
+  </data>
+	<data name="TC_DiscD" xml:space="preserve">
+    <value>Disc diameters, inches</value>
+  </data>
+	<data name="TC_DiscParams" xml:space="preserve">
+    <value>Disc parameters</value>
+  </data>
+	<data name="TC_DiscWMax" xml:space="preserve">
+    <value>Maximal disc width,  inches</value>
+  </data>
+	<data name="TC_DiscWMin" xml:space="preserve">
+    <value>Minimal disc width, inches</value>
+  </data>
+	<data name="TC_ExternalD" xml:space="preserve">
+    <value>External diameter, mm (D)</value>
+  </data>
+	<data name="TC_H1" xml:space="preserve">
+    <value>What is the tire calculator:</value>
+  </data>
+	<data name="TC_InnerD" xml:space="preserve">
+    <value>Inner diameter, mm (C )</value>
+  </data>
+	<data name="TC_Measures" xml:space="preserve">
+    <value>Dimensions</value>
+  </data>
+	<data name="TC_New" xml:space="preserve">
+    <value>New</value>
+  </data>
+	<data name="TC_NewMeasures" xml:space="preserve">
+    <value>New size</value>
+  </data>
+	<data name="TC_Old" xml:space="preserve">
+    <value>Old</value>
+  </data>
+	<data name="TC_OldMeasures" xml:space="preserve">
+    <value>Old size</value>
+  </data>
+	<data name="TC_Profile" xml:space="preserve">
+    <value>Profile height, mm (B)</value>
+  </data>
+	<data name="TC_RealSpeed" xml:space="preserve">
+    <value>Real speed (km/h)</value>
+  </data>
+	<data name="TC_SpeedDifference" xml:space="preserve">
+    <value>Difference (km\h)</value>
+  </data>
+	<data name="TC_Speedometer" xml:space="preserve">
+    <value>Speedometer</value>
+  </data>
+	<data name="TC_SpeedometerValue" xml:space="preserve">
+    <value>Speedometer Value (km/h)</value>
+  </data>
+	<data name="TC_T1_1" xml:space="preserve">
+    <value>With tire calculator you can easily calculate the changes of the external dimensions of wheel, the height of clearance , the speedometer showings and other characteristics, when installing  tires with other sizes to your vehicle. The calculator shows all tire sizes in millimeters, and automobile speed in km/h. You can also calculate  the required width of the disc for a certain tire size. </value>
+  </data>
+	<data name="TC_T1_2" xml:space="preserve">
+    <value>The height of tire profile (is indicated by "B" letter on the picture) is calculated based on the value of the tire profile and tire width (it is the second number in tire profile standard size, shown in percentage of tire width).</value>
+  </data>
+	<data name="TC_T1_3" xml:space="preserve">
+    <value>We recommend you to install only tires with factory size standards, which are specified in the operating manual for your automobile. Installation of non-standard sizes can lead to the withdrawal of the warranty from the dealer, as well as to the deterioration of performance and drivability.</value>
+  </data>
+	<data name="TC_T2_1" xml:space="preserve">
+    <value>First entery the size standard installed in your automobile, then the one you wish to install and click "calculate"</value>
+  </data>
+	<data name="TC_T2_2" xml:space="preserve">
+    <value>The table below will show the results of calculations.</value>
+  </data>
+	<data name="TC_T3_2" xml:space="preserve">
+    <value>&lt;strong&gt;Attention!&lt;/strong&gt; Setting too narrow or too wide discs will lead to the deformation of the tire, deterioration of its performance, and also to increased wear.</value>
+  </data>
+	<data name="TC_Width" xml:space="preserve">
+    <value>Tire width, mm (A)</value>
+  </data>
+	<data name="ThankForUnderstanding" xml:space="preserve">
+    <value>Thank you for understanding!</value>
+  </data>
+	<data name="ThemeText" xml:space="preserve">
+    <value>Theme text</value>
+  </data>
+	<data name="TiresCalculator" xml:space="preserve">
+    <value>Tires calculator</value>
+  </data>
+	<data name="TitleSkype" xml:space="preserve">
+    <value>Question by Skype</value>
+  </data>
+	<data name="VINWatermark" xml:space="preserve">
+    <value>from registration certificate</value>
+  </data>
+	<data name="VisaPayment" xml:space="preserve">
+    <value>Credit card payment</value>
+  </data>
+	<data name="ware" xml:space="preserve">
+    <value>product</value>
+  </data>
+	<data name="WareFromWareHouse" xml:space="preserve">
+    <value>Ware from warehouse</value>
+  </data>
+	<data name="WareIsNotAvailable" xml:space="preserve">
+    <value>Not available</value>
+  </data>
+	<data name="Warning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+	<data name="OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+	<data name="ExtractToOrder" xml:space="preserve">
+    <value>Extract to order</value>
+  </data>
+	<data name="ReturnToOrderMessage" xml:space="preserve">
+    <value>In order to return to your order click "Return" button of the browser</value>
+  </data>
+	<data name="WareIsLate" xml:space="preserve">
+    <value>The ware is late</value>
+  </data>
+	<data name="TotalSelectedSum" xml:space="preserve">
+    <value>Total selected sum</value>
+  </data>
+	<data name="NewWare" xml:space="preserve">
+    <value>New product</value>
+  </data>
+	<data name="CityDistrict" xml:space="preserve">
+    <value>City district</value>
+  </data>
+	<data name="notSelected" xml:space="preserve">
+    <value>not selected</value>
+  </data>
+	<data name="DeliveryDate" xml:space="preserve">
+    <value>Delivery date</value>
+  </data>
+	<data name="WarehouseShipmentDate" xml:space="preserve">
+    <value>Warehouse shipment date</value>
+  </data>
+	<data name="Remain" xml:space="preserve">
+    <value>Remain</value>
+  </data>
+	<data name="AccessStatistics" xml:space="preserve">
+    <value>Access Statistics</value>
+  </data>
+	<data name="Promotions" xml:space="preserve">
+    <value>Promo</value>
+  </data>
+	<data name="Specials" xml:space="preserve">
+    <value>Sale</value>
+  </data>
+	<data name="Message" xml:space="preserve">
+    <value>Message</value>
+  </data>
+	<data name="AddToCompare" xml:space="preserve">
+    <value>Add to compare</value>
+  </data>
+	<data name="RemoveFromComparision" xml:space="preserve">
+    <value>Remove from comparison</value>
+  </data>
+	<data name="WareComparision" xml:space="preserve">
+    <value>Compare products</value>
+  </data>
+	<data name="Compare" xml:space="preserve">
+    <value>Compare</value>
+  </data>
+	<data name="AllParams" xml:space="preserve">
+    <value>All parameters</value>
+  </data>
+	<data name="OnlyDifference" xml:space="preserve">
+    <value>Only difference</value>
+  </data>
+	<data name="WareType" xml:space="preserve">
+    <value>Type of product</value>
+  </data>
+	<data name="AdditionalInformation" xml:space="preserve">
+    <value>Additional information</value>
+  </data>
+	<data name="ContactInfo" xml:space="preserve">
+    <value>Contact Information</value>
+  </data>
+	<data name="AccordingOfDeliveryServiceTarifs" xml:space="preserve">
+    <value>According to service tarifs</value>
+  </data>
+	<data name="Version" xml:space="preserve">
+    <value>Version</value>
+  </data>
+	<data name="AutoData" xml:space="preserve">
+    <value>Auto data</value>
+  </data>
+	<data name="Change" xml:space="preserve">
+    <value>Change</value>
+  </data>
+	<data name="AllNews" xml:space="preserve">
+    <value>All news</value>
+  </data>
+	<data name="ActionWarningMessage" xml:space="preserve">
+    <value>Attention! Your order contain action wares not subject to return!</value>
+  </data>
+	<data name="NoReturn" xml:space="preserve">
+    <value>No return</value>
+  </data>
+	<data name="ImageUrl" xml:space="preserve">
+    <value>URL group image</value>
+  </data>
+	<data name="ShortProblemDescription" xml:space="preserve">
+    <value>Short problem description</value>
+  </data>
+	<data name="CarStateNumber" xml:space="preserve">
+    <value>Car state number</value>
+  </data>
+	<data name="OnlyLettersAndDigits" xml:space="preserve">
+    <value>Only letters and numbers</value>
+  </data>
+	<data name="ForReservation" xml:space="preserve">
+    <value>On order</value>
+  </data>
+	<data name="AllPromotions" xml:space="preserve">
+    <value>All promotions</value>
+  </data>
+	<data name="Contacts" xml:space="preserve">
+    <value>Contacts</value>
+  </data>
+	<data name="HowToBuy" xml:space="preserve">
+    <value>How to buy?</value>
+  </data>
+	<data name="ServiceProducerCatalogs" xml:space="preserve">
+    <value>Catalogs &lt;span&gt;from producers&lt;/span&gt;</value>
+  </data>
+	<data name="Services" xml:space="preserve">
+    <value>Services</value>
+  </data>
+	<data name="ServiceSelectionByMark" xml:space="preserve">
+    <value>Selection &lt;span&gt;by mark&lt;/span&gt;</value>
+  </data>
+	<data name="ServiceSelectionByVIN" xml:space="preserve">
+    <value>Selection &lt;span&gt;by VIN&lt;/span&gt;</value>
+  </data>
+	<data name="ServiceTechStationBooking" xml:space="preserve">
+    <value>Online-booking &lt;span&gt;at tech station&lt;/span&gt;</value>
+  </data>
+	<data name="ServiceTiresSelection" xml:space="preserve">
+    <value>Tires &lt;span&gt;selection&lt;/span&gt;</value>
+  </data>
+	<data name="BankAccount" xml:space="preserve">
+    <value>Bank account</value>
+  </data>
+	<data name="BankCode" xml:space="preserve">
+    <value>Bank code</value>
+  </data>
+	<data name="FiscalCode" xml:space="preserve">
+    <value>Fiscal code</value>
+  </data>
+	<data name="JuridicalAddress" xml:space="preserve">
+    <value>Legal adress</value>
+  </data>
+	<data name="JuridicalName" xml:space="preserve">
+    <value>Company's legal name</value>
+  </data>
+	<data name="RepresentationRequest" xml:space="preserve">
+    <value>Representation request</value>
+  </data>
+	<data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+	<data name="ChangePassword_Cap" xml:space="preserve">
+    <value>Change password</value>
+  </data>
+	<data name="OrderSum" xml:space="preserve">
+    <value>Sum of order</value>
+  </data>
+	<data name="SaveComment" xml:space="preserve">
+    <value>Save comment</value>
+  </data>
+	<data name="Buy" xml:space="preserve">
+    <value>Buy</value>
+  </data>
+	<data name="MainPage" xml:space="preserve">
+    <value>Main page</value>
+  </data>
+	<data name="Applicability" xml:space="preserve">
+    <value>Applicability</value>
+  </data>
+	<data name="GotoComparision" xml:space="preserve">
+    <value>Go to comparision</value>
+  </data>
+	<data name="SelectDate" xml:space="preserve">
+    <value>Select date</value>
+  </data>
+	<data name="SubscribeForActionInformations" xml:space="preserve">
+    <value>Subscribe for action informations</value>
+  </data>
+	<data name="Booking" xml:space="preserve">
+    <value>to register</value>
+  </data>
+	<data name="SummaryTitle2" xml:space="preserve">
+    <value>&lt;p&gt;Your order &lt;span&gt;№{0}&lt;/span&gt; has been accepted, and you will get it soon.&lt;/p&gt;
+            &lt;p&gt;  If you have any question on the order contact sales department &lt;a&gt; {2}&lt;/a&gt;&lt;/p&gt;
+            &lt;p&gt; &lt;b&gt; Your order includes following items:&lt;/b&gt; &lt;/p&gt;</value>
+  </data>
+	<data name="OrderCompleting" xml:space="preserve">
+    <value>Order completing</value>
+  </data>
+	<data name="PaymentTitle2" xml:space="preserve">
+    <value>&lt;p&gt;Your order &lt;span&gt;№{0}&lt;/span&gt; was accepted and it has not been paid yet&lt;/p&gt;&lt;p&gt; If you have any question on your order please contact sales department  &lt;a&gt; {2}&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt; Your order includes the following positions:&lt;/b&gt;&lt;/p&gt;</value>
+  </data>
+	<data name="ThanksForPurchase" xml:space="preserve">
+    <value>Thank you for the purchase</value>
+  </data>
+	<data name="WareSelection" xml:space="preserve">
+    <value>Select product</value>
+  </data>
+	<data name="Apply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+	<data name="Filters" xml:space="preserve">
+    <value>Filters</value>
+  </data>
+	<data name="Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+	<data name="PageSize" xml:space="preserve">
+    <value>Page size</value>
+  </data>
+	<data name="TC_New_T1_1" xml:space="preserve">
+    <value>When increasing the diameter of the rim (and consequently, decreasing the height of tire profile, in order to leave unchanged the outer diameter of the wheel)  the load on the car's suspension, as well as the comfort is deteriorated (the automobile will be much harder).</value>
+  </data>
+	<data name="TC_New_T1_2" xml:space="preserve">
+    <value>In case of excessive increase in the profile of the tire the automobile becomes "felling", less controlled and at critical values of the height profile the tire can start clinging to body parts and suspension of the car, which will lead to its destruction in the aftermath.</value>
+  </data>
+	<data name="TC_New_T3" xml:space="preserve">
+    <value>The error in the readings of the speedometer depends on the vehicle speed, error increases with rasing the speed. Besides one should take into account that the error affects the car's fuel consumption readings.</value>
+  </data>
+	<data name="SelectMark" xml:space="preserve">
+    <value>Select mark</value>
+  </data>
+	<data name="ShowAll" xml:space="preserve">
+    <value>Show all</value>
+  </data>
+	<data name="EngineTypeAndVolume" xml:space="preserve">
+    <value>Engine type and volume</value>
+  </data>
+	<data name="EnterYourCarData" xml:space="preserve">
+    <value>Enter your car data</value>
+  </data>
+	<data name="GotoMain" xml:space="preserve">
+    <value>Go to main page</value>
+  </data>
+	<data name="NothingFound2" xml:space="preserve">
+    <value>Sorry, nothing matching your search is found, which could take place by following reasons:</value>
+  </data>
+	<data name="NothingFound2Message" xml:space="preserve">
+    <value>&lt;ol&gt;
+                &lt;li&gt;Catalog number you entered does not exist. Try to reformulate your initial request. &lt;/li&gt;
+                &lt;li&gt;There are certain restrictions on the search. f there are check marks in  "Advanced search" or "Search in a particular section" column try to remove them. &lt;/li&gt;
+            &lt;/ol&gt;</value>
+  </data>
+	<data name="NothingFound2Title" xml:space="preserve">
+    <value>Request not found</value>
+  </data>
+	<data name="SelectPreferredDate" xml:space="preserve">
+    <value>Select date</value>
+  </data>
+	<data name="SelectPreferredTime" xml:space="preserve">
+    <value>Select time</value>
+  </data>
+	<data name="ServiceBookingFinishing" xml:space="preserve">
+    <value>Finishing registration </value>
+  </data>
+	<data name="SeviceBookingConfirmation2" xml:space="preserve">
+    <value>&lt;p&gt;Your application for a service at the service station  &lt;br&gt;
+            &lt;strong&gt;«{0}»&lt;/strong&gt; на &lt;strong&gt;{1}, {2}&lt;/strong&gt; is sent.&lt;/p&gt;&lt;p&gt; Our manager will contact you soon. &lt;/p&gt;</value>
+  </data>
+	<data name="VINRequest" xml:space="preserve">
+    <value>Request VIN</value>
+  </data>
+	<data name="SubscribeForOrderInfo" xml:space="preserve">
+    <value>Send notifications on your order to your e-mail</value>
+  </data>
+	<data name="ShowResults" xml:space="preserve">
+    <value>Show results</value>
+  </data>
+	<data name="TiresSelection" xml:space="preserve">
+    <value>Tire selection</value>
+  </data>
+	<data name="TiresSummer" xml:space="preserve">
+    <value>Summer tires</value>
+  </data>
+	<data name="TiresWinter" xml:space="preserve">
+    <value>Winter</value>
+  </data>
+	<data name="AboutCompany" xml:space="preserve">
+    <value>About company</value>
+  </data>
+	<data name="Providers" xml:space="preserve">
+    <value>Suppliers</value>
+  </data>
+	<data name="OrderPayment" xml:space="preserve">
+    <value>The orders payment</value>
+  </data>
+	<data name="AllWareCategories" xml:space="preserve">
+    <value>All ware categories</value>
+  </data>
+	<data name="DoYouLikeShare" xml:space="preserve">
+    <value>Do you like our post? Share!</value>
+  </data>
+	<data name="DescribeError" xml:space="preserve">
+    <value>Describe the error</value>
+  </data>
+	<data name="ReportAboutError" xml:space="preserve">
+    <value>Report an error</value>
+  </data>
+	<data name="Comment2" xml:space="preserve">
+    <value>Note</value>
+  </data>
+	<data name="EngineCode" xml:space="preserve">
+    <value>Engine number/code</value>
+  </data>
+	<data name="ShowRetailPricesWareCard" xml:space="preserve">
+    <value>Retail price in ware card</value>
+  </data>
+	<data name="OrderDeleteError" xml:space="preserve">
+    <value>Order delete error</value>
+  </data>
+	<data name="cm3" xml:space="preserve">
+    <value>cm3</value>
+  </data>
+	<data name="Power" xml:space="preserve">
+    <value>Power</value>
+  </data>
+	<data name="Volume" xml:space="preserve">
+    <value>Volume</value>
+  </data>
+	<data name="_HP" xml:space="preserve">
+    <value>hp</value>
+  </data>
+	<data name="_kWt" xml:space="preserve">
+    <value>kW</value>
+  </data>
+	<data name="DeliveryCreationError" xml:space="preserve">
+    <value>Delivery creation error:</value>
+  </data>
+	<data name="JsonUnknownError" xml:space="preserve">
+    <value>Something went wrong and we were unable to process your request. Try again or contact us by phone number {1}</value>
+  </data>
+	<data name="NoWareFound" xml:space="preserve">
+    <value>Product not found</value>
+  </data>
+	<data name="NeedAllTaxInvoices" xml:space="preserve">
+    <value>All non-drawn tax tax invoices needed</value>
+  </data>
+	<data name="WareCode" xml:space="preserve">
+    <value>Ware code</value>
+  </data>
+	<data name="PaymentAccepted" xml:space="preserve">
+    <value>Payment accepted</value>
+  </data>
+	<data name="PaymentAcceptedMessage" xml:space="preserve">
+    <value>Your payment for {0} order on {1} amount is successfully accepted.</value>
+  </data>
+	<data name="PaymentErrorMessage" xml:space="preserve">
+    <value>Your payment for {0} order on {1} amount cannot be processed  &lt;a href="{2}"&gt;Try again&lt;/a&gt; or apply to our bank.</value>
+  </data>
+	<data name="Printing" xml:space="preserve">
+    <value>Print</value>
+  </data>
+	<data name="ProduceDate" xml:space="preserve">
+    <value>Manufacture Date</value>
+  </data>
+	<data name="Info" xml:space="preserve">
+    <value>Info</value>
+  </data>
+	<data name="UrgentCollection" xml:space="preserve">
+    <value>Collect urgently</value>
+  </data>
+	<data name="Default" xml:space="preserve">
+    <value>By default</value>
+  </data>
+	<data name="FefoMessage" xml:space="preserve">
+    <value>1. To display all the offers available on order, click on "Make to order".&lt;/br&gt;2. Choose the best price and date of availability of goods.&lt;/br&gt;3. Add the product to the cart and order it.</value>
+  </data>
+	<data name="TrustedPerson" xml:space="preserve">
+    <value>Authorised person</value>
+  </data>
+	<data name="VINSearchPlaceholder" xml:space="preserve">
+    <value>Enter VIN code (17 characters)</value>
+  </data>
+	<data name="Transmission" xml:space="preserve">
+    <value>Transmission</value>
+  </data>
+	<data name="VinCodeNotFound" xml:space="preserve">
+    <value>Incorrect VIN code or no such VIN code in the database</value>
+  </data>
+	<data name="SelectByCategories" xml:space="preserve">
+    <value>List of assemblies</value>
+  </data>
+	<data name="SelectByGroups" xml:space="preserve">
+    <value>Search by group</value>
+  </data>
+	<data name="EnterGroupName" xml:space="preserve">
+    <value>Enter group name</value>
+  </data>
+	<data name="MaxRequestsPerDay" xml:space="preserve">
+    <value>Max. number of requests per day</value>
+  </data>
+	<data name="Unlimited" xml:space="preserve">
+    <value>Unlimited</value>
+  </data>
+	<data name="ValabilityTerm" xml:space="preserve">
+    <value>Validity period</value>
+  </data>
+	<data name="VINSearch" xml:space="preserve">
+    <value>Search by VIN code</value>
+  </data>
+	<data name="ComparisionActErrorMessage" xml:space="preserve">
+    <value>&lt;p&gt;The system generated an empty reconciliation report&lt;/p&gt;&lt;p&gt;Please retry the request with different parameters or contact us at &lt;b&gt;{1}&lt;/b&gt;&lt;/p&gt;</value>
+  </data>
+	<data name="Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+	<data name="NeedPart" xml:space="preserve">
+    <value>Needed part</value>
+  </data>
+	<data name="NothingFound3" xml:space="preserve">
+    <value>Nothing found</value>
+  </data>
+	<data name="Action" xml:space="preserve">
+    <value>Promotional event</value>
+  </data>
+	<data name="Sale" xml:space="preserve">
+    <value>Sale</value>
+  </data>
+	<data name="CategoryFirstEntranceMessage" xml:space="preserve">
+    <value>Use this list to select a category</value>
+  </data>
+	<data name="SelectFromList" xml:space="preserve">
+    <value>Select from the list</value>
+  </data>
+	<data name="NeedParametersSpecification" xml:space="preserve">
+    <value>Please specify the parameters</value>
+  </data>
+	<data name="Note" xml:space="preserve">
+    <value>Note</value>
+  </data>
+	<data name="SelectModification" xml:space="preserve">
+    <value>Select a modification</value>
+  </data>
+	<data name="AutoIsNotSelected" xml:space="preserve">
+    <value>Car not selected</value>
+  </data>
+	<data name="SupportEmailLabel" xml:space="preserve">
+    <value>Contact the technical support</value>
+  </data>
+	<data name="LoyaltyProgram" xml:space="preserve">
+    <value>Loyalty program</value>
+  </data>
+	<data name="AllTires" xml:space="preserve">
+    <value>All tires</value>
+  </data>
+	<data name="Tires" xml:space="preserve">
+    <value>Tires</value>
+  </data>
+	<data name="NotificationsHistory" xml:space="preserve">
+    <value>Notification history</value>
+  </data>
+	<data name="Subject" xml:space="preserve">
+    <value>Topic</value>
+  </data>
+	<data name="AccessDenied" xml:space="preserve">
+    <value>Access denied</value>
+  </data>
+	<data name="FeatureDisabled" xml:space="preserve">
+    <value>The requested section is not supported on the server side.</value>
+  </data>
+	<data name="Region" xml:space="preserve">
+    <value>Region</value>
+  </data>
+	<data name="EPayKKBPayment" xml:space="preserve">
+    <value>Payment via ePay.kkb system</value>
+  </data>
+	<data name="ClientsDelivery" xml:space="preserve">
+    <value>Delivery</value>
+  </data>
+	<data name="PaymentRejected" xml:space="preserve">
+    <value>Payment rejected</value>
+  </data>
+	<data name="QntOnStock" xml:space="preserve">
+    <value>Quantity in stock</value>
+  </data>
+	<data name="AmountOnStock" xml:space="preserve">
+    <value>Quantity in stock</value>
+  </data>
+	<data name="IsAbsent" xml:space="preserve">
+    <value>Not available</value>
+  </data>
+	<data name="Credit" xml:space="preserve">
+    <value>Credit</value>
+  </data>
+	<data name="Debet" xml:space="preserve">
+    <value>Debit</value>
+  </data>
+	<data name="OrderCommentText" xml:space="preserve">
+    <value>&lt; b&gt;Attention!&lt;/b&gt;&lt;br /&gt;We kindly ask you to check the completeness and external packaging condition (for integrity, deformation, etc.) within 3 days from the date of receipt&lt;br /&gt;After 3 days from the date of receipt, no claims regarding the condition of the goods and packaging will be accepted!&lt;br /&gt;            The goods can be returned within 14 business days, subject to the preservation of the marketable condition (does not apply to pre-order items).&lt;br /&gt;            A technical malfunction of the goods shall be confirmed by the Damage Certificate on the date the defect was discovered!</value>
+  </data>
+	<data name="ByName" xml:space="preserve">
+    <value>By name</value>
+  </data>
+	<data name="CurrentDebt" xml:space="preserve">
+    <value>Current debt</value>
+  </data>
+	<data name="EpayKKBAmount" xml:space="preserve">
+    <value>Amount due</value>
+  </data>
+	<data name="EpayKKBDataTitle" xml:space="preserve">
+    <value>Enter your payment details</value>
+  </data>
+	<data name="EpayKKBEmail" xml:space="preserve">
+    <value>Payer's e-mail address</value>
+  </data>
+	<data name="Inventory" xml:space="preserve">
+    <value>Inventory management</value>
+  </data>
+	<data name="OvervalueComment" xml:space="preserve">
+    <value>The number of items in the order exceeds the available quantity (max. {0})</value>
+  </data>
+	<data name="UserRegistration" xml:space="preserve">
+    <value>User registration</value>
+  </data>
+	<data name="RegistrationSuccessful" xml:space="preserve">
+    <value>Registration completed</value>
+  </data>
+	<data name="NearestWorkingDays" xml:space="preserve">
+    <value>Next business days</value>
+  </data>
+	<data name="SelectSelfDeliveryWarehouse" xml:space="preserve">
+    <value>Select a warehouse for pickup</value>
+  </data>
+	<data name="WrongVINCode" xml:space="preserve">
+    <value>Invalid VIN code</value>
+  </data>
+	<data name="UploadSupplierPriceKros" xml:space="preserve">
+    <value>Upload price list/cross-reference numbers</value>
+  </data>
+	<data name="LoadCrosses" xml:space="preserve">
+    <value>Upload cross-reference numbers</value>
+  </data>
+	<data name="LoadPrice" xml:space="preserve">
+    <value>Upload price list</value>
+  </data>
+	<data name="SelectFile" xml:space="preserve">
+    <value>Select a file</value>
+  </data>
+	<data name="RetailIsBlockedMessage" xml:space="preserve">
+    <value>We are sorry, but retail service is not available in your region at the moment</value>
+  </data>
+	<data name="CodeHS" xml:space="preserve">
+    <value>HS Code</value>
+  </data>
+	<data name="SearchPlaceholderNumber" xml:space="preserve">
+    <value>Search by number</value>
+  </data>
+	<data name="Discount" xml:space="preserve">
+    <value>Discount</value>
+  </data>
+	<data name="UploadSupplierPriceKrosMissingData" xml:space="preserve">
+    <value>Error parsing line No. {0}. No data in column No. {1}</value>
+  </data>
+	<data name="PartNumber" xml:space="preserve">
+    <value>SCU</value>
+  </data>
+	<data name="DebtWarningMessageBrief" xml:space="preserve">
+    <value>You have an overdue debt!</value>
+  </data>
+	<data name="ComparisionActFilter" xml:space="preserve">
+    <value>Reconciliation report filter</value>
+  </data>
+	<data name="PeriodFrom" xml:space="preserve">
+    <value>Period from</value>
+  </data>
+	<data name="EndBalance" xml:space="preserve">
+    <value>Final balance</value>
+  </data>
+	<data name="StartBalance" xml:space="preserve">
+    <value>Initial balance</value>
+  </data>
+	<data name="ExistingCartItemMessage" xml:space="preserve">
+    <value>This item is already in the shopping cart</value>
+  </data>
+	<data name="OrdersAndPayments" xml:space="preserve">
+    <value>Orders and payments</value>
+  </data>
+	<data name="Tools" xml:space="preserve">
+    <value>Tools</value>
+  </data>
+	<data name="UserFilter" xml:space="preserve">
+    <value>User filter</value>
+  </data>
+	<data name="SummaryListTitle" xml:space="preserve">
+    <value>Your order includes the following items</value>
+  </data>
+	<data name="SummaryNotificationText" xml:space="preserve">
+    <value>The text of this form was sent to your e-mail address specified during registration.</value>
+  </data>
+	<data name="Logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+	<data name="YourCarIsEmpty" xml:space="preserve">
+    <value>Your shopping cart is empty</value>
+  </data>
+	<data name="Sorting" xml:space="preserve">
+    <value>Sorting</value>
+  </data>
+	<data name="Warehouse" xml:space="preserve">
+    <value>Warehouse</value>
+  </data>
+	<data name="Authorize" xml:space="preserve">
+    <value>Authorization</value>
+  </data>
+	<data name="Loading" xml:space="preserve">
+    <value>Loading</value>
+  </data>
+	<data name="ByAvailability" xml:space="preserve">
+    <value>By availability</value>
+  </data>
+	<data name="Cheaper" xml:space="preserve">
+    <value>Cheaper</value>
+  </data>
+	<data name="ExternalUserCode" xml:space="preserve">
+    <value>User code in the system</value>
+  </data>
+	<data name="ClientManager" xml:space="preserve">
+    <value>Your manager</value>
+  </data>
+	<data name="ManagerName" xml:space="preserve">
+    <value>Manager's name</value>
+  </data>
+	<data name="OrderCreateErrorMessage" xml:space="preserve">
+    <value>An error occurred when creating the order</value>
+  </data>
+	<data name="of" xml:space="preserve">
+    <value>from</value>
+  </data>
+	<data name="TotalFound" xml:space="preserve">
+    <value>Total found</value>
+  </data>
+	<data name="Dealers" xml:space="preserve">
+    <value>Our dealers</value>
+  </data>
+	<data name="Reserved" xml:space="preserve">
+    <value>Reserved</value>
+  </data>
+	<data name="ProductCategory" xml:space="preserve">
+    <value>Product category</value>
+  </data>
+	<data name="Catalogs" xml:space="preserve">
+    <value>Catalogues</value>
+  </data>
+	<data name="GotoCart" xml:space="preserve">
+    <value>Go to the shopping cart</value>
+  </data>
+	<data name="SearchHistory" xml:space="preserve">
+    <value>Search history</value>
+  </data>
+	<data name="LaximoDataSelection" xml:space="preserve">
+    <value>OEM catalog</value>
+  </data>
+	<data name="SiteDataSelection" xml:space="preserve">
+    <value>Universal</value>
+  </data>
+	<data name="SiteTrackDataSelection" xml:space="preserve">
+    <value>Universal (trucks)</value>
+  </data>
+	<data name="BrandNotFound" xml:space="preserve">
+    <value>Manufacturer not found</value>
+  </data>
+	<data name="YourMessageSuccessfullySent" xml:space="preserve">
+    <value>Your message has been sent</value>
+  </data>
+	<data name="LxmOtherDetails" xml:space="preserve">
+    <value>Other assembly details</value>
+  </data>
+	<data name="Number_short" xml:space="preserve">
+    <value>No.</value>
+  </data>
+	<data name="Variant_short" xml:space="preserve">
+    <value>Var.</value>
+  </data>
+	<data name="ComparisionActExportDetails" xml:space="preserve">
+    <value>Export a detailed version</value>
+  </data>
+	<data name="MaxWarehouseQntAchived" xml:space="preserve">
+    <value>Maximum surplus amount reached: {0}</value>
+  </data>
+	<data name="ContinueShopping" xml:space="preserve">
+    <value>Continue shopping</value>
+  </data>
+</root>

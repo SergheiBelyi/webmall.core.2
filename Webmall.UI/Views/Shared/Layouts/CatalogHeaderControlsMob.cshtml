@@ -1,0 +1,40 @@
+﻿@using ViewRes
+@model Webmall.UI.Models.Catalog.CatalogWaresModel
+@{
+    var view = ViewBag.ViewMode;
+}
+
+<div class="header-controls d-md-none">
+    <div class="header-control">
+        <a class="filter-toggle" href="#">
+            <svg class="icon icon-funnel filter-toggle__icon">
+                <use href="/assets/images/svg/symbol/sprite.svg#funnel"></use>
+            </svg>
+        </a>
+    </div>
+    @if (Model.TotalAmountWares > 0)
+    {
+        <div class="header-control">
+            <div class="header-control__progress">товары <strong>@Model.Wares.PageSize</strong> @SharedResources.of <strong>@Model.TotalAmountWares</strong></div>
+        </div>
+    }
+   
+    <div class="header-control">
+        <ul class="view-mode">
+            <li class="view-mode__item @(view==1 ? "active":"")">
+                <a class="view-mode__link" href="#" @if (view == 0) { <text> onclick="setview(1); return false;" </text> }>
+                    <svg class="icon icon-th view-mode__icon">
+                        <use href="/assets/images/svg/symbol/sprite.svg#th"></use>
+                    </svg>
+                </a>
+            </li>
+            <li class="view-mode__item @(view==0 ? "active":"")">
+                <a class="view-mode__link" href="#" @if (view == 1) { <text> onclick="setview(0); return false;" </text> }>
+                    <svg class="icon icon-th-list view-mode__icon">
+                        <use href="/assets/images/svg/symbol/sprite.svg#th-list"></use>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+﻿@using ViewRes
+
+@{
+    Layout = null;
+}
+
+<div class="header__mob-area-main">
+    <button class="header__mob-area-toggle catalog-toggle js-catalog-mob-toggle" type="button">
+        <svg class="icon icon-menu catalog-toggle__icon" width="25" height="25">
+            <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#menu")"></use>
+        </svg>
+        <svg class="icon icon-close catalog-toggle__icon" width="25" height="25">
+            <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#close")"></use>
+        </svg>
+    </button>
+    @using (Html.BeginForm("Search", "Catalog", FormMethod.Get, new { id = "search-form", name = "search-form", @class = "search header__mob-area-search" }))
+    {
+        <div class="search__field">
+            <input class="search__input input" type="search" name="query" placeholder="@SharedResources.SearchPlaceholderArticle" value="@ViewBag.SearchString">
+            <button class="search__submit" type="submit" name="send">
+                <svg class="icon icon-search-glass search__submit-icon" width="25" height="25">
+                    <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#search-glass")"></use>
+                </svg>
+            </button>
+        </div>
+    }
+
+    @{Html.RenderAction("GroupMenuMobile", "Catalog");}
+
+</div>
+<div class="header__mob-area-bottom">
+    <ul class="header__mob-area-items mob-categories">
+        @{Html.RenderAction("HeaderNav", "Layout", new { mobile = true });}
+    </ul>
+</div>

@@ -1,0 +1,100 @@
+﻿@using Webmall.Model
+@using Webmall.Model.Entities.User
+@using ViewRes
+@using Webmall.UI.Core
+
+@{
+    //var allowEvents = ConfigHelper.AllowEventsMenu;
+    //var allowActions = ConfigHelper.AllowActionsMenu;
+    string baseClass = (ViewData["BaseClass"] != null) ? (string)ViewData["BaseClass"] : "category-nav";
+
+}
+
+@helper DrawMenuItem(string text, string href, string baseClass, string addClass = null, bool newWindow = false, bool? isCurrent = false)
+{
+    <li class="@(baseClass)__item @(isCurrent == true ? "active" : null)"> 
+        <a class="@(baseClass)__link @addClass" href="@Href(href)" target="@(newWindow ? "_blank" : "")">@text</a>
+    </li>
+}
+
+@helper DrawMenuItem(string text, string action, string controller, string baseClass = null, string addClass = null, bool newWindow = false, bool? isCurrent = null)
+{
+    isCurrent = isCurrent ?? Html.IsCurrentController(controller);
+    @DrawMenuItem(text, @Url.Action(action, controller), baseClass, addClass, newWindow, isCurrent)
+}
+
+@helper DrawMenuItemWitchCurrentAction(string text, string action, string controller, string baseClass, string addClass = null, bool newWindow = false)
+{
+    @DrawMenuItem(text,action, controller, baseClass, addClass, newWindow, Html.IsCurrentAction(action, controller))
+}
+ 
+    <ul class="@(baseClass)__list">
+        @*<li class="category-nav__item"><a class="category-nav__link important" href="@Url.Action("Index", "Promotions")">@SharedResources.Promotions</a></li>*@
+        @DrawMenuItem(SharedResources.Promotions, "Index", "Promotions", baseClass, "important")
+        @* ReSharper disable once Html.PathError *@
+        @if (SessionHelper.CurrentUser != null)
+        {
+            if (SessionHelper.CurrentClientId != null)
+            {
+                <li class="category-nav__title h3">@SharedResources.OrdersAndPayments</li>
+                @DrawMenuItem(SharedResources.Cart, "Index", "Cart", baseClass, "")
+                @DrawMenuItem(SharedResources.Orders, "List", "Order", baseClass, "")
+                @DrawMenuItem(SharedResources.Payment, "Index", "Payment", baseClass, "")
+
+                <li class="category-nav__title h3">@SharedResources.PersonalCabinet</li>
+                if (SessionHelper.CurrentUser.CurrentPresenter.IsComparisionUser)
+                {
+                    @DrawMenuItem(SharedResources.ComparisionAct, "Index", "ComparisionAct", baseClass, "")
+                }
+                if (ConfigHelper.FeaturesConfig.Cabinet.UserNotifications)
+                {
+                    @DrawMenuItem(SharedResources.NotificationsHistory, "Index", "UserNotifications", baseClass, "")
+                }
+                if (SecurityHelper.UserHasRole(UserRoles.LoyaltyUser) && ConfigHelper.FeaturesConfig.Cabinet.LoyaltyProgram)
+                {
+                    @DrawMenuItem(SharedResources.LoyaltyProgram, "Index", "Loyalty", baseClass, "")
+                }
+            }
+
+            @*if (SessionHelper.CurrentUser.Roles.IsFlagSet((long)UserRoles.Statistic))
+                {
+                    @DrawMenuItem(SharedResources.Reporting, "PentupDemand", "Reports")
+            }*@
+
+            @DrawMenuItemWitchCurrentAction(SharedResources.Clients, "Index", "Clients", baseClass, "")
+            @DrawMenuItemWitchCurrentAction(SharedResources.Profile, "EditPersonalData", "Security", baseClass, "")
+            @DrawMenuItem(SharedResources.VINRequests, "Index", "VINRequest", baseClass, "")
+
+            @*if (allowEvents)
+            {
+                @DrawMenuItem(SharedResources.Events, "Index", "Events", baseClass, "")
+            }
+            if (allowActions)
+            {
+                @DrawMenuItem(SharedResources.Actions, "Index", "Actions", baseClass, "")
+            }
+            if (SessionHelper.AllowServiceBooking)
+            {
+                @DrawMenuItem(SharedResources.ServiceBooking, "Index", "ServiceBooking", baseClass, ConfigHelper.ServiceBookingTargetNew)
+            }*@
+
+            if (SessionHelper.IsSupplier)
+            {
+                @DrawMenuItemWitchCurrentAction(SharedResources.UploadSupplierPriceKros, "Index", "UploadPriceKros", baseClass, "")
+            }
+            <li class="category-nav__title h3">@SharedResources.Tools</li>
+            if (SessionHelper.CurrentUser.Roles.IsFlagSet((long)UserRoles.Admin))
+            {
+                @DrawMenuItem(SharedResources.UsersManagement, "UsersManagement", "Security", baseClass, "", false, Html.IsCurrentAction("UsersManagement", "Security") || Html.IsCurrentAction("EditUserData", "Security"))
+                @DrawMenuItemWitchCurrentAction(SharedResources.UserRegistration, "InternalRegistration", "Security", baseClass, "")
+                @DrawMenuItemWitchCurrentAction(SharedResources.AccessStatistics, "Index", "AccessStatistics", baseClass, "")
+            }
+            if (SessionHelper.CurrentUser.Roles.IsFlagSet((long)UserRoles.ContentManager))
+            {
+                @DrawMenuItemWitchCurrentAction(SharedResources.GroupContentManagement, "Index", "ContentManagement", baseClass, "")
+                @DrawMenuItem(SharedResources.SiteManagement, "~/Backend", baseClass, "", true)
+            }
+            @*@DrawMenuItem(SharedResources.Logout, "Logout", "Security", baseClass, false)*@
+        }
+    </ul>
+

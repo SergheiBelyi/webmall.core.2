@@ -1,0 +1,41 @@
+﻿@using Webmall.Model
+@using ViewRes
+@using Webmall.UI.ViewModel.Helpers
+@using Webmall.UI.ViewModel
+@using Webmall.Model.Repositories.Abstract
+@using Webmall.UI.Core
+
+@model Webmall.UI.ViewModel.Catalog.GroupsListViewModel
+@{
+    Layout = "~/Views/Shared/_Inner.cshtml";
+    ViewBag.Title = Model.Title ?? SharedResources.Catalogs;
+    var showCategoryNav = ConfigHelper.ShowCategoryNavigationMenu;
+
+}
+
+@section BreadCrumbs{
+
+    @{Html.RenderPartial("Components/BreadCrumbsRender", Model.BreadCrumbs);}
+}
+
+@section Sidebar{
+    @{
+        if (showCategoryNav)
+        {
+            Html.RenderPartial("GroupsNav", Model.CurrentLevel);
+        }
+    }
+}
+@* Рисование подгруппы в виде иконок *@
+@{
+    Html.RenderPartial("GroupIcons", Model.SubGroups);
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/fancy")
+}
+
+@section styles {
+    @Styles.Render("~/Content/fancybox/fancy")
+}

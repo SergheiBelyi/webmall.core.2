@@ -1,0 +1,37 @@
+﻿@using ViewRes
+@using Webmall.UI.Core
+
+@model GridViewModel<Webmall.Model.Entities.Cms.NewsData.NewsArticle>
+@{
+    var title = ViewBag.NewsType;
+}           
+
+<div class="content-secondary">
+    <ul class="breadcrumbs">
+        <li><a href="@Url.Content("~")">@SharedResources.MainPage</a></li>
+        <li>&#8250;</li>
+        <li><a class="current">@title</a></li>
+    </ul>
+    <!--start action-->
+    <div id="action">
+
+        <h2>@title</h2>
+        <div class="column">
+            @foreach (var news in Model.List.Take((Model.List.Count()+1) / 2).Where(i => !string.IsNullOrEmpty(i.Header)))
+            {
+                Html.RenderPartial("_PromotionsListCard", news);
+            }
+        </div>
+        <div class="column no-padding">
+            @foreach (var news in Model.List.Skip((Model.List.Count()+1) / 2).Where(i => !string.IsNullOrEmpty(i.Header)))
+            {
+                Html.RenderPartial("_PromotionsListCard", news);
+            }
+        </div>
+        <div class="clear-div"> </div>
+        <div class="center">
+            @{ Html.RenderPartial("GridViewFooter", Model); }
+        </div>
+        <!--end action-->
+    </div>
+</div>

@@ -1,0 +1,25 @@
+﻿@using ViewRes
+@using Webmall.UI.Core.Helpers
+@using Webmall.UI.ViewModel
+@model List<BreadCrumbsModel>
+
+<ul class="breadcrumbs">
+    <li class="breadcrumbs__item">
+        <a class="breadcrumbs__link" href="@this.ToLocalizedUrl("/")">@SharedResources.MainPage</a>
+    </li>
+    @if (Model.Count > 0)
+    {
+        var last = Model.Last();
+        foreach (var item in Model)
+        {
+            <li class="breadcrumbs__item">
+                @if (!item.Equals(last))
+                {
+                    <a class="breadcrumbs__link" href="@item.Url">@item.Name</a>
+                }
+                else
+                {@item.Name}
+            </li>
+        }
+    }
+</ul>

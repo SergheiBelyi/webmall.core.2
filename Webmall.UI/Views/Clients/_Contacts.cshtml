@@ -1,0 +1,25 @@
+﻿@using ViewRes
+@model Webmall.Model.Entities.Client.Client
+
+@{
+    Layout = null;
+}
+
+@if (Model?.Contacts != null)
+{
+    <div class="addresses users__subsection">
+        <h2 class="profile__subheading secondary-heading">@SharedResources.Contacts</h2>
+        <div class="addresses__header text-left">
+            <a class="addresses__btn btn btn--primary" href="#" data-modal-win-trigger="contact-detail"
+               id="contact-0" data-close-outside="false" data-after-open="UpdateContactDialog();"
+               data-id="0" data-data="">@SharedResources.NewContact</a>
+        </div>
+        <div class="addresses__main">
+            @foreach (var item in Model.Contacts)
+            {
+                Html.RenderPartial("_ContactCard", item);
+            }
+        </div>
+
+    </div>
+}

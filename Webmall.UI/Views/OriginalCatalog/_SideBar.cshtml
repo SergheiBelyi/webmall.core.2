@@ -1,0 +1,12 @@
+﻿@model Webmall.UI.Models.ExternalCatalogModel
+
+<div class="sidebar">
+    <div class="category-nav d-none d-md-block">
+        <ul class="category-nav__list">
+            @foreach (var category in Model.Catalog)
+            {
+                <li class="category-nav__item @(category.Slug == Model.SelectedItemId ? "active" : "")"><a class="category-nav__link" href="@Url.Action("Index", new { Id = category.Slug })">@category.Name</a></li>
+            }
+        </ul>
+    </div>
+</div>

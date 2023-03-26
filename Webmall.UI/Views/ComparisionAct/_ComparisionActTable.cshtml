@@ -1,0 +1,173 @@
+﻿@using ViewRes
+@model Webmall.UI.Models.ComparisionActModel
+@{
+    Layout = null;
+}
+<!-- /orders-filter-->
+<div class="card-specification-section">
+    <div class="spec-payment-header d-none d-md-block"><a class="spec-payment-toggle" href="#">"@SharedResources.Expand <i class="fas fa-angle-double-down"></i></a></div>
+    <div class="table-responsive d-none d-md-block">
+        <table class="spec-payment-table" id="spec-payment-table">
+            <colgroup>
+                <col>
+                <col class="spec-payment-table__col-title">
+                <col>
+                <col>
+                <col>
+                <col>
+            </colgroup>
+            <thead class="spec-payment-table__thead">
+                <tr class="spec-payment-table__tr">
+                    <th class="spec-payment-table__th" rowspan="2">@SharedResources.DocNumber</th>
+                    <th class="spec-payment-table__th" rowspan="2">@SharedResources.DocType</th>
+                    <th class="spec-payment-table__th text-center" rowspan="2">@SharedResources.Date</th>
+                    <th class="spec-payment-table__th text-center" colspan="3">@SharedResources.Sum, @Model.ValuteName</th>
+                </tr>
+                <tr class="spec-payment-table__tr spec-payment-table__tr--bordered">
+                    <th class="spec-payment-table__th text-center">@SharedResources.Debet.ToLower()</th>
+                    <th class="spec-payment-table__th text-center">@SharedResources.Credit.ToLower()</th>
+                    <th class="spec-payment-table__th text-center">@SharedResources.debt</th>
+                </tr>
+                @{
+                    var firstRow = Model.List.FirstOrDefault();
+                    var lastRow = Model.List.LastOrDefault();
+                }
+                @if (firstRow != null)
+                {
+                    <tr class="spec-payment-table__subhead-tr">
+                        <th class="spec-payment-table__th">&nbsp;</th>
+                        <th class="spec-payment-table__th">@SharedResources.StartBalance</th>
+                        <th class="spec-payment-table__th text-center">@(firstRow.DocDate.HasValue ? firstRow.DocDate.Value.ToShortDateString() : String.Empty)</th>
+                        <th class="spec-payment-table__th">@(firstRow.DocSum > 0 ? firstRow.DocSum.Value.ToString("n") : String.Empty)</th>
+                        <th class="spec-payment-table__th">@(firstRow.DocSum < 0 ? firstRow.DocSum.Value.ToString("n") : String.Empty)</th>
+                        <th class="spec-payment-table__th">&nbsp;</th>
+                    </tr>
+                }
+            </thead>
+            @if (Model.List != null)
+            {
+                foreach (var row in Model.List.Skip(1).Take(Model.List.Count - 2))
+                {
+                    <tbody class="spec-payment-table__tbody">
+                        <tr class="spec-payment-table__tr comp-act-row" rowId="@row.Id,@row.DocTypeId" panelId="@row.Id.Replace('@', '_')" id="@row.Id.Replace('@', '_')">
+                            <td class="spec-payment-table__td">
+                                <div class="spec-payment-table__value-primary">@row.DocNumber@(row.CustomValues.ContainsKey("OrderNumber") && !string.IsNullOrEmpty(row.CustomValues["OrderNumber"]) ? string.Format(" ({0}: {1})", SharedResources.Order, row.CustomValues["OrderNumber"]) : "")</div>
+                            </td>
+                            <td class="spec-payment-table__td">
+                                <div class="spec-payment-table__value">@row.DocType</div>
+                            </td>
+                            <td class="spec-payment-table__td">
+                                <div class="spec-payment-table__value">@(row.DocDate.HasValue ? row.DocDate.Value.ToShortDateString() : String.Empty)</div>
+                            </td>
+                            <td class="spec-payment-table__td">
+                                <div class="spec-payment-table__value">@(row.DocSum > 0 ? row.DocSum.Value.ToString("n") : String.Empty)</div>
+                            </td>
+                            <td class="spec-payment-table__td">
+                                <div class="spec-payment-table__value">@(row.DocSum < 0 ? row.DocSum.Value.ToString("n") : String.Empty)</div>
+                            </td>
+                            <td class="spec-payment-table__td">
+                                <div class="spec-payment-table__value">@(row.DebdSum.HasValue ? row.DebdSum.Value.ToString("n") : String.Empty)</div>
+                                @if (row.HasDetail)
+                                {
+                                    <div class="spec-payment-table__toggle">
+                                        <svg class="icon icon-chevron-down spec-payment-table__toggle-icon">
+                                            <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#chevron-down")"></use>
+                                        </svg>
+                                    </div>
+                                }
+                            </td>
+                        </tr>
+                        <tr class="spec-payment-table__tr comp-act-detail-row" bodyid="@row.Id">
+                            <td class="spec-payment-table__td" colspan="6">
+                                @if (row.HasDetail)
+                                {
+                                    <table class="spec-payment-table comp-act-detail-table">
+                                        <colgroup>
+                                            <col>
+                                            <col class="spec-payment-table__col-title-sub">
+                                            <col>
+                                            <col>
+                                            <col class="spec-payment-table__col-count">
+                                            <col>
+                                        </colgroup>
+                                        <thead class="spec-payment-table__thead">
+                                            <tr class="spec-payment-table__tr">
+                                                <th class="spec-payment-table__th">@SharedResources.Number</th>
+                                                <th class="spec-payment-table__th">@SharedResources.WareName</th>
+                                                <th class="spec-payment-table__th">@SharedResources.Brand</th>
+                                                <th class="spec-payment-table__th">@SharedResources.UnitPrice</th>
+                                                <th class="spec-payment-table__th text-center">@SharedResources.Amount</th>
+                                                <th class="spec-payment-table__th">@SharedResources.Sum, @(Model.ValuteName)</th>
+                                                @if (row.FullForm)
+                                                {
+                                                    <th class="spec-payment-table__th">@SharedResources.OrderNumber </th>
+                                                    <th class="spec-payment-table__th">@SharedResources.OrderDate</th>
+                                                    <th class="spec-payment-table__th">@SharedResources.ReturningType</th>
+                                                }
+                                            </tr>
+                                        </thead>
+                                        <tbody class="spec-payment-table__tbody" id="body_det_@row.Id.Replace('@', '_')"></tbody>
+                                    </table>
+                                }
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+            }
+            @if (lastRow != null)
+            {
+                <thead class="spec-payment-table__thead">
+                    <tr class="spec-payment-table__subhead-tr">
+                        <th class="spec-payment-table__th">&nbsp;</th>
+                        <th class="spec-payment-table__th">@SharedResources.EndBalance</th>
+                        <th class="spec-payment-table__th text-center">@(lastRow.DocDate.HasValue ? lastRow.DocDate.Value.ToShortDateString() : String.Empty)</th>
+                        <th class="spec-payment-table__th">@(lastRow.DocSum > 0 ? lastRow.DocSum.Value.ToString("n") : String.Empty)</th>
+                        <th class="spec-payment-table__th">@(lastRow.DocSum < 0 ? lastRow.DocSum.Value.ToString("n") : String.Empty)</th>
+                        <th class="spec-payment-table__th">&nbsp;</th>
+                    </tr>
+                </thead>
+            }
+        </table>
+    </div>
+    <div class="spec d-md-none">
+        <div class="spec__title">@SharedResources.ComparisionAct</div>
+        <p class="spec__heading-desc">@SharedResources.StartBalance <strong>@((firstRow != null && firstRow.DocDate.HasValue) ? firstRow.DocDate.Value.ToShortDateString() : String.Empty)</strong> - <strong>@(lastRow != null ? lastRow.DocSum.Value.ToString("n") : String.Empty)</strong></p>
+        @if (Model.List != null)
+        {
+            foreach (var row in Model.List.Skip(1).Take(Model.List.Count - 2))
+            {
+                <div class="spec__product">
+                    <div class="spec__heading" rowId="@row.Id,@row.DocTypeId" panelId="@row.Id.Replace('@', '_')">@SharedResources.DocNumber - @row.DocNumber@row.DocNumber@(row.CustomValues.ContainsKey("OrderNumber") && !string.IsNullOrEmpty(row.CustomValues["OrderNumber"]) ? string.Format(" ({0}: {1})", SharedResources.Order, row.CustomValues["OrderNumber"]) : "")</div>
+                    <div class="spec__main">
+                        <dl class="spec__params">
+                            <dt class="spec__property"><strong>@SharedResources.DocType</strong></dt>
+                            <dd class="spec__value">@row.DocType</dd>
+                            <dt class="spec__property"><strong>@SharedResources.Date</strong></dt>
+                            <dd class="spec__value">@(row.DocDate.HasValue ? row.DocDate.Value.ToShortDateString() : String.Empty)</dd>
+                            <dt class="spec__property"><strong>@SharedResources.Debet</strong></dt>
+                            <dd class="spec__value">@(row.DocSum > 0 ? row.DocSum.Value.ToString("n") : String.Empty)</dd>
+                            <dt class="spec__property"><strong>@SharedResources.Credit</strong></dt>
+                            <dd class="spec__value">@(row.DocSum < 0 ? row.DocSum.Value.ToString("n") : String.Empty)</dd>
+                            <dt class="spec__property"><strong>@SharedResources.debt</strong></dt>
+                            <dd class="spec__value">@(row.DebdSum.HasValue ? row.DebdSum.Value.ToString("n") : String.Empty)</dd>
+                        </dl>
+                    </div>
+                    <div class="spec__detail" id="div_det_@row.Id.Replace('@', '_')">
+                    </div>
+                </div>
+            }
+        }
+    </div>
+    <div class="orders-list__mob-controls">
+        <div class="section-area checkbox-label">
+            <input class="checkbox-label__input" type="checkbox" name="detailed" id="detailed" value="true">
+            <label class="checkbox-label__main" for="detailed">@SharedResources.ComparisionActExportDetails</label>
+        </div>
+        <div class="section-area checkbox-label">
+            <label for="excel"><input type="radio" name="reportFormat" value="excel" checked="checked" id="excel" /> Excel</label>
+            <label for="pdf"><input type="radio" name="reportFormat" value="pdf" id="pdf" /> PDF</label>
+        </div>
+        <input class="btn btn--main" type="submit" id="ComparisionActButton" value="@SharedResources.Download">
+    </div>
+
+</div>

@@ -1,0 +1,29 @@
+﻿@using Webmall.Model
+@using ViewRes
+@{ 
+   Layout = "~/Views/Shared/_Layout.cshtml"; 
+}
+
+<div class="inner-section inner-section--mod">
+    <div class="inner-section__main inner-section__main--secondary">
+        <div class="inner-section__header">
+            <h1 class="inner-section__heading">@SharedResources.Error.ToUpper() 404</h1>
+        </div>
+        <figure class="error-notification">
+            <div class="error-notification__img-wrap"><img class="error-notification__img img-responsive" src="@Url.Content("~/assets/images/general/404.png")" alt="Страница не найдена"></div>
+            <figcaption class="error-notification__figcaption">
+                <div class="error-notification__desc">Так уж получилось, что из множества страниц нашего сайта Вы оказались как раз на той, которая уже не существует… Предлагаем вам вернуться на главную страницу или связаться с нами по номеру <b>@ConfigHelper.ContactRetailPhone</b>.</div><a class="btn btn--main" href="@Url.Content("~")">Вернуться на главную</a>
+            </figcaption>
+        </figure>
+    </div>
+</div>
+
+@*<div class="content-secondary">
+    <div class="error404">
+        <h2>@SharedResources.Error.ToUpper() 404</h2>
+        <p> Нам кажется, что вы заблудились. Либо такой страницы у нас нет.</p>
+        <p> Попробуйте перейти на <a href="@Url.Content("~")">главную страницу</a> </p>
+        <p> или связаться с нами по номеру <b>@ConfigHelper.ContactRetailPhone</b> </p>
+    </div>
+</div>*@
+

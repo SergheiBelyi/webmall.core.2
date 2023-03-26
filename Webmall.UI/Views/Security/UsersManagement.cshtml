@@ -1,0 +1,435 @@
+﻿@using Webmall.Model.Entities.User;
+@using ViewRes
+
+@model Webmall.UI.Models.UserManagement.UserListModel
+
+@{
+    Layout = "~/Views/Shared/_PersonalLayout.cshtml";
+    ViewBag.Title = SecurityResources.UserManagement;
+    var rUrl = ViewContext.RequestContext.HttpContext.Request.RawUrl;
+}
+
+<div class="users">
+    <div class="users__subsection">
+        <div class="users__subsection js-accordion">
+            <h2 class="users__subheading secondary-heading is-mob-hidden">@SharedResources.Filters</h2><!-- users-filter-->
+            <div class="users__filter users-filter js-accordion is-active">
+                <div class="users-filter__heading js-accordion-trigger">@SharedResources.Filters</div>
+                @using (Html.BeginForm("UsersManagement", "Security", FormMethod.Get, new { @class = "users-filter__main js-accordion-body" }))
+                {
+                    <div class="users-filter__fields">
+                        <div class="users-filter__field">
+                            <input class="users-filter__input input" type="text" name="name" placeholder="@SharedResources.Name / @SharedResources.FIO" value="@Model.Filter.LastName">
+                        </div>
+                        <div class="users-filter__field">
+                            <input class="users-filter__input input" type="text" name="login" placeholder="@SharedResources.Login" value="@Model.Filter.Login">
+                        </div>
+                        <div class="users-filter__field">
+                            <input class="users-filter__input input" type="tel" name="ClientCode" placeholder="@SharedResources.ClientCode" value="@Model.Filter.ClientCode">
+                        </div>
+                        <div class="users-filter__field">
+                            <div class="users-filter__option checkbox-label">
+                                <input class="checkbox-label__input" type="checkbox" value="true" name="IsManager" id="IsManager" @(Model.Filter.IsManager ? "checked=\"checked\"" : "")>
+                                <label class="checkbox-label__main" for="IsManager">
+                                    <span class="checkbox-label__main-text">@SecurityResources.ManagersOnly</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="users-filter__field">
+                            <div class="users-filter__option checkbox-label">
+                                <input class="checkbox-label__input" type="checkbox" name="IsAdmin" id="IsAdmin" @(Model.Filter.IsAdmin ? "checked=\"checked\"" : "") value="true">
+                                <label class="checkbox-label__main" for="IsAdmin">
+                                    <span class="checkbox-label__main-text">@SecurityResources.AdminsOnly</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="users-filter__field">
+                            <input class="users-filter__btn btn btn--primary btn--block" type="submit" value="@SecurityResources.ApplyFilter">
+                        </div>
+                    </div>
+                }
+            </div><!-- /users-filter-->
+        </div>
+    </div>
+    <div class="users__subsection">
+        <div class="users__subsection">
+            <!-- users-data-->
+            <div class="users__main users-data">
+                <div class="users-data__header">
+                    @*<!-- header-controls-->
+                        <div class="users-data__controls header-controls">
+                            <div class="header-control">
+                                <div class="header-control__dropdown">
+                                    <div class="header-control__dropdown-main custom-dropdown js-dropdown">
+                                        <div class="custom-dropdown__header js-dropdown-toggle">
+                                            <div class="custom-dropdown__heading">Всех пользователей</div>
+                                        </div>
+                                        <ul class="custom-dropdown__items">
+                                            <li class="custom-dropdown__item">
+                                                <a class="custom-dropdown__link" href="#">Всех пользователей</a>
+                                            </li>
+                                            <li class="custom-dropdown__item">
+                                                <a class="custom-dropdown__link" href="#">Только менеджеры</a>
+                                            </li>
+                                            <li class="custom-dropdown__item">
+                                                <a class="custom-dropdown__link" href="#">Только администраторы</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="header-control__dropdown-text">Отображать</div>
+                                </div>
+                            </div>
+                        </div><!-- /header-controls-->
+                    *@
+                </div>
+                <div class="users-data__main">
+                    <!-- users-table-->
+                    <div class="users-data__table users-table">
+                        <div class="users-table__header">
+                            <div class="users-table__row">
+                                <div class="users-table__cell">
+                                    <div class="users-table__caption">@(SharedResources.FIO + "/" + SharedResources.RegistrationDate)</div>
+                                </div>
+                                <div class="users-table__cell">
+                                    <div class="users-table__caption">@(SharedResources.Login + "/" + SharedResources.Phones)</div>
+                                </div>
+                                <div class="users-table__cell">
+                                    <div class="users-table__caption">@SharedResources.RolesInSystem</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="users-table__main">
+                            @foreach (var user in Model.Users.List)
+                            {
+                                <div class="users-table__row">
+                                    <div class="users-table__cell">
+                                        <div class="users-table__meta @(user.IsBlocked ? "is-locked" : "")">
+                                            <div class="users-table__info">
+                                                @if (user.IsBlocked)
+                                                {
+                                                    <i class="fas fa-lock"></i>
+                                                }
+                                                else if (user.Status == (long)UserStatuses.WaitConfirmation)
+                                                {
+                                                    <a onclick="return confirm('@SecurityResources.ConfirmOperation');" href="@Url.Action("ConfirmUser", new { guid = user.Guid, returnUrl = rUrl })">
+                                                        <i class="fas fa-lock" title="@SecurityResources.WaitingConfirmation"></i>
+                                                    </a>
+                                                }
+                                                <time class="users-table__date" datetime="@user.RegistrationDate.Year">@(user.RegistrationDate.ToShortDateString() + " " + user.RegistrationDate.ToShortTimeString())</time>
+                                                <div class="users-table__name"><a href="@Url.Action("EditUserData", new { userLogin = user.Login, returnUrl = rUrl })">@user.FullName</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="users-table__cell">
+                                        <ul class="users-table__contacts user-contacts">
+                                            <li class="user-contacts__contact">
+                                                <a class="user-contacts__contact-link" href="mailto:@user.Email">@user.Login</a>
+                                            </li>
+                                            <li class="user-contacts__contact">
+                                                <a class="user-contacts__contact-link" href="tel:@user.PhoneMobile">@user.PhoneMobile</a>
+                                            </li>
+                                            @if (!string.IsNullOrEmpty(user.PhoneHome))
+                                            {
+                                                <li class="user-contacts__contact">
+                                                    <a class="user-contacts__contact-link" href="tel:@user.PhoneHome">@user.PhoneHome</a>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
+                                    <div class="users-table__cell">
+                                        <div class="users-table__roles user-roles">
+                                            @if (user.UserRolesView.Count > 0)
+                                            {
+                                                <ul class="user-roles__list">
+                                                    @{
+                                                        var cnt = 0;
+                                                    }
+                                                    @foreach (var role in user.UserRolesView)
+                                                    {
+                                                        cnt++;
+                                                        <li class="user-roles__item @(cnt > 3 ? "is-hidden" : "")">@role</li>
+                                                    }
+                                                </ul>
+                                                if (cnt > 3)
+                                                {
+                                                    <button class="user-roles__more js-more-trigger" type="button">
+                                                        <span>@SharedResources.ShowAll</span>
+                                                    </button>
+                                                }
+                                            }
+                                        </div>
+                                        <ul class="users-table__controls user-controls">
+                                            <li class="user-controls__item">
+                                                <a class="user-controls__link" href="@Url.Action("EditUserData", new { userLogin = user.Login, returnUrl = rUrl })">
+                                                    <svg class="icon icon-pen user-controls__icon" width="25" height="25">
+                                                        <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#pen")"></use>
+                                                    </svg>
+                                                </a>
+                                            </li>
+                                            <li class="user-controls__item">
+                                                <a class="user-controls__link is-remove" href="@Url.Action("RemoveUser", new { userLogin = user.Login, returnUrl = rUrl })">
+                                                    <svg class="icon icon-close user-controls__icon" width="25" height="25">
+                                                        <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#close")"></use>
+                                                    </svg>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            }
+                        @*
+                            <div class="users-table__row">
+                                <div class="users-table__cell">
+                                    <div class="users-table__meta">
+                                        <div class="users-table__info">
+                                            <time class="users-table__date" datetime="2023">09 Августа 2019 / Время 14:55</time>
+                                            <div class="users-table__name">Алиев Турал</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="users-table__cell">
+                                    <ul class="users-table__contacts user-contacts">
+                                        <li class="user-contacts__contact">
+                                            <a class="user-contacts__contact-link" href="mailto:m.baidauletov@allurauto.com">m.baidauletov@allurauto.com</a>
+                                        </li>
+                                        <li class="user-contacts__contact">
+                                            <a class="user-contacts__contact-link" href="tel:+387059888827">+387 059888827</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="users-table__cell">
+                                    <div class="users-table__roles user-roles">
+                                        <ul class="user-roles__list">
+                                            <li class="user-roles__item">Администратор системы безопасности</li>
+                                            <li class="user-roles__item">Менеджер по VIN запросам</li>
+                                            <li class="user-roles__item">Менеджер по ключевым сотрудникам</li>
+                                        </ul>
+                                    </div>
+                                    <ul class="users-table__controls user-controls">
+                                        <li class="user-controls__item">
+                                            <a class="user-controls__link" href="#">
+                                                <svg class="icon icon-pen user-controls__icon" width="25" height="25">
+                                                    <use href="assets/images/svg/symbol/sprite.svg#pen"></use>
+                                                </svg>
+                                            </a>
+                                        </li>
+                                        <li class="user-controls__item">
+                                            <a class="user-controls__link is-remove" href="#">
+                                                <svg class="icon icon-close user-controls__icon" width="25" height="25">
+                                                    <use href="assets/images/svg/symbol/sprite.svg#close"></use>
+                                                </svg>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="users-table__row">
+                                <div class="users-table__cell">
+                                    <div class="users-table__meta is-locked">
+                                        <div class="users-table__info">
+                                            <time class="users-table__date" datetime="2023">09 Августа 2019 / Время 14:55</time>
+                                            <div class="users-table__name">Алиев Турал</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="users-table__cell">
+                                    <ul class="users-table__contacts user-contacts">
+                                        <li class="user-contacts__contact">
+                                            <a class="user-contacts__contact-link" href="mailto:m.baidauletov@allurauto.com">m.baidauletov@allurauto.com</a>
+                                        </li>
+                                        <li class="user-contacts__contact">
+                                            <a class="user-contacts__contact-link" href="tel:+387059888827">+387 059888827</a>
+                                        </li>
+                                        <li class="user-contacts__contact">
+                                            <a class="user-contacts__contact-link" href="tel:++7789421977">+778 9421977</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="users-table__cell">
+                                    <div class="users-table__roles user-roles">
+                                        <ul class="user-roles__list">
+                                            <li class="user-roles__item">Администратор системы безопасности</li>
+                                            <li class="user-roles__item">Менеджер по VIN запросам</li>
+                                            <li class="user-roles__item">Менеджер по ключевым сотрудникам</li>
+                                            <li class="user-roles__item is-hidden">Администратор системы безопасности</li>
+                                            <li class="user-roles__item is-hidden">Менеджер по VIN запросам</li>
+                                            <li class="user-roles__item is-hidden">Менеджер по ключевым сотрудникам</li>
+                                        </ul>
+                                        <button class="user-roles__more js-more-trigger" type="button">Показать еще</button>
+                                    </div>
+                                    <ul class="users-table__controls user-controls">
+                                        <li class="user-controls__item">
+                                            <a class="user-controls__link" href="#">
+                                                <svg class="icon icon-pen user-controls__icon" width="25" height="25">
+                                                    <use href="assets/images/svg/symbol/sprite.svg#pen"></use>
+                                                </svg>
+                                            </a>
+                                        </li>
+                                        <li class="user-controls__item">
+                                            <a class="user-controls__link is-remove" href="#">
+                                                <svg class="icon icon-close user-controls__icon" width="25" height="25">
+                                                    <use href="assets/images/svg/symbol/sprite.svg#close"></use>
+                                                </svg>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="users-table__row">
+                                <div class="users-table__cell">
+                                    <div class="users-table__meta">
+                                        <div class="users-table__info">
+                                            <time class="users-table__date" datetime="2023">09 Августа 2019 / Время 14:55</time>
+                                            <div class="users-table__name">AqusServiceAstana ТОО (аэропорт) (док), Карпушенко</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="users-table__cell">
+                                    <ul class="users-table__contacts user-contacts">
+                                        <li class="user-contacts__contact">
+                                            <a class="user-contacts__contact-link" href="mailto:m.baidauletov@allurauto.com">m.baidauletov@allurauto.com</a>
+                                        </li>
+                                        <li class="user-contacts__contact">
+                                            <a class="user-contacts__contact-link" href="tel:++7789421977">+778 9421977</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="users-table__cell">
+                                    <div class="users-table__roles user-roles">
+                                        <ul class="user-roles__list">
+                                            <li class="user-roles__item">Администратор системы безопасности</li>
+                                            <li class="user-roles__item">Менеджер по VIN запросам</li>
+                                            <li class="user-roles__item">Менеджер по ключевым сотрудникам</li>
+                                            <li class="user-roles__item is-hidden">Администратор системы безопасности</li>
+                                        </ul>
+                                        <button class="user-roles__more js-more-trigger" type="button">Показать еще</button>
+                                    </div>
+                                    <ul class="users-table__controls user-controls">
+                                        <li class="user-controls__item">
+                                            <a class="user-controls__link" href="#">
+                                                <svg class="icon icon-pen user-controls__icon" width="25" height="25">
+                                                    <use href="assets/images/svg/symbol/sprite.svg#pen"></use>
+                                                </svg>
+                                            </a>
+                                        </li>
+                                        <li class="user-controls__item">
+                                            <a class="user-controls__link is-remove" href="#">
+                                                <svg class="icon icon-close user-controls__icon" width="25" height="25">
+                                                    <use href="assets/images/svg/symbol/sprite.svg#close"></use>
+                                                </svg>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="users-table__row">
+                                <div class="users-table__cell">
+                                    <div class="users-table__meta is-locked">
+                                        <div class="users-table__info">
+                                            <time class="users-table__date" datetime="2023">09 Августа 2019 / Время 14:55</time>
+                                            <div class="users-table__name">Алиев Турал</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="users-table__cell">
+                                    <ul class="users-table__contacts user-contacts">
+                                        <li class="user-contacts__contact">
+                                            <a class="user-contacts__contact-link" href="mailto:Ramszotti110@yandex.ru">Ramszotti110@yandex.ru</a>
+                                        </li>
+                                        <li class="user-contacts__contact">
+                                            <a class="user-contacts__contact-link" href="tel:++7789421977">+778 9421977</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="users-table__cell">
+                                    <ul class="users-table__controls user-controls">
+                                        <li class="user-controls__item">
+                                            <a class="user-controls__link" href="#">
+                                                <svg class="icon icon-pen user-controls__icon" width="25" height="25">
+                                                    <use href="assets/images/svg/symbol/sprite.svg#pen"></use>
+                                                </svg>
+                                            </a>
+                                        </li>
+                                        <li class="user-controls__item">
+                                            <a class="user-controls__link is-remove" href="#">
+                                                <svg class="icon icon-close user-controls__icon" width="25" height="25">
+                                                    <use href="assets/images/svg/symbol/sprite.svg#close"></use>
+                                                </svg>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        *@
+                        </div>
+                    </div><!-- /users-table-->
+                </div>
+            <div class="users-data__bottom text-center">
+                
+                <div class="header-control">
+                    @{
+                        Html.RenderPartial("Components/Pagination", Model.Users);
+                    }
+                </div>
+
+                <!-- pagination-->
+                <!--<div class="users-data__pagination pagination">
+                    <a class="pagination__first" href="#">
+                        <svg class="pagination__first-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.5 6.93038V13.0618L7.90139 9.97312L12.5 6.93038Z"/>
+                            <line x1="5.5" y1="5.71429" x2="5.5" y2="14.2857"/>
+                        </svg>
+                    </a>
+                    <a class="pagination__prev" href="#">
+                        <svg class="pagination__prev-icon" width="6" height="8" viewBox="0 0 6 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 8L0 3.97L6 0V8Z"/>
+                        </svg>
+                    </a>
+                    <ul class="pagination__list">
+                        <li class="pagination__item">
+                            <a class="pagination__link" href="#">1</a>
+                        </li>
+                        <li class="pagination__item">
+                            <a class="pagination__link" href="#">2</a>
+                        </li>
+                        <li class="pagination__item">
+                            <a class="pagination__link active" href="#">3</a>
+                        </li>
+                        <li class="pagination__item">
+                            <a class="pagination__link" href="#">4</a>
+                        </li>
+                        <li class="pagination__item">
+                            <a class="pagination__link" href="#">5</a>
+                        </li>
+                    </ul>
+                    <a class="pagination__next" href="#">
+                        <svg class="pagination__next-icon" width="6" height="8" viewBox="0 0 6 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 8L6 3.97L0 0V8Z"/>
+                        </svg>
+                    </a>
+                    <a class="pagination__last" href="#">
+                        <svg class="pagination__last-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7.5 6.93038V13.0618L12.0986 9.97312L7.5 6.93038Z"/>
+                            <line y1="-0.5" x2="8.57143" y2="-0.5" transform="matrix(0 1 1 0 15 5.71429)"/>
+                        </svg>
+                    </a>
+                </div>--><!-- /pagination-->
+            </div>
+            </div><!-- /users-data-->
+        </div>
+    </div>
+
+</div>
+
+<div class="client-detail">
+    @{
+        Html.RenderPartial("Components/Pagination", Model.Users);
+    }
+</div>
+
+@section scripts
+{
+    @{
+        Html.RenderPartial("GridViewFooterScripts", Model.Users);
+    }
+}

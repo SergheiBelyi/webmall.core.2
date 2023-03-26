@@ -1,0 +1,47 @@
+﻿@using Webmall.UI.Core
+@using ViewRes
+@using Webmall.Model.Repositories.Abstract
+@{
+    //var phones = CmsData.GetPhones();
+
+    var cmsRepository = DependencyResolver.Current.GetService<ICmsRepository>();
+    var contacts = cmsRepository.GetContact();
+    var phone = "";
+    if (contacts.Phones != null && contacts.Phones.Count > 0)
+    {
+        phone = contacts.Phones[0].Phone;
+    }
+}
+@if (SessionHelper.CurrentUser == null)
+{
+    <div class="tiny-contacts">
+        <a class="tiny-contacts__wrap" href="tel:@phone">
+            <svg class="icon icon-phone-call tiny-contacts__icon">
+                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#phone-call")"></use>
+            </svg><span class="tiny-contacts__phone">@phone</span>
+        </a>
+        <div class="tiny-contacts__weekdays">
+            @string.Join("\n", contacts.Schedule.Values)
+            <div class="tiny-contacts__working-hours"></div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="header-contacts">
+        <svg class="icon icon-phone-call header-contacts__icon">
+            <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#phone-call")"></use>
+        </svg>
+        <div class="header-contacts-phones">
+            <div class="header-contacts-phone"><a class="header-contacts__tel" href="tel:@phone">@SharedResources.Phone</a></div>
+            <div class="header-contacts-phone"><a class="header-contacts__tel" href="tel:@phone">@phone</a></div>
+            @*<div class="header-contacts-phone"><a class="header-contacts__tel" href="tel:@contacts.GrossPhone">@contacts.GrossPhone</a></div>
+        <div class="header-contacts-phone"><a class="header-contacts__tel" href="tel:@contacts.RetailPhone">@contacts.RetailPhone</a></div>*@
+        </div>
+        <ul class="header-contacts__timetable">
+            <li class="header-contacts__timetable-info">ПН-ПТ: с 9-00 до 18-00</li>
+            <li class="header-contacts__timetable-info">СБ: с 9-00 до 14-00</li>
+            <li class="header-contacts__timetable-info">Вс: выходной</li>
+        </ul>
+    </div>
+}

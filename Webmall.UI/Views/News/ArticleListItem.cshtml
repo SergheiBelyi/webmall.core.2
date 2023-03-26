@@ -1,0 +1,18 @@
+﻿@model Webmall.UI.ViewModel.News.NewsArticleViewModel
+@{
+    var article = Model.Article;
+    var newsUrl = Url.Action("Index", "News", new {category = Model.Category?.Slug, id=article.Url});
+}
+
+<article class="blog__news news">
+    <a class="news__img-wrap" href="@newsUrl">
+        <img class="news__img" src="@article.ImageUrl" srcset="@article.ImageUrl 2x" alt="" width="410" height="190">
+    </a>
+    <div class="news__main">
+        <time class="news__date" datetime="@article.Date.ToShortDateString()">@article.Date.ToShortDateString()</time>
+        <h3 class="news__heading">
+            <a class="news__heading-link" href="@newsUrl">@article.Header</a>
+        </h3>
+        <p class="news__excerpt">@article.ShortText</p>
+    </div>
+</article>

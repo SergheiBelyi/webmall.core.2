@@ -1,0 +1,41 @@
+﻿@using ViewRes
+@model Webmall.UI.Models.Catalog.CatalogWaresModel
+
+<div class="table-responsive d-none d-md-block">
+    <table class="stock-table">
+        <thead class="stock-table__thead">
+            <tr class="stock-table__tr">
+                <th class="stock-table__th"></th>
+                <th class="stock-table__th">@SharedResources.Brand</th>
+                <th class="stock-table__th">@SharedResources.PartNumber</th>
+                <th class="stock-table__th">@SharedResources.Name</th>
+            </tr>
+        </thead>
+        @foreach (var ware in Model.Wares.List)
+        {
+            <tbody class="stock-table__tbody">
+                <tr class="stock-table__tr">
+                    <td class="stock-table__td">
+                        @*@{Html.RenderPartial("Components/WareImageTable", ware); }*@
+                    </td>
+                    <td class="stock-table__td">
+                        <div class="stock-table__meta">
+                            <a class="stock-table__meta-title" href="@ware.Url">@ware.ProducerName</a>
+                        </div>
+                    </td>
+                    <td class="stock-table__td">
+                        <div class="stock-table__meta">
+                            <a class="stock-table__meta-title" href="@ware.Url">@ware.WareNumber</a>
+                        </div>
+                    </td>
+                    <td class="stock-table__td">
+                        <div class="stock-table__meta">
+                            <a class="stock-table__meta-title" href="@ware.Url">@ware.Name</a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        }
+    </table>
+</div>
+

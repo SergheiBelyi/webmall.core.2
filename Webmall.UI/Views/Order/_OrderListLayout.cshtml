@@ -1,0 +1,42 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.HideTitle = ViewBag.HideTitle ?? true;
+}
+
+<div class="container-fluid">
+    @RenderSection("BreadCrumbs", false)
+    <div class="content">
+        <div class="page-intro">
+            <h1 class="page-intro__heading main-heading">@ViewBag.Title</h1>
+        </div>
+
+        <div class="primary">
+            <aside class="primary__sidebar">
+                @RenderSection("Filters", false)
+            </aside>
+            <main class="primary__main">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+</div>
+
+
+@section styles
+{
+    @RenderSection("styles", required: false)
+}
+
+@section headerScript
+{
+    @RenderSection("headerScript", required: false)
+}
+
+@section scripts
+{
+    @RenderSection("scripts", required: false)
+}
+
+@section dialogs {
+    @RenderSection("dialogs", required: false)
+}

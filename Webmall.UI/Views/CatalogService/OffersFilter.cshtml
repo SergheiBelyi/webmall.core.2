@@ -1,0 +1,68 @@
+﻿@using ViewRes
+@model Webmall.UI.ViewModel.Catalog.OffersFilterViewModel
+
+@* filter *@
+<form class="filter catalog-layout__filter" id="filterForm" name="filterForm" method="get">
+    <div class="filter__mob-header">
+        <div class="filter__mob-heading filter__close">@SharedResources.Filters</div>
+        <button class="filter__collapse">@SharedResources.CollapseAll</button>
+    </div>
+
+    @if (Model.ShowSearchFilter)
+    {
+        <div class="filter__aside-search search-form">
+            <div class="search-form__field" @(!Model.ShowSearchFilter ? "d-none" : "")>
+                <input class="search-form__input input" type="search" name="addQuery" placeholder="Поиск по результату">
+                <button class="search-form__submit" type="button" name="send">
+                    <svg class="icon icon-magnifying-zoom-glass search-form__submit-icon" width="25" height="25">
+                        <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#magnifying-zoom-glass")"></use>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    }
+    <div class="filter__header">
+        <div class="filter__heading">@SharedResources.Filters</div><span class="filter__collapse">@SharedResources.CollapseAll</span>
+    </div>
+
+    <div class="filter__main">
+        <div class="filter__sections">
+            @{
+                Html.RenderPartial("Components/FilterSelectSection", Model.ShowSection);
+                Html.RenderPartial("Components/FilterSelectSection", Model.ActionsSection);
+                Html.RenderPartial("Components/FilterRangeSection", Model.ReturnDays);
+            }
+            @if (Model.GroupSection.Options.Any())
+            {
+                Html.RenderPartial("Components/FilterSelectSection", Model.GroupSection);
+            }
+            @if (Model.BrandSection.Options.Any())
+            {
+                Html.RenderPartial("Components/FilterSelectSection", Model.BrandSection);
+            }
+            @{
+                Html.RenderPartial("Components/FilterRangeSection", Model.DeliveryRating);
+                Html.RenderPartial("Components/FilterRangeSection", Model.AvailableQnt);
+                Html.RenderPartial("Components/FilterRangeSection", Model.DeliveryDays);
+                Html.RenderPartial("Components/FilterRangeSection", Model.ClientPrice);
+                //Html.RenderPartial("Components/FilterRangeSection", Model.SalePrice);
+            }
+            @foreach (var section in Model.PropertySections)
+            {
+                Html.RenderPartial("Components/FilterSelectSection", section);
+            }
+        </div>
+        <div class="filter__footer">
+            <a class="filter__btn-reset btn btn--primary-reverse btn--sm" href="#" onclick="return resetFilter()">
+                <svg class="icon icon-close btn__icon" width="25" height="25">
+                    <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#close")"></use>
+                </svg><span class="btn__text">@SharedResources.Reset</span>
+            </a>
+            @if (!Model.AutoSubmit)
+            {
+                <a class="filter__btn-accept btn btn--primary btn--sm" href="" onclick="return submitFilter()">@SharedResources.Apply</a>
+            }
+        </div>
+    </div>
+
+</form>

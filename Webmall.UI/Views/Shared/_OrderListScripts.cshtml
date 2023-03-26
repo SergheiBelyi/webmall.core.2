@@ -1,0 +1,48 @@
+﻿
+@{
+    Layout = null;
+}
+
+<script type="text/javascript">
+
+    document._action_GetListItemProps = '@Url.Action("ListItemProperties", "Order")';
+
+    $(function () {
+        console.log("load block _OrderListScripts");
+    });
+
+    function OpenOrderItemProp(id) {
+        var bodyBlock = $(".js-accordion-body[data-orderId='" + id + "']");
+        console.log("bodyBlock", id);
+
+        if (!bodyBlock) return;
+
+        if (bodyBlock.data("loaded") !== "true") {
+            var pannelId = "updateBlock-" + id;
+            var link = document._action_GetListItemProps + "?orderId=" + id;
+            setTimeout(() => {
+                updatePannel(link, pannelId, UpdateOrderBlock(bodyBlock));
+            }, 1000);
+            
+        }
+    }
+
+    function OpenOrderItemPropMob(id) {
+        var bodyBlock = $(".js-checked-all[data-orderIdMob='" + id + "']");
+
+        if (!bodyBlock) return;
+
+        if (bodyBlock.data("loaded") !== "true") {
+            var pannelId = "updateBlockMob-" + id;
+            var link = document._action_GetListItemProps + "?orderId=" + id + "&mob=true";
+            setTimeout(() => {
+                updatePannel(link, pannelId, UpdateOrderBlock(bodyBlock));
+            }, 1000);
+        }
+    }
+
+    function UpdateOrderBlock(id) {
+        $(id).data("loaded", "true");
+    }
+
+</script>

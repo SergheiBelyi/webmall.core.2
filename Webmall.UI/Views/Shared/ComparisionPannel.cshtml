@@ -1,0 +1,27 @@
+﻿@using System.Linq
+@using ViewRes
+@using Webmall.UI.Core
+@model Webmall.UI.Models.WareComparision.ComparisionList
+@{
+    Layout = null;
+    var currentParentLink = UserPreferences.CurrentCultureLink + "/";
+}           
+@if (Model.Any())
+{
+    <div id="compare">
+        <h5>@(SharedResources.WareComparision + " [" + Model.Count + "]")</h5>
+        @foreach (var ware in Model)
+        {
+            <p>
+                <a href="@Url.Content("~/" + currentParentLink + ware.URL)">@ware.Name</a>
+                <a class="delete" href="" onclick="RemoveComparision(@ware.Id); return false;" title="@SharedResources.RemoveFromComparision"></a>
+            </p>
+        }
+        
+        @if (Model.Count > 1)
+        {
+            @Html.ActionLink(SharedResources.GotoComparision, "Index", "Compare", null, new { @class = "compare-link" })
+        }
+    </div>
+}
+

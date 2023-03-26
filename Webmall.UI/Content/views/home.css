@@ -1,0 +1,171 @@
+﻿section#content #vidgets {
+  margin: 26px auto 38px;
+  max-width: 100%;
+  overflow: hidden;
+}
+section#content #vidgets .vin-vidget {
+  -ms-flex-direction: column;
+  -ms-flex-pack: end;
+  -webkit-box-direction: normal;
+  -webkit-box-orient: vertical;
+  -webkit-box-pack: end;
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+section#content #vidgets .vin-vidget input {
+  -ms-flex-order: 2;
+  -webkit-box-ordinal-group: 3;
+  -webkit-box-sizing: border-box;
+  border-radius: 3px;
+  border: 1px solid #d9d9d9;
+  box-sizing: border-box;
+  color: #8b8d8d;
+  font-size: 14px;
+  font: normal 16px "CenturyGothic";
+  height: 30px;
+  margin-left: 16px;
+  order: 2;
+  width: 80%;
+}
+section#content #vidgets .vin-vidget button {
+  -ms-flex-order: 1;
+  -webkit-box-ordinal-group: 2;
+  background-color: transparent;
+  border: none;
+  color: #1e5d8d;
+  cursor: pointer;
+  font: normal 24px "CenturyGothic";
+  margin-bottom: 2px;
+  margin-left: -7px;
+  order: 1;
+  padding: 0;
+  text-decoration: none;
+  width: 100%;
+}
+section#content #vidgets .vin-vidget input#vin-button {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  background: #1e5d8d url(../images/search.png) no-repeat center center;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+  font-size: 0;
+  height: 49px;
+  margin: 0% 63%;
+  position: absolute;
+  width: 60px;
+}
+section#content #vidgets .vin-vidget b {
+  margin-bottom: 0;
+}
+section#content #vidgets .vidget {
+  border-right: 4px solid #c2d3e0;
+  color: #1e5d8d;
+  font: normal 24px "CenturyGothic";
+  height: 125px;
+  padding: 0 60px;
+  position: relative;
+  text-decoration: none;
+  width: calc(100% / 3);
+}
+section#content #vidgets .vidget a {
+  color: #1e5d8d;
+  font: normal 16px "SegoeUIRegular";
+  text-decoration: none;
+}
+section#content #vidgets .vidget span {
+  color: #1e5d8d;
+  display: block;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+section#content #vidgets .vidget b {
+  display: block;
+  font-family: "CenturyGothic";
+  font-weight: normal;
+  margin-bottom: 4px;
+  text-align: center;
+  width: 186px;
+}
+section#content #vidgets .vidget:hover b {
+  color: #000000;
+}
+section#content #vidgets .vidget:hover b span {
+  color: #000000;
+}
+section#content #vidgets .vidget.vin:before {
+  background: url('../images/vidget1.png') no-repeat;
+  content: '';
+  display: block;
+  height: 101px;
+  position: absolute;
+  right: 90px;
+  top: 0;
+  width: 144px;
+  z-index: -1;
+}
+section#content #vidgets .vidget.model {
+  -ms-flex-align: center;
+  -webkit-box-align: center;
+  align-items: center;
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+}
+section#content #vidgets .vidget.model:before {
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  background: url('../images/vidget2.png') no-repeat;
+  content: '';
+  display: block;
+  height: 107px;
+  position: absolute;
+  right: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 134px;
+}
+section#content #vidgets .vidget.bus {
+  background: url(../images/vidjet3.jpg) no-repeat center top;
+}
+section#content #vidgets .vidget.on-line {
+  -ms-flex-align: center;
+  -webkit-box-align: center;
+  align-items: center;
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+}
+section#content #vidgets .vidget.on-line:before {
+  background: url('../images/vidget3.png') no-repeat;
+  content: '';
+  display: block;
+  height: 85px;
+  position: absolute;
+  right: 80px;
+  top: 13px;
+  width: 110px;
+}
+section#content #vidgets .vidget.catalogs {
+  background: url(../images/vidjet5.jpg) no-repeat center top;
+}
+section#content #vidgets .vidget.catalogs:hover b {
+  color: #ffffff;
+}
+section#content #vidgets .vidget.catalogs:hover b span {
+  color: #ffffff;
+}
+section#content #vidgets:last-child {
+  margin-right: 0;
+}
+section#content #vidgets .error {
+  color: red;
+}
+section#content #vidgets label.error {
+  display: block;
+  font-size: 10px;
+  font-weight: bold;
+}

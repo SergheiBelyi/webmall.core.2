@@ -1,0 +1,254 @@
+{
+    "properties": {
+        "label": "Новости",
+        "validateOnPublish": false
+    },
+    "category": "Articles",
+    "scripts": {
+        "create": "var data = ctx.data;\r\n// Create the slug only if the title has been set and the the slug has not been set\r\nif (data.Header && data.Header.ru && (!data.Slug || !data.Slug.iv)) {\r\n    ctx.data.Slug = { iv: slugify(ctx.data.Header.ru) };\r\n}\r\nreplace();\r\n",
+        "update": "var data = ctx.data;\r\n// Create the slug only if the title has been set and the the slug has not been set\r\nif (data.Header && data.Header.ru && (!data.Slug || !data.Slug.iv)) {\r\n    ctx.data.Slug = { iv: slugify(ctx.data.Header.ru) };\r\n}\r\nreplace();\r\n"
+    },
+    "fieldsInLists": [
+        "meta.status",
+        "meta.status.color",
+        "Date",
+        "IsGrossOnly",
+        "IsRetailOnly",
+        "IsForMailing",
+        "Header"
+    ],
+    "fieldsInReferences": [],
+    "fields": [
+        {
+            "name": "Date",
+            "properties": {
+                "isRequired": true,
+                "isRequiredOnPublish": false,
+                "isHalfWidth": true,
+                "fieldType": "DateTime",
+                "editor": "Date",
+                "label": "Дата новости"
+            },
+            "isLocked": false,
+            "isHidden": false,
+            "isDisabled": false,
+            "partitioning": "invariant"
+        },
+        {
+            "name": "IsForMailing",
+            "properties": {
+                "isRequired": false,
+                "isRequiredOnPublish": false,
+                "isHalfWidth": true,
+                "fieldType": "Boolean",
+                "editor": "Checkbox",
+                "inlineEditable": true,
+                "defaultValue": false,
+                "label": "Разослать подписчикам"
+            },
+            "isLocked": false,
+            "isHidden": false,
+            "isDisabled": false,
+            "partitioning": "invariant"
+        },
+        {
+            "name": "IsGrossOnly",
+            "properties": {
+                "isRequired": true,
+                "isRequiredOnPublish": false,
+                "isHalfWidth": true,
+                "fieldType": "Boolean",
+                "editor": "Checkbox",
+                "inlineEditable": true,
+                "defaultValue": false,
+                "label": "Только для оптовых клиентов"
+            },
+            "isLocked": false,
+            "isHidden": false,
+            "isDisabled": false,
+            "partitioning": "invariant"
+        },
+        {
+            "name": "IsRetailOnly",
+            "properties": {
+                "isRequired": true,
+                "isRequiredOnPublish": false,
+                "isHalfWidth": true,
+                "fieldType": "Boolean",
+                "editor": "Checkbox",
+                "inlineEditable": true,
+                "defaultValue": false,
+                "label": "Только для розничных клиентов"
+            },
+            "isLocked": false,
+            "isHidden": false,
+            "isDisabled": false,
+            "partitioning": "invariant"
+        },
+        {
+            "name": "Header",
+            "properties": {
+                "isRequired": true,
+                "isRequiredOnPublish": false,
+                "isHalfWidth": false,
+                "fieldType": "String",
+                "editor": "Input",
+                "inlineEditable": true,
+                "isUnique": false,
+                "contentType": "Unspecified",
+                "label": "Заголовок новости"
+            },
+            "isLocked": false,
+            "isHidden": false,
+            "isDisabled": false,
+            "partitioning": "language"
+        },
+        {
+            "name": "Slug",
+            "properties": {
+                "isRequired": false,
+                "isRequiredOnPublish": false,
+                "isHalfWidth": false,
+                "fieldType": "String",
+                "editor": "Slug",
+                "inlineEditable": false,
+                "isUnique": true,
+                "pattern": "^[a-z0-9]+(\\-[a-z0-9]+)*$",
+                "contentType": "Unspecified",
+                "placeholder": "URL"
+            },
+            "isLocked": false,
+            "isHidden": false,
+            "isDisabled": false,
+            "partitioning": "invariant"
+        },
+        {
+            "name": "Short",
+            "properties": {
+                "isRequired": true,
+                "isRequiredOnPublish": false,
+                "isHalfWidth": false,
+                "fieldType": "String",
+                "editor": "TextArea",
+                "inlineEditable": false,
+                "isUnique": false,
+                "contentType": "Unspecified",
+                "label": "Краткий текст новости"
+            },
+            "isLocked": false,
+            "isHidden": false,
+            "isDisabled": false,
+            "partitioning": "language"
+        },
+        {
+            "name": "Full",
+            "properties": {
+                "isRequired": false,
+                "isRequiredOnPublish": true,
+                "isHalfWidth": false,
+                "fieldType": "String",
+                "editor": "Markdown",
+                "inlineEditable": false,
+                "isUnique": false,
+                "contentType": "Html",
+                "label": "Полный текст новости",
+                "editorUrl": ""
+            },
+            "isLocked": false,
+            "isHidden": false,
+            "isDisabled": false,
+            "partitioning": "language"
+        },
+        {
+            "name": "Image",
+            "properties": {
+                "isRequired": false,
+                "isRequiredOnPublish": false,
+                "isHalfWidth": false,
+                "fieldType": "Assets",
+                "previewMode": "ImageAndFileName",
+                "folderId": "06574911-952a-476b-9ce1-1c6801d72975",
+                "mustBeImage": true,
+                "resolveFirst": false,
+                "resolveImage": false,
+                "allowedExtensions": [
+                    "png",
+                    "gif",
+                    "jpg"
+                ],
+                "allowDuplicates": true
+            },
+            "isLocked": false,
+            "isHidden": false,
+            "isDisabled": false,
+            "partitioning": "invariant"
+        },
+        {
+            "name": "SeoSeparator",
+            "properties": {
+                "isRequired": false,
+                "isRequiredOnPublish": false,
+                "isHalfWidth": false,
+                "fieldType": "UI",
+                "editor": "Separator",
+                "label": "SEO-блок"
+            },
+            "isLocked": false,
+            "isHidden": false,
+            "isDisabled": false,
+            "partitioning": "invariant"
+        },
+        {
+            "name": "MetaTitle",
+            "properties": {
+                "isRequired": false,
+                "isRequiredOnPublish": false,
+                "isHalfWidth": false,
+                "fieldType": "String",
+                "editor": "Input",
+                "inlineEditable": false,
+                "isUnique": false,
+                "contentType": "Unspecified",
+                "label": "Заголовок браузера"
+            },
+            "isLocked": false,
+            "isHidden": false,
+            "isDisabled": false,
+            "partitioning": "language"
+        },
+        {
+            "name": "MetaDescription",
+            "properties": {
+                "isRequired": false,
+                "isRequiredOnPublish": false,
+                "isHalfWidth": false,
+                "fieldType": "String",
+                "editor": "TextArea",
+                "inlineEditable": false,
+                "isUnique": false,
+                "contentType": "Unspecified",
+                "label": "SEO - Описание"
+            },
+            "isLocked": false,
+            "isHidden": false,
+            "isDisabled": false,
+            "partitioning": "language"
+        },
+        {
+            "name": "MetaKeywords",
+            "properties": {
+                "isRequired": false,
+                "isRequiredOnPublish": false,
+                "isHalfWidth": false,
+                "fieldType": "Tags",
+                "editor": "Tags",
+                "label": "SEO - Ключевые слова"
+            },
+            "isLocked": false,
+            "isHidden": false,
+            "isDisabled": false,
+            "partitioning": "language"
+        }
+    ],
+    "isPublished": true
+}

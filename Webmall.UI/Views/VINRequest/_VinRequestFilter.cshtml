@@ -1,0 +1,60 @@
+﻿@using ViewRes
+@using Webmall.UI.Core
+
+@model GridViewModel<Webmall.Model.Entities.User.VINRequest>
+
+<!-- comparision act filter-->
+<div class="orders-filter">
+    <div class="orders-filter__heading d-md-none">
+        @SharedResources.Filters
+        <button class="orders-filter__close d-md-none">
+            <svg class="icon icon-close orders-filter__close-icon">
+                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#close")"></use>
+            </svg>
+        </button>
+    </div>
+    @using (Html.BeginForm("Index", "VinRequest", FormMethod.Get))
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row align-items-center">
+                    <div class="col-md-2">
+                        <div class="orders-filter__date-picker-title">@SharedResources.ForPeriod</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="orders-filter__date-picker-main">
+                            <input class="orders-filter__date-from" type="date" name="requestStartDate" placeholder="@SharedResources.PeriodFrom">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="orders-filter__date-picker-main">
+                            <input class="orders-filter__date-to" type="date" name="requestEndDate" placeholder="@SharedResources.to">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="orders-filter__date-picker-main">
+                            <input class="orders-filter__date-from" type="text" name="partName" placeholder="@SharedResources.PartName">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="row align-items-center">
+                    <div class="col-md-2">
+                        <div class="orders-filter__date-picker-title">@SharedResources.SelectStatus</div>
+                    </div>
+                    <div class="col-md-6">
+                        @Html.DropDownList("isResponded", new [] {
+                            new SelectListItem { Text = SharedResources.All, Value = "0" },
+                            new SelectListItem { Text = SharedResources.WithResponce, Value = "1" },
+                            new SelectListItem { Text = SharedResources.WithoutResponce, Value = "2" }
+                        }, new { @class= "js-select-autocomplete" })
+                    </div>
+                    <div class="col-md-4">
+                        <input class="orders-filter__btn btn btn--main" type="submit" name="send-data" value="@SharedResources.ApplyFilter">
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

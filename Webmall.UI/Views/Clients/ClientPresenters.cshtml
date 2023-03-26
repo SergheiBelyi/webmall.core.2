@@ -1,0 +1,162 @@
+@using ViewRes
+@using Webmall.UI.Core
+@using Webmall.Model
+@using Webmall.Model.Entities.User
+@model Webmall.UI.ViewModel.Client.ClientViewModel
+
+@{
+    Layout = null;
+}
+
+<div class="addresses users__subsection">
+    <h2 class="profile__subheading secondary-heading">@SharedResources.Representations</h2>
+    @* -------------------- Представительства текущего клиента ------------------------------------*@
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th>@SharedResources.FIO</th>
+                    <th>@SharedResources.EmailPhone</th>
+                    <th class="text-center" title="@SharedResources.KeyUser">
+                        <svg class="icon icon-key" alt="@SharedResources.KeyUser">
+                            <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#key")"></use>
+                        </svg>
+                    </th>
+                    <th class="text-center" title="@SharedResources.AllOrderUser">
+                        <svg class="icon icon-contacts">
+                            <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#contacts")"></use>
+                        </svg>
+                    </th>
+                    <th class="text-center" title="@SharedResources.ComparisionActUser">
+                        <svg class="icon icon-file">
+                            <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#file")"></use>
+                        </svg>
+                    </th>
+                    <th class="text-center" title="@SharedResources.TradeUser">
+                        <svg class="icon icon-shopping-cart">
+                            <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#shopping-cart")"></use>
+                        </svg>
+                    </th>
+                    @*<th class="text-center" title="@SharedResources.PriceListUser">
+                            <svg class="icon icon-shopping-cart">
+                                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#paper")"></use>
+                            </svg>
+                        </th>*@
+                    @*<th class="text-center"></th>*@
+                    <th class="text-center">
+                        @*<svg class="icon icon-shopping-cart">
+                                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#close")"></use>
+                            </svg>*@
+                    </th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    var isKey = SessionHelper.CurrentUser.CurrentPresenter.Roles.IsFlagSet((long)RepresentativeRole.KeyRepresentative);
+                }
+                @foreach (var item in Model.AllClientPresenters)
+                {
+                    var canChangeKey = SessionHelper.CurrentUser.Roles.IsFlagSet((long)UserRoles.RepresentativeManager)
+                             || (item.User.Id != SessionHelper.CurrentUser.Id && isKey);
+                    var canChange = isKey || SessionHelper.CurrentUser.Roles.IsFlagSet((long)UserRoles.RepresentativeManager);
+                    string id;
+                    <tr>
+                        <td>
+                            @if (item.User.IsBlocked)
+                            {
+                                <img alt="blocked" src="@Url.Content("~/Content/images/block.png")" />
+                            }
+                        </td>
+                        <td>@(item.User.FullName + ((!item.IsAccepted) ? "(" + item.Client.Name + ")" : ""))</td>
+                        <td>
+                            <ul class="client-detail-contacts">
+                                @if (!string.IsNullOrEmpty(item.User.Phones))
+                                {
+                                    <li> <a href="tel:@(item.User.Phones)"><i class="fas fa-phone-alt"></i> @item.User.Phones</a></li>
+                                }
+                                @if (!string.IsNullOrEmpty(item.User.Email))
+                                {
+                                    <li> <a href="mailto:@(item.User.Email)"><i class="fas fa-envelope"></i> @item.User.Email</a></li>
+                                }
+                            </ul>
+                        </td>
+                        <td>
+                            <div class="checkbox-label">
+                                @{ id = $"{RepresentativeRole.KeyRepresentative}_{item.Id}"; }
+                                <input class="checkbox-label__input" type="checkbox" represent="true" id="@id"
+                                       name="prd" value="@(item.Roles)" @(item.IsKeyRepresentative ? "checked=checked" : "")
+                                       @(!canChangeKey ? "disabled = disabled" : "") />
+                                <label class="checkbox-label__main" for="@id"></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-label">
+                                @{ id = $"{RepresentativeRole.AllOrders}_{item.Id}"; }
+                                <input class="checkbox-label__input" represent="true" type="checkbox" id="@id"
+                                       name="prd" value="@(item.Roles)" @(item.Roles.IsFlagSet((long)RepresentativeRole.AllOrders) ? "checked=checked" : "")
+                                       @(!canChange ? "disabled = disabled" : "") />
+                                <label class="checkbox-label__main" for="@id"></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-label">
+                                @{ id = $"{RepresentativeRole.Verification}_{item.Id}"; }
+                                <input class="checkbox-label__input" represent="true" type="checkbox" id="@id"
+                                       name="prd" value="@(item.Roles)" @(item.Roles.IsFlagSet((long)RepresentativeRole.Verification) ? "checked=checked" : "")
+                                       @(!canChange ? "disabled = disabled" : "") />
+                                <label class="checkbox-label__main" for="@id"></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-label">
+                                @{ id = $"{RepresentativeRole.Trade}_{item.Id}"; }
+                                <input class="checkbox-label__input" represent="true" type="checkbox" id="@id"
+                                       name="prd" value="@(item.Roles)" @(item.Roles.IsFlagSet((long)RepresentativeRole.Trade) ? "checked=checked" : "")
+                                       @(!canChange ? "disabled = disabled" : "") />
+                                <label class="checkbox-label__main" for="@id"></label>
+                            </div>
+                        </td>
+                        @*<td>
+                                <div class="checkbox-label">
+                                    <input class="checkbox-label__input" represent="true" type="checkbox" id="@string.Format("{0}_{1}", RepresentativeRole.ViewPrices, item.Id)"
+                                           name="prd" value="@(item.Roles)" @((item.Roles.IsFlagSet((long)RepresentativeRole.ViewPrices)) ? "checked=checked" : "")
+                                           @(!canChange ? "disabled = disabled" : "") />
+                                    <label class="checkbox-label__main" for="@string.Format("{0}_{1}", RepresentativeRole.ViewPrices, item.Id)"></label>
+                                </div>
+                            </td>*@
+                        <td class="text-center">
+                            @if (canChangeKey && (!item.IsKeyRepresentative && item.User.Id == SessionHelper.CurrentUser.Id))
+                            {
+                                <a class="user-status-remove" href="@Url.Action("DeleteRepresentation", new {id = item.Id, clientId = Model.CurrentClientPresenter.Client.Id})"
+                                   title="@SharedResources.Delete"
+                                   onclick=" return confirm('@SharedResources.AreYouSure'); ">
+                                    <svg class="icon icon-close">
+                                        <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#close")"></use>
+                                    </svg>
+                                </a>
+                            }
+                        </td>
+                        <td>
+                            @if (!item.IsAccepted)
+                            {
+                                if (//item.User.Id != SessionHelper.CurrentUser.Id ||
+                                    SessionHelper.CurrentUser.Roles.IsFlagSet((long)UserRoles.RepresentativeManager) ||
+                                    item.Roles.IsFlagSet((long)RepresentativeRole.KeyRepresentative))
+                                {
+                                    <a href="@Url.Action("Approve", new {id = item.Id})" class="vos" title="@SharedResources.Approve">@SharedResources.Approve</a>
+                                }
+                                else
+                                {
+                                    <img src="@Url.Content("~/Content/images/sing-vos.png")" alt="@SharedResources.WaitingToApprove" title="@SharedResources.WaitingToApprove" />
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>

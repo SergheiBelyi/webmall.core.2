@@ -1,0 +1,39 @@
+﻿@using ViewRes
+
+<div class="modal-content" data-modal-win="phone-add" hidden>
+    <div class="modal-content__heading modal-win-title">@SharedResources.Add @SharedResources.Phone </div>
+    <div class="modal-content__body">
+        <form class="main-form" method="POST" action="/" name="add-phone">
+            <div class="main-form__field">
+                <input class="main-form__input" type="text" name="user-name" placeholder="@SharedResources.FIO">
+            </div>
+            <div class="main-form__field">
+                <input class="main-form__input" type="tel" name="user-phone" placeholder="@SharedResources.Phone">
+            </div>
+            <input class="main-form__btn btn btn--main btn--block" type="submit" value="@SharedResources.Add">
+        </form>
+    </div>
+</div>
+<div class="modal-content" data-modal-win="address-add" hidden>
+    <div class="modal-content__heading modal-win-title">@SharedResources.NewDeliveryAddress</div>
+    <div class="modal-content__body">
+        <form class="main-form" method="POST" action="/" name="add-address">
+            <div class="main-form__field">
+                <input class="main-form__input" type="text" name="user-city" placeholder="@SharedResources.Locality">
+            </div>
+            <div class="main-form__field">
+                <input class="main-form__input" type="text" name="user-street" placeholder="@SharedResources.Street">
+            </div>
+            <div class="main-form__field">
+                <input class="main-form__input" type="text" name="user-house" placeholder="@SharedResources.House">
+            </div>
+            <div class="main-form__field">
+                <input class="main-form__input" type="text" name="user-flat" placeholder="@SharedResources.Apartment">
+            </div>
+            <div class="main-form__field">
+                <textarea class="main-form__input" name="user-message" placeholder="@SharedResources.Comment"></textarea>
+            </div>
+            <input class="main-form__btn btn btn--main btn--block" type="submit" value="@SharedResources.Add">
+        </form>
+    </div>
+</div>

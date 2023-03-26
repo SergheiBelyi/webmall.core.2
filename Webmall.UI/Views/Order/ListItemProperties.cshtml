@@ -1,0 +1,102 @@
+﻿@using ViewRes
+@model List<Webmall.Model.Entities.Order.OrderPosition>
+
+@{
+    Layout = null;
+}
+
+@if (Model.Any()) {
+    <div class="stock-table js-checked-all scrollbar is-detail is-dark">
+        <div class="stock-table__header">
+            <div class="stock-table__row">
+                <div class="stock-table__cell text-center">
+                    <div class="stock-table__checkbox checkbox-label">
+                        <input class="checkbox-label__input js-checked-all-trigger" type="checkbox" name="is-opt-0a" id="opt-0a">
+                        <label class="checkbox-label__main" for="opt-0a"></label>
+                    </div>
+                </div>
+                <div class="stock-table__cell">
+                    <div class="stock-table__caption">
+                        @SharedResources.WareNumber, @SharedResources._brand
+                    </div>
+                </div>
+                <div class="stock-table__cell">
+                    <div class="stock-table__caption">@SharedResources.Name</div>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <div class="stock-table__caption">@SharedResources.PricePerOne</div>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <div class="stock-table__caption">@SharedResources.Amount</div>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <div class="stock-table__caption">@SharedResources.Sum</div>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <div class="stock-table__caption">@SharedResources.Status</div>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <div class="stock-table__caption">@SharedResources.DeliveryDate</div>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <div class="stock-table__caption">@SharedResources.Note</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stock-table__main">
+            @foreach (var item in Model)
+            {
+                var wareUrl = Url.Action("WareCard", "Catalog")?.Replace("WareCard", "") + $"{item.ProducerName}/{item.WareNumber}";
+
+                <div class="stock-table__row">
+                    <div class="stock-table__cell text-center">
+                        <div class="stock-table__checkbox checkbox-label">
+                            <input class="checkbox-label__input js-checked-all-item" type="checkbox" name="is-opt-@item.Id" id="opt-@item.Id">
+                            <label class="checkbox-label__main" for="opt-@item.Id"></label>
+                        </div>
+                    </div>
+                    <div class="stock-table__cell">
+                        <div class="stock-table__meta">
+                            <a class="stock-table__articul" href="@wareUrl">@item.WareNumber</a>
+                            <a class="stock-table__brand" href="@wareUrl">@item.ProducerName</a>
+                        </div>
+                    </div>
+                    <div class="stock-table__cell">
+                        <div class="stock-table__heading">
+                            <a class="stock-table__heading-link" href="@wareUrl">@item.WareName</a>
+                        </div>
+                    </div>
+                    <div class="stock-table__cell text-center">
+                        <div class="stock-table__text" data-tippy-gray-content="@SharedResources.PurchasePriceForOneUnit">@item.Price</div>
+                    </div>
+                    <div class="stock-table__cell text-center">
+                        <div class="stock-table__text">@item.WareQnt</div>
+                    </div>
+                    <div class="stock-table__cell text-center">
+                        <strong class="stock-table__text">@item.Sum</strong>
+                    </div>
+                    <div class="stock-table__cell text-center">
+                        <div class="stock-table__badge status-badge is-processing">@item.StatusName</div>
+                    </div>
+                    <div class="stock-table__cell text-center">
+                        <time class="stock-table__accent" datetime="2022" data-tippy-gray-content="@SharedResources.TermDays">@item.DeliveryPresentation</time>
+                    </div>
+                    <div class="stock-table__cell">
+                        <div class="stock-table__comment custom-comment" data-modal-win-trigger="comment-add">
+                            <label class="user-note__caption" for="un-@item.Id">@item.Comment</label>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+
+        </div>
+
+    </div>
+}
+else { 
+<div>@SharedResources.NoData</div>
+}
+

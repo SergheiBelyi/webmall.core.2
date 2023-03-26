@@ -1,0 +1,62 @@
+﻿@using Webmall.UI.Core
+
+@{
+    var count = 0;
+    //decimal price = 0;
+    if (SessionHelper.CurrentUser != null)
+    {
+        count = SessionHelper.Cart.Count;
+        //foreach (var item in SessionHelper.Cart)
+        //{
+        //    price += item.ClientPrice * item.WareQnt;
+        //}
+    }
+}
+
+<div class="mob-utils d-md-none">
+    <div class="mob-utils__util header-utility is-search-trigger d-none">
+        <span class="header-utility__link js-mobile-search-trigger">
+            <svg class="icon icon-search header-utility__icon" width="25" height="25">
+                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#search")"></use>
+            </svg>
+        </span>
+    </div>
+
+    <div class="mob-utils__util header-utility is-phone">
+        <a class="header-utility__link js-mob-contacts" href="#">
+            <svg class="icon icon-phone-rounded header-utility__icon">
+                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#phone-rounded")"></use>
+            </svg>
+        </a>
+    </div>
+    @if (SessionHelper.CurrentUser == null)
+    {
+        if (ViewBag.HideAuthorize != true)
+        {
+            <div class="mob-utils__util header-utility">
+                <a class="header-utility__link" href="#" data-modal-win-trigger="modal-auth">
+                    <svg class="icon icon-avatar header-utility__icon">
+                        <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#avatar")"></use>
+                    </svg>
+                </a>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="mob-utils__util header-utility">
+            <a class="header-utility__link" href="@Url.Action("EditPersonalData", "Security")">
+                <svg class="icon icon-logout-2 header-utility__icon">
+                    <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#avatar")"></use>
+                </svg>
+            </a>
+        </div>
+    }
+    <div class="mob-utils__util header-utility">
+        <a class="header-utility__link" href="@Url.Action("Index", "Cart")">
+            <svg class="icon icon-shopping-cart-main header-utility__icon">
+                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#shopping-cart-main")"></use>
+            </svg><span class="header-utility__count cart-counter">@count</span>
+        </a>
+    </div>
+</div>

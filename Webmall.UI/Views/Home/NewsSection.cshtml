@@ -1,0 +1,25 @@
+﻿@using System.Web.Mvc.Html
+@using ViewRes
+@using Webmall.UI.Core
+@using Webmall.UI.ViewModel.News
+
+@model Webmall.Model.Entities.Cms.NewsData.NewsCategory
+@{
+    Layout = null;
+    var catUrl = Url.Action("Index", "News", new {category = Model.Slug});
+}
+
+@if (Model?.Items != null && Model.Items.Any())
+{
+    <div class="news-section__area">
+        <div class="news-section__title section__heading"> <a class="section__heading-link" href="@catUrl">@Model.Name</a></div>
+        <div class="row">
+            @foreach(var item in Model.Items.GetRolesTracker(SessionHelper.CurrentUser?.Categories).Take(4))
+            {
+                Html.RenderPartial("Components/NewsArticle", new NewsArticleViewModel { Article = item, Category = Model });
+            }
+        </div>
+    </div>
+}
+
+

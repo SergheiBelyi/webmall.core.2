@@ -1,0 +1,23 @@
+﻿@using Webmall.Model
+@using ViewRes
+
+
+@using (Html.BeginForm("LogOn", "Security", FormMethod.Post, new { @class = "auth-form", name = "auth-form", id = "form-logon" }))
+{
+    @Html.Hidden("ReturnUrl", Request.Url)
+    <div class="auth-form__field">
+        <input class="auth-form__input input" type="email" name="UserName" placeholder="@SharedResources.Email">
+    </div>
+    <div class="auth-form__field">
+        <input class="auth-form__input input" type="password" name="Pass" placeholder="@SharedResources.Password">
+    </div>
+    <div class="auth-form__field">
+        <div class="auth-form__checkbox checkbox-label">
+            <input class="checkbox-label__input" type="checkbox" name="RememberMe" id="remember2" value="true" @(ConfigHelper.IsDefaultRememberMe ? "checked=\"checked\"" : "")>
+            <label class="checkbox-label__main" for="remember2">@SecurityResources.RememberMe</label>
+        </div>
+
+    </div>
+    <input class="auth-form__btn btn btn--primary" type="submit" value="@SharedResources.Enter">
+    <a class="auth-form__restore" href="@Url.Action("PasswordRecovery", "Security")">@SecurityResources.AreYouForgetPassword</a>
+}

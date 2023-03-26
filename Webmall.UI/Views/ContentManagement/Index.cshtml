@@ -1,0 +1,156 @@
+﻿@using ViewRes
+@using Webmall.UI.Core
+@model Webmall.UI.Models.GroupContentInfo
+
+@{
+    //ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_PersonalLayout.cshtml";
+}
+
+<div class="table-responsive d-none d-md-block">
+    @*@using (Html.BeginForm("SiteMapGenerate", "ContentManagement", FormMethod.Post))
+    {
+        @Html.SubmitButton(SharedResources.GenerateSiteMap)
+        <p></p>
+    }*@
+    <table class="stock-table table">
+        <thead>
+            <tr>
+                <th>@Html.SortColumnLink(Model.Groups, SharedResources.Number, "OrderName")</th>
+                <th>@Html.SortColumnLink(Model.Groups, SharedResources.Name, "Name")</th>
+                <th>@Html.SortColumnLink(Model.Groups, SharedResources.WareType, "WareType")</th>
+                <th>@SharedResources.PageHeader</th>
+                <th>@SharedResources.Description</th>
+                <th>URL</th>
+                @*<th></th>*@
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Groups.List)
+            {
+                <tr>
+                    <td class="middle">@item.OrderName</td>
+                    <td id="@(item.Id)Name" class="spec-payment-table__value-primary"><a href="#" class="clickable" onclick="EditGroup('@item.Id')">@item.Name</a></td>
+                    <td id="@(item.Id)Type">@item.WareType</td>
+                    <td id="@(item.Id)PageHeader">@item.PageHeader</td>
+                    <td id="@(item.Id)Descr">@item.Description</td>
+                    <td id="@(item.Id)URL" class="middle">@item.Url</td>
+                    <td style="display: none" id="@(item.Id)Keywords">@item.Keywords</td>
+                    <td style="display: none" id="@(item.Id)Theme">@item.ThemeText</td>
+                    <td style="display: none" id="@(item.Id)AddText">@item.AdditionalHtmlText</td>
+                    <td style="display: none" id="@(item.Id)ImageUrl">@item.ImageUrl</td>
+                    @*<td class="middle"><a class="edit clickable" onclick="EditGroup('@item.Id')"> </a></td>*@
+                </tr>
+            }
+        </tbody>
+    </table>
+    @{Html.RenderPartial("Components/Pagination", Model.Groups);}
+    @*@{ Html.RenderPartial("GridViewFooter", Model.Groups); }*@
+</div>
+
+@section dialogs
+    {
+    <div id="groupCard" style="display: none">
+        @using (Html.BeginForm("UpdateGroup", "ContentManagement"))
+        {
+            <dl>
+                <dt>@SharedResources.Name</dt>
+                @*<dd><b id="Name"></b></dd>
+                    <dt>@SharedResources.LocalizedName</dt>*@
+                <dd>@Html.TextBoxFor(m => Model.ActiveGroup.Name)</dd>
+                <dt>@SharedResources.WareType</dt>
+                <dd>@Html.TextBoxFor(m => Model.ActiveGroup.WareType)</dd>
+                <dt>@SharedResources.PageHeader</dt>
+                <dd>@Html.TextBoxFor(m => Model.ActiveGroup.PageHeader)</dd>
+                <dt>@SharedResources.Description</dt>
+                <dd>@Html.TextAreaFor(m => Model.ActiveGroup.Description)</dd>
+                <dt>URL</dt>
+                <dd>@Html.TextBoxFor(m => Model.ActiveGroup.Url)</dd>
+                <dt>@SharedResources.ImageUrl</dt>
+                <dd>@Html.TextBoxFor(m => Model.ActiveGroup.ImageUrl)</dd>
+                <dt>Keywords</dt>
+                <dd>@Html.TextBoxFor(m => Model.ActiveGroup.Keywords)</dd>
+                <dt>@SharedResources.ThemeText</dt>
+                <dd>@Html.TextAreaFor(m => Model.ActiveGroup.ThemeText)</dd>
+                <dt>@SharedResources.AdditionalInformation</dt>
+                <dd>@Html.TextAreaFor(m => Model.ActiveGroup.AdditionalHtmlText)</dd>
+            </dl>
+            @Html.Hidden("groupId")
+            <div class="right">@Html.Button("OK", new { onclick = "return UpdateGroup()", @class = "button-submit" })</div>
+        }
+    </div>
+}
+
+@section scripts
+{
+    @{ Html.RenderPartial("GridViewFooterScripts", Model.Groups); }
+
+    <script>
+        $(function () {
+            $("#groupCard").dialog({
+                modal: true,
+                resizable: false,
+                autoOpen: false,
+                width: 770,
+                show: {
+                    effect: "fade",
+                    duration: 500
+                },
+                hide: {
+                    effect: "fade",
+                    duration: 500
+                }
+            });
+        });
+
+        function EditGroup(id) {
+            $("#groupId").val(id);
+            //$("#Name").text($('#' + id + 'Name').text());
+            $("#ActiveGroup_Name").val($('#' + id + 'Name').text());
+            $("#ActiveGroup_WareType").val($('#' + id + 'Type').text());
+            $("#ActiveGroup_PageHeader").val($('#' + id + 'PageHeader').text());
+            $("#ActiveGroup_Description").val($('#' + id + 'Descr').text());
+            $("#ActiveGroup_URL").val($('#' + id + 'URL').text());
+            $("#ActiveGroup_Keywords").val($('#' + id + 'Keywords').text());
+            $("#ActiveGroup_ThemeText").val($('#' + id + 'Theme').text());
+            $("#ActiveGroup_AdditionalHtmlText").val($('#' + id + 'AddText').text());
+            $("#ActiveGroup_ImageUrl").val($('#' + id + 'ImageUrl').text());
+            $("#groupCard").dialog('open');
+            return false;
+        }
+
+        function UpdateGroup() {
+            var form = $("#groupCard > form");
+            var url = form.attr("action");
+            var data = form.serialize();
+            $.post(url, data, function (resultData) {
+                var id = resultData.Id;
+                if (resultData.Name != null)
+                    $('#' + id + 'Name').text(resultData.Name);
+                if (resultData.WareType != null)
+                    $('#' + id + 'Type').text(resultData.WareType);
+                if (resultData.PageHeader != null)
+                    $('#' + id + 'PageHeader').text(resultData.PageHeader);
+                if (resultData.Description != null)
+                    $('#' + id + 'Descr').text(resultData.Description);
+                if (resultData.URL != null)
+                    $('#' + id + 'URL').text(resultData.URL);
+                if (resultData.Keywords != null)
+                    $('#' + id + 'Keywords').text(resultData.Keywords);
+                if (resultData.ThemeText != null)
+                    $('#' + id + 'Theme').text(resultData.ThemeText);
+                if (resultData.AdditionalHtmlText != null)
+                    $('#' + id + 'AddText').text(resultData.AdditionalHtmlText);
+                if (resultData.ImageUrl != null)
+                    $('#' + id + 'ImageUrl').text(resultData.ImageUrl);
+            }).error(function () {
+            });
+            $("#groupCard").dialog('close');
+            return false;
+        }
+    </script>
+}
+
+@section styles {
+    @Styles.Render("~/Content/jUI")
+}

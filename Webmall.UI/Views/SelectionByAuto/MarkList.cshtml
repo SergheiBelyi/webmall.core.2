@@ -1,0 +1,124 @@
+﻿@using Webmall.Model
+@using Webmall.Model.Entities.User
+@using ViewRes
+@using Webmall.UI.Core
+@model List<Webmall.Model.Entities.Auto.AutoMarka>
+
+@{
+    ViewBag.Title = SharedResources.SelectMark;
+    var isContentManager = SessionHelper.CurrentUser != null && SessionHelper.CurrentUser.Roles.IsFlagSet((long)UserRoles.ContentManager);
+}
+
+<div class="content-secondary">
+    <h2>@SharedResources.SelectMark</h2>
+    <table class="all-product mark-list">
+        <thead>
+            <tr>
+                <th class="mark-logo"></th>
+                <th>@SharedResources.AutoMarka</th>
+                @if (isContentManager)
+                {
+                    <th>@SharedResources.PageHeader</th>
+                    <th>Keywords</th>
+                    <th>@SharedResources.Description</th>
+                    <th style="width:32px;"></th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    @*<td>
+                        @if (ImagesController.HasBrandImage(item.Id.ToString(CultureInfo.InvariantCulture)))
+                        {
+                            <img id="brandImage" alt="" style="width: 32px; height: 32px" src="@(Url.RouteUrl(new { controller = "Images", action = "GetBrandImage" }))?id=@item.Id" />
+                        }
+                    </td>*@
+                    @{
+                        var url = Url.Content("~/Auto/" + item.UrlName);
+                    }
+                    <td onclick="window.location.href = '@url'" style="cursor: pointer"><a href="@url" id="@(item.Id)Name">@item.Name</a></td>
+                    @*@if (isContentManager)
+                    {
+                        <td id="@(item.Id)Title">@item.Meta.Title</td>
+                        <td id="@(item.Id)Keywords">@item.Meta.Keywords</td>
+                        <td id="@(item.Id)Description">@item.Meta.Description</td>
+                        <td>
+                            <a onclick="Edit(@item.Id)" class="edit clickable" title="@SharedResources.Edit"></a>
+                        </td>
+                    }*@
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div style="display: none" id="markCard">
+        @using (Html.BeginForm("UpdateMark", "SelectionByAuto"))
+        {
+            <dl>
+                <dt>@SharedResources.PageHeader</dt>
+                <dd>@Html.TextBox("Title")</dd>
+                <dt>@SharedResources.Description</dt>
+                <dd>@Html.TextArea("Description")</dd>
+                <dt>Keywords</dt>
+                <dd>@Html.TextBox("Keywords")</dd>
+            </dl>
+            <div class="right">
+                @Html.Button("Ok", new { @class = "button-submit", onclick = "return UpdateCard()" })
+            </div>
+            @Html.Hidden("markaId")
+        }
+    </div>
+</div>
+
+
+@section scripts
+{
+    <script type="text/javascript">
+
+        $(function() {
+            $("#markCard").dialog({
+                modal: true,
+                resizable: false,
+                autoOpen: false,
+                width: '700px',
+                height: 'auto',
+                show: {
+                    effect: "blind",
+                    duration: 500
+                },
+                hide: {
+                    effect: "explode",
+                    duration: 500
+                }
+            });
+        });
+
+        function Edit(id) {
+            $("#markaId").val(id);
+            //$("#Name").text($('#' + id + 'Name').text());
+            $('#markCard').dialog("option", "title", $('#' + id + 'Name').text());
+            $("#Title").val($('#' + id + 'Title').text());
+            $("#Description").val($('#' + id + 'Description').text());
+            $("#Keywords").val($('#' + id + 'Keywords').text());
+            $("#markCard").dialog('open');
+            return false;
+        }
+
+        function UpdateCard() {
+            var form = $("#markCard > form");
+            var url = form.attr("action");
+            var data = form.serialize();
+            $.post(url, data, function(resultData) {
+                var id = resultData.MarkaId;
+                $('#' + id + 'Title').text(resultData.Title);
+                $('#' + id + 'Description').text(resultData.Description);
+                $('#' + id + 'Keywords').text(resultData.Keywords);
+            }).error(function() {
+            });
+            $("#markCard").dialog('close');
+            return false;
+        }
+    </script>
+
+}

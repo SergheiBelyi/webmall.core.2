@@ -1,0 +1,10 @@
+﻿@using ViewRes
+
+<div class="empty-basket text-center">
+    <header class="orders-list__header">
+        <div class="orders-list__heading">@SharedResources.YourCarIsEmpty</div>
+    </header>
+    <div class="empty-basket__img-wrap">
+        <img class="empty-basket__img img-responsive" src="@Url.Content("~/assets/images/general/basket-default.png")" alt="">
+    </div><a class="empty-basket__btn btn btn--main" href="@Url.Action("Index", "Home")">@SharedResources.GotoMain</a>
+</div>

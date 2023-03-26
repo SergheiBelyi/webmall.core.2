@@ -1,0 +1,77 @@
+﻿@using ViewRes
+@using Webmall.Model.CoreHelpers
+
+@model Webmall.Model.Entities.Client.Contact
+@{ var item = Model; }
+
+<article class="addresses__address address-card" id="cont-contact-@item.Id">
+    <div class="address-card__heading"> @item.Name, @(item.Phone)</div>
+    @if (item.DateFrom?.Year > 1900)
+    {
+        <div class="params__param">
+            <dt class="params__property">@(item.DateFrom.Value.ToShortDateString()) - @(item.DateTo?.Year > 1900 ? item.DateTo.Value.ToShortDateString() : "")</dt>
+        </div>
+    }
+    <div class="address-card__main">
+        <dl class="address-card__params params">
+            <div class="params__param">
+            <dt class="params__property">@(item.DocumentNumber)</dt>
+            @*<dd class="params__value">1000</dd>*@
+            </div>
+            <div class="params__param">
+                <dt class="params__property">@(item.IsTrustee ? SharedResources.TrustedPerson : "")</dt>
+            @*<dd class="params__value">1000</dd>*@
+            </div>            
+        </dl>
+    </div>
+    <div class="address-card__bottom">
+        <div class="address-card__controls">
+            <a class="address-card__control btn btn--primary" href="#">
+                <svg class="icon icon-pen btn__icon" width="25" height="25">
+                    <use href="assets/images/svg/symbol/sprite.svg#pen"></use>
+                </svg>
+                <span class="btn__text" data-modal-win-trigger="contact-detail"
+                      id="contact-@item.Id" data-close-outside="false" data-after-open="UpdateContactDialog('@item.Id');"
+                      data-id="@(item.Id)" data-data="@item.ToJson()">@SharedResources.Edit</span>
+                </a>
+                    <a class="address-card__control btn btn--gray" href="#">
+                        <svg class="icon icon-bin btn__icon" width="25" height="25">
+                            <use href="assets/images/svg/symbol/sprite.svg#bin"></use>
+                        </svg>
+                        <span class="btn__text" onclick="deleteContact('@item.Id')">@SharedResources.Delete</span>
+                    </a>
+            </div>
+        </div>
+    </article>
+
+
+    @*<div class="users-table__row" id="cont-contact-@item.Id">
+        <div class="users-table__cell">
+            <ul class="users-table__contacts user-contacts">
+                <li class="user-contacts__contact">
+                    @item.Name, @(item.Phone)
+                </li>
+                @if (item.DateFrom?.Year > 1900)
+                {
+                    <li class="user-contacts__contact">
+                        @(item.DateFrom.Value.ToShortDateString()) - @(item.DateTo?.ToShortDateString() ?? "")
+                    </li>
+                }
+                <li class="user-contacts__contact">
+                    @(item.DocumentNumber)
+                </li>
+                <li class="user-contacts__contact">
+                    @(item.IsTrustee ? SharedResources.TrustedPerson : "")
+                </li>
+                <li class="user-contacts__contact">
+                    <div class="stock-mob-table__counter-trigger input" data-modal-win-trigger="contact-detail"
+                         id="contact-@item.Id" data-close-outside="false" data-after-open="UpdateContactDialog('@item.Id');"
+                         data-id="@(item.Id)" data-data="@item.ToJson()">@SharedResources.Edit</div>
+
+                    </li>
+                    <li class="user-contacts__contact">
+                        <div class="stock-mob-table__counter-trigger input" onclick="deleteContact('@item.Id')">@SharedResources.Delete</div>
+                    </li>
+                </ul>
+            </div>
+        </div>*@

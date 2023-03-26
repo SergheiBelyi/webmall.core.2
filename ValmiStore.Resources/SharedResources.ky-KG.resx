@@ -1,0 +1,1774 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="metadata">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" />
+							</xsd:sequence>
+							<xsd:attribute name="name" use="required" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="assembly">
+						<xsd:complexType>
+							<xsd:attribute name="alias" type="xsd:string" />
+							<xsd:attribute name="name" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="_amount" xml:space="preserve">
+    <value>саны</value>
+  </data>
+	<data name="_delivery" xml:space="preserve">
+    <value>жеткирүү</value>
+  </data>
+	<data name="_sum" xml:space="preserve">
+    <value>сумма</value>
+  </data>
+	<data name="ABSPresence" xml:space="preserve">
+    <value>ABSдин болушу</value>
+  </data>
+	<data name="AcceptedPayment" xml:space="preserve">
+    <value>&lt;br /&gt; төлөм кабыл алынат:</value>
+  </data>
+	<data name="active" xml:space="preserve">
+    <value>активдүү
+</value>
+  </data>
+	<data name="ActiveOrdersFilter" xml:space="preserve">
+    <value>[Бардык активдүү тапшырыктар]</value>
+  </data>
+	<data name="Add" xml:space="preserve">
+    <value>Кошуу</value>
+  </data>
+	<data name="AddNewDelivery" xml:space="preserve">
+    <value>Жаңы жеткирүүнү тариздөө</value>
+  </data>
+	<data name="AddNewDeliveryAddress" xml:space="preserve">
+    <value>Жеткирүүнүн жаңы дарегин кошуңуз</value>
+  </data>
+	<data name="Address" xml:space="preserve">
+    <value>Дарек</value>
+  </data>
+	<data name="AddToCartErrorMessage" xml:space="preserve">
+    <value>Товарды себетке кошуудагы ката </value>
+  </data>
+	<data name="AddToOrder" xml:space="preserve">
+    <value>Тапшырыкка кошуу</value>
+  </data>
+	<data name="AddWareFromCart" xml:space="preserve">
+    <value>Товарды себеттен  кошуу</value>
+  </data>
+	<data name="Agreement" xml:space="preserve">
+    <value>Келишим</value>
+  </data>
+	<data name="All" xml:space="preserve">
+    <value>Баары
+</value>
+  </data>
+	<data name="AllBrands" xml:space="preserve">
+    <value>Бардык бренддер</value>
+  </data>
+	<data name="AllOrderUser" xml:space="preserve">
+    <value>Кардардын бардык буйрутмаларын көрө алат</value>
+  </data>
+	<data name="Amount" xml:space="preserve">
+    <value>Сумма</value>
+  </data>
+	<data name="Analogues" xml:space="preserve">
+    <value>Аналогдор</value>
+  </data>
+	<data name="AnotherPresentations" xml:space="preserve">
+    <value>Башка кардарлардын өкүлчүлүктөрү</value>
+  </data>
+	<data name="Apartment" xml:space="preserve">
+    <value>Батир</value>
+  </data>
+	<data name="ApplyFilter" xml:space="preserve">
+    <value>Чыпканы колдонуу</value>
+  </data>
+	<data name="Approve" xml:space="preserve">
+    <value>Бекитүү</value>
+  </data>
+	<data name="AreYouSure" xml:space="preserve">
+    <value>Сиз чын ишенесизби?</value>
+  </data>
+	<data name="ascending" xml:space="preserve">
+    <value>өсүү боюнча</value>
+  </data>
+	<data name="AskManager" xml:space="preserve">
+    <value>Менеджерден суроо берилсин</value>
+  </data>
+	<data name="ASRPresence" xml:space="preserve">
+    <value>ASR болушу</value>
+  </data>
+	<data name="Attention" xml:space="preserve">
+    <value>Көңүл буруңуз !!!</value>
+  </data>
+	<data name="AutoMarka" xml:space="preserve">
+    <value>Автонун маркасы
+</value>
+  </data>
+	<data name="AutoModel" xml:space="preserve">
+    <value>Автонун модели</value>
+  </data>
+	<data name="AutoModification" xml:space="preserve">
+    <value> Модификация</value>
+  </data>
+	<data name="AutoSpareParts" xml:space="preserve">
+    <value>Авто бөлүктөр</value>
+  </data>
+	<data name="AutoType" xml:space="preserve">
+    <value>Автонун тиби</value>
+  </data>
+	<data name="AutoVINCode" xml:space="preserve">
+    <value>Автомобилдин VIN коду</value>
+  </data>
+	<data name="Availability" xml:space="preserve">
+    <value>Жеткиликтүүлүк</value>
+  </data>
+	<data name="AvailabilityOnOtherStock" xml:space="preserve">
+    <value>Башка кампаларда бар болушу</value>
+  </data>
+	<data name="AvailabilityOnShippingStock" xml:space="preserve">
+    <value> Жүктөп жөнөтүүнүн кампаларда бар болушу</value>
+  </data>
+	<data name="BlockingSendOrderResumeErrorMessage" xml:space="preserve">
+    <value>Жасалган тапшырыктар жөнүндө маалыматты таратуудан жазуу жүзүндө курулай жоопту ийгиликтүү кайтардыңыз. Жеке кабинеттин "{0}" бөлүмүн пайдаланыңыз.</value>
+  </data>
+	<data name="BlockingSendOrderResumeSuccessMessage" xml:space="preserve">
+    <value>Сиз берилген тапшырыктар жөнүндө маалыматты таратуудан жазуу жүзүндө курулай жоопту ийгиликтүү кайтара алдыңыз.Таратууну кайра баштоо үчүн жеке кабинетин "{0}" бөлүгүн пайдаланыңыз.</value>
+  </data>
+	<data name="BodyType" xml:space="preserve">
+    <value>Кузовдун тиби</value>
+  </data>
+	<data name="BrakeSystem" xml:space="preserve">
+    <value>Тормоз механизминин тиби</value>
+  </data>
+	<data name="BrakeType" xml:space="preserve">
+    <value>Тормоз системасынын иштеткичинин түрү</value>
+  </data>
+	<data name="Brand" xml:space="preserve">
+    <value>Бренд</value>
+  </data>
+	<data name="byProperties" xml:space="preserve">
+    <value>касиеттери боюнча</value>
+  </data>
+	<data name="Calculate" xml:space="preserve">
+    <value> Эсебин чыгаруу</value>
+  </data>
+	<data name="Cancel" xml:space="preserve">
+    <value>Жокко чыгаруу</value>
+  </data>
+	<data name="Cart" xml:space="preserve">
+    <value>Себет</value>
+  </data>
+	<data name="Cash" xml:space="preserve">
+    <value>Накталай</value>
+  </data>
+	<data name="Cashless" xml:space="preserve">
+    <value>Накталай эмес</value>
+  </data>
+	<data name="CashPayment" xml:space="preserve">
+    <value>Накталай төлөө</value>
+  </data>
+	<data name="CashPaymentComment" xml:space="preserve">
+    <value>Тапшырык үчүн курьерге же кассага накталай төлөө</value>
+  </data>
+	<data name="Catalizator" xml:space="preserve">
+    <value>Катализатор</value>
+  </data>
+	<data name="ChangeWare" xml:space="preserve">
+    <value>Товарды алмаштыруу</value>
+  </data>
+	<data name="City" xml:space="preserve">
+    <value>Шаар</value>
+  </data>
+	<data name="Client" xml:space="preserve">
+    <value>Кардар</value>
+  </data>
+	<data name="ClientCode" xml:space="preserve">
+    <value>Кардардын коду</value>
+  </data>
+	<data name="ClientManagementTitle" xml:space="preserve">
+    <value>Кардарларды башкаруу</value>
+  </data>
+	<data name="Clients" xml:space="preserve">
+    <value>Кардарлар</value>
+  </data>
+	<data name="Close" xml:space="preserve">
+    <value>Жабуу</value>
+  </data>
+	<data name="Code" xml:space="preserve">
+    <value>Код</value>
+  </data>
+	<data name="Comment" xml:space="preserve">
+    <value>Түшүндүрмө</value>
+  </data>
+	<data name="CommentForOrder" xml:space="preserve">
+    <value>Тапшырыкка түшүндүрмө</value>
+  </data>
+	<data name="Reconciliate" xml:space="preserve">
+    <value>Салыштырып текшерүү</value>
+  </data>
+	<data name="ComparisionAct" xml:space="preserve">
+    <value>Салыштырып текшерүү актысы</value>
+  </data>
+	<data name="ComparisionActPeriodError" xml:space="preserve">
+    <value>Мезгил туура эмес киргизилген</value>
+  </data>
+	<data name="ComparisionActUser" xml:space="preserve">
+    <value>Салыштырып текшерүү актысын сурай алат.</value>
+  </data>
+	<data name="Confirmation" xml:space="preserve">
+    <value>Ырастоо</value>
+  </data>
+	<data name="ContactPhone" xml:space="preserve">
+    <value>Байланыш телефону</value>
+  </data>
+	<data name="Cost" xml:space="preserve">
+    <value>Наркы</value>
+  </data>
+	<data name="CurrentPassword" xml:space="preserve">
+    <value>Учурдагы сыр сөз</value>
+  </data>
+	<data name="CylinderNumber" xml:space="preserve">
+    <value>Цилиндрлердин саны</value>
+  </data>
+	<data name="Date" xml:space="preserve">
+    <value>Дата</value>
+  </data>
+	<data name="days" xml:space="preserve">
+    <value>күндөр</value>
+  </data>
+	<data name="debt" xml:space="preserve">
+    <value>карыз</value>
+  </data>
+	<data name="Delete" xml:space="preserve">
+    <value>Алып салуу</value>
+  </data>
+	<data name="DeleteSelectedPositions" xml:space="preserve">
+    <value>
+Тандап алынган позициялар алып салынсынбы?
+</value>
+  </data>
+	<data name="DeleteWare" xml:space="preserve">
+    <value>Товар алып салынсынбы</value>
+  </data>
+	<data name="Delivery" xml:space="preserve">
+    <value>Жеткирүү</value>
+  </data>
+	<data name="DeliveryAddress" xml:space="preserve">
+    <value>Жеткирүү дареги</value>
+  </data>
+	<data name="DeliveryAddresses" xml:space="preserve">
+    <value>Жеткирүү даректери</value>
+  </data>
+	<data name="DeliveryScheduleTime" xml:space="preserve">
+    <value>Тапшырыкты жеткирүү убактысы</value>
+  </data>
+	<data name="DeliveryTableComment" xml:space="preserve">
+    <value>Тапшырыкты мурда таризделген жеткирүүлөрдүн бирине кошулуп коюлсун</value>
+  </data>
+	<data name="DeliveryType" xml:space="preserve">
+    <value>Жеткирүү түрү</value>
+  </data>
+	<data name="descending" xml:space="preserve">
+    <value>кемүү боюнча</value>
+  </data>
+	<data name="Description" xml:space="preserve">
+    <value> Сыпаттоо</value>
+  </data>
+	<data name="DocNumber" xml:space="preserve">
+    <value>Документтин №</value>
+  </data>
+	<data name="DocType" xml:space="preserve">
+    <value>Документтин тиби</value>
+  </data>
+	<data name="Download" xml:space="preserve">
+    <value>Жүктөп алуу</value>
+  </data>
+	<data name="DriveType" xml:space="preserve">
+    <value>Дөңгөлөктөрдүн иштеткичи</value>
+  </data>
+	<data name="Edit" xml:space="preserve">
+    <value>Редакциялоо</value>
+  </data>
+	<data name="Email" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+	<data name="EmailAsLogin" xml:space="preserve">
+    <value>Email (логин катары колдонулат)</value>
+  </data>
+	<data name="EmailPhone" xml:space="preserve">
+    <value>Email, телефон</value>
+  </data>
+	<data name="EndYear" xml:space="preserve">
+    <value>Чыгаруунун аягы</value>
+  </data>
+	<data name="Engine" xml:space="preserve">
+    <value> Кыймылдаткыч</value>
+  </data>
+	<data name="EngineNumber" xml:space="preserve">
+    <value>Кыймылдаткычтын номери</value>
+  </data>
+	<data name="EngineType" xml:space="preserve">
+    <value>Кыймылдаткычтын түрү</value>
+  </data>
+	<data name="Enter" xml:space="preserve">
+    <value>Кирүү</value>
+  </data>
+	<data name="ErrorMessage" xml:space="preserve">
+    <value>&lt;p&gt; Бир нерсе туура эмес кетип, жана биз Сиздин өтүнүчтү иштете албай койдук. &lt;/p&gt; &lt;p&gt; Башкы бетке &lt;a href="{0}"&gt; өтүүгө аракет кылып көрүңүз &lt;/a&gt; жана өтүнүчтү кайталап көрүңүз же биз менен &lt;b&gt;{1}&lt;/b&gt;&lt;/p&gt; номери боюнча байланышыңыз</value>
+  </data>
+	<data name="ErrorsFound" xml:space="preserve">
+    <value>Каталар табылды</value>
+  </data>
+	<data name="Expand" xml:space="preserve">
+    <value>Жаюу</value>
+  </data>
+	<data name="Finish" xml:space="preserve">
+    <value>Аяктоо</value>
+  </data>
+	<data name="FIO" xml:space="preserve">
+    <value>Аты-жөнү</value>
+  </data>
+	<data name="FirstName" xml:space="preserve">
+    <value>Аты</value>
+  </data>
+	<data name="FixedPhone" xml:space="preserve">
+    <value>Стационардык телефон</value>
+  </data>
+	<data name="FixedShippingMessage" xml:space="preserve">
+    <value>Тапшырыгыңызды алуу үчүн биздин өкүлчүлүккө, Сиз төмөнкү дарек боюнча келишиңиз керек. Сураныч,тапшырык жеткиликтүү болгон убакытка көңүл бурууңузду өтүнөбүз</value>
+  </data>
+	<data name="ForPayment" xml:space="preserve">
+    <value>Төлөөгө</value>
+  </data>
+	<data name="ForPeriod" xml:space="preserve">
+    <value>Мезгилде</value>
+  </data>
+	<data name="from" xml:space="preserve">
+    <value>-дан баштап</value>
+  </data>
+	<data name="FromWarehouse" xml:space="preserve">
+    <value>Кампадан</value>
+  </data>
+	<data name="FuelType" xml:space="preserve">
+    <value>Күйүүчү майдын түрү</value>
+  </data>
+	<data name="GetExcelInvoice" xml:space="preserve">
+    <value>Төлөөгө эсеп Excelде</value>
+  </data>
+	<data name="GetPDFInvoice" xml:space="preserve">
+    <value>Төлөөгө эсеп PDFде</value>
+  </data>
+	<data name="GroupContentManagement" xml:space="preserve">
+    <value>Топтордун мазмуну</value>
+  </data>
+	<data name="hours" xml:space="preserve">
+    <value>саат</value>
+  </data>
+	<data name="House" xml:space="preserve">
+    <value>Үй</value>
+  </data>
+	<data name="InCart" xml:space="preserve">
+    <value>Себетке </value>
+  </data>
+	<data name="Information" xml:space="preserve">
+    <value>Маалымат</value>
+  </data>
+	<data name="InvoicePayment" xml:space="preserve">
+    <value>Которуу жолу менен төлөө</value>
+  </data>
+	<data name="InvoicePaymentComment" xml:space="preserve">
+    <value>Которуу жолу менен төлөөдө дүкөндүн эсебине акча которушуңуз керек. Төлөө үчүн эсепти жеткирүү тандалгандан кийин алууга болот.</value>
+  </data>
+	<data name="IsBlocked" xml:space="preserve">
+    <value>Тосмолонгон</value>
+  </data>
+	<data name="IsRequired" xml:space="preserve">
+    <value>Милдеттүү талаа</value>
+  </data>
+	<data name="KeyUser" xml:space="preserve">
+    <value>Негизги</value>
+  </data>
+	<data name="LastName" xml:space="preserve">
+    <value>Фамилиясы</value>
+  </data>
+	<data name="latin_only" xml:space="preserve">
+    <value> (латин алфавити менен)</value>
+  </data>
+	<data name="Limit" xml:space="preserve">
+    <value>Чек</value>
+  </data>
+	<data name="LiqPayment" xml:space="preserve">
+    <value>LiqPay тутуму аркылуу төлөө</value>
+  </data>
+	<data name="LiqPaymentComment" xml:space="preserve">
+    <value>Пластикалык карта менен төлөмдөрдү кабыл алуу тейлемеси &lt;a href="https://www.liqpay.com"&gt;LiqPAY&lt;/a&gt; от &lt;a href="http://privatbank.ua"&gt;ПриватБанк&lt;/a&gt; </value>
+  </data>
+	<data name="Locality" xml:space="preserve">
+    <value>Шаар</value>
+  </data>
+	<data name="Login" xml:space="preserve">
+    <value>Логин</value>
+  </data>
+	<data name="MakeOrder" xml:space="preserve">
+    <value>Тапшырык түзүү</value>
+  </data>
+	<data name="MaxCartPositionMessage" xml:space="preserve">
+    <value>1000ден көп эмес позицияны тандоого жол берилет.</value>
+  </data>
+	<data name="MobilePhone" xml:space="preserve">
+    <value>Мобилдик телефон</value>
+  </data>
+	<data name="ModelOfCar" xml:space="preserve">
+    <value>Автомобилдин модели</value>
+  </data>
+	<data name="MultComment" xml:space="preserve">
+    <value>Количество товара должно соответствовать кратности продажи</value>
+  </data>
+	<data name="Name" xml:space="preserve">
+    <value>Аталышы</value>
+  </data>
+	<data name="NeedPartList" xml:space="preserve">
+    <value>Керектүү бөлүктөрдүн тизмеси</value>
+  </data>
+	<data name="NeedTaxInvoice" xml:space="preserve">
+    <value>Салыктык коштомо кагаз керек</value>
+  </data>
+	<data name="NewDeliveryAddress" xml:space="preserve">
+    <value>Жеткирүүнүн жаңы дареги</value>
+  </data>
+	<data name="NewPassword" xml:space="preserve">
+    <value>Жаңы сыр сөз</value>
+  </data>
+	<data name="NewRequest" xml:space="preserve">
+    <value>Жаңы өтүнүч</value>
+  </data>
+	<data name="NewRequestByAuto" xml:space="preserve">
+    <value>Автомобиль боюнча жаңы өтүнүч</value>
+  </data>
+	<data name="News" xml:space="preserve">
+    <value>Жаңылыктар</value>
+  </data>
+	<data name="Next" xml:space="preserve">
+    <value>Алга</value>
+  </data>
+	<data name="NextNews" xml:space="preserve">
+    <value>Кийинкиси </value>
+  </data>
+	<data name="No" xml:space="preserve">
+    <value>Жок</value>
+  </data>
+	<data name="NoData" xml:space="preserve">
+    <value>Маалымат жок</value>
+  </data>
+	<data name="NotAvailable" xml:space="preserve">
+    <value>Жеткиликтүү эмес</value>
+  </data>
+	<data name="NotAvailableDeliveries" xml:space="preserve">
+    <value>Таризделген жеткиликтүү жеткирүү жок</value>
+  </data>
+	<data name="NothingChecked" xml:space="preserve">
+    <value>Эч нерсе тандалган жок</value>
+  </data>
+	<data name="NotOurTransporComment" xml:space="preserve">
+    <value>Бул вариант тапшырыкты "эшикке чейин" жеткирүүнү камсыз кылбай тургандыгына, Сиздин көңүлүңүздү бурабыз. Тапшырык каттамдык транспорт менен берилип жиберилет. Биздин кызматкер Сиз менен телефон аркылуу байланышат жана Сиз тапшырыкты кайсы жерде жана качан тосуп алуу керек экендигин айтып берет.</value>
+  </data>
+	<data name="Number" xml:space="preserve">
+    <value>Номери</value>
+  </data>
+	<data name="OnlyOnStock" xml:space="preserve">
+    <value>Болгону ушул турганы гана</value>
+  </data>
+	<data name="OnStock" xml:space="preserve">
+    <value>Кампада</value>
+  </data>
+	<data name="Order" xml:space="preserve">
+    <value>Тапшырык</value>
+  </data>
+	<data name="orderBy" xml:space="preserve">
+    <value>...боюнча сорттоо</value>
+  </data>
+	<data name="OrderConfirmDialogTitle" xml:space="preserve">
+    <value>Тапшырыкты тариздөө жана резервге коюу</value>
+  </data>
+	<data name="OrderDate" xml:space="preserve">
+    <value>Тапшырыктын датасы</value>
+  </data>
+	<data name="OrderError" xml:space="preserve">
+    <value>Тапшырыкты иштеп чыгууга жөнөтүүнүн катасы</value>
+  </data>
+	<data name="OrderErrorText" xml:space="preserve">
+    <value>Сиздин тапшырыкта биз тариздей албаган товар бар (&lt;b&gt;{0}&lt;/b&gt;). &lt;br&gt;" тапшырыкка кайтууну" басыңыз жана  тапшырыктан, кызыл менен белгиленген товарларды алып салыңыз.</value>
+  </data>
+	<data name="Ordering" xml:space="preserve">
+    <value>тапшырык ичинде</value>
+  </data>
+	<data name="OrderIsAvailable" xml:space="preserve">
+    <value>Тапшырык жеткиликтүү</value>
+  </data>
+	<data name="OrderIsAvailableForShipment" xml:space="preserve">
+    <value>...дан өзү алып кетүүгө тапшырык жеткиликтүү</value>
+  </data>
+	<data name="OrderMadeBy" xml:space="preserve">
+    <value>Тапшырыкты түзгөн</value>
+  </data>
+	<data name="OrderNotExist" xml:space="preserve">
+    <value>Бул тапшырык жок.</value>
+  </data>
+	<data name="OrderNumber" xml:space="preserve">
+    <value>Тапшырыктын номери</value>
+  </data>
+	<data name="OrderPreview" xml:space="preserve">
+    <value>Тапшырыкты алдын ала карап көрүү</value>
+  </data>
+	<data name="OrderPreviewComment" xml:space="preserve">
+    <value>&lt;p&gt; Тандалып алынган кампага ылайык, Сиздин тапшырык автоматтык түрдө бир нече тапшырыкчаларга бөлүштүрүлдү. &lt;/p&gt; &lt;p&gt;  "Тапшырыкты ырастоо" басуу менен, Сиз №1 тапшырыкты тариздөөгө өтөсүз. Калган тапшырыктар боюнча, "Тапшырыктар" бөлүмүндө долбоорлор түзүлөт. Аларды өзүнчө тариздөө керек болот. &lt;/p&gt;</value>
+  </data>
+	<data name="Orders" xml:space="preserve">
+    <value>Тапшырыктар</value>
+  </data>
+	<data name="Original" xml:space="preserve">
+    <value>Түп нуска</value>
+  </data>
+	<data name="PackLength" xml:space="preserve">
+    <value>Таңгактын узундугу, мм</value>
+  </data>
+	<data name="PackQnt" xml:space="preserve">
+    <value>Таңгактагынын саны</value>
+  </data>
+	<data name="PackWeight" xml:space="preserve">
+    <value>Таңгактын брутто салмагы, кг</value>
+  </data>
+	<data name="PackWidth" xml:space="preserve">
+    <value>Таңгактын туурасы, мм</value>
+  </data>
+	<data name="PageCreationTime" xml:space="preserve">
+    <value>Баракты түзүү убактысы</value>
+  </data>
+	<data name="PageHeader" xml:space="preserve">
+    <value>Барактын аталышы</value>
+  </data>
+	<data name="PartName" xml:space="preserve">
+    <value>Деталдын аталышы</value>
+  </data>
+	<data name="Password" xml:space="preserve">
+    <value>Сыр сөз</value>
+  </data>
+	<data name="Payment" xml:space="preserve">
+    <value>Төлөө</value>
+  </data>
+	<data name="PaymentConditions" xml:space="preserve">
+    <value>Төлөмдү кийинкиге калтыруу, күндөрү</value>
+  </data>
+	<data name="PaymentForm" xml:space="preserve">
+    <value>Төлөө формасы</value>
+  </data>
+	<data name="PersonalCabinet" xml:space="preserve">
+    <value>Менин кеңсем</value>
+  </data>
+	<data name="PersonalData" xml:space="preserve">
+    <value>Жеке маалыматтар</value>
+  </data>
+	<data name="PersonalDataChange" xml:space="preserve">
+    <value>Жеке маалыматтарды өзгөртүү</value>
+  </data>
+	<data name="Phone" xml:space="preserve">
+    <value>Телефон</value>
+  </data>
+	<data name="Phones" xml:space="preserve">
+    <value>Телефондор</value>
+  </data>
+	<data name="positions" xml:space="preserve">
+    <value>позициялар</value>
+  </data>
+	<data name="PowerHp" xml:space="preserve">
+    <value>Кубаттуулук, а. к. (ат күчү)</value>
+  </data>
+	<data name="PowerKw" xml:space="preserve">
+    <value>Кубаттуулугу, квт </value>
+  </data>
+	<data name="Presence" xml:space="preserve">
+    <value>Бар болуу</value>
+  </data>
+	<data name="Previous" xml:space="preserve">
+    <value>Артка</value>
+  </data>
+	<data name="PrevNews" xml:space="preserve">
+    <value>Мурунку</value>
+  </data>
+	<data name="Price" xml:space="preserve">
+    <value>Баа</value>
+  </data>
+	<data name="ProduceEndDateFull" xml:space="preserve">
+    <value>Чыгаруунун аяктаган күнү</value>
+  </data>
+	<data name="Producer" xml:space="preserve">
+    <value>Өндүрүүчү</value>
+  </data>
+	<data name="ProduceStartDateFull" xml:space="preserve">
+    <value>Чыгарылыш башталган күн</value>
+  </data>
+	<data name="ProdusersCatalogs" xml:space="preserve">
+    <value>Өндүрүүчүлөрдүн каталогдору</value>
+  </data>
+	<data name="Profile" xml:space="preserve">
+    <value>Профиль</value>
+  </data>
+	<data name="PropertySearchResult" xml:space="preserve">
+    <value>Касиеттери боюнча издөөнүн натыйжасы</value>
+  </data>
+	<data name="Question" xml:space="preserve">
+    <value>Суроо</value>
+  </data>
+	<data name="Registration" xml:space="preserve">
+    <value>Каттоо</value>
+  </data>
+	<data name="RegistrationDate" xml:space="preserve">
+    <value>Катталган күнү</value>
+  </data>
+	<data name="RepeatNewPassword" xml:space="preserve">
+    <value>Жаңы сыр сөз дагы бир жолу</value>
+  </data>
+	<data name="RepeatPassword" xml:space="preserve">
+    <value>Сыр сөздү дагы бир жолу кайталаңыз</value>
+  </data>
+	<data name="ReplyAddress" xml:space="preserve">
+    <value>Кайтуу дареги же телефону</value>
+  </data>
+	<data name="Representations" xml:space="preserve">
+    <value>Өкүлчүлүктөр</value>
+  </data>
+	<data name="RequestDate" xml:space="preserve">
+    <value>Суроо-талап берилген күн</value>
+  </data>
+	<data name="RequestError" xml:space="preserve">
+    <value>Суроо-талаптын катасы</value>
+  </data>
+	<data name="Responce" xml:space="preserve">
+    <value>Жооп</value>
+  </data>
+	<data name="RetailPrice" xml:space="preserve">
+    <value>Чекене баа</value>
+  </data>
+	<data name="ReturningType" xml:space="preserve">
+    <value>Кайтаруу түрү</value>
+  </data>
+	<data name="ReturnToOrder" xml:space="preserve">
+    <value>Тапшырыкка кайтуу</value>
+  </data>
+	<data name="ReturnToRequests" xml:space="preserve">
+    <value>Тапшырыктарга кайтуу</value>
+  </data>
+	<data name="ReturnWareToCart" xml:space="preserve">
+    <value>Товарды себетке кайтаруу</value>
+  </data>
+	<data name="RolesInSystem" xml:space="preserve">
+    <value>Тутумдагы ролдор</value>
+  </data>
+	<data name="SaleMultiplisity" xml:space="preserve">
+    <value>Сатуунун кайталанышы</value>
+  </data>
+	<data name="Save" xml:space="preserve">
+    <value>Сактоо</value>
+  </data>
+	<data name="SaveChanges" xml:space="preserve">
+    <value>Өзгөрүүлөрдү сактоо</value>
+  </data>
+	<data name="Search" xml:space="preserve">
+    <value>Издөө</value>
+  </data>
+	<data name="Select" xml:space="preserve">
+    <value>Тандоо</value>
+  </data>
+	<data name="SelectedPartNumbers" xml:space="preserve">
+    <value>Тандалып алынган каталог номерлери</value>
+  </data>
+	<data name="SelectedPartNumbersFull" xml:space="preserve">
+    <value>Суроо-талапка туура келген каталог номери (лери)</value>
+  </data>
+	<data name="SelectionByAuto" xml:space="preserve">
+    <value>Автоунаа боюнча тандоо</value>
+  </data>
+	<data name="SelectModel" xml:space="preserve">
+    <value>Моделди тандаңыз</value>
+  </data>
+	<data name="SelectService" xml:space="preserve">
+    <value>Авто борборду тандаңыз</value>
+  </data>
+	<data name="SelectStatus" xml:space="preserve">
+    <value>Статусту тандаңыз</value>
+  </data>
+	<data name="SelfDelivery" xml:space="preserve">
+    <value>Өзү ала кетүү</value>
+  </data>
+	<data name="Send" xml:space="preserve">
+    <value>Жөнөтүү</value>
+  </data>
+	<data name="SendRequest" xml:space="preserve">
+    <value>Суроо-талап жөнөтүү</value>
+  </data>
+	<data name="SendResponce" xml:space="preserve">
+    <value>Жооп жөнөтүү</value>
+  </data>
+	<data name="SendToWork" xml:space="preserve">
+    <value>Тапшырыкты тариздөө</value>
+  </data>
+	<data name="ServiceBooking" xml:space="preserve">
+    <value>Кызматка онлайн режиминде катталуу </value>
+  </data>
+	<data name="ServiceBookingSubmit" xml:space="preserve">
+    <value>Кызматта жазылуу</value>
+  </data>
+	<data name="Settings" xml:space="preserve">
+    <value>Төп келтирүүлөр</value>
+  </data>
+	<data name="ShippingAddress" xml:space="preserve">
+    <value>Жүктөп жөнөтүү дареги</value>
+  </data>
+	<data name="ShippingStock" xml:space="preserve">
+    <value>Жүктөп жөнөтүү кампасы</value>
+  </data>
+	<data name="Show" xml:space="preserve">
+    <value>Көргөзүү</value>
+  </data>
+	<data name="ShowImages" xml:space="preserve">
+    <value>Миниатюраларды көрсөтүү</value>
+  </data>
+	<data name="ShowPrices" xml:space="preserve">
+    <value>Бааларды чагылдыруу</value>
+  </data>
+	<data name="SiteManagement" xml:space="preserve">
+    <value>Сайтты башкаруу</value>
+  </data>
+	<data name="Specifications" xml:space="preserve">
+    <value>Өзгөчөлөөлөр</value>
+  </data>
+	<data name="StartYear" xml:space="preserve">
+    <value>Чыгарыла баштайт</value>
+  </data>
+	<data name="Stock" xml:space="preserve">
+    <value>Кампа</value>
+  </data>
+	<data name="Street" xml:space="preserve">
+    <value>Көчө</value>
+  </data>
+	<data name="SubmitOrder" xml:space="preserve">
+    <value>Тапшырыкты ырастоо</value>
+  </data>
+	<data name="Sum" xml:space="preserve">
+    <value>Сумма</value>
+  </data>
+	<data name="SummaryFooter" xml:space="preserve">
+    <value>Сиздин тапшырыгыңыздын абалы жөнүндө маалыматты Сиз "Тапшырыктар" кошумча барагындагы “Менин кеңсем" барагынан билип тура аласыз. &lt;br /&gt; Бул формадагы текст каттоодо көрсөтүлгөн Сиздин e-mailга  жөнөтүлдү.</value>
+  </data>
+	<data name="TankVolume" xml:space="preserve">
+    <value>Бактын көлөмү</value>
+  </data>
+	<data name="TC_Clearance" xml:space="preserve">
+    <value>Жылчыктын (Клиренстин) өзгөрүүсү (мм)</value>
+  </data>
+	<data name="TC_Difference" xml:space="preserve">
+    <value>Салыштыруу</value>
+  </data>
+	<data name="TC_DiscD" xml:space="preserve">
+    <value>Дисктин диаметри, дюйм</value>
+  </data>
+	<data name="TC_DiscParams" xml:space="preserve">
+    <value>Дисктин параметрлери</value>
+  </data>
+	<data name="TC_DiscWMax" xml:space="preserve">
+    <value>Дисктин максималдуу туурасы, дюйм</value>
+  </data>
+	<data name="TC_DiscWMin" xml:space="preserve">
+    <value>Дисктин минималдуу туурасы, дюйм</value>
+  </data>
+	<data name="TC_ExternalD" xml:space="preserve">
+    <value>Сырткы диаметр, мм (D)</value>
+  </data>
+	<data name="TC_H1" xml:space="preserve">
+    <value>Шина калькулятору эмне үчүн керек: </value>
+  </data>
+	<data name="TC_InnerD" xml:space="preserve">
+    <value>Ички диаметри, мм (C)</value>
+  </data>
+	<data name="TC_Measures" xml:space="preserve">
+    <value>Шина калькулятору эмне үчүн керек:</value>
+  </data>
+	<data name="TC_New" xml:space="preserve">
+    <value>Жаңы</value>
+  </data>
+	<data name="TC_NewMeasures" xml:space="preserve">
+    <value>Жаңы өлчөм:</value>
+  </data>
+	<data name="TC_Old" xml:space="preserve">
+    <value>Эски</value>
+  </data>
+	<data name="TC_OldMeasures" xml:space="preserve">
+    <value>Эски өлчөм:</value>
+  </data>
+	<data name="TC_Profile" xml:space="preserve">
+    <value>Профилдин бийиктиги, мм (B)</value>
+  </data>
+	<data name="TC_RealSpeed" xml:space="preserve">
+    <value>Реалдуу ылдамдык (км/саат)</value>
+  </data>
+	<data name="TC_SpeedDifference" xml:space="preserve">
+    <value>Айырма (км/с)</value>
+  </data>
+	<data name="TC_Speedometer" xml:space="preserve">
+    <value>Спидометр</value>
+  </data>
+	<data name="TC_SpeedometerValue" xml:space="preserve">
+    <value>Спидометрдин көрсөтмөлөрү (км/с)</value>
+  </data>
+	<data name="TC_T1_1" xml:space="preserve">
+    <value>Унааңызга башка дөңгөлөктүн тип өлчөмүн орнотууда, шина калькуляторунун жардамы менен төмөндөгүлрдүн мүнөздөмөлөрү кандайча өзгөрөрүн эсептей аласыз: дөңгөлөктүн сырткы өлчөмдөрү, жер менен жылчыктын бийиктиги (клиренс), спидометрдин көрсөткүчтөрү жана башкалар. Калькулятор дөңгөлөктөрдүн бардык өлчөмдөрүн миллиметр менен, ал эми унаа ылдамдыгын км/саат менен эсептейт. Ошондой эле дөңгөлөктүн белгилүү бир  өлчөмү үчүн керектүү алкактын туурасын эсептей аласыз.</value>
+  </data>
+	<data name="TC_T1_2" xml:space="preserve">
+    <value>Дөңгөлөктүн профилинин бийиктиги (сүрөттө "Б" тамгасы менен белгиленген) дөңгөлөктүн профилинин маанисине жана покрышканын кеңдигине жараша эсептелет (тип өлчөмдө дөңгөлөктүн профили экинчи цифра болот, ал шинанын туурасынан жараша пайыз менен көрсөтүлөт).</value>
+  </data>
+	<data name="TC_T1_3" xml:space="preserve">
+    <value>Биз сиздин машинаны эксплуатациялоо боюнча нускамада көрсөтүлгөн гана дөңгөлөктөрдүн заводдук тип өлчөмдөрүн колдонууну сунуш кылабыз. Стандарттуу эмес тип өлчөмдөрдү колдонуу, чайкоочунун кепилдик милдеттенмелерин алып салууга, ошондой эле автомобилдин мүнөздөмөлөрүнүн жана анын башкарылуусунун начарлашына алып келиши мүмкүн.</value>
+  </data>
+	<data name="TC_T2_1" xml:space="preserve">
+    <value>Алгач сиздин унааңызга орнотулган тип өлчөмдү, андан кийин орнотууну каалаганыңызды киргизип, "эсептөө" баскычын басыңыз.</value>
+  </data>
+	<data name="TC_T2_2" xml:space="preserve">
+    <value>Төмөндөгү таблицада калькулятордун эсептөө натыйжалары көрсөтүлөт.</value>
+  </data>
+	<data name="TC_T3_2" xml:space="preserve">
+    <value>&lt;strong&gt; Эскертүү &lt;/strong&gt; Өтө эле тар же өтө кенен дисктерди орнотуу дөңгөлөктүн майышуусуна, анын эксплуатациялык мүнөздөмөлөрүнүн начарлоосуна, ошондой эле ылдам эскирүүсүнө алып келет.</value>
+  </data>
+	<data name="TC_Width" xml:space="preserve">
+    <value>Дөңгөлөктөрдүн туурасы, мм (A)</value>
+  </data>
+	<data name="TermDays" xml:space="preserve">
+    <value>Жеткирүү мөөнөтү</value>
+  </data>
+	<data name="ThankForUnderstanding" xml:space="preserve">
+    <value>Түшүнгөнүңүз үчүн рахмат!</value>
+  </data>
+	<data name="ThemeText" xml:space="preserve">
+    <value>Тематикалык текст</value>
+  </data>
+	<data name="Time" xml:space="preserve">
+    <value>Убакыт</value>
+  </data>
+	<data name="TiresCalculator" xml:space="preserve">
+    <value>Шина  калькулятору</value>
+  </data>
+	<data name="TitleSkype" xml:space="preserve">
+    <value>Skype боюнча суроо</value>
+  </data>
+	<data name="to" xml:space="preserve">
+    <value>боюнча</value>
+  </data>
+	<data name="ToOrderList" xml:space="preserve">
+    <value>Тапшырыкттар тизмесине</value>
+  </data>
+	<data name="Total" xml:space="preserve">
+    <value>Бардыгы</value>
+  </data>
+	<data name="TradeUser" xml:space="preserve">
+    <value>Тапшырык жасай алат</value>
+  </data>
+	<data name="TransmissionType" xml:space="preserve">
+    <value>Ттрансмиссиянын тиби</value>
+  </data>
+	<data name="UnitPrice" xml:space="preserve">
+    <value>Бирөөнүн баасы.</value>
+  </data>
+	<data name="UsersManagement" xml:space="preserve">
+    <value>Пайдалануучуларды башкаруу</value>
+  </data>
+	<data name="ValveNumber" xml:space="preserve">
+    <value>
+Клапандардын саны </value>
+  </data>
+	<data name="ViewRequesByAuto" xml:space="preserve">
+    <value>Машина боюнча суроо-талапты карап чыгуу</value>
+  </data>
+	<data name="VINRequests" xml:space="preserve">
+    <value>VIN сурамдары</value>
+  </data>
+	<data name="VINWatermark" xml:space="preserve">
+    <value>техпаспортунан</value>
+  </data>
+	<data name="VisaPayment" xml:space="preserve">
+    <value>Банк картасы менен төлөө</value>
+  </data>
+	<data name="VoltageV" xml:space="preserve">
+    <value>Чыңалуу, В
+</value>
+  </data>
+	<data name="VolumeCm" xml:space="preserve">
+    <value>Көлөмү, см</value>
+  </data>
+	<data name="WaitingToApprove" xml:space="preserve">
+    <value>Бекитүүнү күтүү
+</value>
+  </data>
+	<data name="WantedDeliveryDate" xml:space="preserve">
+    <value>Керектүү жеткирүү датасы</value>
+  </data>
+	<data name="ware" xml:space="preserve">
+    <value>товар</value>
+  </data>
+	<data name="WareFromWareHouse" xml:space="preserve">
+    <value>Товар кампадан</value>
+  </data>
+	<data name="WareGrossWeight" xml:space="preserve">
+    <value>Брутто салмагы, кг</value>
+  </data>
+	<data name="WareHeight" xml:space="preserve">
+    <value>Товардын бийиктиги, мм</value>
+  </data>
+	<data name="WareIsNotAvailable" xml:space="preserve">
+    <value>Накталай жок</value>
+  </data>
+	<data name="WareLength" xml:space="preserve">
+    <value>Товардын узундугу, мм</value>
+  </data>
+	<data name="WareName" xml:space="preserve">
+    <value>Товардын аталышы</value>
+  </data>
+	<data name="WareNumber" xml:space="preserve">
+    <value>Товардын №</value>
+  </data>
+	<data name="WareWasAddedToCart" xml:space="preserve">
+    <value>Товар себетке кошулду</value>
+  </data>
+	<data name="WareWidth" xml:space="preserve">
+    <value>Товардын туурасы, мм</value>
+  </data>
+	<data name="Warning" xml:space="preserve">
+    <value>Эскертүү</value>
+  </data>
+	<data name="WheelFormula" xml:space="preserve">
+    <value>Дөңгөлөк формула
+</value>
+  </data>
+	<data name="WithoutResponce" xml:space="preserve">
+    <value>Жооп жок</value>
+  </data>
+	<data name="WithResponce" xml:space="preserve">
+    <value>Жообу менен</value>
+  </data>
+	<data name="YearOfProduce" xml:space="preserve">
+    <value>Чыгарылган жылы</value>
+  </data>
+	<data name="Yes" xml:space="preserve">
+    <value>Ооба</value>
+  </data>
+	<data name="YourName" xml:space="preserve">
+    <value>Сиздин атыңыз</value>
+  </data>
+	<data name="YourPrice" xml:space="preserve">
+    <value>Сиздин бааңыз</value>
+  </data>
+	<data name="OK" xml:space="preserve">
+    <value>Ооба</value>
+  </data>
+	<data name="ExtractToOrder" xml:space="preserve">
+    <value>Тапшырыкта бөлүп баса көрсөтүлсүн</value>
+  </data>
+	<data name="ReturnToOrderMessage" xml:space="preserve">
+    <value>Тапшырыкка кайра кайтаруу үчүн браузердин "Артка" баскычын басыңыз.
+</value>
+  </data>
+	<data name="WareIsLate" xml:space="preserve">
+    <value>Товар кечигип жатат</value>
+  </data>
+	<data name="TotalSelectedSum" xml:space="preserve">
+    <value>
+ Бардыгы болуп ... суммага тандалып алынды</value>
+  </data>
+	<data name="NewWare" xml:space="preserve">
+    <value>Жаңылык</value>
+  </data>
+	<data name="CityDistrict" xml:space="preserve">
+    <value>Шаардын району</value>
+  </data>
+	<data name="notSelected" xml:space="preserve">
+    <value>тандалып алынган жок</value>
+  </data>
+	<data name="DeliveryDate" xml:space="preserve">
+    <value>Жеткирүү датасы</value>
+  </data>
+	<data name="WarehouseShipmentDate" xml:space="preserve">
+    <value>Кампадан жүктөп жөнөтүлгөн дата</value>
+  </data>
+	<data name="Remain" xml:space="preserve">
+    <value>Калды</value>
+  </data>
+	<data name="AccessStatistics" xml:space="preserve">
+    <value>Мүмкүндүк статистикасы</value>
+  </data>
+	<data name="Promotions" xml:space="preserve">
+    <value>Акциялар</value>
+  </data>
+	<data name="Specials" xml:space="preserve">
+    <value>Акциялар</value>
+  </data>
+	<data name="Message" xml:space="preserve">
+    <value>Билдирүү</value>
+  </data>
+	<data name="AddToCompare" xml:space="preserve">
+    <value>Салыштырууга кошуу</value>
+  </data>
+	<data name="RemoveFromComparision" xml:space="preserve">
+    <value>Салыштыруудан алып салуу</value>
+  </data>
+	<data name="WareComparision" xml:space="preserve">
+    <value>Товарларды салыштыруу</value>
+  </data>
+	<data name="Compare" xml:space="preserve">
+    <value>Салыштыруу</value>
+  </data>
+	<data name="AllParams" xml:space="preserve">
+    <value>Бардык параметрлер</value>
+  </data>
+	<data name="OnlyDifference" xml:space="preserve">
+    <value>Айырмачылыктар гана</value>
+  </data>
+	<data name="WareType" xml:space="preserve">
+    <value>Товардын түрү</value>
+  </data>
+	<data name="AdditionalInformation" xml:space="preserve">
+    <value>Кошумча маалымат</value>
+  </data>
+	<data name="ContactInfo" xml:space="preserve">
+    <value>Байланыш маалыматы</value>
+  </data>
+	<data name="AccordingOfDeliveryServiceTarifs" xml:space="preserve">
+    <value>Кызматтын тарифине ылайык</value>
+  </data>
+	<data name="Version" xml:space="preserve">
+    <value>Жоромол</value>
+  </data>
+	<data name="AutoData" xml:space="preserve">
+    <value>Унаа маалыматтары</value>
+  </data>
+	<data name="Change" xml:space="preserve">
+    <value>Өзгөртүү</value>
+  </data>
+	<data name="AllNews" xml:space="preserve">
+    <value>Бардык жаңылыктар</value>
+  </data>
+	<data name="ActionWarningMessage" xml:space="preserve">
+    <value>Көңүл буруңуз! Сиздин тапшырыгыңызда акциялык товарлар камтылган, аларды кайтарып берүү мүмкүн эмес!</value>
+  </data>
+	<data name="NoReturn" xml:space="preserve">
+    <value>Кайтарылып берилбейт</value>
+  </data>
+	<data name="ImageUrl" xml:space="preserve">
+    <value>Топтун URL сүрөттөлүшү</value>
+  </data>
+	<data name="ShortProblemDescription" xml:space="preserve">
+    <value>Көйгөйдүн кыскача баяндамасы</value>
+  </data>
+	<data name="CarStateNumber" xml:space="preserve">
+    <value>Автомобилдин мам. номери</value>
+  </data>
+	<data name="OnlyLettersAndDigits" xml:space="preserve">
+    <value>Тамгалар жана сандар гана</value>
+  </data>
+	<data name="ForReservation" xml:space="preserve">
+    <value>Тапшырыкка</value>
+  </data>
+	<data name="AllPromotions" xml:space="preserve">
+    <value>Бардык акциялар</value>
+  </data>
+	<data name="Contacts" xml:space="preserve">
+    <value>Контакттар</value>
+  </data>
+	<data name="HowToBuy" xml:space="preserve">
+    <value>Кантип сатып алуу?</value>
+  </data>
+	<data name="ServiceProducerCatalogs" xml:space="preserve">
+    <value>&lt;span&gt; өндүрүүчүлөрдүн каталогдору &lt;/span&gt;</value>
+  </data>
+	<data name="Services" xml:space="preserve">
+    <value>Кызмат көрсөтүүлөр</value>
+  </data>
+	<data name="ServiceSelectionByMark" xml:space="preserve">
+    <value>&lt;span&gt;маркасы боюнча &lt;/span&gt; тандоо </value>
+  </data>
+	<data name="ServiceSelectionByVIN" xml:space="preserve">
+    <value>VIN &lt;/span&gt; боюнча &lt;span&gt; тандоо</value>
+  </data>
+	<data name="ServiceTechStationBooking" xml:space="preserve">
+    <value>&lt;/span&gt;тейлемеге &lt;span&gt;онлайн катталуу </value>
+  </data>
+	<data name="ServiceTiresSelection" xml:space="preserve">
+    <value>&lt;span&gt;шиналарын&lt;/span&gt; тандоо </value>
+  </data>
+	<data name="BankAccount" xml:space="preserve">
+    <value>Алыш-бериш эсеби</value>
+  </data>
+	<data name="BankCode" xml:space="preserve">
+    <value>Банктын коду</value>
+  </data>
+	<data name="FiscalCode" xml:space="preserve">
+    <value>BIN / INN</value>
+  </data>
+	<data name="JuridicalAddress" xml:space="preserve">
+    <value>Юридикалык дарек</value>
+  </data>
+	<data name="JuridicalName" xml:space="preserve">
+    <value>Юридикалык аталышы</value>
+  </data>
+	<data name="RepresentationRequest" xml:space="preserve">
+    <value>Өкүлчүлүккө суроо-талап</value>
+  </data>
+	<data name="Error" xml:space="preserve">
+    <value>Ката</value>
+  </data>
+	<data name="ChangePassword_Cap" xml:space="preserve">
+    <value>Сыр сөздү өзгөртүү</value>
+  </data>
+	<data name="OrderSum" xml:space="preserve">
+    <value>Тапшырыктын суммасы</value>
+  </data>
+	<data name="SaveComment" xml:space="preserve">
+    <value>Түшүндүрмөнү сактоо</value>
+  </data>
+	<data name="Buy" xml:space="preserve">
+    <value>Сатып алуу</value>
+  </data>
+	<data name="MainPage" xml:space="preserve">
+    <value>Башкы</value>
+  </data>
+	<data name="Applicability" xml:space="preserve">
+    <value>Колдонуу мүмкүнчүлүгү </value>
+  </data>
+	<data name="GotoComparision" xml:space="preserve">
+    <value>Салыштырууга өтүү</value>
+  </data>
+	<data name="SelectDate" xml:space="preserve">
+    <value>Датаны тандаңыз</value>
+  </data>
+	<data name="SubscribeForActionInformations" xml:space="preserve">
+    <value>Акциялар жөнүндө маалыматка жазылыңыз</value>
+  </data>
+	<data name="Booking" xml:space="preserve">
+    <value>
+жазылыңыз!</value>
+  </data>
+	<data name="SummaryTitle2" xml:space="preserve">
+    <value>"&lt;p&gt; Сиздин &lt;span&gt;тапшырык № {0} &lt;/span&gt; биз тарабынан кабыл алынды жана жакын арада ана аласыз. &lt;/p&gt;  &lt;p&gt; Тапшырыгыңыз боюнча суроолор пайда болсо, биздин сатуу бөлүмүнө кайрылыңыз &lt;/p&gt; "</value>
+  </data>
+	<data name="OrderCompleting" xml:space="preserve">
+    <value>Тапшырыкты аяктоо</value>
+  </data>
+	<data name="PaymentTitle2" xml:space="preserve">
+    <value>&lt;p&gt;Сиздин &lt;span&gt;№{0}&lt;/span&gt; тапшырык   биз тарабынан кабыл алынган жана али төлөнө элек.&lt;/p&gt;&lt;p&gt; Эгер тапшырык боюнча суроо пайда болсо, &lt;a&gt; {2}&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt; сатуу бөлүмүнө кайрылыңыз Сиздин тапшырык төмөнкү позицияларды камтыйт: :&lt;/b&gt;&lt;/p&gt;</value>
+  </data>
+	<data name="ThanksForPurchase" xml:space="preserve">
+    <value>Сатып алганыңыз үчүн рахмат!</value>
+  </data>
+	<data name="WareSelection" xml:space="preserve">
+    <value>Товарды тандоо</value>
+  </data>
+	<data name="Apply" xml:space="preserve">
+    <value>Колдонулсун</value>
+  </data>
+	<data name="Filters" xml:space="preserve">
+    <value>Чыпкалар</value>
+  </data>
+	<data name="Reset" xml:space="preserve">
+    <value>Баштапкы абалга келтирүү</value>
+  </data>
+	<data name="PageSize" xml:space="preserve">
+    <value>Барактын өлчөмү</value>
+  </data>
+	<data name="TC_New_T1_1" xml:space="preserve">
+    <value>Дөңгөлөктүн дискинин диаметри көбөйгөндө (жана натыйжада, дөңгөлөктүн тышкы диаметри өзгөрүүсүз калуусу үчүн дөңгөлөктүн профилинин бийиктиги төмөндөйт), унаанын асма бөлүгүнө жүктөм көбөйүп, ошондой эле ыңгайлуулугу да начарлайт (унаа байкалаарлык катуу болуп калат). </value>
+  </data>
+	<data name="TC_New_T1_2" xml:space="preserve">
+    <value>Дөңгөлөктүн профили ашыкча көбөйүп кетсе, машина "калкылдак" болуп, башкарылуусу начарлайт, ал эми профилдин бийиктигинин критикалык маанисинде шина кузовдун бөлүктөрүнө жана унаанын асма бөлүктөрүнө тие башташынын кесепетинен анын бузулушуна алып келүүсү мүмкүн</value>
+  </data>
+	<data name="TC_New_T3" xml:space="preserve">
+    <value>Спидометрдин көрсөткүчтөрүндөгү ката унаанын ылдамдыгына жараша болот, ылдамдык жогорулаган сайын катасы өсөт. Мындан тышкары ката, унаанын күйүүчү майдын чыгымынын көрсөткүчтөрүнө таасир этерин унутпаш керек.</value>
+  </data>
+	<data name="SelectMark" xml:space="preserve">
+    <value>Марканы тандаңыз</value>
+  </data>
+	<data name="ShowAll" xml:space="preserve">
+    <value>Баарын көрсөтүү
+</value>
+  </data>
+	<data name="EngineTypeAndVolume" xml:space="preserve">
+    <value>Кыймылдаткычтын көлөмү жана түрү</value>
+  </data>
+	<data name="EnterYourCarData" xml:space="preserve">
+    <value>Сиздин автомобиль тууралуу маалыматтарды көрсөтүңүз</value>
+  </data>
+	<data name="GotoMain" xml:space="preserve">
+    <value>Башкы бетке</value>
+  </data>
+	<data name="NothingFound2" xml:space="preserve">
+    <value>Тилекке каршы, Сиздин суроо-талап боюнча эч нерсе табылган жок, бул төмөнкү себептерден улам болушу мүмкүн:</value>
+  </data>
+	<data name="NothingFound2Message" xml:space="preserve">
+    <value>"&lt;ol&gt;
+                 &lt;li&gt; Сиз киргизген каталог номери жок. Өзүңүздүн баштапкы сурооңузду башкача туюндурууга аракет кылыңыз. &lt;/li&gt;
+                 &lt;li&gt; Издөө боюнча белгилүү чектөөлөр турат. Эгерде "Так издөө" же "Белгилүү бир бөлүмдөн издөө" тик тилкесинин жанында белгичелер турса, аларды алып салууга аракет кылыңыз. &lt;/li&gt;
+             &lt;/ol&gt; "
+</value>
+  </data>
+	<data name="NothingFound2Title" xml:space="preserve">
+    <value>Издөө болгон жок :)</value>
+  </data>
+	<data name="SelectPreferredDate" xml:space="preserve">
+    <value>Каалаган датаны тандаңыз</value>
+  </data>
+	<data name="SelectPreferredTime" xml:space="preserve">
+    <value>Сиз үчүн ыңгайлуу убакытты тандаңыз</value>
+  </data>
+	<data name="ServiceBookingFinishing" xml:space="preserve">
+    <value>Жазууну аяктоо</value>
+  </data>
+	<data name="SeviceBookingConfirmation2" xml:space="preserve">
+    <value>&lt;h3&gt;Введите данные для импорта позиций в корзину заказов.&lt;/h3&gt;
+&lt;p&gt;Данные должны представлять собой текст, каждая строка которого содержит бренд, каталожный номер и количество заказываемого товара. Разделителем между колонками (полями) должен быть знак табуляции.
+                    Такой текст легко получить, если взять в буфер (CTRL+C) необходимый вам диапазон на листе Excel (или OpenOffice Calc).&lt;/p&gt;</value>
+  </data>
+	<data name="VINRequest" xml:space="preserve">
+    <value>VIN-суроо-талап</value>
+  </data>
+	<data name="Block" xml:space="preserve">
+    <value>Блок</value>
+  </data>
+	<data name="SubscribeForOrderInfo" xml:space="preserve">
+    <value>Тапшырык жөнүндө кабарламаны e-mailге жиберүү</value>
+  </data>
+	<data name="ShowResults" xml:space="preserve">
+    <value>Жыйынтыктарды көрсөтүү</value>
+  </data>
+	<data name="TiresSelection" xml:space="preserve">
+    <value>Шиналарды тандоо</value>
+  </data>
+	<data name="TiresSummer" xml:space="preserve">
+    <value>Жайкы</value>
+  </data>
+	<data name="TiresWinter" xml:space="preserve">
+    <value>Кышкы
+</value>
+  </data>
+	<data name="AboutCompany" xml:space="preserve">
+    <value>Компания жөнүндө</value>
+  </data>
+	<data name="Providers" xml:space="preserve">
+    <value>Жеткирип берүүчүлөр</value>
+  </data>
+	<data name="OrderPayment" xml:space="preserve">
+    <value>Тапшырыкка төлөө</value>
+  </data>
+	<data name="AllWareCategories" xml:space="preserve">
+    <value>Товарлар каталогу</value>
+  </data>
+	<data name="DoYouLikeShare" xml:space="preserve">
+    <value>Басылма жактыбы? Бөлүшүңүз!</value>
+  </data>
+	<data name="DescribeError" xml:space="preserve">
+    <value>Ката жөнүндө баяндап жазыңыз</value>
+  </data>
+	<data name="ReportAboutError" xml:space="preserve">
+    <value>Ката  жөнүндө билдирүү</value>
+  </data>
+	<data name="Comment2" xml:space="preserve">
+    <value>Эскертүү</value>
+  </data>
+	<data name="EngineCode" xml:space="preserve">
+    <value>Кыймылдаткычтын номери / коду</value>
+  </data>
+	<data name="ShowRetailPricesWareCard" xml:space="preserve">
+    <value>Тоардын карточкасындагы чекене баа</value>
+  </data>
+	<data name="OrderDeleteError" xml:space="preserve">
+    <value>Тапшырыкты алып салуу мүмкүн эмес:</value>
+  </data>
+	<data name="cm3" xml:space="preserve">
+    <value>куб. см</value>
+  </data>
+	<data name="Power" xml:space="preserve">
+    <value>Кубаттуулук</value>
+  </data>
+	<data name="Volume" xml:space="preserve">
+    <value>Көлөм</value>
+  </data>
+	<data name="_HP" xml:space="preserve">
+    <value>а.к. (ат күчү)</value>
+  </data>
+	<data name="_kWt" xml:space="preserve">
+    <value>кВт</value>
+  </data>
+	<data name="DeliveryCreationError" xml:space="preserve">
+    <value>Жеткирүүнү тариздөөдө ката  кетти: </value>
+  </data>
+	<data name="JsonUnknownError" xml:space="preserve">
+    <value>Бир нерсе туура эмес кетип, жана биз Сиздин өтүнүчтү иштете албай койдук. Кайталап көрүңүз же биз менен {1} номери боюнча байланышыңыз</value>
+  </data>
+	<data name="NoWareFound" xml:space="preserve">
+    <value>Товар табылган жок</value>
+  </data>
+	<data name="NeedAllTaxInvoices" xml:space="preserve">
+    <value>Бардык жазылбаган салык коштомо кагаздар керек</value>
+  </data>
+	<data name="WareCode" xml:space="preserve">
+    <value>Товардын коду</value>
+  </data>
+	<data name="PaymentAccepted" xml:space="preserve">
+    <value>Төлөм кабыл алынды</value>
+  </data>
+	<data name="PaymentAcceptedMessage" xml:space="preserve">
+    <value>{0} тапшырыгы боюнча {1} суммадагы төлөмүңүз ийгиликтүү кабыл алынды.</value>
+  </data>
+	<data name="PaymentErrorMessage" xml:space="preserve">
+    <value>{0} тапшырыгы боюнча {1} суммадагы Сиздин төлөм иштетилүүсү мүмкүн эмес. . &lt;a href="{2}"&gt;Дагы бир жолу&lt;/a&gt; аракет кылыңыз же Сиздин банкка кайрылыңыз.</value>
+  </data>
+	<data name="Printing" xml:space="preserve">
+    <value>Басып чыгаруу</value>
+  </data>
+	<data name="TrustedPerson" xml:space="preserve">
+    <value>Ишенимдүү адам</value>
+  </data>
+	<data name="VINSearchPlaceholder" xml:space="preserve">
+    <value>VIN киргизиңиз (17 белги)</value>
+  </data>
+	<data name="ProduceDate" xml:space="preserve">
+    <value>Чыгарылган датасы</value>
+  </data>
+	<data name="Transmission" xml:space="preserve">
+    <value>Трансмиссия</value>
+  </data>
+	<data name="VinCodeNotFound" xml:space="preserve">
+    <value>Сиз киргизген VIN-код маалымат базасында жок же туура эмес киргизилген</value>
+  </data>
+	<data name="Info" xml:space="preserve">
+    <value>Маалымат</value>
+  </data>
+	<data name="UrgentCollection" xml:space="preserve">
+    <value>Шашылыш чогултуу</value>
+  </data>
+	<data name="SelectByCategories" xml:space="preserve">
+    <value>Түйүндөрдүн тизмеси</value>
+  </data>
+	<data name="SelectByGroups" xml:space="preserve">
+    <value>Топтор боюнча издөө</value>
+  </data>
+	<data name="EnterGroupName" xml:space="preserve">
+    <value>Топтун аталышын киргизиңиз</value>
+  </data>
+	<data name="Default" xml:space="preserve">
+    <value>Жарыяланбас</value>
+  </data>
+	<data name="MaxRequestsPerDay" xml:space="preserve">
+    <value>Суткадагы эң көп сурамдар</value>
+  </data>
+	<data name="Unlimited" xml:space="preserve">
+    <value>
+Чексиз </value>
+  </data>
+	<data name="ValabilityTerm" xml:space="preserve">
+    <value>Жарактуулук мөөнөтү</value>
+  </data>
+	<data name="VINSearch" xml:space="preserve">
+    <value>VIN боюнча издөө</value>
+  </data>
+	<data name="ComparisionActErrorMessage" xml:space="preserve">
+    <value>&lt;п&gt;Система бош салыштырып текшерүү актысын түздү &lt;/p&gt;&lt;p&gt; Өтүнүчтү башка параметрлер менен кайталап көрүңүз же биз менен &lt;b&gt;{1}&lt;/b&gt;&lt;/p&gt;номери боюнча байланышыңыз</value>
+  </data>
+	<data name="FefoMessage" xml:space="preserve">
+    <value>1. Тапшырык боюнча жеткиликтүү сунуштарды кароо үчүн "Тапшырыкты тариздөө" баскычын басыңыз.&lt;/br&gt;2. Баасы жана жеткиликтүү мөөнөтү боюнча ыңгайлуу товарды тандаңыз.&lt;/br&gt;3. Андан кийин, товарды себетке кошуңуз жана тапшырыкты тариздеңиз.</value>
+  </data>
+	<data name="Details" xml:space="preserve">
+    <value>Майда-чүйдөсү</value>
+  </data>
+	<data name="NeedPart" xml:space="preserve">
+    <value>Деталь керек</value>
+  </data>
+	<data name="NothingFound3" xml:space="preserve">
+    <value>Эч нерсе табылган жок</value>
+  </data>
+	<data name="Action" xml:space="preserve">
+    <value>Акция</value>
+  </data>
+	<data name="Sale" xml:space="preserve">
+    <value>Сатып түгөтүү</value>
+  </data>
+	<data name="CategoryFirstEntranceMessage" xml:space="preserve">
+    <value>Категорияны тандоо үчүн ушул тизме менен пайдаланыңыз</value>
+  </data>
+	<data name="SelectFromList" xml:space="preserve">
+    <value>Тизмеден тандаңыз</value>
+  </data>
+	<data name="NeedParametersSpecification" xml:space="preserve">
+    <value>Параметрлерди тактоо талап кылынат</value>
+  </data>
+	<data name="Note" xml:space="preserve">
+    <value>Эскертүү</value>
+  </data>
+	<data name="SelectModification" xml:space="preserve">
+    <value>Модификацияны тандаңыз</value>
+  </data>
+	<data name="AutoIsNotSelected" xml:space="preserve">
+    <value>Автомобиль  тандалган жок</value>
+  </data>
+	<data name="SupportEmailLabel" xml:space="preserve">
+    <value>Техникалык консультант</value>
+  </data>
+	<data name="LoyaltyProgram" xml:space="preserve">
+    <value>Loyalty Program</value>
+  </data>
+	<data name="AllTires" xml:space="preserve">
+    <value>Бардык шиналар</value>
+  </data>
+	<data name="Tires" xml:space="preserve">
+    <value>Шиналар</value>
+  </data>
+	<data name="NotificationsHistory" xml:space="preserve">
+    <value>Кабарламалар тарыхы</value>
+  </data>
+	<data name="Subject" xml:space="preserve">
+    <value>Тема</value>
+  </data>
+	<data name="AccessDenied" xml:space="preserve">
+    <value>Кирүүгө тыюу салынган</value>
+  </data>
+	<data name="FeatureDisabled" xml:space="preserve">
+    <value>Суралган бөлүм сервер тарабында колдоого алынбайт.</value>
+  </data>
+	<data name="Region" xml:space="preserve">
+    <value>Регион</value>
+  </data>
+	<data name="EPayKKBPayment" xml:space="preserve">
+    <value>EPay KKB тутуму аркылуу төлөө</value>
+  </data>
+	<data name="ClientsDelivery" xml:space="preserve">
+    <value>Жеткирүү</value>
+  </data>
+	<data name="PaymentRejected" xml:space="preserve">
+    <value>Төлөм четке кагылды</value>
+  </data>
+	<data name="QntOnStock" xml:space="preserve">
+    <value>Кампадагынын саны</value>
+  </data>
+	<data name="AmountOnStock" xml:space="preserve">
+    <value>Кампадагынын саны</value>
+  </data>
+	<data name="IsAbsent" xml:space="preserve">
+    <value>Жок</value>
+  </data>
+	<data name="Credit" xml:space="preserve">
+    <value>Кредит</value>
+  </data>
+	<data name="Debet" xml:space="preserve">
+    <value>Дебет</value>
+  </data>
+	<data name="OrderCommentText" xml:space="preserve">
+    <value>&lt;b&gt; Көңүл буруңуз !!! &lt;/b&gt; &lt;br /&gt; Сизден товарларды алган күндөн тартып 3 күндүн ичинде бар экендигин жана тышкы абалын (бүтүндүгү, майышуусун (деформациясы) ж.б.) текшерип коюуну абдан өтүнөбүз. &lt;br /&gt; Товар келип түшкөн күндөн тартып 3 күндөн кийин, товардын сырткы көрүнүшү жана абалы боюнча дооматтар кабыл алынбайт! &lt;br /&gt;  Товарларды кайтарып берүү, товардык көрүнүшү сакталган шартта (тапшырык позицияларына тиешеси жок) 14 жумушчу күндүн ичинде жүзөгө ашырылат. &lt;br /&gt; Товарлардын техникалык бузулуулары, кемчиликтер табылган учурдан тартып Даттануу актысы таризделет!</value>
+  </data>
+	<data name="ByName" xml:space="preserve">
+    <value>Аталышы боюнча</value>
+  </data>
+	<data name="CurrentDebt" xml:space="preserve">
+    <value>Учурдагы карыз</value>
+  </data>
+	<data name="EpayKKBAmount" xml:space="preserve">
+    <value>Төлөй турган сумма</value>
+  </data>
+	<data name="EpayKKBDataTitle" xml:space="preserve">
+    <value>Төлөө жүргүзүү үчүн чоо-жайыңызды киргизиңиз</value>
+  </data>
+	<data name="EpayKKBEmail" xml:space="preserve">
+    <value>Төлөөчүнүн Email</value>
+  </data>
+	<data name="Inventory" xml:space="preserve">
+    <value>Инвентаризациялоо</value>
+  </data>
+	<data name="OvervalueComment" xml:space="preserve">
+    <value>Тапшырыктагы товардын саны жеткиликтүүдөн ашып кетти (максимум. {0})</value>
+  </data>
+	<data name="UserRegistration" xml:space="preserve">
+    <value>Колдонуучуларды каттоо</value>
+  </data>
+	<data name="RegistrationSuccessful" xml:space="preserve">
+    <value>Каттоо ийгиликтүү аяктады</value>
+  </data>
+	<data name="NearestWorkingDays" xml:space="preserve">
+    <value>Келе жаткан жумуш күндөрү</value>
+  </data>
+	<data name="SelectSelfDeliveryWarehouse" xml:space="preserve">
+    <value>Өзү ташып кетүү кампасын тандаңыз</value>
+  </data>
+	<data name="WrongVINCode" xml:space="preserve">
+    <value>Туура эмес VIN-код
+</value>
+  </data>
+	<data name="UploadSupplierPriceKros" xml:space="preserve">
+    <value>Прайс/кроссторду жүктөө</value>
+  </data>
+	<data name="LoadCrosses" xml:space="preserve">
+    <value>Кроссторду жүктөө</value>
+  </data>
+	<data name="LoadPrice" xml:space="preserve">
+    <value>Прайс баракчаны жүктөө</value>
+  </data>
+	<data name="SelectFile" xml:space="preserve">
+    <value>Файлды тандаңыз</value>
+  </data>
+	<data name="RetailIsBlockedMessage" xml:space="preserve">
+    <value>Тилекке каршы, учурда Сиздин аймакта чекене тейлөө жеткиликтүү эмес</value>
+  </data>
+	<data name="CodeHS" xml:space="preserve">
+    <value> ТН ВЭД коду</value>
+  </data>
+	<data name="SearchPlaceholderNumber" xml:space="preserve">
+    <value>Номери боюнча издөө </value>
+  </data>
+	<data name="Discount" xml:space="preserve">
+    <value>Арзандатуу</value>
+  </data>
+	<data name="UploadSupplierPriceKrosMissingData" xml:space="preserve">
+    <value>№{0} сапты талдоодо ката кетти. № {1} тик тилкеде маалыматтар жок</value>
+  </data>
+	<data name="PartNumber" xml:space="preserve">
+    <value>Артикул</value>
+  </data>
+	<data name="DebtWarningMessageBrief" xml:space="preserve">
+    <value>Мөөнөтү өтүп кеткен карыз бар!</value>
+  </data>
+	<data name="ComparisionActFilter" xml:space="preserve">
+    <value>Салыштырып текшерүү актысынын чыпкасы</value>
+  </data>
+	<data name="PeriodFrom" xml:space="preserve">
+    <value>...дан  мезгил</value>
+  </data>
+	<data name="EndBalance" xml:space="preserve">
+    <value>Акыркы калдык</value>
+  </data>
+	<data name="StartBalance" xml:space="preserve">
+    <value>Баштапкы калдык</value>
+  </data>
+	<data name="ExistingCartItemMessage" xml:space="preserve">
+    <value>Мындай товар мурунтан эле себетте бар</value>
+  </data>
+	<data name="OrdersAndPayments" xml:space="preserve">
+    <value>Тапшырыктар жана төлөм</value>
+  </data>
+	<data name="Tools" xml:space="preserve">
+    <value>Аспаптар</value>
+  </data>
+	<data name="UserFilter" xml:space="preserve">
+    <value>Колдонуучунун чыпкасы </value>
+  </data>
+	<data name="SummaryListTitle" xml:space="preserve">
+    <value>Сиздин тапшырык төмөнкү позицияларды камтыйт</value>
+  </data>
+	<data name="SummaryNotificationText" xml:space="preserve">
+    <value>Бул форманын тексти каттоодо көрсөтүлгөн, Сиздин e-mailга жөнөтүлдү.</value>
+  </data>
+	<data name="Logout" xml:space="preserve">
+    <value>Дүкөндөн чыгуу</value>
+  </data>
+	<data name="YourCarIsEmpty" xml:space="preserve">
+    <value>Сиздин себетиңиз бош</value>
+  </data>
+	<data name="Sorting" xml:space="preserve">
+    <value>Иреттөө</value>
+  </data>
+	<data name="Warehouse" xml:space="preserve">
+    <value>Кампа</value>
+  </data>
+	<data name="Authorize" xml:space="preserve">
+    <value>Авторлоштуруу</value>
+  </data>
+	<data name="Loading" xml:space="preserve">
+    <value>Жүктөө</value>
+  </data>
+	<data name="ByAvailability" xml:space="preserve">
+    <value>Болушуна жараша</value>
+  </data>
+	<data name="Cheaper" xml:space="preserve">
+    <value>Арзаныраак</value>
+  </data>
+	<data name="ExternalUserCode" xml:space="preserve">
+    <value>Эсеп тутумундагы колдонуучунун коду</value>
+  </data>
+	<data name="ClientManager" xml:space="preserve">
+    <value>Сиздин менеджер</value>
+  </data>
+	<data name="ManagerName" xml:space="preserve">
+    <value>Менеджердин аты</value>
+  </data>
+	<data name="OrderCreateErrorMessage" xml:space="preserve">
+    <value>Тапшырык түзүүдө ката пайда болду</value>
+  </data>
+	<data name="of" xml:space="preserve">
+    <value>-дан</value>
+  </data>
+	<data name="TotalFound" xml:space="preserve">
+    <value>Бардык табылганы</value>
+  </data>
+	<data name="Dealers" xml:space="preserve">
+    <value>Биздин дилерлер
+</value>
+  </data>
+	<data name="Reserved" xml:space="preserve">
+    <value>Резервде</value>
+  </data>
+	<data name="ProductCategory" xml:space="preserve">
+    <value>Товардын категориясы</value>
+  </data>
+	<data name="Catalogs" xml:space="preserve">
+    <value>Каталогдор</value>
+  </data>
+	<data name="GotoCart" xml:space="preserve">
+    <value>Себетке өтүү</value>
+  </data>
+	<data name="SearchHistory" xml:space="preserve">
+    <value>Издөө тарыхы</value>
+  </data>
+	<data name="LaximoDataSelection" xml:space="preserve">
+    <value>OEM каталогу </value>
+  </data>
+	<data name="SiteDataSelection" xml:space="preserve">
+    <value>Универсалдуу</value>
+  </data>
+	<data name="SiteTrackDataSelection" xml:space="preserve">
+    <value>Универсалдуу (жүк ташуучу)</value>
+  </data>
+	<data name="BrandNotFound" xml:space="preserve">
+    <value>Өндүрүүчү табылган жок</value>
+  </data>
+	<data name="YourMessageSuccessfullySent" xml:space="preserve">
+    <value>Сиздин билдирүү ийгиликтүү жөнөтүлдү
+</value>
+  </data>
+	<data name="LxmOtherDetails" xml:space="preserve">
+    <value>Түйүндүн башка маалыматтары</value>
+  </data>
+	<data name="Number_short" xml:space="preserve">
+    <value>№</value>
+  </data>
+	<data name="Variant_short" xml:space="preserve">
+    <value>Вариант</value>
+  </data>
+	<data name="ComparisionActExportDetails" xml:space="preserve">
+    <value>Толук  вариантты экспорттоо </value>
+  </data>
+	<data name="MaxWarehouseQntAchived" xml:space="preserve">
+    <value>Калдыктын максималдуу саны жетишилди: {0}
+</value>
+  </data>
+	<data name="ContinueShopping" xml:space="preserve">
+    <value>Дүкөндү уланта бериңиз</value>
+  </data>
+</root>

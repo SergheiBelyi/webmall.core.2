@@ -1,0 +1,152 @@
+﻿@using ViewRes
+@using Webmall.UI.Core
+
+@model List<Webmall.Model.Entities.Order.OrderPosition>
+           
+@{
+    var isGross = SessionHelper.IsGross;
+    var valute = SessionHelper.DefaultValute;
+    var sum = decimal.Zero;
+}
+
+<div id="dlgExtractOrder" style="display:none;" title="@SharedResources.ExtractToOrder">
+    @using (Html.BeginForm("ExtractToOrder", "Order", FormMethod.Post, new { id = "extractToOrderForm" }))
+    {
+        <table class="all-product clients cart dialog">
+            <thead>
+                <tr>
+                    <th width="18"><input id="checkAll" class="checkAll" type="checkbox" checked="checked"></th>
+                    <th width="220">@SharedResources.Number</th>
+                    <th width="200">@SharedResources.WareName</th>
+                    <th width="45">@SharedResources.Brand</th>
+                    <th width="100">@SharedResources.UnitPrice</th>
+                    <th width="40">@SharedResources.Amount</th>
+                    <th width="100">@SharedResources.Sum, @valute.Code</th>
+                </tr>
+            </thead>
+            @*
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                var pos = Model[i];
+                pos.IsSelected = true;
+                sum += pos.Sum.HasValue ? pos.Sum.Value : decimal.Zero;
+                <tr>
+                    <td>@Html.CheckBoxFor(m => m[i].IsSelected, new { groupId = "positions" })</td>
+                    <td>@pos.WareNumber</td>
+                    <td class="no-revers">
+                        @if (pos.IsAction && isGross)
+                        {
+                            <img src="@Url.Content("~/Content/images/revers-sign.png")" width="23" height="23" alt="@SharedResources.NoReturn" title="@SharedResources.NoReturn">
+                        }
+                        <span>@pos.WareName</span>
+                    </td>
+                    <td>@pos.ProducerName</td>
+                    <td id="positionPrice@(pos.WareId)">
+                        @(SessionHelper.PriceFormat(pos.Price))
+                        <input type="hidden" id="pospr@(pos.WareId)" value="@SessionHelper.PriceFormat(pos.Price)" />
+                    </td>
+                    <td class="cantity">
+                        @Html.HiddenFor(m => m[i].Id)
+                        @Html.TextBox(string.Format("[{0}].WareQnt", i), string.Format("{0:0}", pos.WareQnt),
+                            new
+                            {
+                                onchange = pos.OfferTypeId == 1 ? string.Format("UpdateDialogPosition(this, {0}, {1})", pos.WareId, pos.Id) : "",
+                                id = string.Format("dlgWareQnt{0}", pos.WareId),
+                                onkeypress = "return JumpNext(event)"
+                            })
+                        @if (pos.SaleMultiplier > 1)
+                        {
+                            <span id="dlgmult_sp@(pos.WareId)" title="@SharedResources.SaleMultiplisity">/</span>
+                            <span id="dlgmult@(pos.WareId)" title="@SharedResources.SaleMultiplisity">@((int)pos.SaleMultiplier)</span>
+                        }
+                    </td>
+                    <td id="dlgsum@(pos.WareId)">@SessionHelper.PriceFormat(pos.Sum)</td>
+                </tr>
+            }
+             *@
+            <tr>
+                <td colspan="9" class="summa">@SharedResources.Total <b id="dlgTotalSum">@SessionHelper.PriceFormat(sum)</b> @valute.Code</td>
+            </tr>
+        </table>
+        <div class="right">
+            @Html.Button(SharedResources.Close, new { onclick = "return CancelExtractOrder()", @class = "button-submit" })
+            @Html.SubmitButton(SharedResources.OK, new { onclick = "return OkExtractOrder()", @class = "button-submit", id = "OKDialogButton" })
+        </div>
+
+    }
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $('#dlgExtractOrder').dialog({
+            modal: true,
+            resizable: false,
+            autoOpen: false,
+            width: 'auto',
+        });
+    });
+
+    function OpenExtractOrder() {
+        $('#dlgExtractOrder').dialog('open');
+    }
+
+    function CancelExtractOrder() {
+        $("#dlgExtractOrder").dialog("close");
+        return false;
+    }
+
+    function OkExtractOrder() {
+        $("#dlgExtractOrder").dialog("close");
+        return true;
+    }
+
+    function UpdateDialogPosition(ctrl, wareId, positionId) {
+        var wantedQuantity = $(ctrl).val();
+        var sum = numberMul(getNumeric($('#positionPrice' + wareId).text()), getNumeric(wantedQuantity), 5);
+        $('#dlgsum' + wareId).empty();
+        $('#dlgsum' + wareId).append(moneyShow(sum));
+        RecalcDlgSum();
+    }
+
+    function RecalcDlgSum() {
+        var sum = 0;
+		var multFail = false;
+		$('[id^=dlgsum]').each(function () {
+		    sum = sum + getNumeric($(this).text());
+		});
+		$('[id^=dlgmult]').each(function () {
+		    var id = $(this).attr('id');
+		    id = id.substring(7);
+		    var mult = parseInt($(this).text());
+		    var qnt = $('#dlgWareQnt' + id).val();
+		    if (mult > 1 && qnt % mult != 0) {
+		        multFail = true;
+		        $('#dlgmult_sp' + id).prev().css("background", "Red");
+		        $('#dlgmult_sp' + id).prev().css("color", "white");
+		        $('#dlgmult_sp' + id).prev().attr("title", "@SharedResources.MultComment");
+		       // $(this).parent().css("background","Red");
+            }
+            else {
+		        $('#dlgmult_sp' + id).prev().css("background", "");
+		        $('#dlgmult_sp' + id).prev().css("color", "");
+		        $('#dlgmult_sp' + id).prev().attr("title", "");
+		       // $(this).parent().css("background","");
+            }
+		});
+        if (!multFail) {
+            $("#OKDialogButton").removeClass('disabled');
+            $("#OKDialogButton").removeAttr('disabled');
+        }
+        else {
+            $("#OKDialogButton").addClass('disabled');
+            $("#OKDialogButton").attr('disabled', 'disabled');
+        }
+
+        $("[id=dlgTotalSum]").each(function () {
+            $(this).empty();
+            $(this).append(moneyShow(sum));
+        }
+	    );
+    }
+
+</script>

@@ -1,0 +1,24 @@
+﻿@using ViewRes
+@model Webmall.UI.ViewModel.Filter.SelectViewModel
+
+@if (Model != null)
+{
+    foreach (var item in Model.Options.OrderByDescending(i => i.Selected).ThenBy(i => i.Text))
+    {
+        if (item.Selected)
+        {
+            <li class="filter-badges__badge" data-id="@item.Value">
+                <div class="filter-badges__badge-main filter-badge">
+                    <div class="filter-badge">
+                        <div class="filter-badge__text">@item.Text</div>
+                        <button class="filter-badge__remove" data-id="@item.Value">
+                            <svg class="icon icon-close filter-badge__remove-icon">
+                                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#close")"></use>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </li>
+        }
+    }
+}

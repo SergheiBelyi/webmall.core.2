@@ -1,0 +1,32 @@
+﻿@using Webmall.Model
+@using ViewRes
+@using Webmall.UI.Core
+@{
+    ViewBag.Title = String.IsNullOrEmpty((string)TempData["Title"]) ? SharedResources.Message : TempData["Title"];
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <main class="search-result">
+        <h1 class="main-title">@SharedResources.Message</h1>
+        <h3>Системе показалось, что Вы бот и она Вас заблокировала. Если это не так, обратитесь к администратору!</h3>
+        @using (Html.BeginForm("BotDetectedClearing", "Security", FormMethod.Post, new {id = "register-form"}))
+        {
+            <label>
+                @SecurityResources.ConfirmYouAreNotRobot
+                <div id="Recaptcha1"></div>
+            </label>
+            @Html.SubmitButton(SharedResources.Confirmation)
+        }
+    </main>
+</div>
+
+@section headerScript
+{
+    <script src="//www.google.com/recaptcha/api.js?onload=CaptchaCallback&render=explicit" async defer></script>
+    <script type="text/javascript">
+        var CaptchaCallback = function () {
+            window.grecaptcha.render('Recaptcha1', { 'sitekey': '@ConfigHelper.CaptchaSiteKey' });
+        };
+    </script>
+}

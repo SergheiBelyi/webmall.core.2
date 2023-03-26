@@ -1,0 +1,23 @@
+﻿@using ViewRes
+
+@model Webmall.Model.Entities.Client.Contract
+@{ var item = Model; }
+
+<article class="addresses__address address-card" id="cont-contract-@item.Id">
+    <div class="address-card__heading">@item.Name</div>
+    <div class="params__param">
+        <dd class="params__value">@item.Description</dd>
+    </div>
+    <div class="address-card__main">
+        <dl class="address-card__params params">
+            <div class="params__param">
+                <dt class="params__property">@SharedResources.Credit</dt>
+                <dd class="params__value">@(item.MaxSum > 0 ? item.MaxSum?.ToString("n0") : SharedResources.No)</dd>
+            </div>
+            <div class="params__param">
+                <dt class="params__property">@SharedResources.PaymentConditions</dt>
+                <dd class="params__value">@(item.PayDelayDays == 0 ? SharedResources.No : item.PayDelayDays.ToString())</dd>
+            </div>
+        </dl>
+    </div>
+</article>

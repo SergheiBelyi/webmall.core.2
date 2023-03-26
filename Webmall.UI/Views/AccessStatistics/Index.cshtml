@@ -1,0 +1,73 @@
+﻿@using System.Linq
+@using ViewRes
+@using Webmall.UI.Core
+
+@model Webmall.UI.Models.AccessStatistics.AccessStatisticsModel
+
+@{
+    ViewBag.Title = "Access statistics";
+    Layout = "~/Views/Shared/_PersonalLayout.cshtml";
+}
+<div class="table-responsive d-none d-md-block">
+    <table class="stock-table table">
+        <thead>
+            <tr>
+                <th>@Html.SortColumnLink(Model.Items, "IP", "IP")</th>
+                @*<th>@Html.SortColumnLink(Model.Items, "Browser", "Browser")</th>*@
+                <th>@Html.SortColumnLink(Model.Items, "User", "User")</th>
+                <th>@Html.SortColumnLink(Model.Items, "Duration", "Duration")</th>
+                <th>Count</th>
+                <th>@Html.SortColumnLink(Model.Items, "RpsMin", "RequestsPerSecondMin")</th>
+                <th>@Html.SortColumnLink(Model.Items, "Rps", "RequestsPerSecond")</th>
+                <th>@Html.SortColumnLink(Model.Items, "RpsMax", "RequestsPerSecondMax")</th>
+                <th>@Html.SortColumnLink(Model.Items, "RpmMin", "RequestsPerMinuteMin")</th>
+                <th>@Html.SortColumnLink(Model.Items, "Rpm", "RequestsPerMinute")</th>
+                <th>@Html.SortColumnLink(Model.Items, "RpmMax", "RequestsPerMinuteMax")</th>
+                <th>@SharedResources.Block</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items.List)
+            {
+                <tr>
+                    <td>@Html.ActionLink(item.IP, "Detail", new { key = item.Key })</td>
+                    @*<td>@Html.ActionLink(item.Browser, "Detail", new { key = item.Key })</td>*@
+                    <td>@item.User</td>
+                    <td>@item.Duration</td>
+                    <td class="center">@item.LongCount()</td>
+                    <td class="center">@item.RequestsPerSecondMin</td>
+                    <td class="center">@item.RequestsPerSecond.ToString("n2")/<br />@item.RequestsPerSecondNorm.ToString("n2")</td>
+                    <td class="center">@item.RequestsPerSecondMax</td>
+                    <td class="center">@item.RequestsPerMinuteMin</td>
+                    <td class="center">@item.RequestsPerMinute.ToString("n2")/<br />@item.RequestsPerMinuteNorm.ToString("n2")</td>
+                    <td class="center">@item.RequestsPerMinuteMax</td>
+                    <td class="clickable" onclick="block('@item.Key', this)">
+                        <img alt="blocked" src="@Url.Content("~/Content/images/block.png")" style="@(!item.IsBlocked ? "display:none" : "")" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@{Html.RenderPartial("Components/Pagination", Model.Items);}
+@*@{ Html.RenderPartial("GridViewFooter", Model.Items); }*@
+
+<div class="clear-div"></div>
+@using (Html.BeginForm("SaveLog", "AccessStatistics"))
+{
+    <div class="right">
+        @Html.SubmitButton(SharedResources.Save, new { @class = "btn btn--main" })
+    </div>
+}
+
+@section scripts
+{
+    @{ Html.RenderPartial("GridViewFooterScripts", Model.Items); }
+
+    <script>
+        function block(key, el) {
+            $(el).children().toggle();
+            $.post('@Url.Action("Block")', 'key=' + key);
+        }
+    </script>
+}

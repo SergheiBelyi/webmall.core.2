@@ -1,0 +1,278 @@
+﻿@using Webmall.UI.Core.HtmlHelpers
+@using ViewRes
+@using Webmall.Model.CoreHelpers
+@using Webmall.UI.ViewModel.Catalog
+
+@model Webmall.UI.ViewModel.Catalog.WareCardViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var product = Model.Ware;
+    var skeletonClass = "skeleton skeleton-rect";
+    var skeletonStyle  = "--lines:4;--c-w:100%;opacity: 0.6;--l-h:7px;--l-gap:10px;rect-h:100px;";
+}
+
+<div class="container-fluid">
+    @{Html.RenderPartial("Components/BreadCrumbsRender", Model.BreadCrumbs);}
+
+    <section class="product-detail-section js-accordion is-active">
+        <div class="product-detail-section__header js-accordion-trigger" id="info-header">
+            <div class="product-detail-section__heading">@product.ProducerName @product.WareNumber @product.Name</div>
+        </div>
+        <div class="product-detail-section__main js-accordion-body">
+            <!-- product-tabs-->
+            <div class="product-detail-section__tabs tabs js-tabs">
+                <div class="tabs__header">
+                    <ul class="tabs__list">
+                        <li class="tabs__item"><a class="tabs__link js-tabs-trigger is-active" href="#section-1">@SharedResources.Description</a></li>
+                        <li class="tabs__item"><a class="tabs__link js-tabs-trigger" href="#section-2" id="propertiesTab">@SharedResources.Specifications</a></li>
+                        <li class="tabs__item"><a class="tabs__link js-tabs-trigger" href="#section-3" id="applicabilityTab">@SharedResources.Applicability</a></li>
+                        <li class="tabs__item"><a class="tabs__link js-tabs-trigger" href="#section-4" id="setsTab">@SharedResources.Sets</a></li>
+                        <li class="tabs__item"><a class="tabs__link js-tabs-trigger" href="#section-5" id="relatedTab">@SharedResources.RelatedProducts</a></li>
+                    </ul>
+                    <a class="tabs__helper" href="#offers">@SharedResources.Offer</a>
+                </div>
+                <div class="tabs__panes">
+                    <div class="tabs__pane js-tabs-pane is-opened is-active">
+                        <div class="tabs__accordion-toggle js-tabs-accordion-toggle" id="section-1">@SharedResources.Description</div>
+                        <div class="tabs__accordion-body">
+                            <div class="product-main">
+                                <!-- product-gallery-->
+                                <div class="product-main__gallery">
+                                    <div class="product-main-promo product-main__promo">
+                                        <div class="product-main-promo__main">
+                                            <div class="js-promo-main swiper">
+                                                <div class="swiper-wrapper">
+                                                    @if (product.HasImage)
+                                                    {
+                                                        foreach (var item in product.Images)
+                                                        {
+                                                            var imgUrl = item.ImageUrl = item.ImageUrl ?? Url.WareImage(item.Id);
+
+                                                            //var imgUrl = !string.IsNullOrEmpty(item.ImageUrl) ? product.Images[0].ImageUrl
+                                                            //    : Url.Content("~/assets/images/general/product-default.jpg");
+
+                                                            <div class="swiper-slide">
+                                                                <a class="product-main-promo__img-wrap" href="@(Url.Content(imgUrl))">
+                                                                    <img class="product-main-promo__img" src="@(Url.Content(imgUrl))" alt="@product.Name" data-zoom="@(Url.Content(imgUrl))">
+                                                                </a>
+                                                            </div>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="swiper-slide">
+                                                            <a class="product-main-promo__img-wrap" href="@(Url.Content("~/assets/images/general/product-default.jpg"))">
+                                                                <img class="product-main-promo__img" src="@(Url.Content("~/assets/images/general/product-default.jpg"))" alt="@product.Name" data-zoom="@(Url.Content("~/assets/images/general/product-default.jpg"))">
+                                                            </a>
+                                                        </div>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="product-main-promo__thumbs">
+                                            <div class="js-thumbs-list swiper">
+                                                <div class="swiper-wrapper">
+                                                    @if (product.HasImage)
+                                                    {
+                                                        foreach (var item in product.Images)
+                                                        {
+                                                            var imgUrl = !string.IsNullOrEmpty(item.ImageUrl) ? item.ImageUrl
+                                                                : Url.Content("~/assets/images/general/product-default.jpg");
+                                                            <div class="swiper-slide">
+                                                                <span class="product-main-promo__thumb">
+                                                                    <img class="product-main-promo__thumb-img img-responsive" src="@(Url.Content(imgUrl))" alt="@product.Name">
+                                                                </span>
+                                                            </div>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="swiper-slide">
+                                                            <span class="product-main-promo__thumb">
+                                                                <img class="product-main-promo__thumb-img img-responsive" src="@(Url.Content("~/assets/images/general/product-default.jpg"))" alt="@product.Name">
+                                                            </span>
+                                                        </div>
+                                                    }
+                                                </div>
+                                            </div>
+                                            <button class="product-main-promo__thumbs-prev js-thumbs-list-prev" type="button">
+                                                <svg class="icon icon-chevron-up product-main-promo__thumbs-prev-icon" width="25" height="25">
+                                                    <use href="@(Url.Content("~/assets/images/svg/symbol/sprite.svg#chevron-up"))"></use>
+                                                </svg>
+                                            </button>
+                                            <button class="product-main-promo__thumbs-next js-thumbs-list-next" type="button">
+                                                <svg class="icon icon-chevron-down product-main-promo__thumbs-next-icon" width="25" height="25">
+                                                    <use href="@(Url.Content("~/assets/images/svg/symbol/sprite.svg#chevron-down"))"></use>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <div class="product-main-promo__zoom-pane js-gallery-zoom-pane"></div>
+                                    </div>
+                                </div>
+                                <!-- product-gallery-->
+                                <!-- product-info-->
+                                <div class="product-main__info product-info">
+                                    <div class="product-info__header">
+                                        <div class="product-info__heading">@product.Name</div>
+                                        <a class="product-info__brand" href="@(!string.IsNullOrEmpty(Model.Ware.ProducerId) ? Url.Action("Info", "Brands", new {id = Model.Ware.ProducerId }) : "")">
+                                            <img class="product-info__brand-img" src="@Url.ProducerImage(Model.Ware.ProducerName)" alt="@product.ProducerName" title="@product.ProducerName" width="90" height="30">
+                                        </a>
+                                    </div>
+
+                                    <div class="product-info__main">
+                                        <div class="product-info__params params">
+                                            <div class="params__param">
+                                                <dt class="params__property">@SharedResources.Brand:</dt>
+                                                <dd class="params__value">@product.ProducerName</dd>
+                                            </div>
+                                            <div class="params__param">
+                                                <dt class="params__property">@SharedResources.PartNumber:</dt>
+                                                <dd class="params__value">@product.WareNumber</dd>
+                                            </div>
+                                        </div>
+                                        <div class="product-info__props">
+                                            @Html.LazyPanel(HtmlTextWriterTag.Div, Url.Action("ShortProperties", "CatalogService", new { wareId = Model.Ware.Id, cnt = 6 }), "LazyShortPropertiesFun",
+                                                      new { id = "ShortProperties", @class = "product-main__props" })
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- product-info-->
+                            </div>
+                        </div>
+                    </div>
+                    @* Спецификации *@
+                    <div class="tabs__pane js-tabs-pane">
+                        <div class="tabs__accordion-toggle js-tabs-accordion-toggle" id="section-2">@SharedResources.Specifications</div>
+                        <div class="tabs__accordion-body">
+                            @*<h2 style="margin: 0;">@SharedResources.Specifications</h2>*@
+                            @Html.LazyPanel(HtmlTextWriterTag.Div, Url.Action("Properties", "CatalogService", new { wareId = Model.Ware.Id }), null,
+                                new { id = "lazyProps", @class = $"manual-params manual-params--bigger {skeletonClass}", style = skeletonStyle }, "propertiesTab")
+                        </div>
+                    </div>
+                    @* Применяемость *@
+                    <div class="tabs__pane js-tabs-pane">
+                        <div class="tabs__accordion-toggle js-tabs-accordion-toggle" id="section-3">@SharedResources.Applicability</div>
+                        <div class="tabs__accordion-body">
+                            @Html.LazyPanel(HtmlTextWriterTag.Div, Url.Action("Applicability", "CatalogService", new { wareId = Model.Ware.Id }), null,
+                                new { id = "lazyApplicability", @class = $"card-specification-section {skeletonClass}", style = skeletonStyle }, "applicabilityTab")
+                        </div>
+                    </div>
+                    @* Комплекты *@
+                    <div class="tabs__pane js-tabs-pane">
+                        <div class="tabs__accordion-toggle js-tabs-accordion-toggle" id="section-4">@SharedResources.Sets</div>
+                        <div class="tabs__accordion-body">
+                            <h2 style="margin: 0;">@SharedResources.Sets</h2>
+                            @Html.LazyPanel(HtmlTextWriterTag.Div, Url.Action("Sets", "CatalogService", new { wareId = Model.Ware.Id }), null,
+                                new { id = "lazySets", @class = $"card-specification-section {skeletonClass}", style = skeletonStyle }, "setsTab")
+                        </div>
+                    </div>
+                    @* Сопутствующие товары *@
+                    <div class="tabs__pane js-tabs-pane">
+                        <div class="tabs__accordion-toggle js-tabs-accordion-toggle" id="section-5">@SharedResources.RelatedProducts</div>
+                        <div class="tabs__accordion-body">
+                            @Html.LazyPanel(HtmlTextWriterTag.Div, Url.Action("Related", "CatalogService", new { wareId = Model.Ware.Id }), "LazyRelatedFun",
+                                new { id = "lazyRelated", @class = $"items-carousel-wrap {skeletonClass}", style = skeletonStyle }, "relatedTab")
+                        </div>
+                    </div>
+                    @*<div class="tabs__pane js-tabs-pane">
+                            <div class="tabs__accordion-toggle js-tabs-accordion-toggle" id="section-6">Лучшие предложения</div>
+                            @Html.LazyPanel(HtmlTextWriterTag.Div, Url.Action("BestOffers", "CatalogService", new { brand = Model.Ware.ProducerName, article = Model.Ware.WareNumber }), "LazyBestOfferFun",
+                               new { id = "lazyBestOffers", @class = "tabs__accordion-body", data_show = false })
+                        </div>*@
+                </div><!-- /spec table desktop-->
+            </div>
+        </div>
+    </section>
+
+    @Html.LazyPanel(HtmlTextWriterTag.Div,
+        Url.Action("Offers", "CatalogService", new { brand = Model.Ware.ProducerName, article = Model.Ware.WareNumber, filterParams = Model.FilterOptions.ToJson() }), "LazyOfferFun",
+        new { id = "lazyOffersDesktop", data_show = false, @class=skeletonClass, style=skeletonStyle })
+
+    @*@Html.LazyPanel(HtmlTextWriterTag.Div, Url.Action("BestOffers", "CatalogService", new { brand = Model.Ware.ProducerName, article = Model.Ware.WareNumber }), "LazyBestOfferFun",
+            new { id = "lazyBestOffersDesktop", @class = "product-detail-offers", data_show = false })
+
+            <section class="product-detail-bottom" id="offers">
+                <button class="filter-toggle product-detail-bottom__filter-toggle" type="button">
+                    <svg class="icon icon-funnel filter-toggle__icon" width="25" height="25">
+                        <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#funnel")"></use>
+                    </svg>
+                    <span class="filger-toggle__text">@SharedResources.Filters</span>
+                </button>
+                <div class="product-detail-bottom__aside">
+                    @{Html.RenderPartial("CatalogFilter", Model.CatalogPropertiesModel.FilterModel.CreateFilterViewModel()); }
+                </div>
+
+                <div class="product-detail-bottom__main">
+                    <div class="product-detail-bottom__switcher switcher-label">
+                        <input class="switcher-label__input visually-hidden" type="checkbox" name="has-option-1" id="option-opt-1">
+                        <label class="switcher-label__main" for="option-opt-1">Группировать</label>
+                    </div>
+
+                    <div class="product-detail-bottom__table data-table">
+                        <div class="data-table__header">
+                            <div class="data-table__row">
+
+
+                                <div class="data-table__captions">
+                                    <div class="data-table__caption is-desc" onclick="SortTableLazy('ProducerName')">@SharedResources.Brand</div>
+                                    <div class="data-table__caption is-desc" onclick="SortTableLazy('WareNumber')">@SharedResources.PartNumber</div>
+                                </div>
+                                <div class="data-table__caption is-desc" onclick="SortTableLazy('Name')">@SharedResources.Name</div>
+                                <div class="data-table__caption is-asc" onclick="SortTableLazy('SupplierWarehouseName')">@SharedResources.Stock</div>
+                                <div class="data-table__caption is-desc" onclick="SortTableLazy('AvailableQnt')">@SharedResources.Amount</div>
+                                <div class="data-table__caption is-desc" onclick="SortTableLazy('DeliveryTerm')">@SharedResources.TermDays</div>
+                                <div class="data-table__caption is-desc" data-col-buy="" onclick="SortTableLazy('ClientPrice')">@SharedResources.PurchasePrice</div>
+                                <div class="data-table__caption is-desc" data-col-sell="" onclick="SortTableLazy('ClientSalePrice')">@SharedResources.SellingPrice</div>
+                                <div class="data-table__caption">&nbsp;</div>
+                            </div>
+                        </div>
+                        <div class="data-table__body">
+                            @Html.LazyPanel(HtmlTextWriterTag.Div, Url.Action("WarehouseOffers", "CatalogService", new { brand = Model.Ware.ProducerName, article = Model.Ware.WareNumber }), "LazyWarehouseOffersFun",
+                                new { id = "lazyWarehouseOffers", @class = "" })
+                            @Html.LazyPanel(HtmlTextWriterTag.Div, Url.Action("NonWarehouseOffers", "CatalogService", new { brand = Model.Ware.ProducerName, article = Model.Ware.WareNumber }), "LazyNonWarehouseOffersFun",
+                                new { id = "lazyNonWarehouseOffers", @class = "" })
+                            @Html.LazyPanel(HtmlTextWriterTag.Div, Url.Action("Analogs", "CatalogService",
+                                new { brand = Model.Ware.ProducerName, article = Model.Ware.WareNumber,
+                                    producers = string.Join(",", Model.CatalogPropertiesModel.FilterOptions?.Producers ?? new string[0]) }), "LazyAnalogsFun",
+                                new { id = "lazyAnalogs", @class = "" })
+                        </div>
+                    </div>
+                    <div class="product-detail-bottom__mob-table mob-data-table">
+                        @Html.LazyPanel(HtmlTextWriterTag.Div, Url.Action("WarehouseOffers", "CatalogService", new { brand = Model.Ware.ProducerName, article = Model.Ware.WareNumber, isMob = true }), "LazyWarehouseOffersFun",
+                                new { id = "lazyWarehouseOffersMob", @class = "" })
+                        @Html.LazyPanel(HtmlTextWriterTag.Div, Url.Action("NonWarehouseOffers", "CatalogService", new { brand = Model.Ware.ProducerName, article = Model.Ware.WareNumber, isMob = true }), "LazyNonWarehouseOffersFun",
+                            new { id = "lazyNonWarehouseOffersMob", @class = "" })
+                        @Html.LazyPanel(HtmlTextWriterTag.Div, Url.Action("Analogs", "CatalogService",
+                            new { brand = Model.Ware.ProducerName, article = Model.Ware.WareNumber, isMob = true,
+                                producers = string.Join(",", Model.CatalogPropertiesModel.FilterOptions?.Producers ?? new string[0])
+                            }), "LazyAnalogsFun",
+                            new { id = "lazyAnalogsMob", @class = "" })
+                    </div>
+                </div>
+        </section>*@
+
+</div>
+<div id="locker"></div>
+@section styles {
+    @Styles.Render("~/Content/fancybox/fancy")
+}
+
+@section scripts
+{
+    @*<script>
+            function SortTableLazy(columSort) {
+                SortPannelByColumn("lazyWarehouseOffers", columSort, "@Url.Action("WarehouseOffers", "CatalogService", new { brand = Model.Ware.ProducerName, article = Model.Ware.WareNumber })", "LazyWarehouseOffersFun");
+                SortPannelByColumn("lazyNonWarehouseOffers", columSort, "@Url.Action("NonWarehouseOffers", "CatalogService", new { brand = Model.Ware.ProducerName, article = Model.Ware.WareNumber })", "LazyNonWarehouseOffersFun");
+                SortPannelByColumn("lazyAnalogs", columSort, "@Url.Action("Analogs", "CatalogService", new { brand = Model.Ware.ProducerName, article = Model.Ware.WareNumber })", "LazyAnalogsFun");
+            }
+        </script>*@
+    @{ Html.RenderPartial("AddToCartScript"); }
+    @{ Html.RenderPartial("_WareListScripts"); }
+    @{ Html.RenderPartial("_WareListScriptsEx"); }
+    @{ Html.RenderPartial("_FilterScripts", new CatalogFilterViewModel()); }
+    @Scripts.Render("~/bundles/fancy")
+}
+@section dialogs {
+    @{ Html.RenderPartial("AddToCartDialog"); }
+}

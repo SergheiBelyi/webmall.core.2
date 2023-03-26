@@ -1,0 +1,141 @@
+﻿@using System.Linq
+@using ViewRes
+@using Webmall.UI.Core
+
+@model Webmall.UI.Models.WareComparision.ComparisionModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var currentParentLink = UserPreferences.CurrentCultureLink + "/";
+    var valute = SessionHelper.CurrentValute;
+    bool isWhite=true;
+}
+
+<div class="content-secondary">
+    <h2>@SharedResources.WareComparision</h2>
+    <div id="all-parameters">
+        <label>
+            <input type="checkbox" id="all" class="switcher" checked="checked" />
+            @SharedResources.AllParams
+        </label>
+        <label>
+            <input type="checkbox" id="difference" class="switcher" />
+            @SharedResources.OnlyDifference
+        </label>
+        <table class="all-product">
+            <tbody>
+                @foreach (var item in Model.Properties)
+                {
+                    <tr class="@(!item.Value ? "notDiff" : "")">
+                        <td>@item.Key</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div id="compare-carousel">
+        <div class="jcarousel-wrapper">
+            <div class="jcarousel">
+                <div id="wrapper-compare" style="left: 0; top: 0;">
+                    @foreach (var ware in Model.ComparisionList)
+                    {
+                        <div class="compare-item">
+                            <div class="border">
+                                <a href="@Url.Action("Remove", new {id = ware.Id})">@SharedResources.RemoveFromComparision</a>
+                                @{
+                                    var imgUrl = Url.Content("~/Content/images/noWareImage.png");
+                                    if (ware.HasImage)
+                                    {
+                                        imgUrl = Url.Action("GetImage", "Images", new {imageId = ware.MainImageCode});
+                                    }
+                                    var imgTitle = string.Format("{0}, {1}", ware.WareNum, string.IsNullOrEmpty(ware.Name) ? "..." : ware.Name);
+                                    var price = ware.ClientPrice;
+                                    var url = Url.Content("~/" + currentParentLink + ware.URL);
+                                }
+                                <a href="@url" class="warelink">
+                                    <h4>@ware.Name</h4>
+                                    <img src="@imgUrl" alt="@imgTitle" title="@imgTitle">
+                                </a>
+                                <p>@(string.Format("{0:n2}", (int?)price))<span>@(valute.Code)</span></p>
+                                
+                                @if (ware.CanAddToCart && (SessionHelper.CurrentClientId != null || SessionHelper.CurrentUser == null))
+                                {
+                                    <button type="submit" class="button-submit" wareid="@ware.Id" offerid="0" offertypeid="@(ware.WareQnt > 0 ? "1" : "")"
+                                            onclick=" return UpdateCart(this) ">
+                                        @SharedResources.Buy
+                                    </button>
+                                }
+                                else if (ware.OnlyForReservation)
+                                {
+                                    <button type="button" class="button-grey-gradient" onclick="document.location='@url';">
+                                        @SharedResources.ForReservation
+                                    </button>
+                                }
+                                else
+                                {
+                                    <b>@SharedResources.WareIsNotAvailable</b>
+                                }
+
+
+                                @*@if (ware.Offers.Any())
+                                    {
+                                        //var el = ware.Offers.FirstOrDefault(i => i.MaxQuantity > 0 && i.Price == price) ?? ware.Offers.FirstOrDefault(i => i.Price == price) ?? ware.Offers.First();
+                                        <button type="submit" class="button-submit" wareid="@ware.Id" offerid="0" offertypeid="@(ware.WareQnt > 0 ? "1" : "")"
+                                                onclick=" return UpdateCart(this) ">
+                                            @SharedResources.Buy
+                                        </button>
+
+                                    }*@
+                            </div>
+                            <table class="all-product @(isWhite ? "white" : "")">
+                                <tbody>
+                                    @{
+                                        isWhite = !isWhite;
+                                    }
+                                    @foreach (var item in Model.Properties)
+                                    {
+                                        <tr class="@(!item.Value ? "notDiff" : "")">
+                                            <td>@ware.Properties.Where(w => w.Name == item.Key).Select(w => w.Value).FirstOrDefault()</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                </div>
+
+            </div>
+            <a href="#" class="jcarousel-control-prev"></a> <a href="#" class="jcarousel-control-next"></a>
+        </div>
+    </div>
+
+</div>
+
+@section scripts
+{
+    @*@Scripts.Render("~/bundles/jcarousel")*@
+    <script>
+        $(function () {
+            $('.switcher').click(function () {
+                var id = this.id;
+                $('.switcher').removeAttr('checked'); //removeClass('selected');
+                $(this).attr('checked', 'checked'); //addClass('selected');
+                switch (id) {
+                    case 'all':
+                        $('.notDiff').show();
+                        break;
+                    case 'difference':
+                        $('.notDiff').hide();
+                        break;
+                }
+            });
+        });
+    </script>
+    @{ Html.RenderPartial("AddToCartScript"); }
+}
+
+@section dialogs
+{
+    @{
+        Html.RenderPartial("AddToCartDialog");
+    }
+}

@@ -1,0 +1,39 @@
+﻿<div id="dialog-fiting" title="2.0 TDI"></div>
+
+<script>
+        $(function() {
+
+            $("#dialog-fiting").dialog({
+                autoOpen: false,
+                resizable: false,
+                draggable: true,
+                width: "auto",
+                show: {
+                    effect: "fade",
+                    duration: 100
+                },
+                hide: {
+                    effect: "explode",
+                    duration: 500
+                }
+            }
+            );
+        });
+    
+        function ViewInfo(obj) {
+            var title = $(obj).attr("data-title"); //.parent().next().text();
+            $('#dialog-fiting').dialog("option", "title", title);
+            $("#dialog-fiting").dialog("open");
+            $('#dialog-fiting').dialog("widget").position({
+                my: "left top",
+                at: "right bottom",
+                of: $(obj)
+            });
+        }
+
+        function UpdateInfo(obj) {
+            var modifId = obj.id;
+            updatePannel('@Url.Action("Info")' + '?modifId=' + modifId, 'dialog-fiting', null, ViewInfo, obj);
+        }
+
+</script>

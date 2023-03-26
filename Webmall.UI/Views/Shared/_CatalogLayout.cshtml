@@ -1,0 +1,37 @@
+﻿@using Webmall.UI.Core
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{ Html.RenderPartial("ComparisionMenu", SessionHelper.ComparisionList); }
+
+@RenderBody()
+
+@section styles
+{
+    @RenderSection("styles", required: false)
+}
+
+@section scripts
+{
+    @RenderSection("scripts", required: false)
+    <script>
+        function checkComparisionPanalPresence() {
+            var pannel = $('#compare');
+            if (pannel.length) {
+                $('.compare-resizable').removeClass('search');
+            } else {
+                $('.compare-resizable').addClass('search');
+            }
+        }
+
+        $(function () {
+            window.checkComparisionPanalPresence();
+        });
+    </script>
+}
+
+@section dialogs {
+    @RenderSection("dialogs", required: false)
+}

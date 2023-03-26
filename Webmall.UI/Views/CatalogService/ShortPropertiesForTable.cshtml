@@ -1,0 +1,21 @@
+﻿@using ViewRes
+@model List<Webmall.Model.Entities.Catalog.WareProperty>
+@{
+    Layout = null;
+}
+
+    @if (Model.Any())
+    {
+        foreach (var el in Model)
+        {
+            <div class="spec-table-params__item">
+                <dt class="spec-table-params__property">@el.Name:</dt>
+                <dd class="spec-table-params__value">@el.Value</dd>
+            </div>
+        }
+    }
+    else
+    {
+        <div>@SharedResources.NoData</div>
+    }
+

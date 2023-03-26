@@ -1,0 +1,247 @@
+﻿@using ViewRes
+@using Webmall.UI.ViewModel
+
+@model Webmall.UI.ViewModel.Order.OrdersListViewModel
+
+@{
+    Layout = "_OrderListLayout.cshtml";
+    ViewBag.Title = SharedResources.Orders;
+    //var hasTrusted = SessionHelper.CurrentUser.CurrentClient.Client.TrustedPersons != null && SessionHelper.CurrentUser.CurrentClient.Client.TrustedPersons.Any();
+}
+
+<div class="stock-area is-table-view">
+    @*@Html.Hidden("SortDir", Model.Orders.SortDirection.ToString())
+        @Html.Hidden("SortColumn", Model.Orders.SortColumn)*@
+    <button class="filter-toggle stock-area__filter-toggle" type="button">
+        <svg class="icon icon-funnel filter-toggle__icon" width="25" height="25">
+            <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#funnel")"></use>
+        </svg>
+        <span class="filter-toggle__text">@SharedResources.Filters</span>
+    </button>
+    <div class="stock-area__top-controls">
+        <!-- switcher-->
+        <div class="stock-area__switcher switcher-label">
+            <input class="switcher-label__input visually-hidden js-mode-trigger" type="checkbox" name="has-option-1"
+                   id="option-opt-1">
+            <label class="switcher-label__main" for="option-opt-1">@SharedResources.LineByLine</label>
+        </div>
+        <a class="stock-area__back btn btn--primary" href="#">@SharedResources.CreateReturn</a>
+    </div>
+
+    <div class="stock-area__table">
+        <div class="stock-table stock-area__table-main js-checked-all scrollbar is-table-mode">
+            <div class="stock-table__header">
+                <div class="stock-table__row">
+                    <div class="stock-table__cell">&nbsp;</div>
+                    <div class="stock-table__cell text-center">
+                        <div class="stock-table__checkbox checkbox-label">
+                            <input class="checkbox-label__input js-checked-all-trigger" type="checkbox" name="is-opt-0" id="opt-0">
+                            <label class="checkbox-label__main" for="opt-0"></label>
+                        </div>
+                    </div>
+                    <div class="stock-table__cell">
+                        <div class="stock-table__caption">
+                            @*@Html.SortColumnLink(Model.Orders, SharedResources.OrderNumber, "Number")*@
+                            @SharedResources.OrderNumber
+                        </div>
+                    </div>
+                    <div class="stock-table__cell">
+                        <div class="stock-table__caption">
+                            @SharedResources.DataAndTimeOrder
+                        </div>
+                    </div>
+                    <div class="stock-table__cell text-center">
+                        <div class="stock-table__caption">@SharedResources.Status</div>
+                    </div>
+                    <div class="stock-table__cell text-center">
+                        <div class="stock-table__caption">@SharedResources.DeliveryDate</div>
+                    </div>
+                    <div class="stock-table__cell text-center">
+                        <div class="stock-table__caption">@SharedResources.Amount</div>
+                    </div>
+                    <div class="stock-table__cell text-center">
+                        <div class="stock-table__caption">@SharedResources.Note</div>
+                    </div>
+                    <div class="stock-table__cell text-center">
+                        <div class="stock-table__caption">@SharedResources.Sum</div>
+                    </div>
+                    <div class="stock-table__cell">&nbsp;</div>
+                </div>
+            </div>
+            <div class="stock-table__main">
+                @foreach (var item in Model.Orders.List)
+                {
+                    var status = Model.Statuses.FirstOrDefault(i => i.StatusId == item.StatusId);
+                    <div class="stock-table__wrapper js-accordion">
+                        <div class="stock-table__row">
+                            <div class="stock-table__cell">
+                                <button class="js-accordion-trigger stock-table__more" type="button" onclick="OpenOrderItemProp('@item.Id')">
+                                    <svg class="icon icon-chevron-down stock-table__more-icon" width="25" height="25">
+                                        <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#chevron-down")"></use>
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <div class="stock-table__cell text-center">
+                                <div class="stock-table__checkbox checkbox-label">
+                                    <input class="checkbox-label__input js-checked-all-item" type="checkbox" name="is-opt-@item.Id" id="opt-@item.Id">
+                                    <label class="checkbox-label__main" for="opt-@item.Id"></label>
+                                </div>
+                            </div>
+                            <div class="stock-table__cell">
+                                <div class="stock-table__text">
+                                    <a class="stock-table__articul" href="@Url.Action("Detail", "Order", new { orderId = item.Number })">@item.Number</a>
+                                </div>
+                                <div class="stock-table__helpers">
+                                    @if (item.PaymentInfo.IsPayed)
+                                    {
+                                        <div class="stock-table__helper badge" data-tippy-gray-content="Оплачено">
+                                            <svg class="badge__icon" width="26" height="17" viewBox="0 0 26 17" fill="none"
+                                                 xmlns="http://www.w3.org/2000/svg">
+                                                <rect x="2" y="2" width="16" height="12" rx="2" fill="#49A122"></rect>
+                                                <rect x="2" y="4" width="16" height="1" fill="white"></rect>
+                                                <path d="M24.5938 10.5C24.5938 13.2614 22.3552 15.5 19.5938 15.5C16.8323 15.5 14.5938 13.2614 14.5938 10.5C14.5938 7.73858 16.8323 5.5 19.5938 5.5C22.3552 5.5 24.5938 7.73858 24.5938 10.5Z"
+                                                      fill="#49A122" stroke="white"></path>
+                                                <path d="M19.6853 10.8302C19.3569 11.1201 19.0559 11.3899 19.0115 11.427L18.9328 11.4978L18.5942 11.164L17.2909 9.87898L16.9147 10.2499L16.5384 10.6208L18.1974 12.2565L18.8952 12.9444L18.9773 12.8803C19.1791 12.7218 22.6495 9.4624 22.6495 9.43879C22.6495 9.41519 21.9723 8.66661 21.9518 8.66661C21.9484 8.66661 20.0137 10.5402 19.6853 10.8302Z"
+                                                      fill="white"></path>
+                                            </svg>
+                                        </div>
+                                    }
+                                    <div class="stock-table__helper badge" data-tippy-gray-content="">
+                                        <svg class="icon icon-info badge__icon" width="25" height="25">
+                                            <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#info")"></use>
+                                        </svg>
+                                        <div data-tippy-gray-content-template="">
+                                            <strong>@SharedResources.OrderAuthor:</strong>
+                                            <p>@item.UserName</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="stock-table__cell">
+                                <time class="stock-table__date" datetime="@item.OrderDate.Date.ToString(CultureInfo.CurrentUICulture)">
+                                    @item.OrderDate.Date.ToString("dd.MM.yyyy")
+                                    <span>@item.OrderDate.ToString("HH:mm")</span>
+                                </time>
+                            </div>
+                            <div class="stock-table__cell text-center">
+                                <div class="stock-table__badge status-badge is-processing" style="background-color: @(status?.WebColor)">@item.StatusName</div>
+                            </div>
+                            <div class="stock-table__cell text-center">
+                                <div class="stock-table__text">
+                                    @(item.DeliveryTime?.ToString())
+                                </div>
+                                <div class="stock-table__helpers">
+                                    @if (item.DeliveryInfo.DeliveryTypeId == 1)
+                                    {
+                                        <div class="stock-table__helper badge" data-tippy-gray-content="">
+                                            <svg class="icon icon-self-delivery badge__icon" width="25" height="25">
+                                                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#self-delivery")"></use>
+                                            </svg>
+                                            <div data-tippy-gray-content-template="">
+                                                <strong></strong>
+                                                <p>@SharedResources.SelfDelivery</p>
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="stock-table__helper badge" data-tippy-gray-content="">
+                                            <svg class="icon icon-truck badge__icon" width="25" height="25">
+                                                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#truck")"></use>
+                                            </svg>
+                                            <div data-tippy-gray-content-template="">
+                                                <strong></strong>
+                                                <p>@SharedResources.Delivery</p>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            <div class="stock-table__cell text-center">
+                                <div class="stock-table__order-info" data-tippy-gray-content="">
+                                    @foreach (var pos in item.PosStatuses)
+                                    {
+                                        var posStatus = Model.PosStatuses.FirstOrDefault(i => i.StatusId == pos.StatusId);
+                                        <span style="color: @(posStatus?.WebColor ?? "0xFFFFFF");">@pos.Qnt</span>
+                                        if (item.PosStatuses.Last() != pos)
+                                        {
+                                            <text>/</text>
+                                        }
+                                    }
+                                    <div data-tippy-gray-content-template="">
+                                        @foreach (var pos in item.PosStatuses)
+                                        {
+                                            var posStatus = Model.PosStatuses.FirstOrDefault(i => i.StatusId == pos.StatusId);
+                                            <p>@(posStatus?.StatusName ?? pos.StatusName) - <strong style="color: @(posStatus?.WebColor ?? "0xFFFFFF");">@pos.Qnt</strong></p>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="stock-table__cell">
+                                <div class="stock-table__comment custom-comment">
+                                    @item.Options.Comment
+                                </div>
+                            </div>
+                            <div class="stock-table__cell text-center">
+                                <strong class="stock-table__text">@item.Sum</strong>
+                            </div>
+                            <div class="stock-table__cell">
+                                <div class="stock-table__control" data-tippy-dropdown-content="" aria-expanded="false">
+                                    <svg class="icon icon-dots stock-table__control-icon" width="25" height="25">
+                                        <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#dots")"></use>
+                                    </svg>
+                                    <div data-tippy-dropdown-content-template="">
+                                        <ul class="tooltip-nav">
+                                            <li class="tooltip-nav__item">
+                                                <a class="tooltip-nav__link" href="#">@SharedResources.DeleteOrder</a>
+                                            </li>
+                                            <li class="tooltip-nav__item">
+                                                <a class="tooltip-nav__link" href="#">@SharedResources.RepeatOrder</a>
+                                            </li>
+                                            <li class="tooltip-nav__item">
+                                                <a class="tooltip-nav__link" href="#">@SharedResources.PrintAPP</a>
+                                            </li>
+                                            <li class="tooltip-nav__item">
+                                                <a class="tooltip-nav__link" href="#">@SharedResources.ExportToExcel</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="stock-table__inner js-accordion-body" data-loaded="false" data-orderId="@item.Id" hidden>
+                            <div id="updateBlock-@item.Id">
+                                <p>@SharedResources.Loading</p>
+                            </div>
+
+                            @*ajax here*@
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    @{ Html.RenderPartial("OrderListMob", Model); }
+
+    <div class="stock-area__bottom">
+        <div class="stock-area__pagination pagination">
+            @{Html.RenderPartial("Components/Pagination", Model.Orders);}
+        </div>
+    </div>
+</div>
+
+@section BreadCrumbs {
+    @{Html.RenderPartial("Components/BreadCrumbsRender", new List<BreadCrumbsModel> { new BreadCrumbsModel { Name = SharedResources.Orders }});}
+}
+
+@section Filters {
+    @{ Html.RenderPartial("OrderFilter", Model.Filters); }
+}
+
+@section scripts {
+    @{Html.RenderPartial("_OrderListScripts");}
+    @{ Html.RenderPartial("GridViewFooterScripts", Model.Orders); }
+}

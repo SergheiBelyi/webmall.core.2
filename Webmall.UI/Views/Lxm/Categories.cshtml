@@ -1,0 +1,278 @@
+﻿@using System.Web.Mvc.Html
+@using ViewRes
+@using Webmall.Laximo.Entities
+@using Webmall.UI.Core.Renderers
+@using Webmall.UI.Models.Laximo
+@using Webmall.UI.ViewModel
+@model CategoriesModel
+
+@{
+    // ViewBag.Title = ((Model != null && Model.Wares.List != null && Model.Wares.List.Any())) ? SharedResources.Search + ": " + ViewBag.SearchBy ?? SharedResources.byProperties : SharedResources.NothingFound2Title;
+    Layout = "~/Views/Shared/_Inner.cshtml";
+    List<Category> catscr = new List<Category>();
+    var selcat = ((CategoryTree)Model.SelectedCategory).Category;
+    while (selcat != null)
+    {
+        catscr.Insert(0, selcat);
+        selcat = selcat.Parent;
+    }
+    selcat = ((CategoryTree)Model.SelectedCategory).Category;
+}
+
+@section BreadCrumbs{
+    @{
+        var links = new List<BreadCrumbsModel>
+        {
+            new BreadCrumbsModel
+            {
+                Url = Model.Type == "Auto" ? Url.Action("Selection", "SelectionByAuto") + "#section-3" : Url.Action("VinSearch", Model.Clone()),
+                Name = Model.VehicleInfo.Brand + " " + Model.VehicleInfo.Name
+            },
+            new BreadCrumbsModel {Name = SharedResources.SelectByCategories}
+        };
+    }
+    @{Html.RenderPartial("Components/BreadCrumbsRender", links);}
+}
+
+@section Sidebar{
+    <aside class="match-area__aside filter">
+        <!-- tree-nav-widget-->
+        <div class="match-area__nav tree-nav-widget js-accordion is-active">
+            <div class="tree-nav-widget__header">
+                <div class="tree-nav-widget__heading js-accordion-trigger">@Model.VehicleInfo.Brand @Model.VehicleInfo.Name</div>
+            </div>
+            <div class="tree-nav-widget__main js-accordion-body">
+                <nav class="tree-nav-widget__nav tree-nav">
+                    @(new HtmlString(Html.RenderTree(Model.Categories, Model.SelectedCategory, "categories",
+                        cat =>
+                        {
+                            var baseModel = Model.Clone();
+                            baseModel.CategoryId = cat.Id;
+                            return Html.ActionLink(cat.Name, "Categories", baseModel).ToHtmlString();
+
+                        })))
+                </nav>
+            </div>
+        </div><!-- /tree-nav-widget-->
+    </aside>
+
+    @*<div class="filter">
+        <div class="filter__heading">
+            <span class="filter__heading-text d-md-none">@Model.VehicleInfo.Brand @Model.VehicleInfo.Name</span>
+            <button class="filter__close d-md-none">
+                <svg class="icon icon-close filter__close-icon">
+                    <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#close")"></use>
+                </svg>
+            </button>
+        </div>
+        <div class="filter__main">
+            <div class="filter__auto-categories">
+                <div class="tree-nav-section is-opened">
+                    <div class="tree-nav-section__header">
+                        <div class="tree-nav-section__heading">
+                            @Model.VehicleInfo.Brand @Model.VehicleInfo.Name
+                        </div>
+                    </div>
+                    <div class="tree-nav-section__body">
+                        <nav class="tree-nav">
+                            @(new HtmlString(Html.RenderTree(Model.Categories, Model.SelectedCategory, "categories",
+                                                                      cat =>
+                                                                      {
+                                                                          var baseModel = Model.Clone();
+                                                                          baseModel.CategoryId = cat.Id;
+                                                                          return Html.ActionLink(cat.Name, "Categories", baseModel).ToHtmlString();
+
+                                                                      })))
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+}
+<button class="filter-toggle match-area__filter-toggle" type="button">
+    <svg class="icon icon-tree filter-toggle__icon" width="25" height="25">
+        <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#tree")"></use>
+    </svg>
+    <span class="filter-toggle__text">@SharedResources.SelectByGroups</span>
+</button>
+
+<main class="match-area__main">
+    <div class="match-area__tabs tabs js-tabs">
+        <div class="tabs__header">
+            <ul class="tabs__list">
+                <li class="tabs__item js-tabs-item">
+                    <a class="tabs__link" href="@Url.Action("Groups", Model.Clone())">@SharedResources.SelectByGroups</a>
+                </li>
+                <li class="tabs__item js-tabs-item">
+                    <a class="tabs__link is-active" href="@Url.Action("Categories", Model.Clone())">@SharedResources.SelectByCategories</a>
+                </li>
+            </ul>
+            <div class="tabs__panes">
+                <div class="tabs__pane js-tabs-pane is-active" id="groupDetail">
+                    <div class="media-grid">
+                        @foreach (var item in Model.Units)
+                        {
+                            var baseModel = Model.Clone();
+                            baseModel.UnitId = item.Id;
+                            baseModel.Ssd = item.Ssd;
+                            <a class="media-grid__item media-card" href="@Url.Action("Unit", baseModel)">
+                                <figure class="media-card__main">
+                                    <div class="media-card__img-wrap">
+                                        <img class="media-card__img" src="@item.ImageUrl.Replace("%size%", "200")" alt="" width="120" height="175">
+                                    </div>
+                                    <figcaption class="media-card__info">
+                                        <div class="media-card__caption">@item.Code: @item.Name</div>
+                                    </figcaption>
+                                </figure>
+                            </a>
+                        }
+                    </div>
+                </div>
+                <div class="tabs__pane js-tabs-pane"></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+@*<div class="tabs-section">
+    <div class="tabs tabs--secondary tabs--full-body">
+        <div class="tabs__header">
+            <ul class="tabs__list">
+                @if (Model.CatalogInfo.HasGroupSearch)
+                {
+                    <li class="tabs__item"><a class="tabs__link" href="@Url.Action("Groups", Model.Clone())">@SharedResources.SelectByGroups</a></li>
+                }
+                <li class="tabs__item"><a class="tabs__link is-active" href="@Url.Action("Categories", Model.Clone())">@SharedResources.SelectByCategories</a></li>
+                </ul>
+            <div class="tabs__panes">
+                <div class="tabs__tab-pane is-active">
+                    <div id="groupDetail" class="match-items">
+                        <div class="row">
+                            @foreach (var item in Model.Units)
+                            {
+                                var baseModel = Model.Clone();
+                                baseModel.UnitId = item.Id;
+                                baseModel.Ssd = item.Ssd;
+                                <div class="col-6 col-sm-4 col-md-3">
+                                    <a class="match-item" href="@Url.Action("Unit", baseModel)">
+                                        <figure class="match-item__main">
+                                            <div class="match-item__img-wrap"><img class="match-item__img img-responsive" src="@item.ImageUrl.Replace("%size%", "200")" alt=""></div>
+                                            <figcaption class="match-item__caption">@item.Code: @item.Name</figcaption>
+                                        </figure>
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="tabs__tab-pane">
+                    <div class="match-items">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>*@
+
+@*<div class="table-container">
+    <nav id="catalog" class="article-card">
+        <div id="navigation_wrapper">
+            <ul id="navigation" style="display: none">
+                <li class="top-level-navigation open">
+                    <span>@Model.VehicleInfo.Brand @Model.VehicleInfo.Name</span>
+                    @(new HtmlString(Html.RenderTree(Model.Categories, Model.SelectedCategory, "categories",
+                                      cat =>
+                                      {
+                                          var baseModel = Model.Clone();
+                                          baseModel.CategoryId = cat.Id;
+                                          return Html.ActionLink(cat.Name, "Categories", baseModel).ToHtmlString();
+
+                                      })))
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <aside id="compare-description" class="category-list">
+        <ul class="std-tabs">
+            @if (Model.CatalogInfo.HasGroupSearch)
+            {
+                <li><a href="@Url.Action("Groups", Model.Clone())">@SharedResources.SelectByGroups</a></li>
+            }
+            <li class="active"><a href="@Url.Action("Categories", Model.Clone())">@SharedResources.SelectByCategories</a></li>
+        </ul>
+        <ul class="breadcrumbs inner-breadscrumbs">
+            @foreach (var item in catscr)
+            {
+                <li><span>@item.Name</span></li>
+                if (item != selcat)
+                {
+                    <li>&#8250;</li>
+                }
+            }
+        </ul>
+        <div class="tiles lxm-groups">
+            @foreach (var item in Model.Units)
+            {
+                var baseModel = Model.Clone();
+                baseModel.UnitId = item.Id;
+                baseModel.Ssd = item.Ssd;
+                <div class="tile">
+                    <a href="@Url.Action("Unit", baseModel)"><img src="@item.ImageUrl.Replace("%size%", "200")" /><b>@item.Code:</b> @item.Name</a>
+                </div>
+            }
+        </div>
+    </aside>
+</div>*@
+
+@section styles
+{
+    @Styles.Render("~/Content/views/laximo")
+}
+
+@section scripts
+{
+    <script>
+        $(function () {
+            //var navigation = $("#navigation");
+            //// var navigation = $("#navigation_wrapper");
+            //navigation.treeview({
+            //    collapsed: true,
+            //    unique: true
+            //    //persist: "cookie",
+            //    //cookieId: "webmallTree",
+            //    //cookieOptions: { expires: 365 },
+            //    //prerendered: false,
+            //});
+            ////var stored = $.cookie("webmallTree");
+            ////if (!stored || stored.indexOf("1") == -1)
+            ////    $("#navigation>li>span").click();
+            ////navigation.jstree();
+
+            //navigation.show();
+        });
+    </script>
+
+    @if (Model.CategoryId == "-1")
+    {
+        @Scripts.Render("~/bundles/notify")
+        <script>
+            setTimeout(notifyTAction, 1000);
+            function notifyTAction() {
+                $("ul#categories").notify("@SharedResources.CategoryFirstEntranceMessage",
+                {
+                    position: "top left",
+                    className: 'info'
+                    //style: 'speedometer',
+                    // whether to hide the notification on click
+                    //clickToHide: true,
+                    // whether to auto-hide the notification
+                    //autoHide: false
+                });
+            }
+        </script>
+
+    }
+}

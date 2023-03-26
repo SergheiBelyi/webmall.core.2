@@ -1,0 +1,361 @@
+﻿@using ViewRes
+@using Webmall.UI.Core
+@model Webmall.UI.Models.Cart.CartModel
+
+@{
+    Layout = null;
+    ViewBag.Title = SharedResources.Cart;
+    var rate = 1;
+}
+
+<main class="cart" id="cart-reload">
+    <h1 class="main-title">@SharedResources.Cart</h1>
+    @if (!Model.Positions.List.Any())
+    {
+        <div class="empty-basket text-center">
+            <header class="orders-list__header">
+                <div class="orders-list__heading">@SharedResources.YourCarIsEmpty</div>
+            </header>
+            <div class="empty-basket__img-wrap">
+                <img class="empty-basket__img img-responsive" src="@Url.Content("~/assets/images/general/basket-default.png")" alt="">
+            </div><a class="empty-basket__btn btn btn--main" href="@Url.Action("Index", "Home")">@SharedResources.GotoMain</a>
+        </div>
+    }
+    else
+    {
+
+        <div class="orders-list orders-list--basket">
+            @*<div class="orders-list__badge badge is-error"><strong class="badge__accent">Внимание!</strong> Произошли изменения в строках заказа! Изменения отмечены цветом!</div>
+                <div class="orders-list__heading">Адрес магазина и адрес разгрузки</div>*@
+
+            @using (Html.BeginForm("Preview", "Cart", FormMethod.Post, new { @class = "shopping-cart-form", id = "desktopForm" }))
+            {
+                @Html.HiddenFor(m => m.InOrderId)
+                @Html.Hidden("toAction")
+                <div class="table-responsive d-none d-md-block">
+                    <table class="orders-list__table">
+                        <thead class="orders-list__thead">
+                            <tr class="orders-list__tr">
+                                <th class="orders-list__th">
+                                    <div class="checkbox-label">
+                                        <input class="checkbox-label__input js-checked-all" type="checkbox" id="opt-1">
+                                        <label class="checkbox-label__main" for="opt-1"></label>
+                                    </div>
+                                </th>
+                                <th class="orders-list__th">@SharedResources.AddTime</th>
+                                <th class="orders-list__th">@SharedResources.PartNumber, @SharedResources.Brand</th>
+                                <th class="orders-list__th">@SharedResources.Name</th>
+                                <th class="orders-list__th text-center">@SharedResources.Note</th>
+                                <th class="orders-list__th text-center">@SharedResources.Presence</th>
+                                <th class="orders-list__th">@SharedResources.Stock</th>
+                                <th class="orders-list__th text-center">@SharedResources.DeliveryDate</th>
+                                <th class="orders-list__th text-center">@SharedResources.ReturnPeriod</th>
+                                <th class="orders-list__th text-center">@SharedResources.PricePerOne</th>
+                                <th class="orders-list__th text-center">@SharedResources.Amount</th>
+                                <th class="orders-list__th text-center">@SharedResources.Sum</th>
+                                <th class="orders-list__th text-center">&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody class="orders-list__tbody">
+                            @foreach (var item in Model.Positions.List)
+                            {
+                                var wareUrl = Url.Action("WareIndex", "Catalog", new { group = Request.QueryString["group"], id = item.WareId, returnUrl = Request.Url });
+
+                                <tr class="orders-list__tr">
+                                    <td class="orders-list__td">
+                                        <div class="checkbox-label">
+                                            <input class="checkbox-label__input js-cart-checkbox" type="checkbox" value="@item.Id" name="selected" id="opt-@item.Id">
+                                            <label class="checkbox-label__main" for="opt-@item.Id"></label>
+                                        </div>
+                                    </td>
+                                    <td class="orders-list__td">
+                                        <time class="orders-list__time" datetime="@item.CreationDate.ToString("yyyy")">@item.CreationDate.ToString("MM/dd/yyyy") <span>@item.CreationDate.ToString("HH:mm")</span></time>
+                                    </td>
+                                    <td class="orders-list__td">
+                                        <a class="orders-list__order-number" href="@wareUrl">@item.WareNum</a>
+                                        <div class="orders-list__order-brand-wrap">
+                                            <a class="orders-list__order-brand" href="@wareUrl">@item.ProducerName</a>
+                                        </div>
+                                    </td>
+                                    <td class="orders-list__td">
+                                        <div class="orders-list__product-heading"><a href="@wareUrl">@item.WareName</a></div>
+                                    </td>
+                                    <td class="orders-list__td text-center">
+                                        @if (!string.IsNullOrEmpty(item.Comment))
+                                        {
+                                            <div class="custom-comment" data-modal-win-trigger="comment-edited" onclick="CartEditPositionComment(@item.Id)">
+                                                <div class="custom-comment__desc" id="comment_@item.Id">@item.Comment</div>
+                                                <ul class="custom-comment__helpers spec-helpers">
+                                                    <li class="spec-helpers__helper">
+                                                        <span class="spec-helpers__link">
+                                                            <svg class="spec-helpers__icon" width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M0.631774 6.93641L0.015424 9.59645C-0.00583801 9.69369 -0.00510913 9.79445 0.0175573 9.89137C0.0402238 9.98829 0.0842552 10.0789 0.146435 10.1566C0.208615 10.2344 0.287373 10.2972 0.376954 10.3406C0.466536 10.384 0.564679 10.4068 0.664213 10.4074C0.710592 10.4121 0.757324 10.4121 0.803703 10.4074L3.47996 9.79108L8.61837 4.67214L5.75072 1.81097L0.631774 6.93641Z" fill="#828282"></path>
+                                                                <path d="M10.2338 2.1094L8.31984 0.195476C8.19401 0.0702808 8.02373 0 7.84622 0C7.66872 0 7.49844 0.0702808 7.37261 0.195476L6.30859 1.25949L9.173 4.1239L10.237 3.05988C10.2993 2.9973 10.3486 2.92305 10.3821 2.84139C10.4157 2.75973 10.4328 2.67225 10.4325 2.58397C10.4322 2.49569 10.4145 2.40833 10.3804 2.3269C10.3463 2.24547 10.2965 2.17156 10.2338 2.1094Z" fill="#828282"></path>
+                                                            </svg>
+                                                        </span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="custom-comment" data-modal-win-trigger="comment-edit" onclick="CartAddPositionComment(@item.Id, this)">
+                                                <button class="custom-comment__btn" type="button">
+                                                    <svg class="custom-comment__icon" width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M2 0C0.895434 0 0 0.895431 0 2V11.6717C0 12.7763 0.895431 13.6717 2 13.6717H4.25141L6.1094 15.5311C6.38493 15.7936 6.81842 15.7931 7.09376 15.5304L8.95038 13.6717H15.7732C16.8778 13.6717 17.7732 12.7763 17.7732 11.6717V2C17.7732 0.895428 16.8778 0 15.7732 0H2ZM1.36717 3.36717C1.36717 2.2626 2.2626 1.36717 3.36717 1.36717H15.406C15.9583 1.36717 16.406 1.81489 16.406 2.36717V11.3045C16.406 11.8568 15.9583 12.3045 15.406 12.3045H8.6612C8.47633 12.3045 8.29794 12.3727 8.16015 12.4959L7.308 13.3488C6.91753 13.7397 6.28412 13.7398 5.89348 13.3492L5.04232 12.498C4.90412 12.3739 4.72492 12.3052 4.53917 12.3052H2.36717C1.81489 12.3052 1.36717 11.8575 1.36717 11.3052V3.36717ZM4.7851 4.17983C4.40756 4.17983 4.10151 4.48588 4.10151 4.86342C4.10151 5.24095 4.40756 5.547 4.7851 5.547H12.9881C13.3657 5.547 13.6717 5.24095 13.6717 4.86342C13.6717 4.48588 13.3657 4.17983 12.9881 4.17983H4.7851ZM5.547 8.12471C5.16947 8.12471 4.86342 8.43076 4.86342 8.80829C4.86342 9.18583 5.16947 9.49188 5.547 9.49188H10.2538C10.6313 9.49188 10.9374 9.18583 10.9374 8.80829C10.9374 8.43076 10.6313 8.12471 10.2538 8.12471H5.547Z" fill="#828282"></path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        }
+
+                                    </td>
+                                    <td class="orders-list__td text-center"> <span class="orders-list__availability">@item.AvailableQnt &gt;</span></td>
+                                    <td class="orders-list__td">
+                                        <span class="orders-list__stock">
+                                            @item.WarehouseName
+                                            <div class="spec-table-badge is-success" data-tippy-gray-content="@SharedResources.DeliveryProbability">@item.WarehouseQnt%</div>
+                                        </span>
+                                    </td>
+                                    <td class="orders-list__td text-center">
+                                        <a class="orders-list__delivery-date" href="#" data-tippy-gray-content="@SharedResources.TermDays">@item.DeliveryPresentation</a>
+                                    </td>
+
+                                    @if (item.IsReturnAllowed)
+                                    {
+                                        <td class="orders-list__td text-center"><span class="orders-list__value">@item.ReturnDays @SharedResources.days</span></td>
+                                    }
+                                    else
+                                    {
+                                        <td class="orders-list__td text-center">
+                                            <span class="orders-list__value is-error" data-tippy-gray-content="@SharedResources.NonRefundable">
+                                                <svg class="icon icon-close orders-list__value-icon">
+                                                    <use href=@Url.Content("~/assets/images/svg/symbol/sprite.svg#close")></use>
+                                                </svg>
+                                            </span>
+                                        </td>
+                                    }
+
+                                    <td class="orders-list__td text-center">
+                                        <span class="orders-list__price" data-tippy-gray-content="@SharedResources.PurchasePriceForOneUnit">@SessionHelper.PriceFormat(item.ClientPrice)</span>
+                                    </td>
+                                    <td class="orders-list__td text-center">
+                                        <div class="orders-list__counter" data-tippy-gray-content="@SharedResources.SaleMultiplisity = 2">
+                                            <div class="counter">
+                                                <button class="counter__btn counter--remove">-</button>
+                                                <input class="counter__field" type="tel" name="quantity" value="@string.Format("{0:0}", item.WareQnt)"
+                                                       onchange="UpdatePosition(this, @(item.Id))" onkeypress="return JumpNext(event, @(item.Id))">
+                                                <button class="counter__btn counter--add">+</button>
+                                                @Html.Hidden(string.Format("WareQntOld{0}", item.Id), string.Format("{0:0}", item.WareQnt))
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="orders-list__td text-center">
+                                        <div class="orders-list__total" id="position@(item.Id)">@SessionHelper.PriceFormat(new Decimal(Math.Round((double)(item.ClientPrice / rate), 2)) * item.WareQnt)</div>
+                                    </td>
+                                    <td class="orders-list__td text-center">
+                                        <a class="orders-list__remove" onclick="return RemoveCartPosition(this, @item.Id)" data-tippy-gray-content="@SharedResources.Delete">
+                                            <svg class="icon icon-close orders-list__remove-icon">
+                                                <use href=@Url.Content("~/assets/images/svg/symbol/sprite.svg#close")></use>
+                                            </svg>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+
+                        <tfoot class="orders-list__tfoot orders-list__tfoot--white">
+                            <tr class="orders-list__tr">
+                                <td class="orders-list__td" colspan="13">
+                                    <div class="orders-list__footer-summary">
+                                        <div class="orders-list__footer-info">@SharedResources.MinimumDeliveryAmount: <strong>Пока нет 0 р.</strong></div>
+                                        <div class="orders-list__footer-total">@SharedResources.Quantity: <strong id="totalQnt">0 </strong><strong>@SharedResources.Things.</strong> / @SharedResources.TotalSelectedSum: <strong id="totalPrice"><span id="totalSelectedSum"></span> <span>@Model.ValuteName</span></strong></div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="orders-list__outro d-none d-md-flex">
+                    <a class="btn btn--black" data-modal-win-trigger="product-import-cart">@SharedResources.ImportToCart</a>
+                    <div class="orders-list__outro-controls">
+                        <button type="submit" class="btn btn--main" onclick="return CheckPosisionsCount()">@SharedResources.MakeOrder</button>
+                        <button type="submit" class="btn btn--reverse" onclick="return Submit('Delete')">@SharedResources.Delete</button>
+                    </div>
+                </div>
+            }
+
+            @using (Html.BeginForm("Preview", "Cart", FormMethod.Post, new { @class = "shopping-cart-form", id = "mobileForm" }))
+            {
+                @Html.HiddenFor(m => m.InOrderId)
+                @Html.Hidden("toActionMobile")
+                <div class="orders-list__mob d-md-none">
+                    <header class="orders-list__mob-header">
+                        <div class="orders-list__mob-heading">
+                            <div class="checkbox-label">
+                                <input class="checkbox-label__input js-checked-mob-all" type="checkbox" id="opt-0">
+                                <label class="checkbox-label__main" for="opt-0"></label>
+                            </div>
+                        </div>
+                        <div class="orders-list__mob-heading">Артикул, Бренд</div>
+                        <div class="orders-list__mob-heading">Срок</div>
+                        <div class="orders-list__mob-heading" style="justify-content: center;">Кол-во</div>
+                        <div class="orders-list__mob-heading">Сумма</div>
+                        <div class="orders-list__mob-heading">&nbsp;</div>
+                    </header>
+
+                    @foreach (var item in Model.Positions.List)
+                    {
+                        var wareUrl = Url.Action("WareIndex", "Catalog", new { group = Request.QueryString["group"], id = item.WareId, returnUrl = Request.Url });
+
+                        <div class="orders-list__mob-order">
+                            <div class="orders-list__mob-side">
+                                <div class="checkbox-label">
+                                    <input class="checkbox-label__input js-cart-mob-checkbox" type="checkbox" value="@item.Id" name="selected" id="m-opt-@item.Id">
+                                    <label class="checkbox-label__main" for="m-opt-@item.Id"></label>
+                                </div>
+                            </div>
+                            <div class="orders-list__mob-side">
+                                <div class="orders-list__mob-order-number-wrap">
+                                    <a class="orders-list__mob-order-number" href="@wareUrl">@item.WareNum</a>
+                                    <a class="orders-list__mob-order-date" href="@wareUrl">@item.ProducerName</a>
+                                </div>
+                            </div>
+
+                            <div class="orders-list__mob-side">
+                                <div class="orders-list__mob-value">@item.DeliveryPresentation</div>
+                            </div>
+
+                            <div class="orders-list__mob-side">
+                                <div class="orders-list__mob-counter">
+                                    <input type="hidden" id="inp-mob-qnt-@item.Id" name="quantity" value="@string.Format("{0:0}", item.WareQnt)">
+                                    <div class="orders-list__mob-counter-input" id="mob-qnt-@item.Id" onclick="MobUpdatePosition(@item.Id, @string.Format("{0:0}", item.WareQnt))" data-modal-win-trigger="product-detail-add">@string.Format("{0:0}", item.WareQnt)</div>
+                                    <div class="spec-table-badge is-success">@item.WarehouseQnt%</div>
+
+                                    @Html.Hidden(string.Format("WareQntOld{0}", item.Id), string.Format("{0:0}", item.WareQnt))
+                                </div>
+                            </div>
+
+                            <div class="orders-list__mob-side">
+                                <div class="orders-list__mob-price" id="positionMobile@(item.Id)">@SessionHelper.PriceFormat(new Decimal(Math.Round((double)(item.ClientPrice / rate), 2)) * item.WareQnt)</div>
+                            </div>
+
+                            <div class="orders-list__mob-side">
+                                <button type="button" class="orders-list__mob-toggle">
+                                    <svg class="icon icon-chevron-down orders-list__mob-toggle-icon">
+                                        <use href=@Url.Content("~/assets/images/svg/symbol/sprite.svg#chevron-down")></use>
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <div class="orders-list__mob-more">
+                                <dl class="orders-mob__params">
+                                    <div class="orders-mob__param">
+                                    <dt class="orders-mob__param-term">Наименование</dt>
+                                    <dd class="orders-mob__param-definition">@item.WareName</dd>
+                            </div>
+                            <div class="orders-mob__param">
+                                <dt class="orders-mob__param-term">Склад</dt>
+                                <dd class="orders-mob__param-definition">@item.WarehouseName</dd>
+                            </div>
+                            <div class="orders-mob__param">
+                                <dt class="orders-mob__param-term">Цена за единицу </dt>
+                                <dd class="orders-mob__param-definition">@SessionHelper.PriceFormat(item.ClientPrice)</dd>
+                            </div>
+                            <div class="orders-mob__param">
+                                <dt class="orders-mob__param-term">Дата добавления</dt>
+                                <dd class="orders-mob__param-definition">@item.CreationDate.ToString("MM/dd/yyyy"), @item.CreationDate.ToString("HH:mm")</dd>
+                            </div>
+                            <div class="orders-mob__param">
+                                <dt class="orders-mob__param-term">Вероятность поставки</dt>
+                                <dd class="orders-mob__param-definition">@item.WarehouseQnt%</dd>
+                            </div>
+                            </dl>
+
+
+                            <div class="orders-list__mob-comment user-note">
+                                <label class="user-note__caption" for="un-@item.Id">Примечание:</label>
+                                <textarea class="user-note__input input" placeholder="Добавить примечание" id="un-@item.Id" oninput="return SubmitEditPositionCommentMobile(this,  @item.Id)">@item.Comment</textarea>
+                            </div>
+                            <div class="orders-list__mob-bottom"><a class="orders-list__mob-remove" onclick="return RemoveCartPositionMob(this, @item.Id)">Удалить из корзины</a></div>
+                        </div>
+                    </div>
+
+                }
+
+                    <footer class="orders-list__mob-footer">
+                        <dl class="orders-list__summary-list summary-list">
+                            <div class="summary-list__item">
+                            <dt class="summary-list__property">@SharedResources.MinimumDeliveryAmount</dt>
+                            <dd class="summary-list__value">Пока нет 0 р.</dd>
+                </div>
+                <div class="summary-list__item">
+                    <dt class="summary-list__property">@SharedResources.Quantity</dt>
+                    <dd class="summary-list__value"><strong id="totalQntMobile">0 </strong><strong>@SharedResources.Things.</strong></dd>
+                </div>
+                <div class="summary-list__item">
+                    <dt class="summary-list__property">@SharedResources.TotalSelectedSum</dt>
+                    <dd class="summary-list__value"><span id="totalSelectedSumMobile"></span> <span>@Model.ValuteName</span></dd>
+                </div>
+                </dl>
+                </footer>
+                </div>
+
+                <div class="orders-mob-controls d-md-none">
+                    <div class="row">
+                        <div class="col-4">
+                            <button type="submit" class="btn btn--reverse" onclick="return SubmitMob('Delete')">@SharedResources.Delete</button>
+                        </div>
+                        <div class="col-8">
+                            <button type="submit" class="btn btn--main" onclick="return CheckPosisionsCountMob()">@SharedResources.MakeOrder</button>
+                        </div>
+                    </div>
+                    <a class="btn btn--black" data-modal-win-trigger="product-import-cart">Импорт в корзину</a>
+                </div>
+            }
+
+            </div>
+        }
+</main>
+
+<script>
+    $("#show-message-cart .modal-warning__heading").html("@TempData["Title"]")
+    $("#show-message-cart .modal-warning__desc").html("@TempData["Message"]")
+
+    var cart = document.getElementById("cart-reload")
+
+    cart.querySelectorAll('.counter--add').forEach(function (item) {
+        item.addEventListener('click', function (e) {
+            const input = this.closest('.counter').querySelector('input[type="tel"]');
+            const value = input.value;
+
+            if (!parseInt(value) === value) return;
+
+            if (parseInt(input.value) >= 999) return;
+
+            input.value = parseInt(value) + 1;
+
+            input.onchange();
+
+            e.preventDefault();
+        });
+    });
+
+    cart.querySelectorAll('.counter--remove').forEach(function (item) {
+        item.addEventListener('click', function (e) {
+            const input = this.closest('.counter').querySelector('input[type="tel"]');
+            const value = input.value;
+
+            if (!parseInt(value) === value) return;
+
+            if (value > 1) {
+                input.value = parseInt(value) - 1;
+            }
+
+            input.onchange();
+
+            e.preventDefault();
+        });
+    });
+</script>
+
+

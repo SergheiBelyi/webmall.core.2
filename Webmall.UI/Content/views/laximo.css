@@ -1,0 +1,99 @@
+﻿#viewport .g_highlight_over {
+  border: 2px solid #ee5500 !important;
+  background: none;
+}
+#viewport .g_highlight_lock {
+  border: 2px solid #ee5500 !important;
+  background: none;
+}
+#viewport .g_highlight {
+  border: 2px solid transparent;
+  background: none;
+  cursor: pointer;
+}
+#compare-description table.ware-list tbody tr.g_highlight_over td {
+  background-color: #d4d4d4 !important;
+}
+#compare-description table.ware-list tbody tr.g_highlight_lock td {
+  background: #b0bce2 !important;
+}
+#compare-description .tiles.lxm-groups .tile {
+  border-bottom: none !important;
+  height: 210px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+#compare-description .tiles.lxm-groups .tile img {
+  display: block;
+  margin: auto;
+  max-height: 170px;
+  max-width: 200px;
+}
+#compare-description #top-panel form {
+  padding-top: 3px;
+  padding-left: 5px;
+}
+#compare-description #top-panel form label {
+  color: red;
+  float: none;
+}
+#compare-description #top-panel form input {
+  margin-right: 5px;
+}
+.gdUnit td.gdDetailCol {
+  width: 100%;
+}
+.gdUnit .gdImageCol {
+  padding: 0 10px;
+}
+table.unit-legend {
+  width: 100%;
+  border: 0;
+  margin-top: 5px;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+table.unit-legend th {
+  text-align: center;
+}
+table.unit-legend td.image {
+  white-space: nowrap;
+}
+a.over-tree-button {
+  background: #e8e6e6 no-repeat 17px 14px;
+  vertical-align: middle;
+  text-align: center;
+  text-decoration: underline;
+  font-size: 16px;
+  color: #000000;
+  padding: 12px 15px;
+  border: 1px solid #D3D3D3;
+  cursor: pointer;
+  display: block;
+  margin-bottom: 10px;
+}
+#navigation.treeview li span a {
+  text-decoration: underline;
+}
+table.all-product.article tbody tr td[name='d_oem'] {
+  white-space: nowrap;
+}
+table.all-product.article tbody tr td[name='d_oem'] img {
+  margin-bottom: -3px;
+}
+table.all-product.article tbody tr td[name='d_name'] {
+  text-align: left;
+}
+table.all-product.article tbody tr td[name='d_name'] p {
+  margin-bottom: 0;
+  font-size: smaller;
+}
+.g_highlight_lock {
+  background-color: #cef5d0;
+}
+.g_highlight_over {
+  background-color: #cef5d0;
+}
+.pannel-loader {
+  display: none;
+}

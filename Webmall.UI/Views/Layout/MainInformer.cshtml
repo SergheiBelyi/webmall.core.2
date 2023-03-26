@@ -1,0 +1,44 @@
+﻿@using Webmall.UI.Core.Helpers
+@model Webmall.Model.Entities.Cms.Informer
+
+@{
+    Layout = null;
+}
+
+@if (Model != null)
+{
+    if (!string.IsNullOrEmpty(Model.Image) && !string.IsNullOrEmpty(Model.ImageMob))
+    {
+        <div class="header-banner">
+            <a class="header-banner__wrap" href="@(this.ToLocalizedUrl(Model.Url))" @this.LikAttrs(Model.Url)>
+                <div class="header-banner__desc">
+                    <picture>
+                        <source srcset="@(new HtmlString(Model.Image))" media="(min-width: 576px)">
+                        <source srcset="@(new HtmlString(Model.ImageMob))" media="(max-width: 575px)">
+                        <img class="top-banner__img" src="@(new HtmlString(Model.Image))" alt="" width="850" height="30">
+                    </picture>
+                </div>
+                <div class="header-banner__logo"><img class="header-banner__logo-img" src="@Url.Content("~/assets/images/logo.svg")" alt=""></div>
+            </a>
+            <a class="header-banner__close" data-id="@Model.Id" href="#">
+                <svg class="icon icon-close header-banner__close-icon">
+                    <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#close")"></use>
+                </svg>
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="header-banner">
+            <a class="header-banner__wrap" href="@(this.ToLocalizedUrl(Model.Url))" @this.LikAttrs(Model.Url)>
+                <div class="header-banner__desc">@Html.Raw(Model.Name)</div>
+                <div class="header-banner__logo"><img class="header-banner__logo-img" src="@Url.Content("~/assets/images/logo.svg")" alt=""></div>
+            </a>
+            <a class="header-banner__close" data-id="@Model.Id" href="#">
+                <svg class="icon icon-close header-banner__close-icon">
+                    <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#close")"></use>
+                </svg>
+            </a>
+        </div>
+    }
+}

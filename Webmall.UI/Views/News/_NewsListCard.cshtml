@@ -1,0 +1,15 @@
+﻿@using System.Globalization
+@model Webmall.Model.Entities.Cms.NewsData.NewsArticle
+
+@{
+    var newsId = string.IsNullOrEmpty(Model.Url) ? Model.Id.ToString(CultureInfo.InvariantCulture) : Model.Url;
+}
+<article class="news">
+    <a href="@Url.Action("Show", "News", new { id = newsId })"><img src="@Url.Content("~/" + Model.ImageUrl)" alt="Img-News" /></a>
+    <div class="news-description">
+        <h3>@Html.ActionLink(Model.Header, "Show", "News", new { id = newsId }, null)</h3>
+        <p>@(new HtmlString(Model.ShortText))</p>
+        <time datetime="@Model.Date.ToString("yyyy-MM-dd")">@(Model.Date.ToShortDateString())</time>
+    </div>
+</article>
+

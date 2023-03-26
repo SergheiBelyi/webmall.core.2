@@ -1,0 +1,94 @@
+﻿@using ViewRes
+@using Webmall.UI.Core
+
+@model List<Webmall.Model.Entities.Order.OrderPosition>
+
+@{
+    Layout = null;
+    var rate = 1;
+}
+
+
+<div class="stock-table__header">
+    <div class="stock-table__row">
+        <div class="stock-table__cell">
+            <div class="stock-table__caption">@SharedResources.WareNumber, @SharedResources._brand</div>
+        </div>
+        <div class="stock-table__cell">
+            <div class="stock-table__caption">@SharedResources.WareName</div>
+        </div>
+        <div class="stock-table__cell text-center">
+            <div class="stock-table__caption">@SharedResources.Note</div>
+        </div>
+        <div class="stock-table__cell text-center">
+            <div class="stock-table__caption">@SharedResources.DeliveryDate</div>
+        </div>
+        <div class="stock-table__cell text-center">
+            <div class="stock-table__caption">@SharedResources.ReturnPeriod</div>
+        </div>
+        <div class="stock-table__cell text-center">
+            <div class="stock-table__caption">@SharedResources.UnitPrice</div>
+        </div>
+        <div class="stock-table__cell text-center">
+            <div class="stock-table__caption">@SharedResources.Amount</div>
+        </div>
+        <div class="stock-table__cell text-center">
+            <div class="stock-table__caption">@SharedResources.Sum</div>
+        </div>
+    </div>
+</div>
+
+<div class="stock-table__main">
+    @foreach (var item in Model)
+    {
+        var wareUrl = Url.Action("WareCard", "Catalog")?.Replace("WareCard", "") + $"{item.ProducerName}/{item.WareNumber}";
+        <div class="stock-table__row">
+            
+            <div class="stock-table__cell">
+                @Html.Hidden($"Positions[{Model.IndexOf(item)}].Id", item.Id)
+                <div class="stock-table__meta">
+                    <a class="stock-table__articul" href="@wareUrl">@item.WareName</a>
+                    <a class="stock-table__brand" href="@wareUrl">@item.ProducerName</a>
+                </div>
+            </div>
+            <div class="stock-table__cell">
+                <div class="stock-table__heading">
+                    <a class="stock-table__heading-link" href="@wareUrl">@item.WareName</a>
+                </div>
+            </div>
+            <div class="stock-table__cell">
+                <div class="custom-comment" data-modal-win-trigger="comment-edited" onclick="CartEditPositionComment(@item.Id)">
+                    <div class="custom-comment__desc" id="comment_@item.Id">@item.Comment</div>
+                </div>
+            </div>
+
+            <div class="stock-table__cell text-center">
+                <div class="stock-table__accent" data-tippy-gray-content>
+                    05.02.2022<div data-tippy-gray-content-template>
+                        <div class="tooltip-dates-ranges">
+                            <div class="tooltip-dates-range">
+                                Получение <span>до 10:50 23.09.2021</span>
+                            </div>
+                            <div class="tooltip-dates-range">
+                                при заказе <span>до 20:15 22.09.2021</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="stock-table__cell text-center">
+                @*<div class="stock-table__text">@item.ReturnDays @SharedResources.days</div>*@
+            </div>
+            <div class="stock-table__cell text-center">
+                <div class="stock-table__text" data-tippy-gray-content="@SharedResources.PurchasePriceForOneUnit">@SessionHelper.PriceFormat(item.Price)</div>
+            </div>
+            <div class="stock-table__cell text-center">
+                <div class="stock-table__text">@string.Format("{0:0}", item.WareQnt)</div>
+            </div>
+            <div class="stock-table__cell text-center">
+                <strong class="stock-table__text" id="position@(item.Id)">@SessionHelper.PriceFormat(new Decimal(Math.Round((double)(item.Price / rate), 2)) * item.WareQnt)</strong>
+            </div>
+        </div>
+    }
+</div>
+

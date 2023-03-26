@@ -1,0 +1,242 @@
+﻿@using ViewRes
+@using Webmall.UI.Models.Laximo
+@using Webmall.Laximo.Core
+@using Webmall.UI.ViewModel
+
+@model UnitModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var links = new List<BreadCrumbsModel>
+{
+        new BreadCrumbsModel
+        {
+            Url = Model.Type == "Auto" ? Url.Action("Selection", "SelectionByAuto") + "#section-3" : Url.Action("VinSearch", Model.Clone()),
+            Name = Model.VehicleInfo.Brand + " " + Model.VehicleInfo.Name
+        },
+        new BreadCrumbsModel
+        {
+            Url = Url.Action("Categories", Model.Clone()),
+            Name = SharedResources.SelectByCategories
+        },
+        new BreadCrumbsModel {Name = Model.UnitInfo.Name}
+    };
+}
+
+<div class="container-fluid">
+    @{Html.RenderPartial("Components/BreadCrumbsRender", links);}
+    <main class="content">
+        <div class="page-intro">
+            <h1 class="page-intro__heading main-heading">
+                <span>@Model.UnitInfo.Name</span>
+                <a href="#">@Model.VehicleInfo.Brand @Model.VehicleInfo.Name</a>
+            </h1>
+        </div><!-- /page-intro-->
+        <div class="media-card-info is-detail">
+            <div class="media-card-info__card js-gallery js-lgallery" lg-uid="lg0">
+                <div id="viewport" class="inline_block" style="position: relative; border: 1px solid rgb(119, 119, 119); background: white; overflow: hidden; width: 100%; height: 600px;">
+                    @foreach (var item in Model.ImageMaps)
+                    {
+                        var w = item.X2 - item.X1;
+                        var h = item.Y2 - item.Y1;
+                        <div name="@item.Code" class="dragger g_highlight" style="position: absolute; width: @(w)px; height: @(h)px; margin-top: @(item.Y1)px; margin-left: @(item.X1)px; overflow: hidden;"
+                             owidth="@(w)" oheight="@(h)" oleft="@(item.Y1)" otop="@(item.X1)">
+                        </div>
+                    }
+                    <img class="dragger" src="@Model.UnitInfo.ImageUrl" onload="rescaleImage(-100);">
+                </div>
+                <table class="unit-legend table-responsive media-card-info__wrap">
+                    <tbody>
+                        <tr>
+                            <th colspan="4">Управление</th>
+                        </tr>
+                        <tr>
+                            <td class="image">
+                                <img src="@Url.Content("~/Content/Images/lxm/mouse_wheel.png")">
+                            </td>
+                            <td>масштабирование изображения</td>
+                            <td class="image">
+                                <img src="@Url.Content("~/Content/Images/lxm/lmb.png")">
+                                <img src="@Url.Content("~/Content/Images/lxm/move.png")">
+                            </td>
+                            <td>прокрутка картинки</td>
+                        </tr>
+                        <tr>
+                            <td class="image">
+                                <img src="@Url.Content("~/Content/Images/lxm/mouse.png")">
+                                <img src="@Url.Content("~/Content/Images/lxm/pointer.png")">
+                            </td>
+                            <td>подсветка деталей на картинке и в таблице</td>
+                            <td class="image">
+                                <img src="@Url.Content("~/Content/Images/lxm/lmb.png")">
+                                <img src="@Url.Content("~/Content/Images/voskl.png")">
+                            </td>
+                            <td>информация о запчасти</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="media-card-info__main">
+                <div class="media-card-info__info">
+                    <div class="table-responsive media-card-info__wrap">
+                        <table class="kit-table media-card-info__table is-dark">
+                            <thead>
+                                <tr>
+                                    <th id="d_number" width="10%">@SharedResources.Number_short</th>
+                                    @*<th></th>*@
+                                    <th id="d_oem" width="15%">OEM</th>
+                                    <th id="d_name">@SharedResources.Name</th>
+                                    @foreach (var i in Model.ExtAttrTitles)
+                                    {
+                                        <th id="d_@i.Key" style="display: none">@i.Value</th>
+                                    }
+                                    <th class="text-center" width="10%">@SharedResources.Info</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Details.Any())
+                                {
+                                    foreach (var item in Model.Details)
+                                    {
+                                        <tr name="@item.CodeOnImage" class="g_collapsed g_highlight" onmouseout="hl(this, 'out');" onmouseover="hl(this, 'in');">
+                                            <td class="hd" name="d_number">
+                                                <div class="kit-table__info">
+                                                    @if (!string.IsNullOrEmpty(item.Oem))
+                                                    {
+                                                        @Html.ActionLink(item.CodeOnImage, "Index", "SearchOem", new { oem = item.Oem }, new { target = "_blank" })
+                                                    }
+                                                    else
+                                                    {
+                                                        @item.CodeOnImage
+                                                    }
+                                                    @if (!string.IsNullOrEmpty(item.Variant))
+                                                    {
+                                                        <p>@item.Variant</p>
+                                                    }
+                                                </div>
+                                            </td>
+                                            @*<td><div class="table__td__variant kit-table__info">@item.Variant</div></td>*@
+                                            <td name="d_oem">
+                                                <div class="kit-table__info">
+                                                    @if (!string.IsNullOrEmpty(item.Filter))
+                                                    {
+                                                        <img src="@Url.Content("~/Content/images/cito-icon.png")" title="@SharedResources.NeedParametersSpecification" />
+                                                        <a href="#" filter="@item.Filter" onclick="UpdateInfo(this)">@item.Oem</a>
+                                                    }
+                                                    else if (!string.IsNullOrEmpty(item.Oem))
+                                                    {
+                                                        @Html.ActionLink(item.Oem, "Index", "SearchOem", new { oem = item.Oem }, new { target = "_blank", @class = "kit-table__title-link" })
+                                                    }
+                                                </div>
+                                            </td>
+                                            <td class="hd" name="d_name">
+                                                <div class="kit-table__title">
+                                                    @if (!string.IsNullOrEmpty(item.Oem))
+                                                    {
+                                                        @Html.ActionLink(item.Name, "Index", "SearchOem", new { oem = item.Oem }, new { target = "_blank", @class = "kit-table__title-link" })
+                                                    }
+                                                    else
+                                                    {
+                                                        @item.Name
+                                                    }
+                                                    @if (!string.IsNullOrEmpty(item.Note))
+                                                    {
+                                                        <p>@SharedResources.Note: @item.Note</p>
+                                                    }
+                                                </div>
+                                            </td>
+                                            @foreach (var i in Model.ExtAttrTitles)
+                                            {
+                                                <td name="d_@i.Key" class="hd kit-table__info" style="display: none">@item.ExtAttributes.GetValue(i.Key)</td>
+                                            }
+                                            <td>
+                                                <div class="kit-table__info unit-tippy text-center" id="@item.Oem">
+                                                    <svg class="icon icon-info kit-table__info-icon" width="25" height="25">
+                                                        <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#info")"></use>
+                                                    </svg>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="media-card-info__data kit-products">
+                        @if (Model.Details.Any())
+                        {
+                            foreach (var item in Model.Details)
+                            {
+                                <div name="@item.CodeOnImage" class="g_collapsed g_highlight kit-products__item kit-product js-accordion is-active">
+                                    @*<div class="kit-product__header js-accordion-trigger">
+                                        <div class="kit-product__heading">@item.Name</div>
+                                    </div>*@
+                                    <div class="kit-product__main js-accordion-body">
+                                        <div class="kit-product__subsection">
+                                            <dl class="kit-product__props">
+                                                <div class="kit-product__prop">
+                                                    <dt class="kit-product__property">@SharedResources.Number</dt>
+                                                    <dd class="kit-product__value">
+                                                        @item.CodeOnImage
+                                                        @if (!string.IsNullOrEmpty(item.Variant))
+                                                        {
+                                                            <p>@item.Variant</p>
+                                                        }
+                                                    </dd>
+                                                </div>
+                                                <div class="kit-product__prop">
+                                                    <dt class="kit-product__property">@SharedResources.Name</dt>
+                                                    <dd class="kit-product__value">
+                                                        @if (!string.IsNullOrEmpty(item.Oem))
+                                                        {
+                                                            @Html.ActionLink(item.Name, "Index", "SearchOem", new {oem = item.Oem}, new {target = "_blank", @class = "kit-product__link"})
+                                                        }
+                                                        else
+                                                        {
+                                                            @item.Name
+                                                        }
+                                                    </dd>
+                                                </div>
+                                                <div class="kit-product__prop">
+                                                    <dt class="kit-product__property">OEM</dt>
+                                                    <dd class="kit-product__value">
+                                                        @if (!string.IsNullOrEmpty(item.Oem))
+                                                        {
+                                                            @Html.ActionLink(item.Oem, "Index", "SearchOem", new {oem = item.Oem}, new {target = "_blank", @class = "kit-product__link"})
+                                                        }
+                                                        else
+                                                        {
+                                                            @item.Oem
+                                                        }
+                                                    </dd>
+                                                </div>
+                                            </dl>
+                                        </div>
+                                        <div class="kit-product__bottom">
+                                            <span class="kit-product__info unit-tippy-mobile" data-id="@item.Oem">@SharedResources.Details
+                                                <svg class="icon icon-info kit-product__info-icon" width="25" height="25">
+                                                    <use href="assets/images/svg/symbol/sprite.svg#info"></use>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+@section styles
+{
+    @Styles.Render("~/Content/views/laximo")
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/laximo")
+}

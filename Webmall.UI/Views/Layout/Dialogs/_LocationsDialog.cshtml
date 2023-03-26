@@ -1,0 +1,36 @@
+﻿@using ViewRes
+
+<div class="modal-content" data-modal-win="modal-locations" hidden>
+    <div class="modal-content__heading modal-win-title">@SharedResources.StoreSelection</div>
+    <div class="modal-content__body">
+        <div class="modal-content__locations">
+            <div class="modal-content__locations-subsection">
+                <div>
+                    <div class="modal-content__locations-caption">
+                        <svg class="icon icon-location" width="25" height="25">
+                            <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#location")"></use>
+                        </svg>
+                        @SharedResources.PickupNearestShops
+                    </div>
+                    <ul class="modal-content__locations-list" id="locations-list"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function SetCity(city_id, short_name) {
+        $("#current-location").text(short_name);
+        var today = new Date();
+        var expire = new Date();
+        var nDays = 365;
+
+        expire.setTime(today.getTime() + 3600000 * 24 * nDays);
+        document.cookie = "CityId" + "=" + escape(city_id) + ";expires=" + expire.toGMTString();
+
+        $(".modal-win__close").click();
+        $(".mob-regions__close").click();
+        $("#informer-close").click();
+    }
+</script>

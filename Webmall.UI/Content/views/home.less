@@ -1,0 +1,211 @@
+﻿// Color variables (appears count calculates by raw css)
+@color0: #1e5d8d; // Appears 5 times
+@color1: #000000; // Appears 2 times
+@color2: #ffffff; // Appears 2 times
+
+// Width variables (appears count calculates by raw css)
+@width6: 100%; // Appears 2 times
+
+
+section#content {
+    #vidgets {
+        margin: 26px auto 38px;
+        max-width: @width6;
+        overflow: hidden;
+
+        .vin-vidget {
+            -ms-flex-direction: column;
+            -ms-flex-pack: end;
+            -webkit-box-direction: normal;
+            -webkit-box-orient: vertical;
+            -webkit-box-pack: end;
+            display: -ms-flexbox;
+            display: -webkit-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+
+            input {
+                -ms-flex-order: 2;
+                -webkit-box-ordinal-group: 3;
+                -webkit-box-sizing: border-box;
+                border-radius: 3px;
+                border: 1px solid #d9d9d9;
+                box-sizing: border-box;
+                color: #8b8d8d;
+                font-size: 14px;
+                font: normal 16px "CenturyGothic";
+                height: 30px;
+                margin-left: 16px;
+                order: 2;
+                width: 80%;
+            }
+
+            button {
+                -ms-flex-order: 1;
+                -webkit-box-ordinal-group: 2;
+                background-color: transparent;
+                border: none;
+                color: @color0;
+                cursor: pointer;
+                font: normal 24px "CenturyGothic";
+                margin-bottom: 2px;
+                margin-left: -7px;
+                order: 1;
+                padding: 0;
+                text-decoration: none;
+                width: @width6;
+            }
+
+            input#vin-button {
+                -moz-border-radius: 3px;
+                -webkit-border-radius: 3px;
+                background: @color0 url(../images/search.png) no-repeat center center;
+                border-radius: 3px;
+                border: none;
+                cursor: pointer;
+                font-size: 0;
+                height: 49px;
+                margin: 0% 63%;
+                position: absolute;
+                width: 60px;
+            }
+
+            b {
+                margin-bottom: 0;
+            }
+        }
+
+        .vidget {
+            border-right: 4px solid #c2d3e0;
+            color: @color0;
+            font: normal 24px "CenturyGothic";
+            height: 125px;
+            padding: 0 60px;
+            position: relative;
+            text-decoration: none;
+            width: calc(@width6 / 3);
+
+            a {
+                color: @color0;
+                font: normal 16px "SegoeUIRegular";
+                text-decoration: none;
+            }
+
+            span {
+                color: @color0;
+                display: block;
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+
+            b {
+                display: block;
+                font-family: "CenturyGothic";
+                font-weight: normal;
+                margin-bottom: 4px;
+                text-align: center;
+                width: 186px;
+            }
+
+            &:hover {
+                b {
+                    color: @color1;
+
+                    span {
+                        color: @color1;
+                    }
+                }
+            }
+        }
+
+        .vidget.vin {
+            &:before {
+                background: url('../images/vidget1.png') no-repeat;
+                content: '';
+                display: block;
+                height: 101px;
+                position: absolute;
+                right: 90px;
+                top: 0;
+                width: 144px;
+                z-index: -1;
+            }
+        }
+
+        .vidget.model {
+            -ms-flex-align: center;
+            -webkit-box-align: center;
+            align-items: center;
+            display: -ms-flexbox;
+            display: -webkit-box;
+            display: flex;
+
+            &:before {
+                -ms-transform: translateY(-50%);
+                -webkit-transform: translateY(-50%);
+                background: url('../images/vidget2.png') no-repeat;
+                content: '';
+                display: block;
+                height: 107px;
+                position: absolute;
+                right: 60px;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 134px;
+            }
+        }
+
+        .vidget.bus {
+            background: url(../images/vidjet3.jpg) no-repeat center top;
+        }
+
+        .vidget.on-line {
+            -ms-flex-align: center;
+            -webkit-box-align: center;
+            align-items: center;
+            display: -ms-flexbox;
+            display: -webkit-box;
+            display: flex;
+
+            &:before {
+                background: url('../images/vidget3.png') no-repeat;
+                content: '';
+                display: block;
+                height: 85px;
+                position: absolute;
+                right: 80px;
+                top: 13px;
+                width: 110px;
+            }
+        }
+
+        .vidget.catalogs {
+            background: url(../images/vidjet5.jpg) no-repeat center top;
+
+            &:hover {
+                b {
+                    color: @color2;
+
+                    span {
+                        color: @color2;
+                    }
+                }
+            }
+        }
+
+        &:last-child {
+            margin-right: 0;
+        }
+
+        .error {
+            color: red;
+        }
+
+        label.error {
+            display: block;
+            font-size: 10px;
+            font-weight: bold;
+        }
+    }
+}

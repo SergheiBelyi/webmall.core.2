@@ -1,0 +1,14 @@
+﻿@using Webmall.Model
+@using Webmall.UI.Core
+@{
+    var gtmAcc = ConfigHelper.GoogleTagManagerAccount;
+}
+
+@* Google Tag Manager *@
+@if (!string.IsNullOrEmpty(gtmAcc))
+{
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=@(gtmAcc)"
+                      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+}

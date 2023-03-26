@@ -1,0 +1,207 @@
+﻿@using Webmall.UI.Models.Ware
+@using ViewRes
+@using Webmall.UI.Core
+@using Webmall.UI.Core.Helpers
+@using Webmall.Model
+@using Webmall.UI.ViewModel
+@using Webmall.UI.ViewModel.Filter
+@model Webmall.UI.Models.Catalog.FilterModel
+@{
+
+    WaresCatalogModel waresCatalog = ViewBag.WaresCatalog ?? new WaresCatalogModel();
+    var showAllSections = true;
+    var autoSubmit = true;
+    // form the group data list
+    SelectViewModel groupSection = new SelectViewModel();
+    // form the brands data list
+    SelectViewModel brandSection = new SelectViewModel();
+    //bool showMoreOption = true;
+    if (Model.Categories != null && Model.Categories.Any())
+    {
+        groupSection = new SelectViewModel
+        {
+            Caption = SharedResources.ProductCategory,
+            Name = "groups",
+            SectionIsOpened = true,
+            ShowSelectMoreLink = false,
+            SectionIsHidden = false,
+            AutoSubmit = autoSubmit,
+        };
+
+        foreach (var item in Model.Categories)
+        {
+            var selected = Model.SelectedGroups != null && Model.SelectedGroups.Contains(item.Id);
+            groupSection.Options.Add(new SelectListItem { Value = item.Id, Text = item.Name, Selected = selected });
+        }
+
+    };
+
+    if (Model.Brands != null && Model.Brands.Any())
+    {
+        brandSection = new SelectViewModel
+        {
+            Caption = SharedResources.Brand,
+            Name = "producers",
+            SectionIsOpened = true,
+            ShowSelectMoreLink = true,
+            SectionIsHidden = false,
+            AutoSubmit = autoSubmit,
+        };
+
+        foreach (var group in Model.Brands.GroupBy(i => i.IsOEM).OrderByDescending(i => i.Key))
+        {
+            foreach (var item in group.OrderBy(i => i.Name))
+            {
+                var selected = Model.SelectedProducers.Contains(item.Id);
+                brandSection.Options.Add(new SelectListItem { Value = item.Id, Text = item.Name, Selected = selected });
+            }
+            //showMoreOption = false;
+        }
+
+    };
+
+    var propertySections = new List<SelectViewModel>();
+    foreach (var group in Model.WareProperties.OrderByDescending(i => i.Importance).ThenBy(i => i.Name))
+    {
+        var section = new SelectViewModel
+        {
+            Caption = group.Name,
+            Name = "properties",
+            SectionIsOpened = false,
+            SectionIsHidden = !showAllSections,
+            AutoSubmit = autoSubmit
+            //ShowSelectMoreLink = showMoreOption
+        };
+        //showMoreOption = false;
+        foreach (var item in group.AvailableValues)
+        {
+            var id = item.Id.Trim().ToHex() + CommonHelpers.PropertyDivider + group.Name.Trim().ToHex();
+            var selected = ViewBag.SelectedProperties != null && ViewBag.SelectedProperties.Contains(id);
+            section.Options.Add(new SelectListItem { Value = id, Text = item.Id, Selected = selected });
+        }
+        if (section.Options.Any(i => i.Selected))
+        {
+            section.SectionIsOpened = true;
+        }
+        propertySections.Add(section);
+    }
+
+    if (propertySections.Any(i => !i.SectionIsHidden) || !propertySections.Any())
+    {
+        brandSection.ShowSelectMoreLink = false;
+    }
+
+    if (propertySections.Any(i => i.SectionIsHidden))
+    {
+        var last = propertySections.LastOrDefault(i => !i.SectionIsHidden);
+        if (last != null)
+        {
+            last.ShowSelectMoreLink = true;
+        }
+    }
+}
+<!-- filter-->
+<div class="filter">
+    <div class="filter__heading h3">
+        @SharedResources.Filters
+        <button class="filter__close d-md-none">
+            <svg class="icon icon-close filter__close-icon">
+                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#close")"></use>
+            </svg>
+        </button>
+    </div>
+    <div class="filter__main">
+        <form id="filterForm" name="filterForm" method="get">
+            @Html.Hidden("modif", waresCatalog.ModifId)
+
+            @if (!string.IsNullOrEmpty(Model.Search))
+            {
+                @Html.Hidden("search", Model.Search)
+            }
+
+            @if (waresCatalog.IsAutoFilter)
+            {
+                @Html.Hidden("markaId", waresCatalog.MarkaId)
+                @Html.Hidden("modelId", waresCatalog.ModelId)
+            }
+            @if (waresCatalog.IsSelectionByAuto)
+            {
+                @Html.Hidden("wareGroupId", waresCatalog.GroupId)
+                @Html.Hidden("groupId", waresCatalog.Groups.Where(i => i.WareGroupId == waresCatalog.GroupId).Select(i => i.Id).FirstOrDefault())
+                //@Html.Hidden("wareGroupId", waresCatalog.WareGroupId)
+            }
+            @Html.Hidden("all", waresCatalog.ShowAllWares)
+            <div class="filter__section is-opened">
+                @if (Model.ShowPriceFilter)
+                {
+                    <div class="filter__title">@SharedResources.Price <span>/ @SessionHelper.CurrentValute.Code</span></div>
+                }
+                else
+                {
+                    <div class="filter__title">@SharedResources.Presence</div>
+                }
+                <div class="filter__body filter__body--free-space">
+                    @if (Model.ShowPriceFilter)
+                    {
+                        <div class="price-range">
+                            <div class="price-range__values">
+                                <div class="price-range__field">
+                                    <input class="price-range__input" id="priceFrom" name="PriceMin" value="@Model.PriceMin">
+                                </div>
+                                <div class="price-range__separator">-</div>
+                                <div class="price-range__field">
+                                    <input class="price-range__input" id="priceTo" name="PriceMax" value="@Model.PriceMax">
+                                </div>
+                            </div>
+                            <div class="price-range__slider" id="priceRange"></div>
+                        </div>
+                    }
+                    @*@if (ConfigHelper.AllowWareOnlyInPresenceSelection && !UserPreferences.CurrentTrend.OnlyOnStockOff)
+                    {
+                        <div class="filter__option checkbox-label">
+                            <input class="checkbox-label__input" type="checkbox" name="OnlyOnStock" value="true" id="opt-avail" @(Model.OnlyOnStock == true ? "checked" : "") onchange="@(autoSubmit ? "return submitFilter()" : "")">
+                            <label class="checkbox-label__main" for="opt-avail">@SharedResources.OnlyOnStock</label>
+                        </div>
+                    }*@
+                    @*@if (UserPreferences.CurrentTrend.AllowPromotionsMenu)
+                    {
+                        <div class="filter__option checkbox-label">
+                            <input class="checkbox-label__input" type="checkbox" name="OnlySpecials" value="true" id="opt-discount" @(Model.OnlyActions == true ? "checked" : "") onchange="@(autoSubmit ? "return submitFilter()" : "")">
+                            <label class="checkbox-label__main" for="opt-discount">@SharedResources.Specials</label>
+                        </div>
+                        <div class="filter__option checkbox-label">
+                            <input class="checkbox-label__input" type="checkbox" name="OnlySales" value="true" id="opt-sale" @(Model.OnlySales == true ? "checked" : "") onchange="@(autoSubmit ? "return submitFilter()" : "")">
+                            <label class="checkbox-label__main" for="opt-sale">@SharedResources.Sale</label>
+                        </div>
+                    }*@
+                </div>
+            </div>
+            @if (groupSection.Options.Any())
+            {
+                Html.RenderPartial("Components/FilterSelectSection", groupSection);
+            }
+            @if (brandSection.Options.Any())
+            {
+                Html.RenderPartial("Components/FilterSelectSection", brandSection);
+            }
+            @foreach (var section in propertySections)
+            {
+                Html.RenderPartial("Components/FilterSelectSection", section);
+            }
+            <div class="filter__footer">
+                <div class="filter__btns">
+                    @if (!autoSubmit)
+                    {
+                        <a class="filter__btn-reset btn btn--reverse btn--radius" href="" onclick="return submitFilter()">@SharedResources.Apply</a>
+                    }
+                    <a class="filter__btn-accept btn btn--ghost" href="" onclick="return resetFilter()">
+                        <svg class="icon icon-update-arrow filter__btn-icon">
+                            <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#update-arrow")"></use>
+                        </svg>@SharedResources.Reset
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- /filter-->

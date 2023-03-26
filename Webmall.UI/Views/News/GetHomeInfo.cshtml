@@ -1,0 +1,19 @@
+﻿@using ViewRes
+
+@model Webmall.Model.Entities.Cms.NewsData.CatalogNews
+
+@{
+    Layout = null;
+    var i = 0;
+}
+@if (Model != null)
+{
+    <div class="section__body news-section__main" data-news-id="@Model.Id">
+        @foreach (var article in Model.Items)
+        {
+            { i++; }
+            if (i > 3) { break; }
+            Html.RenderPartial("Components/NewsArticle", article);
+        }
+    </div>
+}

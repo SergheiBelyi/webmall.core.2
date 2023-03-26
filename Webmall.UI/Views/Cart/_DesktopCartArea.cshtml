@@ -1,0 +1,572 @@
+﻿@using ViewRes
+@using Webmall.UI.Core
+
+@model Webmall.UI.Models.Cart.CartModel
+@{ var rate = SessionHelper.CurrentValute.Rate; }
+
+<!-- stock-table-->
+<div class="stock-area__table">
+    <div class="stock-table stock-area__table-main js-checked-all scrollbar">
+        <div class="stock-table__header">
+            <div class="stock-table__row">
+                <div class="stock-table__cell text-center">
+                    <div class="stock-table__checkbox checkbox-label">
+                        <input class="checkbox-label__input js-checked-all-trigger" type="checkbox" checked="checked" name="is-opt-0" id="opt-0">
+                        <label class="checkbox-label__main" for="opt-0"></label>
+                    </div>
+                </div>
+                <div class="stock-table__cell">
+                    <div class="stock-table__caption">@SharedResources.AddTime</div>
+                </div>
+                <div class="stock-table__cell">
+                    <div class="stock-table__caption">@SharedResources.PartNumber, @SharedResources.Brand</div>
+                </div>
+                <div class="stock-table__cell">
+                    <div class="stock-table__caption">@SharedResources.Name</div>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <div class="stock-table__caption">@SharedResources.Note</div>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <div class="stock-table__caption">@SharedResources.Presence</div>
+                </div>
+                <div class="stock-table__cell">
+                    <div class="stock-table__caption">@SharedResources.Stock</div>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <div class="stock-table__caption">@SharedResources.DeliveryDate</div>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <div class="stock-table__caption">@SharedResources.ReturnPeriod</div>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <div class="stock-table__caption">@SharedResources.PricePerOne</div>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <div class="stock-table__caption">@SharedResources.Amount</div>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <div class="stock-table__caption">@SharedResources.Sum</div>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <div class="stock-table__caption">&nbsp;</div>
+                </div>
+            </div>
+        </div>
+    <div class="stock-table__main">
+    @foreach (var item in Model.Positions.List)
+    {
+        var wareUrl = item.Url;
+        //var wareUrl =  Url.Action("WareIndex", "Catalog", new { group = Request.QueryString["group"], id = item.WareId, returnUrl = Request.Url });
+        var deliveryRatingClass = (item.DeliveryRating >= 90) ? "is-success" : (item.DeliveryRating >= 50) ? "is-warning" : "is-danger";
+                @*
+                                        <tr class="orders-list__tr">
+                    <td class="orders-list__td text-center">
+                        <a class="orders-list__remove" onclick="return RemoveCartPosition(this, @item.Id)" data-tippy-gray-content="@SharedResources.Delete">
+                            <svg class="icon icon-close orders-list__remove-icon">
+                                <use href=@Url.Content("~/assets/images/svg/symbol/sprite.svg#close")></use>
+                            </svg>
+                        </a>
+                    </td>
+
+                *@
+
+        <div class="stock-table__row">
+            <div class="stock-table__cell text-center">
+                <div class="stock-table__checkbox checkbox-label">
+                    <input class="checkbox-label__input js-checked-all-item" type="checkbox" value="@item.Id" name="selected" id="opt-@item.Id" checked="checked">
+                    <label class="checkbox-label__main" for="opt-@item.Id"></label>
+                </div>
+            </div>
+            <div class="stock-table__cell">
+                <time class="stock-table__date" datetime="@item.CreationDate.ToString("yyyy")">
+                    @item.CreationDate.ToString("dd.MM.yyyy") <span>@item.CreationDate.ToString("HH:mm")</span>
+                </time>
+            </div>
+            <div class="stock-table__cell">
+                <div class="stock-table__meta">
+                    <a class="stock-table__articul" href="@wareUrl">@item.WareNum</a>
+                    <a class="stock-table__brand" href="@wareUrl">@item.ProducerName</a>
+                </div>
+            </div>
+            <div class="stock-table__cell">
+                <div class="stock-table__heading">
+                    <a class="stock-table__heading-link" href="@wareUrl">@item.WareName</a>
+                </div>
+            </div>
+            <div class="stock-table__cell">
+                @if (!string.IsNullOrEmpty(item.Comment))
+                {
+                    <div class="stock-table__comment custom-comment" data-modal-win-trigger="comment-edit" onclick="CartEditPositionComment(@item.Id)">
+                        <div class="custom-comment__badge badge">
+                            <svg class="icon icon-pen badge__icon" width="25" height="25">
+                                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#pen")"></use>
+                            </svg>
+                        </div>
+                        <div class="custom-comment__text" id="comment_@item.Id">@item.Comment</div>
+                    </div>
+                }
+                else
+                {
+                    <div class="stock-table__comment custom-comment" data-modal-win-trigger="comment-add" onclick="CartAddPositionComment(@item.Id, this)">
+                        <svg class="icon icon-comment custom-comment__icon" width="25" height="25">
+                            <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#comment")"></use>
+                        </svg>
+                    </div>
+                }
+
+            </div>
+            <div class="stock-table__cell text-center">
+                <div class="stock-table__text">@item.AvailableQntStr</div>
+            </div>
+            <div class="stock-table__cell">
+                <div class="stock-table__stock">
+                    <div class="stock-table__progress progress-badge @deliveryRatingClass" data-tippy-gray-content="@SharedResources.DeliveryProbability">@item.DeliveryRating%</div>@item.WarehouseName
+                </div>
+            </div>
+            <div class="stock-table__cell text-center">
+                <time class="stock-table__accent" datetime="@(item.DeliveryTerm?.ToString("yyyy"))" data-tippy-gray-content="@SharedResources.TermDays">@item.DeliveryTermAsString</time>
+            </div>
+            <div class="stock-table__cell text-center">
+                @if (item.IsReturnAllowed)
+                {
+                    <div class="stock-table__text">@item.ReturnDays @SharedResources.days</div>
+                }
+                else
+                {
+                    <div class="stock-table__text is-error" data-tippy-gray-content="@SharedResources.NonRefundable">
+                        <svg class="icon icon-close stock-table__text-icon" width="25" height="25">
+                            <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#close")"></use>
+                        </svg>
+                    </div>
+                }
+
+            </div>
+            <div class="stock-table__cell text-center">
+                <div class="stock-table__text" data-tippy-gray-content="@SharedResources.PurchasePriceForOneUnit">@SessionHelper.PriceFormat(item.ClientPrice)</div>
+            </div>
+            <div class="stock-table__cell">
+                <div class="counter stock-table__counter" data-tippy-gray-content="@SharedResources.SaleMultiplisity = @item.SaleQnt">
+                    <button class="counter__btn counter__btn--remove" data-action="remove" type="button">
+                        <svg class="icon icon-minus counter__btn-icon" width="25" height="25">
+                            <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#minus")"></use>
+                        </svg>
+                    </button>
+                    <input id="inp-qnt-@item.Id" class="counter__input input" type="tel" name="quantity" maxlength="3" readonly value="@($"{item.WareQnt:0}")"
+                           onchange="UpdatePosition(this, @(item.Id))" onkeypress="return JumpNext(event, @(item.Id))">
+                    <button class="counter__btn counter__btn--add" data-action="add" type="button">
+                        <svg class="icon icon-plus counter__btn-icon" width="25" height="25">
+                            <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#plus")"></use>
+                        </svg>
+                    </button>
+                    @Html.Hidden($"WareQntOld{item.Id}", $"{item.WareQnt:0}")
+                </div>
+            </div>
+            <div class="stock-table__cell text-center">
+                <strong class="stock-table__text cart-sum" id="position@(item.Id)">@SessionHelper.PriceFormat(new Decimal(Math.Round((double)(item.ClientPrice / rate), 2)) * item.WareQnt)</strong>
+            </div>
+            <div class="stock-table__cell text-center">
+                <a class="stock-table__remove" data-tippy-gray-content="@SharedResources.Delete" onclick="return RemoveCartPosition(this, @item.Id)">
+                    <svg class="icon icon-close stock-table__remove-icon" width="25" height="25">
+                        <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#close")"></use>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    }
+    @*
+            <div class="stock-table__row">
+                <div class="stock-table__cell text-center">
+                    <div class="stock-table__checkbox checkbox-label">
+                        <input class="checkbox-label__input js-checked-all-item" type="checkbox" name="is-opt-2" id="opt-2">
+                        <label class="checkbox-label__main" for="opt-2"></label>
+                    </div>
+                </div>
+                <div class="stock-table__cell">
+                    <time class="stock-table__date" datetime="2022">
+                        12.01.2022 <span>10:32</span>
+                    </time>
+                </div>
+                <div class="stock-table__cell">
+                    <div class="stock-table__meta">
+                        <a class="stock-table__articul" href="#">46576898908</a>
+                        <a class="stock-table__brand" href="#">BOSCH Battery</a>
+                    </div>
+                </div>
+                <div class="stock-table__cell">
+                    <div class="stock-table__heading">
+                        <a class="stock-table__heading-link" href="#">**АКБ Bosch S4 12V 52Ah 470EN 207x175x190 -/+</a>
+                    </div>
+                </div>
+                <div class="stock-table__cell">
+                    <div class="stock-table__comment custom-comment" data-modal-win-trigger="comment-edit">
+                        <div class="custom-comment__badge badge">
+                            <svg class="icon icon-pen badge__icon" width="25" height="25">
+                                <use href="assets/images/svg/symbol/sprite.svg#pen"></use>
+                            </svg>
+                        </div>
+                        <div class="custom-comment__text">Текст примечания, для демо</div>
+                    </div>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <div class="stock-table__text">100 &gt;</div>
+                </div>
+                <div class="stock-table__cell">
+                    <div class="stock-table__stock">
+                        <div class="stock-table__progress progress-badge is-warning" data-tippy-gray-content="Вероятность поставки">82%</div>Борисов
+                    </div>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <time class="stock-table__accent" datetime="2022" data-tippy-gray-content="Срок поставки">05.02.2022</time>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <div class="stock-table__text is-error" data-tippy-gray-content="Не подлежит возврату">
+                        <svg class="icon icon-close stock-table__text-icon" width="25" height="25">
+                            <use href="assets/images/svg/symbol/sprite.svg#close"></use>
+                        </svg>
+                    </div>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <div class="stock-table__text" data-tippy-gray-content="Цена покупки за 1 ед.">1 340, 70</div>
+                </div>
+                <div class="stock-table__cell">
+                    <div class="counter stock-table__counter" data-tippy-gray-content="Кратность = 2">
+                        <button class="counter__btn counter__btn--remove" data-action="remove" type="button">
+                            <svg class="icon icon-minus counter__btn-icon" width="25" height="25">
+                                <use href="assets/images/svg/symbol/sprite.svg#minus"></use>
+                            </svg>
+                        </button>
+                        <input class="counter__input input" type="tel" name="quantity" maxlength="3" readonly value="1">
+                        <button class="counter__btn counter__btn--add" data-action="add" type="button">
+                            <svg class="icon icon-plus counter__btn-icon" width="25" height="25">
+                                <use href="assets/images/svg/symbol/sprite.svg#plus"></use>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <strong class="stock-table__text">1 340, 70</strong>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <a class="stock-table__remove" data-tippy-gray-content="Удалить">
+                        <svg class="icon icon-close stock-table__remove-icon" width="25" height="25">
+                            <use href="assets/images/svg/symbol/sprite.svg#close"></use>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="stock-table__row">
+                <div class="stock-table__cell text-center">
+                    <div class="stock-table__checkbox checkbox-label">
+                        <input class="checkbox-label__input js-checked-all-item" type="checkbox" name="is-opt-3" id="opt-3">
+                        <label class="checkbox-label__main" for="opt-3"></label>
+                    </div>
+                </div>
+                <div class="stock-table__cell">
+                    <time class="stock-table__date" datetime="2022">
+                        12.01.2022 <span>10:32</span>
+                    </time>
+                </div>
+                <div class="stock-table__cell">
+                    <div class="stock-table__meta">
+                        <a class="stock-table__articul" href="#">46576898908</a>
+                        <a class="stock-table__brand" href="#">BOSCH Battery</a>
+                    </div>
+                </div>
+                <div class="stock-table__cell">
+                    <div class="stock-table__heading">
+                        <a class="stock-table__heading-link" href="#">**АКБ Bosch S4 12V 52Ah 470EN 207x175x190 -/+</a>
+                    </div>
+                </div>
+                <div class="stock-table__cell">
+                    <div class="stock-table__comment custom-comment" data-modal-win-trigger="comment-add">
+                        <svg class="icon icon-comment custom-comment__icon" width="25" height="25">
+                            <use href="assets/images/svg/symbol/sprite.svg#comment"></use>
+                        </svg>
+                    </div>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <div class="stock-table__text">100 &gt;</div>
+                </div>
+                <div class="stock-table__cell">
+                    <div class="stock-table__stock">
+                        <div class="stock-table__progress progress-badge is-danger" data-tippy-gray-content="Вероятность поставки">23%</div>Гомель
+                    </div>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <time class="stock-table__accent" datetime="2022" data-tippy-gray-content="Срок поставки">05.02.2022</time>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <div class="stock-table__text">10 дней</div>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <div class="stock-table__text" data-tippy-gray-content="Цена покупки за 1 ед.">1 340, 70</div>
+                </div>
+                <div class="stock-table__cell">
+                    <div class="counter stock-table__counter" data-tippy-gray-content="Кратность = 2">
+                        <button class="counter__btn counter__btn--remove" data-action="remove" type="button">
+                            <svg class="icon icon-minus counter__btn-icon" width="25" height="25">
+                                <use href="assets/images/svg/symbol/sprite.svg#minus"></use>
+                            </svg>
+                        </button>
+                        <input class="counter__input input" type="tel" name="quantity" maxlength="3" readonly value="1">
+                        <button class="counter__btn counter__btn--add" data-action="add" type="button">
+                            <svg class="icon icon-plus counter__btn-icon" width="25" height="25">
+                                <use href="assets/images/svg/symbol/sprite.svg#plus"></use>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <strong class="stock-table__text">1 340, 70</strong>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <a class="stock-table__remove" data-tippy-gray-content="Удалить">
+                        <svg class="icon icon-close stock-table__remove-icon" width="25" height="25">
+                            <use href="assets/images/svg/symbol/sprite.svg#close"></use>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="stock-table__row">
+                <div class="stock-table__cell text-center">
+                    <div class="stock-table__checkbox checkbox-label">
+                        <input class="checkbox-label__input js-checked-all-item" type="checkbox" name="is-opt-4" id="opt-4">
+                        <label class="checkbox-label__main" for="opt-4"></label>
+                    </div>
+                </div>
+                <div class="stock-table__cell">
+                    <time class="stock-table__date" datetime="2022">
+                        12.01.2022 <span>10:32</span>
+                    </time>
+                </div>
+                <div class="stock-table__cell">
+                    <div class="stock-table__meta">
+                        <a class="stock-table__articul" href="#">46576898908</a>
+                        <a class="stock-table__brand" href="#">BOSCH Battery</a>
+                    </div>
+                </div>
+                <div class="stock-table__cell">
+                    <div class="stock-table__heading">
+                        <a class="stock-table__heading-link" href="#">**АКБ Bosch S4 12V 52Ah 470EN 207x175x190 -/+</a>
+                    </div>
+                </div>
+                <div class="stock-table__cell">
+                    <div class="stock-table__comment custom-comment" data-modal-win-trigger="comment-add">
+                        <svg class="icon icon-comment custom-comment__icon" width="25" height="25">
+                            <use href="assets/images/svg/symbol/sprite.svg#comment"></use>
+                        </svg>
+                    </div>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <div class="stock-table__text">100 &gt;</div>
+                </div>
+                <div class="stock-table__cell">
+                    <div class="stock-table__stock">
+                        <div class="stock-table__progress progress-badge is-success" data-tippy-gray-content="Вероятность поставки">91%</div>Гомель
+                    </div>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <time class="stock-table__accent" datetime="2022" data-tippy-gray-content="Срок поставки">05.02.2022</time>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <div class="stock-table__text">10 дней</div>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <div class="stock-table__text" data-tippy-gray-content="Цена покупки за 1 ед.">1 340, 70</div>
+                </div>
+                <div class="stock-table__cell">
+                    <div class="counter stock-table__counter" data-tippy-gray-content="Кратность = 2">
+                        <button class="counter__btn counter__btn--remove" data-action="remove" type="button">
+                            <svg class="icon icon-minus counter__btn-icon" width="25" height="25">
+                                <use href="assets/images/svg/symbol/sprite.svg#minus"></use>
+                            </svg>
+                        </button>
+                        <input class="counter__input input" type="tel" name="quantity" maxlength="3" readonly value="1">
+                        <button class="counter__btn counter__btn--add" data-action="add" type="button">
+                            <svg class="icon icon-plus counter__btn-icon" width="25" height="25">
+                                <use href="assets/images/svg/symbol/sprite.svg#plus"></use>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <strong class="stock-table__text">1 340, 70</strong>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <a class="stock-table__remove" data-tippy-gray-content="Удалить">
+                        <svg class="icon icon-close stock-table__remove-icon" width="25" height="25">
+                            <use href="assets/images/svg/symbol/sprite.svg#close"></use>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="stock-table__row">
+                <div class="stock-table__cell text-center">
+                    <div class="stock-table__checkbox checkbox-label">
+                        <input class="checkbox-label__input js-checked-all-item" type="checkbox" name="is-opt-5" id="opt-5">
+                        <label class="checkbox-label__main" for="opt-5"></label>
+                    </div>
+                </div>
+                <div class="stock-table__cell">
+                    <time class="stock-table__date" datetime="2022">
+                        12.01.2022 <span>10:32</span>
+                    </time>
+                </div>
+                <div class="stock-table__cell">
+                    <div class="stock-table__meta">
+                        <a class="stock-table__articul" href="#">46576898908</a>
+                        <a class="stock-table__brand" href="#">BOSCH Battery</a>
+                    </div>
+                </div>
+                <div class="stock-table__cell">
+                    <div class="stock-table__heading">
+                        <a class="stock-table__heading-link" href="#">**АКБ Bosch S4 12V 52Ah 470EN 207x175x190 -/+</a>
+                    </div>
+                </div>
+                <div class="stock-table__cell">
+                    <div class="stock-table__comment custom-comment" data-modal-win-trigger="comment-edit">
+                        <div class="custom-comment__badge badge">
+                            <svg class="icon icon-pen badge__icon" width="25" height="25">
+                                <use href="assets/images/svg/symbol/sprite.svg#pen"></use>
+                            </svg>
+                        </div>
+                        <div class="custom-comment__text">Текст примечания, для демо</div>
+                    </div>
+                </div>
+                <div class="stock-table__cell text-center is-danger">
+                    <div class="stock-table__text">100 &gt;</div>
+                </div>
+                <div class="stock-table__cell">
+                    <div class="stock-table__stock">
+                        <div class="stock-table__progress progress-badge is-warning" data-tippy-gray-content="Вероятность поставки">82%</div>Борисов
+                    </div>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <time class="stock-table__accent" datetime="2022" data-tippy-gray-content="Срок поставки">05.02.2022</time>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <div class="stock-table__text is-error" data-tippy-gray-content="Не подлежит возврату">
+                        <svg class="icon icon-close stock-table__text-icon" width="25" height="25">
+                            <use href="assets/images/svg/symbol/sprite.svg#close"></use>
+                        </svg>
+                    </div>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <div class="stock-table__text" data-tippy-gray-content="Цена покупки за 1 ед.">1 340, 70</div>
+                </div>
+                <div class="stock-table__cell">
+                    <div class="counter stock-table__counter" data-tippy-gray-content="Кратность = 2">
+                        <button class="counter__btn counter__btn--remove" data-action="remove" type="button">
+                            <svg class="icon icon-minus counter__btn-icon" width="25" height="25">
+                                <use href="assets/images/svg/symbol/sprite.svg#minus"></use>
+                            </svg>
+                        </button>
+                        <input class="counter__input input" type="tel" name="quantity" maxlength="3" readonly value="1">
+                        <button class="counter__btn counter__btn--add" data-action="add" type="button">
+                            <svg class="icon icon-plus counter__btn-icon" width="25" height="25">
+                                <use href="assets/images/svg/symbol/sprite.svg#plus"></use>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <strong class="stock-table__text">1 340, 70</strong>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <a class="stock-table__remove" data-tippy-gray-content="Удалить">
+                        <svg class="icon icon-close stock-table__remove-icon" width="25" height="25">
+                            <use href="assets/images/svg/symbol/sprite.svg#close"></use>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="stock-table__row is-danger">
+                <div class="stock-table__cell text-center">
+                    <div class="stock-table__checkbox checkbox-label">
+                        <input class="checkbox-label__input js-checked-all-item" type="checkbox" name="is-opt-6" id="opt-6">
+                        <label class="checkbox-label__main" for="opt-6"></label>
+                    </div>
+                </div>
+                <div class="stock-table__cell">
+                    <time class="stock-table__date" datetime="2022">
+                        12.01.2022 <span>10:32</span>
+                    </time>
+                </div>
+                <div class="stock-table__cell">
+                    <div class="stock-table__meta">
+                        <a class="stock-table__articul" href="#">46576898908</a>
+                        <a class="stock-table__brand" href="#">BOSCH Battery</a>
+                    </div>
+                </div>
+                <div class="stock-table__cell">
+                    <div class="stock-table__heading">
+                        <a class="stock-table__heading-link" href="#">**АКБ Bosch S4 12V 52Ah 470EN 207x175x190 -/+</a>
+                    </div>
+                </div>
+                <div class="stock-table__cell">
+                    <div class="stock-table__comment custom-comment" data-modal-win-trigger="comment-add">
+                        <svg class="icon icon-comment custom-comment__icon" width="25" height="25">
+                            <use href="assets/images/svg/symbol/sprite.svg#comment"></use>
+                        </svg>
+                    </div>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <div class="stock-table__text">100 &gt;</div>
+                </div>
+                <div class="stock-table__cell">
+                    <div class="stock-table__stock">
+                        <div class="stock-table__progress progress-badge is-danger" data-tippy-gray-content="Вероятность поставки">23%</div>Гомель
+                    </div>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <time class="stock-table__accent" datetime="2022" data-tippy-gray-content="Срок поставки">05.02.2022</time>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <div class="stock-table__text">10 дней</div>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <div class="stock-table__text" data-tippy-gray-content="Цена покупки за 1 ед.">1 340, 70</div>
+                </div>
+                <div class="stock-table__cell">
+                    <div class="counter stock-table__counter" data-tippy-gray-content="Кратность = 2">
+                        <button class="counter__btn counter__btn--remove" data-action="remove" type="button">
+                            <svg class="icon icon-minus counter__btn-icon" width="25" height="25">
+                                <use href="assets/images/svg/symbol/sprite.svg#minus"></use>
+                            </svg>
+                        </button>
+                        <input class="counter__input input" type="tel" name="quantity" maxlength="3" readonly value="1">
+                        <button class="counter__btn counter__btn--add" data-action="add" type="button">
+                            <svg class="icon icon-plus counter__btn-icon" width="25" height="25">
+                                <use href="assets/images/svg/symbol/sprite.svg#plus"></use>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <strong class="stock-table__text">1 340, 70</strong>
+                </div>
+                <div class="stock-table__cell text-center">
+                    <a class="stock-table__remove" data-tippy-gray-content="Удалить">
+                        <svg class="icon icon-close stock-table__remove-icon" width="25" height="25">
+                            <use href="assets/images/svg/symbol/sprite.svg#close"></use>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            *@
+    </div>
+    <div class="stock-table__bottom">
+            <div class="stock-table__row">
+                <div class="stock-table__summary">
+                    @*<div class="stock-table__summary-info">
+                            @SharedResources.MinimumDeliveryAmount: <strong>3 343 р.</strong>
+                        </div>*@
+                    <div class="stock-table__summary-total">
+                        @SharedResources.Quantity: <strong id="totalQnt"></strong> <strong>@SharedResources.Things.</strong> / @SharedResources.TotalSelectedSum:<strong> <span id="totalSelectedSum"></span> <span>@Model.ValuteName</span></strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- /stock-table-->

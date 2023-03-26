@@ -1,0 +1,1522 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="metadata">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" />
+							</xsd:sequence>
+							<xsd:attribute name="name" use="required" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="assembly">
+						<xsd:complexType>
+							<xsd:attribute name="alias" type="xsd:string" />
+							<xsd:attribute name="name" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="latin_only" xml:space="preserve">
+    <value>(în grafie latină)</value>
+  </data>
+	<data name="ActiveOrdersFilter" xml:space="preserve">
+    <value>[Toate comenzile active]</value>
+  </data>
+	<data name="PrevNews" xml:space="preserve">
+    <value>&lt;&lt;Noutatea precedentă</value>
+  </data>
+	<data name="TC_T3_2" xml:space="preserve">
+    <value>&lt;b&gt; Atenţie! &lt;/ b&gt;! Montarea jantelor prea înguste sau prea late va duce la deformarea anvelopei, deteriorarea performanţelor ei, precum şi la uzarea prematură a acesteia.</value>
+  </data>
+	<data name="CashPayment" xml:space="preserve">
+    <value>Achitare în numerar</value>
+  </data>
+	<data name="CashPaymentComment" xml:space="preserve">
+    <value>Achitarea comenzii în numerar direct curierului sau la casă</value>
+  </data>
+	<data name="VisaPayment" xml:space="preserve">
+    <value>Achitarea prin cardul Visa</value>
+  </data>
+	<data name="active" xml:space="preserve">
+    <value>active</value>
+  </data>
+	<data name="ComparisionAct" xml:space="preserve">
+    <value>Actul de reconciliere</value>
+  </data>
+	<data name="Add" xml:space="preserve">
+    <value>Adaugă</value>
+  </data>
+	<data name="DeliveryTableComment" xml:space="preserve">
+    <value>Adaugă comanda la una din existente livrări</value>
+  </data>
+	<data name="AddToOrder" xml:space="preserve">
+    <value>Adaugă în comandă</value>
+  </data>
+	<data name="AddWareFromCart" xml:space="preserve">
+    <value>Adaugă marfa din cos</value>
+  </data>
+	<data name="AddNewDeliveryAddress" xml:space="preserve">
+    <value>Adaugă o nouă adresă de livrare</value>
+  </data>
+	<data name="ShippingAddress" xml:space="preserve">
+    <value>Adresa eliberării mărfii</value>
+  </data>
+	<data name="ReplyAddress" xml:space="preserve">
+    <value>Adresa inversă</value>
+  </data>
+	<data name="DeliveryAddress" xml:space="preserve">
+    <value>Adresa livrării</value>
+  </data>
+	<data name="NewDeliveryAddress" xml:space="preserve">
+    <value>Adresa nouă de livrare</value>
+  </data>
+	<data name="DeliveryAddresses" xml:space="preserve">
+    <value>Adresele livrărilor</value>
+  </data>
+	<data name="ShowPrices" xml:space="preserve">
+    <value>Afişarea preţurilor</value>
+  </data>
+	<data name="Select" xml:space="preserve">
+    <value>Alege</value>
+  </data>
+	<data name="AddNewDelivery" xml:space="preserve">
+    <value>Alege o nouă livrare</value>
+  </data>
+	<data name="SelectModel" xml:space="preserve">
+    <value>alegeți un model</value>
+  </data>
+	<data name="SelectionByAuto" xml:space="preserve">
+    <value>Alegerea conform automobilului</value>
+  </data>
+	<data name="YearOfProduce" xml:space="preserve">
+    <value>Anul producerii</value>
+  </data>
+	<data name="Cancel" xml:space="preserve">
+    <value>Anulare</value>
+  </data>
+	<data name="Apartment" xml:space="preserve">
+    <value>Apartament</value>
+  </data>
+	<data name="ApplyFilter" xml:space="preserve">
+    <value>Aplică filtru</value>
+  </data>
+	<data name="Approve" xml:space="preserve">
+    <value>Aprobă</value>
+  </data>
+	<data name="Show" xml:space="preserve">
+    <value>Arată</value>
+  </data>
+	<data name="ShowImages" xml:space="preserve">
+    <value>Arată imagini</value>
+  </data>
+	<data name="ascending" xml:space="preserve">
+    <value>ascendent</value>
+  </data>
+	<data name="Attention" xml:space="preserve">
+    <value>Atenție</value>
+  </data>
+	<data name="WaitingToApprove" xml:space="preserve">
+    <value>Așteptarea aprobării</value>
+  </data>
+	<data name="Warning" xml:space="preserve">
+    <value>Avertisment</value>
+  </data>
+	<data name="WheelFormula" xml:space="preserve">
+    <value>Axa</value>
+  </data>
+	<data name="Block" xml:space="preserve">
+    <value>blocarea</value>
+  </data>
+	<data name="IsBlocked" xml:space="preserve">
+    <value>Blocat</value>
+  </data>
+	<data name="Brand" xml:space="preserve">
+    <value>Producatorul</value>
+  </data>
+	<data name="PersonalCabinet" xml:space="preserve">
+    <value>Cabinetul personal</value>
+  </data>
+	<data name="Calculate" xml:space="preserve">
+    <value>Calculează</value>
+  </data>
+	<data name="_amount" xml:space="preserve">
+    <value>cantitatea</value>
+  </data>
+	<data name="MultComment" xml:space="preserve">
+    <value>Cantitatea de mărfuri trebuie să corespundă multiplicității vînzărilor</value>
+  </data>
+	<data name="PackQnt" xml:space="preserve">
+    <value>Cantitatea în ambalaj</value>
+  </data>
+	<data name="Amount" xml:space="preserve">
+    <value>Cant-tea</value>
+  </data>
+	<data name="AutoModification" xml:space="preserve">
+    <value>Capacitate motorului</value>
+  </data>
+	<data name="House" xml:space="preserve">
+    <value>Casa</value>
+  </data>
+	<data name="Catalizator" xml:space="preserve">
+    <value>Catalizator</value>
+  </data>
+	<data name="ProdusersCatalogs" xml:space="preserve">
+    <value>Catalogul producătorilor</value>
+  </data>
+	<data name="Search" xml:space="preserve">
+    <value>Căutare</value>
+  </data>
+	<data name="NewRequest" xml:space="preserve">
+    <value>Cerere nouă</value>
+  </data>
+	<data name="NewRequestByAuto" xml:space="preserve">
+    <value>Cerere nouă după autovehicul</value>
+  </data>
+	<data name="KeyUser" xml:space="preserve">
+    <value>Cheie</value>
+  </data>
+	<data name="Client" xml:space="preserve">
+    <value>Client</value>
+  </data>
+	<data name="Clients" xml:space="preserve">
+    <value>Clienţi</value>
+  </data>
+	<data name="Code" xml:space="preserve">
+    <value>Cod</value>
+  </data>
+	<data name="ClientCode" xml:space="preserve">
+    <value>Codul fiscal clientului</value>
+  </data>
+	<data name="Order" xml:space="preserve">
+    <value>Comanda</value>
+  </data>
+	<data name="OrderMadeBy" xml:space="preserve">
+    <value>Comanda a fost întocmită de</value>
+  </data>
+	<data name="OrderPreviewComment" xml:space="preserve">
+    <value>Comanda dvs. a fost divizată în mod automat în mai multe subcomenzi, în funcţie de timpul cînd produsele vor fi disponibile. Dacă doriţi să le combinați într-o singură comandă, bifaţi căsuţa "Combină într-o comandă." În caz contrar, făcînd clic pe "Confirm comanda", veți trece la perfectarea comenzii numărul 1. Pentru celelalte comenzi vor fi întocmite ciorne în secțiunea ”Comenzi”. Ele vor trebui perfectate separat.</value>
+  </data>
+	<data name="OrderIsAvailable" xml:space="preserve">
+    <value>Comanda e disponibilă</value>
+  </data>
+	<data name="OrderIsAvailableForShipment" xml:space="preserve">
+    <value>Comanda poate fi transportată cu mijloace proprii de la</value>
+  </data>
+	<data name="Comment" xml:space="preserve">
+    <value>Comentariu</value>
+  </data>
+	<data name="Orders" xml:space="preserve">
+    <value>Comenzi</value>
+  </data>
+	<data name="Reconciliate" xml:space="preserve">
+    <value>Reconciliere</value>
+  </data>
+	<data name="TC_Difference" xml:space="preserve">
+    <value>Comparare</value>
+  </data>
+	<data name="PaymentConditions" xml:space="preserve">
+    <value>Amânarea, zile</value>
+  </data>
+	<data name="SubmitOrder" xml:space="preserve">
+    <value>Confirmă ordinul</value>
+  </data>
+	<data name="Confirmation" xml:space="preserve">
+    <value>Confirmare</value>
+  </data>
+	<data name="TitleSkype" xml:space="preserve">
+    <value>Contactează prin Skype</value>
+  </data>
+	<data name="Next" xml:space="preserve">
+    <value>Continuă</value>
+  </data>
+	<data name="Agreement" xml:space="preserve">
+    <value>Contract</value>
+  </data>
+	<data name="Cart" xml:space="preserve">
+    <value>Coş</value>
+  </data>
+	<data name="TC_T1_1" xml:space="preserve">
+    <value>Cu ajutorul calculatorului pentru dimensiunile anvelopelor puteţi calcula cu uşurinţă cum se schimbă: 
+dimensiunile externe ale roţilor, distanţa minimă de la sol, indicaţiile vitezometrului şi alte
+caracteristici, la instalarea anvelopelor cu tipodimensiuni diferite la vehiculul dvs. Toate dimensiunile anvelopelor calculatorul le evaluează în milimetri, iar viteza vehiculului – în km/h. Puteţi calcula, de asemenea, lăţimea necesară a jantei pentru o dimensiune anumită a anvelopei.</value>
+  </data>
+	<data name="WithResponce" xml:space="preserve">
+    <value>Cu răspuns</value>
+  </data>
+	<data name="Yes" xml:space="preserve">
+    <value>Da</value>
+  </data>
+	<data name="Date" xml:space="preserve">
+    <value>Data</value>
+  </data>
+	<data name="WantedDeliveryDate" xml:space="preserve">
+    <value>Data dorită a livrării</value>
+  </data>
+	<data name="ProduceEndDateFull" xml:space="preserve">
+    <value>Data finisării producerii</value>
+  </data>
+	<data name="ProduceStartDateFull" xml:space="preserve">
+    <value>Data începutului producerii</value>
+  </data>
+	<data name="RegistrationDate" xml:space="preserve">
+    <value>Data înregistrării</value>
+  </data>
+	<data name="OrderDate" xml:space="preserve">
+    <value>Data perfectării comenzii</value>
+  </data>
+	<data name="RequestDate" xml:space="preserve">
+    <value>Data solicitării</value>
+  </data>
+	<data name="PersonalData" xml:space="preserve">
+    <value>Datele personale</value>
+  </data>
+	<data name="debt" xml:space="preserve">
+    <value>datorie</value>
+  </data>
+	<data name="Name" xml:space="preserve">
+    <value>Denumire</value>
+  </data>
+	<data name="WareName" xml:space="preserve">
+    <value>Denumirea mărfii</value>
+  </data>
+	<data name="Stock" xml:space="preserve">
+    <value>Depozit</value>
+  </data>
+	<data name="ShippingStock" xml:space="preserve">
+    <value>Depozitul eliberării mărfii</value>
+  </data>
+	<data name="Download" xml:space="preserve">
+    <value>Descarcă</value>
+  </data>
+	<data name="descending" xml:space="preserve">
+    <value>descendent</value>
+  </data>
+	<data name="Description" xml:space="preserve">
+    <value>Descriere</value>
+  </data>
+	<data name="Expand" xml:space="preserve">
+    <value>Desfăşoară</value>
+  </data>
+	<data name="Ordering" xml:space="preserve">
+    <value>detalii</value>
+  </data>
+	<data name="BlockingSendOrderResumeErrorMessage" xml:space="preserve">
+    <value>Dezabonarea de la expedierea de informaţii despre comenzile efectuate a eșuat. Accesaţi secţiunea "{0}" a cabinetului personal.</value>
+  </data>
+	<data name="TC_ExternalD" xml:space="preserve">
+    <value>Diametrul extern, mm (D)</value>
+  </data>
+	<data name="TC_InnerD" xml:space="preserve">
+    <value>Diametrul intern, mm (C)</value>
+  </data>
+	<data name="TC_DiscD" xml:space="preserve">
+    <value>Diametrul jantei, inch</value>
+  </data>
+	<data name="TC_DiscWMax" xml:space="preserve">
+    <value>Diametrul maxim al jantei, inch</value>
+  </data>
+	<data name="TC_DiscWMin" xml:space="preserve">
+    <value>Diametrul minim al jantei, inch</value>
+  </data>
+	<data name="TC_SpeedDifference" xml:space="preserve">
+    <value>Diferenţa (km/h)</value>
+  </data>
+	<data name="from" xml:space="preserve">
+    <value>din</value>
+  </data>
+	<data name="VINWatermark" xml:space="preserve">
+    <value>din pașaportul tehnic</value>
+  </data>
+	<data name="Presence" xml:space="preserve">
+    <value>Disponibilitate</value>
+  </data>
+	<data name="Availability" xml:space="preserve">
+    <value>Disponibilitate</value>
+  </data>
+	<data name="OnlyOnStock" xml:space="preserve">
+    <value>Doar cele din stoc</value>
+  </data>
+	<data name="byProperties" xml:space="preserve">
+    <value>după proprietăţi</value>
+  </data>
+	<data name="Edit" xml:space="preserve">
+    <value>Editează</value>
+  </data>
+	<data name="Delete" xml:space="preserve">
+    <value>Elimină</value>
+  </data>
+	<data name="DeleteWare" xml:space="preserve">
+    <value>Elimină marfa</value>
+  </data>
+	<data name="DeleteSelectedPositions" xml:space="preserve">
+    <value>Elimina poziţiile evidenţiate?</value>
+  </data>
+	<data name="EmailAsLogin" xml:space="preserve">
+    <value>Email (se utilizează ca login)</value>
+  </data>
+	<data name="EmailPhone" xml:space="preserve">
+    <value>Email, telefon</value>
+  </data>
+	<data name="RequestError" xml:space="preserve">
+    <value>Eroare de solicitare</value>
+  </data>
+	<data name="AddToCartErrorMessage" xml:space="preserve">
+    <value>Eroare la adăugarea produsului în coș</value>
+  </data>
+	<data name="NeedTaxInvoice" xml:space="preserve">
+    <value>Este necesară factura fiscală</value>
+  </data>
+	<data name="GetExcelInvoice" xml:space="preserve">
+    <value>Factură de plată (în Excel)</value>
+  </data>
+	<data name="GetPDFInvoice" xml:space="preserve">
+    <value>Factură de plată (în PDF)</value>
+  </data>
+	<data name="Cashless" xml:space="preserve">
+    <value>Fără numerar</value>
+  </data>
+	<data name="WithoutResponce" xml:space="preserve">
+    <value>Fără răspuns</value>
+  </data>
+	<data name="FIO" xml:space="preserve">
+    <value>FNP</value>
+  </data>
+	<data name="PaymentForm" xml:space="preserve">
+    <value>Forma achitării</value>
+  </data>
+	<data name="MakeOrder" xml:space="preserve">
+    <value>Formează comanda</value>
+  </data>
+	<data name="ClientManagementTitle" xml:space="preserve">
+    <value>Gestionarea clienţilor</value>
+  </data>
+	<data name="SiteManagement" xml:space="preserve">
+    <value>Gestionarea site-ului</value>
+  </data>
+	<data name="UsersManagement" xml:space="preserve">
+    <value>Gestionarea utilizatorilor</value>
+  </data>
+	<data name="InCart" xml:space="preserve">
+    <value>În coş</value>
+  </data>
+	<data name="TC_T2_2" xml:space="preserve">
+    <value>În partea de jos a tabelului vor fi indicate rezultatele calculelor.</value>
+  </data>
+	<data name="NotAvailable" xml:space="preserve">
+    <value>Inaccesibil</value>
+  </data>
+	<data name="WareHeight" xml:space="preserve">
+    <value>Inălţimea mărfii, mm</value>
+  </data>
+	<data name="TC_T1_2" xml:space="preserve">
+    <value>Înălţimea profilului unei anvelope (în figură indicată prin litera "B") este calculată reieşind din mărimea profilului anvelopei şi lăţimea anvelopei (în tipodimensiune, profilul anvelopei este prezentat de cifra a doua, indicat în procente din lăţimea anvelopei).</value>
+  </data>
+	<data name="TC_Profile" xml:space="preserve">
+    <value>Înălţimea profilului, mm (B)</value>
+  </data>
+	<data name="Previous" xml:space="preserve">
+    <value>Înapoi</value>
+  </data>
+	<data name="Close" xml:space="preserve">
+    <value>Închide</value>
+  </data>
+	<data name="TC_SpeedometerValue" xml:space="preserve">
+    <value>Indicaţiile vitezometrului (km/h)</value>
+  </data>
+	<data name="Information" xml:space="preserve">
+    <value>Informaţia</value>
+  </data>
+	<data name="SummaryFooter" xml:space="preserve">
+    <value>Informaţii privind starea comenzii dvs. puteți obține pe pagina "Contul meu", în fila ”Comenzi". &lt;br /&gt; Un text în forma dată a fost trimis la adresa dvs. de e-mail, indicată la înregistrare.</value>
+  </data>
+	<data name="Registration" xml:space="preserve">
+    <value>Înregistrarea</value>
+  </data>
+	<data name="ReturnWareToCart" xml:space="preserve">
+    <value>Întoarce marfa în coş</value>
+  </data>
+	<data name="ReturnToRequests" xml:space="preserve">
+    <value>Întoarcerea la cereri</value>
+  </data>
+	<data name="Enter" xml:space="preserve">
+    <value>Intrare</value>
+  </data>
+	<data name="AskManager" xml:space="preserve">
+    <value>Intreabă managerul</value>
+  </data>
+	<data name="Question" xml:space="preserve">
+    <value>Întrebarea</value>
+  </data>
+	<data name="TC_T2_1" xml:space="preserve">
+    <value>Introduceţi mai întîi tipodimensiunea anvelopelor instalate la automobilul dvs., apoi pe cea care doriţi să o instalaţi şi faceţi clic pe "Calculează".</value>
+  </data>
+	<data name="TC_H1" xml:space="preserve">
+    <value>La ce trebuie un calculator pentru dimensiunile anvelopelor:</value>
+  </data>
+	<data name="OnStock" xml:space="preserve">
+    <value>La depozit</value>
+  </data>
+	<data name="InvoicePaymentComment" xml:space="preserve">
+    <value>La achitare prin transfer, banii urmează a fi restribuiti în contul magazinului. Factura de plată poate fi obţinută după alegerea livrării.</value>
+  </data>
+	<data name="PackWidth" xml:space="preserve">
+    <value>Lăţimea ambalajului, mm</value>
+  </data>
+	<data name="TC_Width" xml:space="preserve">
+    <value>Lăţimea anvelopei, mm (A)</value>
+  </data>
+	<data name="WareWidth" xml:space="preserve">
+    <value>Lăţimea mărfii, mm</value>
+  </data>
+	<data name="Limit" xml:space="preserve">
+    <value>Limita</value>
+  </data>
+	<data name="ToOrderList" xml:space="preserve">
+    <value>Lista comenzilor</value>
+  </data>
+	<data name="NeedPartList" xml:space="preserve">
+    <value>Lista pieselor necesare</value>
+  </data>
+	<data name="_delivery" xml:space="preserve">
+    <value>livrare</value>
+  </data>
+	<data name="Delivery" xml:space="preserve">
+    <value>Livrare</value>
+  </data>
+	<data name="SelfDelivery" xml:space="preserve">
+    <value>Livrare de sine</value>
+  </data>
+	<data name="Login" xml:space="preserve">
+    <value>Loghin</value>
+  </data>
+	<data name="PackLength" xml:space="preserve">
+    <value>Lungimea ambalajului, mm</value>
+  </data>
+	<data name="WareLength" xml:space="preserve">
+    <value>Lungimea mărfii, mm</value>
+  </data>
+	<data name="AutoMarka" xml:space="preserve">
+    <value>Marca autovehicului</value>
+  </data>
+	<data name="ware" xml:space="preserve">
+    <value>marfa</value>
+  </data>
+	<data name="WareWasAddedToCart" xml:space="preserve">
+    <value>Marfa a fost adăugată în coş</value>
+  </data>
+	<data name="WareFromWareHouse" xml:space="preserve">
+    <value>Marfă la depozit</value>
+  </data>
+	<data name="TC_NewMeasures" xml:space="preserve">
+    <value>Mărimea nouă:</value>
+  </data>
+	<data name="TC_OldMeasures" xml:space="preserve">
+    <value>Mărimea veche:</value>
+  </data>
+	<data name="TC_Measures" xml:space="preserve">
+    <value>Mărimi</value>
+  </data>
+	<data name="PackWeight" xml:space="preserve">
+    <value>Masa brutto, kg</value>
+  </data>
+	<data name="WareGrossWeight" xml:space="preserve">
+    <value>Masa brutto, kg</value>
+  </data>
+	<data name="ModelOfCar" xml:space="preserve">
+    <value>Model de masina</value>
+  </data>
+	<data name="AutoModel" xml:space="preserve">
+    <value>Modelul autovehicului</value>
+  </data>
+	<data name="TC_Clearance" xml:space="preserve">
+    <value>Modificarea distanţei minime de la sol (mm)</value>
+  </data>
+	<data name="Engine" xml:space="preserve">
+    <value>Motor</value>
+  </data>
+	<data name="SaleMultiplisity" xml:space="preserve">
+    <value>Multiplicitatea vînzării</value>
+  </data>
+	<data name="TC_New" xml:space="preserve">
+    <value>Nou</value>
+  </data>
+	<data name="News" xml:space="preserve">
+    <value>Noutăți</value>
+  </data>
+	<data name="NextNews" xml:space="preserve">
+    <value>Noutatea următoare&gt;&gt;</value>
+  </data>
+	<data name="No" xml:space="preserve">
+    <value>Nu</value>
+  </data>
+	<data name="NothingChecked" xml:space="preserve">
+    <value>Nu aţi selectat nici o pozitie</value>
+  </data>
+	<data name="NotAvailableDeliveries" xml:space="preserve">
+    <value>Nu există comenzi perfectate accesibile</value>
+  </data>
+	<data name="NoData" xml:space="preserve">
+    <value>Nu se conţin date</value>
+  </data>
+	<data name="Number" xml:space="preserve">
+    <value>Numărul</value>
+  </data>
+	<data name="OrderNumber" xml:space="preserve">
+    <value>Numărul comenzii</value>
+  </data>
+	<data name="ValveNumber" xml:space="preserve">
+    <value>Numărul de canale</value>
+  </data>
+	<data name="CylinderNumber" xml:space="preserve">
+    <value>Numărul de cilindri</value>
+  </data>
+	<data name="ContactPhone" xml:space="preserve">
+    <value>Numărul de telefon</value>
+  </data>
+	<data name="EngineNumber" xml:space="preserve">
+    <value>Numărul motorului</value>
+  </data>
+	<data name="SelectedPartNumbersFull" xml:space="preserve">
+    <value>Numărul(Numerele) de catalog, care revin cererii</value>
+  </data>
+	<data name="FirstName" xml:space="preserve">
+    <value>Numele</value>
+  </data>
+	<data name="LastName" xml:space="preserve">
+    <value>Numele de familie</value>
+  </data>
+	<data name="YourName" xml:space="preserve">
+    <value>Numele D-voastră</value>
+  </data>
+	<data name="PartName" xml:space="preserve">
+    <value>Numele piesei</value>
+  </data>
+	<data name="Cash" xml:space="preserve">
+    <value>Numerar</value>
+  </data>
+	<data name="SelectedPartNumbers" xml:space="preserve">
+    <value>Numerele de catalog deja alese</value>
+  </data>
+	<data name="DocNumber" xml:space="preserve">
+    <value>№ doc-lui</value>
+  </data>
+	<data name="WareNumber" xml:space="preserve">
+    <value>№ mărfii</value>
+  </data>
+	<data name="hours" xml:space="preserve">
+    <value>oare</value>
+  </data>
+	<data name="CommentForOrder" xml:space="preserve">
+    <value>Comentariu la comanda</value>
+  </data>
+	<data name="Locality" xml:space="preserve">
+    <value>Oraş</value>
+  </data>
+	<data name="Original" xml:space="preserve">
+    <value>Original</value>
+  </data>
+	<data name="to" xml:space="preserve">
+    <value>până la</value>
+  </data>
+	<data name="TC_DiscParams" xml:space="preserve">
+    <value>Parametrii jantei</value>
+  </data>
+	<data name="Password" xml:space="preserve">
+    <value>Parola</value>
+  </data>
+	<data name="CurrentPassword" xml:space="preserve">
+    <value>Parola curentă</value>
+  </data>
+	<data name="NewPassword" xml:space="preserve">
+    <value>Parola nouă</value>
+  </data>
+	<data name="FixedShippingMessage" xml:space="preserve">
+    <value>Pentru a ridica comanda dvs., trebuie să vă prezentați la sediul nostru, situat la adresa indicată mai jos. Vă rugăm să reţineţi ora la care va fi disponibilă comanda.</value>
+  </data>
+	<data name="ForPeriod" xml:space="preserve">
+    <value>Pentru perioada</value>
+  </data>
+	<data name="OrderConfirmDialogTitle" xml:space="preserve">
+    <value>Perfectează și rezervă comanda</value>
+  </data>
+	<data name="ComparisionActPeriodError" xml:space="preserve">
+    <value>Perioada este introdusă incorect</value>
+  </data>
+	<data name="AutoSpareParts" xml:space="preserve">
+    <value>Piese de schimb</value>
+  </data>
+	<data name="Payment" xml:space="preserve">
+    <value>Plata</value>
+  </data>
+	<data name="InvoicePayment" xml:space="preserve">
+    <value>Achitare prin transfer</value>
+  </data>
+	<data name="positions" xml:space="preserve">
+    <value>poziţii</value>
+  </data>
+	<data name="Price" xml:space="preserve">
+    <value>Preţ</value>
+  </data>
+	<data name="RetailPrice" xml:space="preserve">
+    <value>Preţul cu amăn.</value>
+  </data>
+	<data name="YourPrice" xml:space="preserve">
+    <value>Preţul D-vostră</value>
+  </data>
+	<data name="UnitPrice" xml:space="preserve">
+    <value>Preţul unitar</value>
+  </data>
+	<data name="ABSPresence" xml:space="preserve">
+    <value>Prezenţa ABS</value>
+  </data>
+	<data name="ASRPresence" xml:space="preserve">
+    <value>Prezenţa ASR</value>
+  </data>
+	<data name="Producer" xml:space="preserve">
+    <value>Producător</value>
+  </data>
+	<data name="StartYear" xml:space="preserve">
+    <value>Producţie de la</value>
+  </data>
+	<data name="EndYear" xml:space="preserve">
+    <value>Producţie pînă la</value>
+  </data>
+	<data name="Profile" xml:space="preserve">
+    <value>Profil</value>
+  </data>
+	<data name="PowerHp" xml:space="preserve">
+    <value>Puterea, c.p.</value>
+  </data>
+	<data name="PowerKw" xml:space="preserve">
+    <value>Puterea, kWt</value>
+  </data>
+	<data name="Responce" xml:space="preserve">
+    <value>Raspuns</value>
+  </data>
+	<data name="RepeatPassword" xml:space="preserve">
+    <value>Repetaţi parola</value>
+  </data>
+	<data name="RepeatNewPassword" xml:space="preserve">
+    <value>Repetaţi parola nouă</value>
+  </data>
+	<data name="AnotherPresentations" xml:space="preserve">
+    <value>Reprezentanțele altor clienţi</value>
+  </data>
+	<data name="Representations" xml:space="preserve">
+    <value>Reprezentaţe</value>
+  </data>
+	<data name="PropertySearchResult" xml:space="preserve">
+    <value>Rezultatul căutării în proprietăţi</value>
+  </data>
+	<data name="RolesInSystem" xml:space="preserve">
+    <value>Rolurile în sistem</value>
+  </data>
+	<data name="ErrorMessage" xml:space="preserve">
+    <value>S-a produs o eroare neaşteptată pe server &lt;br/&gt; Administratorii şi dezvoltatorii sînt notificați cu privire la existența problemei. &lt;br /&gt; Ne cerem scuze pentru inconveniente. &lt;br. /&gt;</value>
+  </data>
+	<data name="Save" xml:space="preserve">
+    <value>Salvează</value>
+  </data>
+	<data name="SaveChanges" xml:space="preserve">
+    <value>Salvează schimbările</value>
+  </data>
+	<data name="ChangeWare" xml:space="preserve">
+    <value>Schimbă marfa</value>
+  </data>
+	<data name="PersonalDataChange" xml:space="preserve">
+    <value>Schimbarea datelor personale</value>
+  </data>
+	<data name="MaxCartPositionMessage" xml:space="preserve">
+    <value>Se acceptă selectarea maximală pină la 1000 de poziţii</value>
+  </data>
+	<data name="AcceptedPayment" xml:space="preserve">
+    <value>Se acceptă&lt;br /&gt; plata:</value>
+  </data>
+	<data name="SelectStatus" xml:space="preserve">
+    <value>Selectaţi statutul</value>
+  </data>
+	<data name="Settings" xml:space="preserve">
+    <value>Setări</value>
+  </data>
+	<data name="Analogues" xml:space="preserve">
+    <value>Similări</value>
+  </data>
+	<data name="VINRequests" xml:space="preserve">
+    <value>Solicitări VIN</value>
+  </data>
+	<data name="orderBy" xml:space="preserve">
+    <value>Sortarea conform</value>
+  </data>
+	<data name="Specifications" xml:space="preserve">
+    <value>Specificaţii</value>
+  </data>
+	<data name="ForPayment" xml:space="preserve">
+    <value>Spre plată</value>
+  </data>
+	<data name="Street" xml:space="preserve">
+    <value>Strada</value>
+  </data>
+	<data name="_sum" xml:space="preserve">
+    <value>suma</value>
+  </data>
+	<data name="Sum" xml:space="preserve">
+    <value>Suma</value>
+  </data>
+	<data name="ErrorsFound" xml:space="preserve">
+    <value>Sunt depistate greşeli</value>
+  </data>
+	<data name="AreYouSure" xml:space="preserve">
+    <value>Sunteţi sigur?</value>
+  </data>
+	<data name="Phones" xml:space="preserve">
+    <value>Telefoane</value>
+  </data>
+	<data name="FixedPhone" xml:space="preserve">
+    <value>Telefonul fix</value>
+  </data>
+	<data name="MobilePhone" xml:space="preserve">
+    <value>Telefonul mobil</value>
+  </data>
+	<data name="TermDays" xml:space="preserve">
+    <value>Termen</value>
+  </data>
+	<data name="Finish" xml:space="preserve">
+    <value>Termină comanda</value>
+  </data>
+	<data name="Time" xml:space="preserve">
+    <value>Timpul</value>
+  </data>
+	<data name="PageCreationTime" xml:space="preserve">
+    <value>Timpul creării paginii</value>
+  </data>
+	<data name="DeliveryScheduleTime" xml:space="preserve">
+    <value>Timpul de livrare </value>
+  </data>
+	<data name="DocType" xml:space="preserve">
+    <value>Tip doc-lui</value>
+  </data>
+	<data name="AutoType" xml:space="preserve">
+    <value>Tipul autovehicului</value>
+  </data>
+	<data name="BodyType" xml:space="preserve">
+    <value>Tipul caroseriei</value>
+  </data>
+	<data name="FuelType" xml:space="preserve">
+    <value>Tipul combustibilului</value>
+  </data>
+	<data name="DeliveryType" xml:space="preserve">
+    <value>Tipul de livrare</value>
+  </data>
+	<data name="BrakeSystem" xml:space="preserve">
+    <value>Tipul mecanismului de frînare</value>
+  </data>
+	<data name="EngineType" xml:space="preserve">
+    <value>Tipul motorului</value>
+  </data>
+	<data name="ReturningType" xml:space="preserve">
+    <value>Tipul returnării</value>
+  </data>
+	<data name="BrakeType" xml:space="preserve">
+    <value>Tipul sistemului de frînare</value>
+  </data>
+	<data name="DriveType" xml:space="preserve">
+    <value>Tipul tracţiunii a roţilor</value>
+  </data>
+	<data name="TransmissionType" xml:space="preserve">
+    <value>Tipul transmisiei</value>
+  </data>
+	<data name="All" xml:space="preserve">
+    <value>Toate</value>
+  </data>
+	<data name="AllBrands" xml:space="preserve">
+    <value>Toate brănduri</value>
+  </data>
+	<data name="Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+	<data name="Send" xml:space="preserve">
+    <value>Trimite</value>
+  </data>
+	<data name="SendToWork" xml:space="preserve">
+    <value>Trimite în lucru</value>
+  </data>
+	<data name="SendResponce" xml:space="preserve">
+    <value>Trimite răspunsul</value>
+  </data>
+	<data name="SendRequest" xml:space="preserve">
+    <value>Trimite solicitarea</value>
+  </data>
+	<data name="ThankForUnderstanding" xml:space="preserve">
+    <value>Vă mulțumim pentru înțelegere!</value>
+  </data>
+	<data name="TC_T1_3" xml:space="preserve">
+    <value>Vă recomandăm să instalaţi doar tipodimensiuni de anvelope de la fabrică, specificate în manualul de utilizare a automobilul dvs. Instalarea tipodimensiunilor non-standard poate duce la retragerea obligaţiunilor de garanţie de către dealer, precum şi la înrăutăţirea caracteristicilor şi manevrabilităţii automobilului.</value>
+  </data>
+	<data name="NotOurTransporComment" xml:space="preserve">
+    <value>Vă rugăm să reţineţi că această opţiune nu asigură livrarea comenzii "la ușă". Comanda va fi transmisă prin transport de rută. Angajatul nostru vă va contacta prin telefon şi vă va comunica unde şi cînd va trebui să întîmpinați comanda.</value>
+  </data>
+	<data name="BlockingSendOrderResumeSuccessMessage" xml:space="preserve">
+    <value>V-aţi dezabonat cu succes de la expedierea informaţiilor despre comenzile efectuate. Pentru reluarea corespondenţei, accesaţi secţiunea "{0}" a cabinetului personal.</value>
+  </data>
+	<data name="TC_Old" xml:space="preserve">
+    <value>Vechi</value>
+  </data>
+	<data name="AutoVINCode" xml:space="preserve">
+    <value>VIN codul al autovehicului</value>
+  </data>
+	<data name="TC_RealSpeed" xml:space="preserve">
+    <value>Viteza (km/h)</value>
+  </data>
+	<data name="TC_Speedometer" xml:space="preserve">
+    <value>Vitezometrul</value>
+  </data>
+	<data name="AllOrderUser" xml:space="preserve">
+    <value>Vizualizarea comenzii</value>
+  </data>
+	<data name="OrderPreview" xml:space="preserve">
+    <value>Vizualizarea comenzii</value>
+  </data>
+	<data name="ViewRequesByAuto" xml:space="preserve">
+    <value>Vizualizarea comenzii pe automobil</value>
+  </data>
+	<data name="TradeUser" xml:space="preserve">
+    <value>Vizualizarea comenzilor</value>
+  </data>
+	<data name="ComparisionActUser" xml:space="preserve">
+    <value>Vizualizarea reconcilierii</value>
+  </data>
+	<data name="VoltageV" xml:space="preserve">
+    <value>Voltajul, V</value>
+  </data>
+	<data name="VolumeCm" xml:space="preserve">
+    <value>Volum, cm</value>
+  </data>
+	<data name="TankVolume" xml:space="preserve">
+    <value>Volumul rezervorului de combustibil</value>
+  </data>
+	<data name="days" xml:space="preserve">
+    <value>zile</value>
+  </data>
+	<data name="TiresCalculator" xml:space="preserve">
+    <value>Calculator pentru anvelope</value>
+  </data>
+	<data name="Address" xml:space="preserve">
+    <value>Adresa</value>
+  </data>
+	<data name="City" xml:space="preserve">
+    <value>Orașul</value>
+  </data>
+	<data name="Email" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+	<data name="Phone" xml:space="preserve">
+    <value>Telefon</value>
+  </data>
+	<data name="OrderNotExist" xml:space="preserve">
+    <value>Comandă inexistentă </value>
+  </data>
+	<data name="AvailabilityOnOtherStock" xml:space="preserve">
+    <value>Disponibilitate la celelalte depozite </value>
+  </data>
+	<data name="AvailabilityOnShippingStock" xml:space="preserve">
+    <value>Disponibilitate la depozitele de expediere </value>
+  </data>
+	<data name="Cost" xml:space="preserve">
+    <value>Costul</value>
+  </data>
+	<data name="FromWarehouse" xml:space="preserve">
+    <value>De la depozit </value>
+  </data>
+	<data name="GroupContentManagement" xml:space="preserve">
+    <value>Grupuri de conținut</value>
+  </data>
+	<data name="IsRequired" xml:space="preserve">
+    <value>Câmp obligatoriu</value>
+  </data>
+	<data name="LiqPayment" xml:space="preserve">
+    <value>Achitare prin sistemul LiqPay</value>
+  </data>
+	<data name="LiqPaymentComment" xml:space="preserve">
+    <value>Service-ul de recepţionare a plăţilor cu cardul bancar este oferit de &lt;a href="https://www.liqpay.com"&gt;LiqPAY&lt;/a&gt; din &lt;a href="http://privatbank.ua"&gt; PrivatBank&lt;/a&gt;</value>
+  </data>
+	<data name="OrderError" xml:space="preserve">
+    <value>Eroare la trimiterea comenzii spre procesare </value>
+  </data>
+	<data name="OrderErrorText" xml:space="preserve">
+    <value>Comanda dvs. conţine o marfă, pe care nu o putem perfecta (&lt;b&gt; {0} &lt;/ b&gt;). &lt;br&gt; Dați clic pe "întoarcere la comanda" si eliminaţi din comandă mărfurile marcate cu roșu.</value>
+  </data>
+	<data name="PageHeader" xml:space="preserve">
+    <value>Antetul paginii</value>
+  </data>
+	<data name="ReturnToOrder" xml:space="preserve">
+    <value>Înapoi la comandă </value>
+  </data>
+	<data name="SelectService" xml:space="preserve">
+    <value>Selectaţi centrul auto </value>
+  </data>
+	<data name="ServiceBooking" xml:space="preserve">
+    <value>Înregistrare on-line la staţia de deservire tehnică </value>
+  </data>
+	<data name="ServiceBookingSubmit" xml:space="preserve">
+    <value>Înregistrează-te pentru un service auto</value>
+  </data>
+	<data name="ThemeText" xml:space="preserve">
+    <value>Text tematic </value>
+  </data>
+	<data name="WareIsNotAvailable" xml:space="preserve">
+    <value>Nu este disponibil</value>
+  </data>
+	<data name="OK" xml:space="preserve">
+    <value>Da</value>
+  </data>
+	<data name="ExtractToOrder" xml:space="preserve">
+    <value>Selectați pentru a comanda</value>
+  </data>
+	<data name="ReturnToOrderMessage" xml:space="preserve">
+    <value>Pentru a reveni la comandă, faceți clic pe "Back-ul" browser-ului.</value>
+  </data>
+	<data name="WareIsLate" xml:space="preserve">
+    <value>Produs în întârziere </value>
+  </data>
+	<data name="TotalSelectedSum" xml:space="preserve">
+    <value>Selectat în valoare totală </value>
+  </data>
+	<data name="NewWare" xml:space="preserve">
+    <value>Nou </value>
+  </data>
+	<data name="CityDistrict" xml:space="preserve">
+    <value>Sector oraş </value>
+  </data>
+	<data name="notSelected" xml:space="preserve">
+    <value>Nu a fost selectat</value>
+  </data>
+	<data name="DeliveryDate" xml:space="preserve">
+    <value>Data livrării </value>
+  </data>
+	<data name="WarehouseShipmentDate" xml:space="preserve">
+    <value>Data expedierii din depozit</value>
+  </data>
+	<data name="Remain" xml:space="preserve">
+    <value>A rămas în stoc </value>
+  </data>
+	<data name="AccessStatistics" xml:space="preserve">
+    <value>Statistica de acces </value>
+  </data>
+	<data name="Promotions" xml:space="preserve">
+    <value>Promo</value>
+  </data>
+	<data name="Specials" xml:space="preserve">
+    <value>Reduceri</value>
+  </data>
+	<data name="Message" xml:space="preserve">
+    <value>Mesaj</value>
+  </data>
+	<data name="AddToCompare" xml:space="preserve">
+    <value>Adaugă pentru comparare</value>
+  </data>
+	<data name="RemoveFromComparision" xml:space="preserve">
+    <value>Elimină din comparație</value>
+  </data>
+	<data name="WareComparision" xml:space="preserve">
+    <value>Compară produse</value>
+  </data>
+	<data name="Compare" xml:space="preserve">
+    <value>comparație</value>
+  </data>
+	<data name="AllParams" xml:space="preserve">
+    <value>Toţi parametrii</value>
+  </data>
+	<data name="OnlyDifference" xml:space="preserve">
+    <value>Doar diferenţe </value>
+  </data>
+	<data name="WareType" xml:space="preserve">
+    <value>Tipul produsului</value>
+  </data>
+	<data name="AdditionalInformation" xml:space="preserve">
+    <value>Informaţii suplimentare </value>
+  </data>
+	<data name="ContactInfo" xml:space="preserve">
+    <value>Date de contact</value>
+  </data>
+	<data name="AccordingOfDeliveryServiceTarifs" xml:space="preserve">
+    <value>Conform tarifului serviciului </value>
+  </data>
+	<data name="Version" xml:space="preserve">
+    <value>Versiune </value>
+  </data>
+	<data name="AutoData" xml:space="preserve">
+    <value>Date automobil </value>
+  </data>
+	<data name="Change" xml:space="preserve">
+    <value>Modifică </value>
+  </data>
+	<data name="AllNews" xml:space="preserve">
+    <value>Toate știrile</value>
+  </data>
+	<data name="ActionWarningMessage" xml:space="preserve">
+    <value>Atenție! Comanda conține obiecte promotionale care sunt nerambursabile!</value>
+  </data>
+	<data name="NoReturn" xml:space="preserve">
+    <value>Non-returnabil </value>
+  </data>
+	<data name="ImageUrl" xml:space="preserve">
+    <value>imagine de grup URL </value>
+  </data>
+	<data name="ShortProblemDescription" xml:space="preserve">
+    <value>O scurtă descriere a problemei</value>
+  </data>
+	<data name="CarStateNumber" xml:space="preserve">
+    <value>Număr de înmatriculare a vehiculului </value>
+  </data>
+	<data name="OnlyLettersAndDigits" xml:space="preserve">
+    <value>Doar în litere şi cifre </value>
+  </data>
+	<data name="ForReservation" xml:space="preserve">
+    <value>La comanda</value>
+  </data>
+	<data name="AllPromotions" xml:space="preserve">
+    <value>Toate campaniile de promovare </value>
+  </data>
+	<data name="Contacts" xml:space="preserve">
+    <value>Contacte </value>
+  </data>
+	<data name="HowToBuy" xml:space="preserve">
+    <value>Cum cumpăr?</value>
+  </data>
+	<data name="ServiceProducerCatalogs" xml:space="preserve">
+    <value>Cataloage&lt;span&gt;ale producătorilor&lt;/span&gt;</value>
+  </data>
+	<data name="Services" xml:space="preserve">
+    <value>Servicii </value>
+  </data>
+	<data name="ServiceSelectionByMark" xml:space="preserve">
+    <value>Selectează &lt;span&gt;după marcă&lt;/span&gt;</value>
+  </data>
+	<data name="ServiceSelectionByVIN" xml:space="preserve">
+    <value>Selectează &lt;span&gt;după VIN&lt;/span&gt;</value>
+  </data>
+	<data name="ServiceTechStationBooking" xml:space="preserve">
+    <value>Înregistrare on-line &lt;span&gt;la SDT&lt;/span&gt;</value>
+  </data>
+	<data name="ServiceTiresSelection" xml:space="preserve">
+    <value>Selectează &lt;span&gt;anvelope &lt;/span&gt;</value>
+  </data>
+	<data name="BankAccount" xml:space="preserve">
+    <value>Cont de decontare </value>
+  </data>
+	<data name="BankCode" xml:space="preserve">
+    <value>Codul băncii </value>
+  </data>
+	<data name="FiscalCode" xml:space="preserve">
+    <value>Cod fiscal </value>
+  </data>
+	<data name="JuridicalAddress" xml:space="preserve">
+    <value>Adresa juridică </value>
+  </data>
+	<data name="JuridicalName" xml:space="preserve">
+    <value>Denumirea juridică a întreprinderii </value>
+  </data>
+	<data name="RepresentationRequest" xml:space="preserve">
+    <value>Cerere de reprezentare </value>
+  </data>
+	<data name="Error" xml:space="preserve">
+    <value>Eroare </value>
+  </data>
+	<data name="ChangePassword_Cap" xml:space="preserve">
+    <value>Schimbaţi parola </value>
+  </data>
+	<data name="OrderSum" xml:space="preserve">
+    <value>Suma comenzii </value>
+  </data>
+	<data name="SaveComment" xml:space="preserve">
+    <value>Salvați un comentariu</value>
+  </data>
+	<data name="Buy" xml:space="preserve">
+    <value>Cumpăra</value>
+  </data>
+	<data name="MainPage" xml:space="preserve">
+    <value>Acasă </value>
+  </data>
+	<data name="Applicability" xml:space="preserve">
+    <value>Aplicabilitatea</value>
+  </data>
+	<data name="GotoComparision" xml:space="preserve">
+    <value>Mergi la comparare</value>
+  </data>
+	<data name="SelectDate" xml:space="preserve">
+    <value>Alegeți o dată</value>
+  </data>
+	<data name="SubscribeForActionInformations" xml:space="preserve">
+    <value>Subscrie la informaţii despre campanii promoţionale </value>
+  </data>
+	<data name="Booking" xml:space="preserve">
+    <value>Înscrie-te!</value>
+  </data>
+	<data name="SummaryTitle2" xml:space="preserve">
+    <value>&lt;p&gt;Comanda dvs.&lt;span&gt;№{0}&lt;/span&gt;a fost acceptată de noi şi în timpul apropiat o veţi primi.&lt;/p&gt;  
+&lt;p&gt; Dacă aveți întrebări despre comandă, vă rugăm să contactați departamentul nostru de vânzări&lt;a&gt; {2}&lt;/a&gt;&lt;/p&gt;  
+&lt;p&gt; &lt;b&gt; Comanda dvs. include următoarele poziţii:&lt;/b&gt; &lt;/p&gt;
+</value>
+  </data>
+	<data name="OrderCompleting" xml:space="preserve">
+    <value>Comandă finalizată </value>
+  </data>
+	<data name="PaymentTitle2" xml:space="preserve">
+    <value>&lt;p&gt; Comanda dvs.&lt;span&gt;№{0}&lt;/span&gt; a fost acceptată de noi și nu este încă plătită.&lt;/p&gt;&lt;p&gt; Dacă aveți întrebări despre comandă, vă rugăm să contactați departamentul nostru de vânzări &lt;a&gt; {2}&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt; Comanda dvs. include următoarele poziţii:&lt;/b&gt;&lt;/p&gt;</value>
+  </data>
+	<data name="ThanksForPurchase" xml:space="preserve">
+    <value>Vă mulțumim pentru achiziție!</value>
+  </data>
+	<data name="WareSelection" xml:space="preserve">
+    <value>Selectează marfa </value>
+  </data>
+	<data name="Apply" xml:space="preserve">
+    <value>Aplică </value>
+  </data>
+	<data name="Filters" xml:space="preserve">
+    <value>Filtre </value>
+  </data>
+	<data name="Reset" xml:space="preserve">
+    <value>Anulează </value>
+  </data>
+	<data name="PageSize" xml:space="preserve">
+    <value>Dimensiuni pagină</value>
+  </data>
+	<data name="TC_New_T1_1" xml:space="preserve">
+    <value>La creșterea diametrului jantei, (și, în consecință, reducerea înălțimii profilului anvelopei cu diametrul exterior al roții rămas neschimbat) se mărește sarcina asupra suspensiei automobilului, reducând şi din confort (maşina va deveni mai rigidă).</value>
+  </data>
+	<data name="TC_New_T1_2" xml:space="preserve">
+    <value>La creşterea excesivă a profilului anvelopei, maşina devine instabilă, mai puţin manevrabilă şi la atingerea unor valori critice ale profilului, anvelopa începe să se agaţe de piesele caroseriei şi ale suspensiei automobilului, care ulterior va duce la distrugerea ei. </value>
+  </data>
+	<data name="TC_New_T3" xml:space="preserve">
+    <value>Eroarea de indicaţii a vitezometrului este în funcţie de viteza automobilului, la mărirea vitezei eroarea creşte. În plus, trebuie să se ţină cont de faptul că eroarea influenţează indicaţiile de consum al combustibilului automobilului.</value>
+  </data>
+	<data name="SelectMark" xml:space="preserve">
+    <value>Selectează marca </value>
+  </data>
+	<data name="ShowAll" xml:space="preserve">
+    <value>Afişare totală </value>
+  </data>
+	<data name="EngineTypeAndVolume" xml:space="preserve">
+    <value>Volumul şi tipul motorului </value>
+  </data>
+	<data name="EnterYourCarData" xml:space="preserve">
+    <value>Indicaţi datele automobilului dvs. </value>
+  </data>
+	<data name="GotoMain" xml:space="preserve">
+    <value>Acasă </value>
+  </data>
+	<data name="NothingFound2" xml:space="preserve">
+    <value>Ne pare rău, dar nu am găsit nici un rezultat pentru căutarea dvs., lucru, care ar putea să se întâmple din următoarele cauze:</value>
+  </data>
+	<data name="NothingFound2Message" xml:space="preserve">
+    <value>&lt;ol&gt;  
+&lt;li&gt;Numărul de catalog pe care l-aţi introdus, nu există. Încercaţi să reformulaţi interogarea iniţială. &lt;/li&gt;  &lt;li&gt; Există anumite restricții privind căutarea. Dacă există marcaje de verificare în coloana "Căutare exactă" sau "Căutare într-o anumită secțiune" încercați să le eliminaţi. &lt;/li&gt;  
+&lt;/ol&gt;
+</value>
+  </data>
+	<data name="NothingFound2Title" xml:space="preserve">
+    <value>Căutare eşuată:)</value>
+  </data>
+	<data name="SelectPreferredDate" xml:space="preserve">
+    <value>Selectați data dorită</value>
+  </data>
+	<data name="SelectPreferredTime" xml:space="preserve">
+    <value>Selectaţi ora dorită </value>
+  </data>
+	<data name="ServiceBookingFinishing" xml:space="preserve">
+    <value>Înregistrare finalizată </value>
+  </data>
+	<data name="SeviceBookingConfirmation2" xml:space="preserve">
+    <value>&lt;p&gt;Cererea dvs. de deservire la service auto &lt;br&gt;  
+&lt;strong&gt;«{0}»&lt;/strong&gt;pentru data de ora &lt;strong&gt;{1}, {2}&lt;/strong&gt; a fost expediată.&lt;/p&gt;&lt;p&gt; În timpul apropiat veţi fi contactat de managerul nostru. &lt;/p&gt;
+</value>
+  </data>
+	<data name="VINRequest" xml:space="preserve">
+    <value>Interogare VIN</value>
+  </data>
+	<data name="SubscribeForOrderInfo" xml:space="preserve">
+    <value>Expediază notificare despre comandă la e-mail</value>
+  </data>
+	<data name="ShowResults" xml:space="preserve">
+    <value>Arată rezultatele </value>
+  </data>
+	<data name="TiresSelection" xml:space="preserve">
+    <value>Selectarea anvelopelor </value>
+  </data>
+	<data name="TiresSummer" xml:space="preserve">
+    <value>de vară </value>
+  </data>
+	<data name="TiresWinter" xml:space="preserve">
+    <value>de iarnă </value>
+  </data>
+	<data name="AboutCompany" xml:space="preserve">
+    <value>Despre noi </value>
+  </data>
+	<data name="Providers" xml:space="preserve">
+    <value>Furnizori</value>
+  </data>
+	<data name="OrderPayment" xml:space="preserve">
+    <value>Achitarea comenzii </value>
+  </data>
+	<data name="AllWareCategories" xml:space="preserve">
+    <value>Categorii marfuri</value>
+  </data>
+	<data name="DoYouLikeShare" xml:space="preserve">
+    <value>Îşi place publicaţia? Distribuie!</value>
+  </data>
+	<data name="DescribeError" xml:space="preserve">
+    <value>Descrie eroarea</value>
+  </data>
+	<data name="ReportAboutError" xml:space="preserve">
+    <value>Raportează o eroare</value>
+  </data>
+	<data name="Comment2" xml:space="preserve">
+    <value>Notă</value>
+  </data>
+	<data name="EngineCode" xml:space="preserve">
+    <value>Număr/Cod motor</value>
+  </data>
+	<data name="ShowRetailPricesWareCard" xml:space="preserve">
+    <value>Prețul de vânzare cu amănuntul în fişa mărfii </value>
+  </data>
+	<data name="OrderDeleteError" xml:space="preserve">
+    <value>Nu se poate șterge comanda:</value>
+  </data>
+	<data name="cm3" xml:space="preserve">
+    <value>cm cubi </value>
+  </data>
+	<data name="Power" xml:space="preserve">
+    <value>Putere </value>
+  </data>
+	<data name="Volume" xml:space="preserve">
+    <value>Volum </value>
+  </data>
+	<data name="_HP" xml:space="preserve">
+    <value>CP</value>
+  </data>
+	<data name="_kWt" xml:space="preserve">
+    <value>kW</value>
+  </data>
+	<data name="DeliveryCreationError" xml:space="preserve">
+    <value>A apărut o eroare în timpul perfectării de livrare: </value>
+  </data>
+	<data name="JsonUnknownError" xml:space="preserve">
+    <value>Ceva a mers prost şi nu am putut procesa cererea dvs. Reluaţi sau contactaţi-ne la numărul de telefon {1}</value>
+  </data>
+	<data name="NoWareFound" xml:space="preserve">
+    <value>Produsul n-a fost găsit </value>
+  </data>
+	<data name="NeedAllTaxInvoices" xml:space="preserve">
+    <value>Sunt necesare toate facturile fiscale neemise </value>
+  </data>
+	<data name="WareCode" xml:space="preserve">
+    <value>Cod produs </value>
+  </data>
+	<data name="PaymentAccepted" xml:space="preserve">
+    <value>Plată acceptată </value>
+  </data>
+	<data name="PaymentAcceptedMessage" xml:space="preserve">
+    <value>Plata dvs. pentru comandă {0} în sumă de {1} a fost recepţionată cu succes.</value>
+  </data>
+	<data name="PaymentErrorMessage" xml:space="preserve">
+    <value>Plata dvs. pentru comandă {0} în sumă de {1} nu poate fi procesată. &lt;a href="{2}"&gt;Reluaţi operaţia &lt;/a&gt; sau adresaţi-vă la banca noastră.</value>
+  </data>
+	<data name="Printing" xml:space="preserve">
+    <value>Imprimare </value>
+  </data>
+	<data name="ProduceDate" xml:space="preserve">
+    <value>Data producerii</value>
+  </data>
+	<data name="Info" xml:space="preserve">
+    <value>Info</value>
+  </data>
+	<data name="UrgentCollection" xml:space="preserve">
+    <value>Colectare urgentă</value>
+  </data>
+	<data name="Default" xml:space="preserve">
+    <value>Tăcit</value>
+  </data>
+	<data name="FefoMessage" xml:space="preserve">
+    <value>1. Pentru vizualizarea ofertelor care sunt disponibile la comandă, apăsați butonul “Perfectează solicitare de ofertă”.&lt;/br&gt;2. Alegeți varianta optimală după preț și timpul de livrare a comenzii.&lt;/br&gt;3. Apoi adăugați marfa în coș și efectuați comanda.</value>
+  </data>
+	<data name="TrustedPerson" xml:space="preserve">
+    <value>Persoana de încredere</value>
+  </data>
+	<data name="VINSearchPlaceholder" xml:space="preserve">
+    <value>Introduceți VIN (17 caractere)</value>
+  </data>
+	<data name="Transmission" xml:space="preserve">
+    <value>Transmisie</value>
+  </data>
+	<data name="VinCodeNotFound" xml:space="preserve">
+    <value>Codul VIN pe care l-ați introdus nu este în baza de date sau a fost introdus incorect</value>
+  </data>
+	<data name="SelectByCategories" xml:space="preserve">
+    <value>Alegerea conform ilustrațiilor</value>
+  </data>
+	<data name="SelectByGroups" xml:space="preserve">
+    <value>Alegerea dupa grupe</value>
+  </data>
+	<data name="EnterGroupName" xml:space="preserve">
+    <value>Introduceți denumirea grupei</value>
+  </data>
+	<data name="MaxRequestsPerDay" xml:space="preserve">
+    <value>Numărul maximal de cereri pe zi</value>
+  </data>
+	<data name="Unlimited" xml:space="preserve">
+    <value>Nelimitat</value>
+  </data>
+	<data name="ValabilityTerm" xml:space="preserve">
+    <value>Termen de valabilitate </value>
+  </data>
+	<data name="VINSearch" xml:space="preserve">
+    <value>Căutare dupa VIN</value>
+  </data>
+	<data name="ComparisionActErrorMessage" xml:space="preserve">
+    <value>Eroare. Solicitarea Dvs. &lt;p&gt;&lt;p&gt;&lt;p&gt; nu a fost procesată. Încercați din nou sau contactați-ne la numărul de telefon &lt;p&gt;&lt;p&gt;&lt;p&gt;</value>
+  </data>
+	<data name="Details" xml:space="preserve">
+    <value>Detalii</value>
+  </data>
+	<data name="NeedPart" xml:space="preserve">
+    <value>Este necesară piesa</value>
+  </data>
+	<data name="NothingFound3" xml:space="preserve">
+    <value>Nimic nu a fost găsit</value>
+  </data>
+	<data name="Action" xml:space="preserve">
+    <value>Promoție</value>
+  </data>
+	<data name="Sale" xml:space="preserve">
+    <value>Lichidare de stoc</value>
+  </data>
+	<data name="CategoryFirstEntranceMessage" xml:space="preserve">
+    <value>Pentru selectarea categoriei, utilizați această listă</value>
+  </data>
+	<data name="SelectFromList" xml:space="preserve">
+    <value>Selectați din listă</value>
+  </data>
+	<data name="NeedParametersSpecification" xml:space="preserve">
+    <value>Este necesară specificarea parametrilor</value>
+  </data>
+	<data name="Note" xml:space="preserve">
+    <value>Notă</value>
+  </data>
+	<data name="SelectModification" xml:space="preserve">
+    <value>Selectați o modificare</value>
+  </data>
+	<data name="AutoIsNotSelected" xml:space="preserve">
+    <value>Automobilul nu este indicat</value>
+  </data>
+	<data name="LoyaltyProgram" xml:space="preserve">
+    <value>Loyalty Program</value>
+  </data>
+	<data name="AllTires" xml:space="preserve">
+    <value>Toate anvelope</value>
+  </data>
+	<data name="Tires" xml:space="preserve">
+    <value>Anvelope</value>
+  </data>
+</root>

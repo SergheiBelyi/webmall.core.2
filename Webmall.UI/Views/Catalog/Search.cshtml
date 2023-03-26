@@ -1,0 +1,55 @@
+﻿@using ViewRes
+
+@model Webmall.UI.ViewModel.Catalog.CatalogViewModel
+@{
+    Layout = "~/Views/Shared/_Inner.cshtml";
+
+    var waresModel = Model.WaresCatalog;
+    var showWaresList = Model.WaresCatalog?.Wares.List?.Any() == true;
+    var filter = Model.CatalogFilterViewModel;
+}
+
+@if (showWaresList)
+{
+    @section BreadCrumbs{
+        @{Html.RenderPartial("Components/BreadCrumbsRender", Model.BreadCrumbs);}
+    }
+    @section FilterBadges{
+        @{Html.RenderPartial("Components/FilterBadges", filter);}
+    }
+    @section ViewModes{
+        @{Html.RenderPartial("Components/ViewModes");}
+    }
+
+    @section Sidebar{
+        @{
+            Html.RenderPartial("CatalogFilter", filter);
+        }
+    }
+
+    Html.RenderPartial("Catalog", waresModel);
+}
+else
+{
+    <div class="image-message">
+        <img src="@Url.Content("~/Content/images/search-void.png")" width="172" height="178" alt="@SharedResources.Search">
+    </div>
+    <div id="message">
+        <p>@SharedResources.NoData</p>
+        @Html.Raw(SharedResources.NothingFound2Message)
+    </div>
+}
+
+@section scripts
+            {
+    @{Html.RenderPartial("_WareListScripts");}
+    @{Html.RenderPartial("GridViewFooterScripts", waresModel.Wares);}
+    @*@{Html.RenderPartial("AddToCartScript");}*@
+    @{
+        Html.RenderPartial("_FilterScripts", Model.CatalogFilterViewModel);
+    }
+}
+@*@section dialogs {
+    @{ Html.RenderPartial("AddToCartDialog"); }
+}*@
+

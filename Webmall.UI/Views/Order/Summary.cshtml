@@ -1,0 +1,61 @@
+﻿@using Webmall.Model
+@using ValmiStore.Model.Entities.Order
+@using ViewRes
+@using Webmall.UI.Core
+
+@{
+    ViewBag.Title = SharedResources.OrderCompleting;
+    Layout = "~/Views/Shared/_PersonalLayout.cshtml";
+    var allowTransmissionAct = ConfigHelper.AllowTransmissionAct && Model.AllowTransmissionAct;
+    //var hasTrusted = SessionHelper.CurrentUser.CurrentPresenter.Client.TrustedPersons != null && SessionHelper.CurrentClient.TrustedPersons.Any();
+}
+
+@model Order
+
+<h1 class="main-title">@SharedResources.Order <span>№ @Model.Id</span></h1>
+<div class="order-steps-wrap text-center">
+    <ul class="order-steps">
+        <li class="order-steps__item">
+            <svg class="icon icon-shopping-cart order-steps__icon">
+                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#shopping-cart")"></use>
+            </svg><span class="order-steps__title">@SharedResources.WareSelection</span>
+        </li>
+        <li class="order-steps__item">
+            <svg class="icon icon-wallet-strong order-steps__icon">
+                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#wallet-strong")"></use>
+            </svg><span class="order-steps__title">@SharedResources.PaymentForm</span>
+        </li>
+        <li class="order-steps__item">
+            <svg class="icon icon-lorry order-steps__icon">
+                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#lorry")"></use>
+            </svg><span class="order-steps__title">@SharedResources.Delivery</span>
+        </li>
+        <li class="order-steps__item is-current">
+            <svg class="icon icon-confirmation order-steps__icon">
+                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#confirmation")"></use>
+            </svg><span class="order-steps__title">@SharedResources.OrderCompleting</span>
+        </li>
+    </ul>
+</div>
+<figure class="order-success">
+    <img class="order-success__img img-responsive" src="@Url.Content("~/assets/images/general/order-success.svg")" alt="Order Success" width="90" height="90">
+    <figcaption class="order-success__figcaption">
+        <div class="order-success__heading">@SharedResources.ThanksForPurchase</div>
+        <p class="order-success__desc">
+            @(new HtmlString(string.Format(SharedResources.SummaryTitle2, Model.Id, (string.IsNullOrEmpty(Model.ResponsibleName)) ? ConfigHelper.SummaryManager : Model.ResponsibleName, ConfigHelper.SummaryManagerPhone)))
+            <svg class="icon icon-phone-call tiny-contacts__icon">
+                <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#phone-call")"></use>
+            </svg><span class="tiny-contacts__phone">@ConfigHelper.SummaryManagerPhone</span>
+        </p>
+    </figcaption>
+</figure>
+@{ Html.RenderPartial("_SummaryOrderInfo", Model); }
+
+<div class="email-notification">
+    <div class="email-notification__info">
+        <p class="email-notification__desc">@SharedResources.SummaryNotificationText</p>
+        <small class="email-notification__detail">@SharedResources.OrderMadeBy: @SessionHelper.CurrentUser.FullName (@SessionHelper.CurrentUser.Login)</small>
+    </div><a class="email-notification__btn btn btn--main" href="@Url.Action("List", "Order")">@SharedResources.ToOrderList</a>
+</div>
+
+

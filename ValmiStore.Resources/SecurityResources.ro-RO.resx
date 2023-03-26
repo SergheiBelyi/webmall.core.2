@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AdminsOnly" xml:space="preserve">
+    <value>Doar administratori</value>
+  </data>
+  <data name="AllUsers" xml:space="preserve">
+    <value>toţi utilizatori</value>
+  </data>
+  <data name="ApplyFilter" xml:space="preserve">
+    <value>Aplică filtru</value>
+  </data>
+  <data name="ConfirmOperation" xml:space="preserve">
+    <value>Confirmați operațiunea</value>
+  </data>
+  <data name="EmailAlreadyRegistered" xml:space="preserve">
+    <value>Email-ul introdus deja este înregistrat</value>
+  </data>
+  <data name="FiscCodesTitle" xml:space="preserve">
+    <value>Introduceți numerele cardurilor clienților (separate prin virgulă)</value>
+  </data>
+  <data name="ManagersOnly" xml:space="preserve">
+    <value>Doar manageri</value>
+  </data>
+  <data name="NewUserRegistration" xml:space="preserve">
+    <value>Înregistrarea unui utilizator nou</value>
+  </data>
+  <data name="OnlyBlocked" xml:space="preserve">
+    <value>doar cele blocate</value>
+  </data>
+  <data name="OnlyUnblocked" xml:space="preserve">
+    <value>doar cele neblocate</value>
+  </data>
+  <data name="PasswordRecovery" xml:space="preserve">
+    <value>Restabilirea parolei</value>
+  </data>
+  <data name="PasswordRecoveryMessage" xml:space="preserve">
+    <value>Aţi uitat parola? Se întîmplă. &lt;br /&gt;
+   Vă rugăm să introduceţi email-ul introdus în timpul înregistrării şi noi vom expedia parola nouă pe acest email.</value>
+  </data>
+  <data name="Read" xml:space="preserve">
+    <value>Citește</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Salvează datele mele</value>
+  </data>
+  <data name="RepresentationRequestErrorRow" xml:space="preserve">
+    <value>Codul clientului {0} - {1}</value>
+  </data>
+  <data name="RepresentationRequestErrorTitle" xml:space="preserve">
+    <value>La înregistrarea reprezentanțelor s-au produs următoarele erori:</value>
+  </data>
+  <data name="SelectAgreementFlag" xml:space="preserve">
+    <value>Am făcut cunoștință și accept condițiile acordului de utilizare și ale acordului privind oferta publică</value>
+  </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>Utilizatorul nu a fost găsit</value>
+  </data>
+  <data name="UserManagement" xml:space="preserve">
+    <value>Gestionarea Utilizatorilor</value>
+  </data>
+  <data name="WaitingConfirmation" xml:space="preserve">
+    <value>Așteptarea confirmării</value>
+  </data>
+  <data name="WrongAgreementFlag" xml:space="preserve">
+    <value>Nu ați acceptat condițiile acordului</value>
+  </data>
+  <data name="WrongCAPTCHA" xml:space="preserve">
+    <value>codul din imagine a fost introdus incorect</value>
+  </data>
+  <data name="WrongClientCodes" xml:space="preserve">
+    <value>lipsesc codurile fiscale ale clienților</value>
+  </data>
+  <data name="WrongOldPassword" xml:space="preserve">
+    <value>parola veche a fost introdusă incorect</value>
+  </data>
+  <data name="WrongPassword" xml:space="preserve">
+    <value>parola a fost introdusă greșit</value>
+  </data>
+  <data name="Registration" xml:space="preserve">
+    <value>Înregistrarea</value>
+  </data>
+  <data name="RegistrationConfirmation" xml:space="preserve">
+    <value>Confirmarea registrării</value>
+  </data>
+  <data name="AreYouForgetPassword" xml:space="preserve">
+    <value>Ati uitat parola?</value>
+  </data>
+  <data name="BadPasswordOrLogin" xml:space="preserve">
+    <value>Nume de utilizator sau parolă incorectă </value>
+  </data>
+  <data name="ConfirmYouAreNotRobot" xml:space="preserve">
+    <value>Confirmați că nu sunteți un robot</value>
+  </data>
+  <data name="GotoPresentationsManagement" xml:space="preserve">
+    <value>Du-te la managementul reprezentanţelor </value>
+  </data>
+  <data name="JuridicalPersons" xml:space="preserve">
+    <value>Persoane juridice </value>
+  </data>
+  <data name="PhisicalPersons" xml:space="preserve">
+    <value>Persoane fizice</value>
+  </data>
+  <data name="ThanksForRegistration" xml:space="preserve">
+    <value>Vă mulțumim pentru înregistare</value>
+  </data>
+  <data name="WrongRecaptchaSimpleMessage" xml:space="preserve">
+    <value>Verificarea anti-robot a eșuat</value>
+  </data>
+  <data name="YouAreNotPresentClient" xml:space="preserve">
+    <value>Datele introduse nu corespund acestui client</value>
+  </data>
+  <data name="YourAccountIsLocked" xml:space="preserve">
+    <value>Contul Dvs. este blocat. Contactați administratorul site-ului.</value>
+  </data>
+  <data name="YourAccountWaitsConfirmation" xml:space="preserve">
+    <value>Contul Dvs. nu este confirmat. Pentru confirmarea înregistrării urmați link-ul ce a fost expediat pe e-mailul Dvs. (scrisoare poate ajunge în dosarul Spam)</value>
+  </data>
+  <data name="WrongEmailAddress" xml:space="preserve">
+    <value>E-mail greșit</value>
+  </data>
+</root>

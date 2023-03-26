@@ -1,0 +1,84 @@
+﻿@using ViewRes
+@using Webmall.UI.Core
+@model Webmall.UI.Models.Cart.CartModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = SharedResources.Cart;
+    var rate = SessionHelper.CurrentValute.Rate;
+    //var rate = 1;
+
+}
+<ul class =" breadcrumbs"></ul>
+<div class="container-fluid">
+    <main class="content">
+        <!-- page-intro-->
+        <div class="page-intro">
+            <h1 class="page-intro__heading main-heading">@SharedResources.Cart</h1>
+            @*<div class="page-intro__informer informer is-danger">
+                    <strong class="informer__accent">Внимание!</strong> Произошли изменения в строках заказа! Изменения отмечены цветом!
+                </div>*@
+            @*<p class="page-intro__desc">Адрес магазина и адрес разгрузки</p>*@
+        </div><!-- /page-intro-->
+
+        @using (Html.BeginForm("Create", "Order", FormMethod.Post, new { @class = "shopping-cart-form", id = "desktopForm" })) 
+        { 
+            if (!Model.Positions.List.Any())
+            {
+                Html.RenderPartial("_EmptyCart");
+            }
+            else
+            {
+                <div >
+                    @{ Html.RenderPartial("_DesktopCartArea"); }
+                    @{ Html.RenderPartial("_MobileCartArea"); }
+
+                    <div class="stock-area__bottom">
+                        <a class="stock-area__btn btn btn--gray" href="#">@SharedResources.ImportToCart</a>
+                        <div class="stock-area__btns">
+                            <button type="submit" class="stock-area__btn btn btn--primary" onclick="return CheckPosisionsCount()">@SharedResources.MakeOrder</button>
+                            <button type="submit" class="stock-area__btn btn btn--gray" onclick="return Delete()">@SharedResources.Delete</button>
+                        </div>
+                    </div><!-- /stock-area-bottom-->
+                </div>
+
+                <div class="orders-list orders-list--basket">
+                    @*<div class="orders-list__badge badge is-error"><strong class="badge__accent">Внимание!</strong> Произошли изменения в строках заказа! Изменения отмечены цветом!</div>
+                        <div class="orders-list__heading">Адрес магазина и адрес разгрузки</div>*@
+                </div>
+            }
+        }
+    </main>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+           @* $("#show-message-cart .modal-warning__heading").html("@TempData["Title"]")
+            $("#show-message-cart .modal-warning__desc").html("@TempData["Message"]")*@
+        });
+</script>
+
+@section scripts
+{
+    <script type="text/javascript">
+        document._action_cart_Index = '@(Url.Action("Index", "Cart"))';
+        document._action_cart_UpdatePostition = '@(Url.Action("UpdatePostitionWCheck", "Cart"))';
+        document._action_cart_DeletePositions = '@(Url.Action("Delete", "Cart"))';
+        document._action_cart_DeletePosition = '@(Url.Action("DeletePosition", "Cart"))';
+        document._action_cart_EditComment = '@(Url.Action("EditCommentPosition", "Cart"))';
+
+        document._action_cart_ImportToExele = '@(Url.Action("ImportToCartExele", "Cart"))';
+
+        document._message_NothingChecked = '@SharedResources.NothingChecked';
+        document._message_DeleteSelectedPositions = '@SharedResources.DeleteSelectedPositions';
+        document._message_MaxCartPositionMessage = '@SharedResources.MaxCartPositionMessage';
+        document._message_YesMessage = '@SharedResources.Yes';
+        document._message_CancelMessage = '@SharedResources.Cancel';
+        document._valute_rate = @rate.ToString(CultureInfo.InvariantCulture);
+
+    </script>
+    @Scripts.Render("~/bundles/cart")
+}
+@section dialogs {
+        @{ Html.RenderPartial("CartDialog"); }
+}
+

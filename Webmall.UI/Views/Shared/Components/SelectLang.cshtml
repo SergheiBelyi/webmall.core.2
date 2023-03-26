@@ -1,0 +1,35 @@
+﻿@using Webmall.UI.Core
+@{
+    var langs = CmsHelper.GetLanguages();
+    var langSelected = langs.FirstOrDefault(i => i.Culture == CultureInfo.CurrentCulture.Name.ToLower()) ?? langs[0];
+}
+<form class="select-lang" action="/" method="GET" name="language">
+    <select class="js-select-default" onchange="changeLang(this, '@(langSelected.Culture)')">
+        @foreach (var language in langs)
+        {
+            var selected = (langSelected == language) ? "SELECTED" : "";
+            <option @selected value="@(language.Culture)">@language.Display</option>
+        }
+    </select>
+</form>
+
+<script>
+    function changeLang(el, cur) {
+        var myUrl = window.location.href;
+        var current = '/' + cur + '/';
+        var newLang = '/' + el.options[el.selectedIndex].value;
+        if (myUrl.indexOf(current) !== -1)
+            myUrl = myUrl.replace(current, newLang + '/');
+        else
+            if (window.location.pathname === '/') {
+                myUrl = myUrl + el.options[el.selectedIndex].value;
+            }
+            else if (window.location.pathname === '/' + cur) {
+                myUrl = myUrl.replace(window.location.pathname, newLang);
+            }
+            else {
+                myUrl = myUrl.replace(window.location.pathname, newLang + window.location.pathname);
+            }
+        document.location = myUrl;
+    }
+</script>

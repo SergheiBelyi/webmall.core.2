@@ -1,0 +1,22 @@
+﻿@using ViewRes
+@model List<Webmall.Model.Entities.Catalog.WareProperty>
+@{
+    Layout = null;
+}
+
+<dl class="product-card__params">
+    @if (Model.Any())
+    {
+        foreach (var el in Model)
+        {
+            <div class="product-card__param">
+                <dt class="product-card__property">@el.Name</dt>
+                <dd class="product-card__value">@el.Value</dd>
+            </div>
+        }
+    }
+    else
+    {
+        <div>@SharedResources.NoData</div>
+    }
+</dl>

@@ -1,0 +1,48 @@
+﻿@model Webmall.UI.ViewModel.Catalog.WareCardViewModel
+
+<script type="text/javascript">
+    $(function() {
+        $(".stock-table__product-img").click(imageLoader);
+    });
+
+    function imageLoader (e) {
+        var wareId = this.dataset.template;
+        if (this.loaded) {
+            openFancy(wareId);
+        } else {
+            updatePannel("@Url.Action("GetWareImages", "CatalogService")?Id=" + wareId,
+                "WareImagePannel_" + wareId,
+                null,
+                function(el) {
+                    el.loaded = true;
+                    openFancy(wareId);
+                },
+                this);
+        }
+        return false;
+    }
+
+    function openFancy(wareId) {
+        $.fancybox.open($('#WareImagePannel_' + wareId + ' a'),
+            {
+                touch: false,
+                thumbs: {
+                    autoStart: true
+                }
+            });
+    }
+
+    @*@if (Model.IsSearchResult)
+    {
+        <text>
+    var selector = $("[data-load='true']");
+    if (selector) {
+        setTimeout(function () {
+            selector.each(function () {
+                this.click();
+            });
+        }, 100);
+    }
+        </text>
+    }*@
+</script>

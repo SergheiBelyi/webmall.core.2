@@ -1,0 +1,28 @@
+﻿@using Webmall.Model
+@using ViewRes
+
+<div class="authorize">
+    <ul class="authorize__list">
+        <li class="authorize__item">
+            <a class="authorize__link authorize__link--login" href="#">
+                <svg class="authorize__icon" width="16" height="17" viewBox="0 0 16 17" fill="none">
+                    <path d="M10.5 8.5L7.5 11.5V5.5L10.5 8.5ZM10.5 8.5H1.5" stroke="#49A122" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2.5 5.49998V3.49198C2.5 2.96293 2.70961 2.45543 3.08296 2.08058C3.4563 1.70574 3.96295 1.49409 4.492 1.49198L12.444 1.45998C12.7067 1.45892 12.9671 1.50965 13.2102 1.60925C13.4533 1.70885 13.6744 1.85537 13.8609 2.04046C14.0474 2.22554 14.1956 2.44554 14.297 2.68791C14.3984 2.93027 14.4511 3.19025 14.452 3.45298L14.492 13.482C14.4931 13.7446 14.4424 14.0049 14.3428 14.248C14.2433 14.491 14.0968 14.7121 13.9119 14.8985C13.7269 15.085 13.507 15.2332 13.2648 15.3347C13.0225 15.4362 12.7626 15.4889 12.5 15.49H4.5C3.96957 15.49 3.46086 15.2793 3.08579 14.9042C2.71071 14.5291 2.5 14.0204 2.5 13.49V11.5" stroke="#49A122" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg> @SharedResources.Enter
+            </a>
+        </li>
+        @if (ConfigHelper.AllowAutoRegistration)
+        {
+            <li class="authorize__item">
+                <a class="authorize__link authorize__link--register" href="@Url.Action("LogOn", "Security")">@SharedResources.Registration</a>
+            </li>
+        }
+        @*<li class="authorize__item"><a class="authorize__link authorize__link--register" href="@Url.Action("PasswordRecovery", "Security")">@SecurityResources.AreYouForgetPassword</a></li>*@
+    </ul>
+    <div class="authorize__dropdown">
+        <div class="authorize__dropdown-body">
+            @{Html.RenderPartial("Components/FormAuthorize");}
+        </div>
+    </div>
+</div>
+@Scripts.Render("~/bundles/ulogin")

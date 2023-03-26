@@ -1,0 +1,288 @@
+﻿@using Webmall.UI.Core
+@model Webmall.UI.Models.SelectionByAuto.SelectionByAutoMarkModel
+
+<script>
+    $(function() {
+        document.carSelect = [];
+
+        /* Choices Statuses */
+        /* Choices Select Car */
+        if (document.querySelector('.js-select-car')) {
+
+            $('.js-select-car').each(function(i, item, arr) {
+                document.carSelect[i] = new Choices(item,
+                    {
+                        delimiter: ',',
+                        itemSelectText: '',
+                        searchResultLimit: 20
+                    });
+            });
+            var carSelect = document.carSelect;
+            /* Disable Selects */
+            carSelect.forEach(function(item, i) {
+                if (i > 1) {
+                    carSelect[i].disable();
+                }
+            });
+            /* Disable Selects */
+
+            /* Enable Selects */
+            carSelect.forEach(function(item, i, arr) {
+                let order = i + 1;
+
+                if (carSelect[i].passedElement) {
+                    let elem = carSelect[i].passedElement.element;
+
+                    elem.addEventListener('change',
+                        function() {
+
+                            if (arr[order] && arr[order].passedElement) {
+                                let nextElem = arr[order].passedElement;
+
+                                if (nextElem.isDisabled) {
+                                    arr[order].enable();
+                                    nextElem.enable();
+                                }
+                            }
+
+                        });
+                }
+
+            });
+            /* Enable Selects */
+        }
+        /* Choices Select Car */
+
+        /* Choices Select Lxm */
+        var lxmSelect;
+        /* Choices Select Lxm */
+        if (document.querySelector('.js-select-lxm')) {
+            document.lxmSelect = new Choices('.js-select-lxm',
+                {
+                    delimiter: ',',
+                    itemSelectText: '',
+                    searchResultLimit: 20
+                });
+        }
+        /* Choices Select Lxm */
+
+        /* Choices Select Truck */
+        if (document.querySelector('.js-select-truck')) {
+            let truckSelect = new Choices('.js-select-truck',
+                {
+                    delimiter: ',',
+                    itemSelectText: '',
+                    searchResultLimit: 20
+                });
+
+            /* Disable Selects */
+            truckSelect.forEach(function(item, i) {
+                if (i > 1) {
+                    truckSelect[i].disable();
+                }
+            });
+            //labelVal = label.innerHTML;
+            /* Disable Selects */
+
+            /* Enable Selects */
+            truckSelect.forEach(function(item, i, arr) {
+                let order = i + 1;
+
+                if (truckSelect[i].passedElement) {
+                    let elem = truckSelect[i].passedElement.element;
+
+                    elem.addEventListener('change',
+                        function() {
+
+                            if (arr[order] && arr[order].passedElement) {
+                                console.log(arr[order].getValue(true));
+
+                                let nextElem = arr[order].passedElement;
+
+                                if (nextElem.isDisabled) {
+                                    arr[order].enable();
+                                    nextElem.enable();
+                                }
+                            }
+
+                        });
+                }
+
+            });
+            /* Enable Selects */
+        }
+        /* Choices Select Truck */
+
+
+        $('#AutoMark').on("change", AutoMarkSelected);
+        $('#LxmCatalog').on("change", LxmCatalogSelected);
+
+        @if (Model.AutoMark.HasValue)
+        {
+            <text>
+                document.carSelect[2].enable();
+                AutoMarkSelected();
+            </text>
+        }
+
+        @if (Model.AutoModel.HasValue)
+        {
+            <text>
+                document.carSelect[3].enable();
+            </text>
+        }
+
+        document.querySelectorAll('.tabs__link').forEach(function(item, i) {
+            item.addEventListener('click',
+                function(e) {
+                    $(".tabs__item_ex").hide();
+                    $(".tabs__item_ex-" + (i + 1)).show();
+                });
+
+        });
+
+        let currentHash = window.location.hash;
+        let hashTab = document.querySelector('.tabs__link[href="' + currentHash + '"]');
+        if (hashTab) {
+            let ev = new Event('click');
+            hashTab.dispatchEvent(ev);
+        }
+
+    });
+
+    function AutoMarkSelected(obj) {
+        var markId = document.carSelect[0].getValue(true);
+        var models = document.carSelect[1];
+        models.setValue([""]);
+
+        $.getJSON('@Url.Action("GetModelsList")?markId=' + markId).done(function(data) {
+            models.setChoices(data, 'Value', 'Text', true);
+            if (!obj) {
+                models.setChoiceByValue('@Model.AutoModel');
+                AutoModelSelected();
+            }
+        });
+    }
+
+    function AutoModelSelected() {
+        $('input[name="fuelType"]').val("");
+        FilterUpdate();
+
+        var modelId = $('#@Html.GetFullHtmlFieldNameFor(m => m.AutoModel)').val();
+
+        var fuels = document.carSelect[2];
+        $.getJSON('@Url.Action("GetFuelTypes")?modelId=' + modelId).done(function(data) {
+            fuels.setChoices(data, 'Value', 'Text', true);
+        });
+    }
+
+    function FilterUpdate() {
+        var modelId = $('#@Html.GetFullHtmlFieldNameFor(m => m.AutoModel)').val();
+        var markId = $('#@Html.GetFullHtmlFieldNameFor(m => m.AutoMark)').val();
+
+        var yearOfProduce = $('#yearOfProduce').val();
+        var volume = $('#volume').val();
+        var volumePercent = $('#volumePercent').prop("checked") ? $('#volumePercent').val() : 0;
+        var fuelType = $('#fuelType').val();
+        var power = $('#power').val();
+        var powerUnit = $('#powerUnit').val();
+        var powerPercent = $('#powerPercent').prop("checked") ? $('#powerPercent').val() : 0;
+
+        var url = '@Url.Action("ModifList")' + '?markId=' + markId + '&modelId=' + modelId;
+        url += (yearOfProduce) ? "&yearOfProduce=" + yearOfProduce : "";
+        url += (volume) ? "&volume=" + volume : "";
+        url += (volumePercent) ? "&volumePercent=" + volumePercent : "";
+        url += (fuelType) ? "&fuelType=" + fuelType : "";
+        url += (power) ? "&power=" + power : "";
+        url += (powerUnit) ? "&powerUnit=" + powerUnit : "";
+        url += (powerPercent) ? "&powerPercent=" + powerPercent : "";
+
+        updatePannel(url, 'modifications', null, tippyInitModif);
+    }
+
+    function tippyInitModif() {
+        tippy('.auto-tippy', {
+                    allowHTML: true,
+                    content: 'Loading...',
+                    onCreate(instance) {
+                        // Setup our own custom state properties
+                        instance._isFetching = false;
+                        instance._src = null;
+                        instance._error = null;
+                    },
+                    onShow(instance) {
+                        if (instance._isFetching || instance._src || instance._error) {
+                            return;
+                        }
+                        instance._isFetching = true;
+                        fetch('@(Url.Action("Info")+"?modifId=")'+instance.reference.id)
+                            .then((response) => response.text())
+                            .then((text) => {
+                                // Convert the blob into a URL
+                                //const url = URL.createObjectURL(blob);
+                                //// Create an image
+                                //const image = new Image();
+                                //image.width = 200;
+                                //image.height = 200;
+                                //image.style.display = 'block';
+                                //image.src = url;
+                                // Update the tippy content with the image
+                                instance.setContent(text);
+                            })
+                            .catch((error) => {
+                                // Fallback if the network request failed
+                                instance.setContent(`Request failed. ${error}`);
+                            })
+                            .finally(() => {
+                                instance._isFetching = false;
+                            });
+                    },
+                    onHidden(instance) {
+                        instance.setContent('Loading...');
+                        // Unset these properties so new network requests can be initiated
+                        instance._src = null;
+                        instance._error = null;
+                    }
+                });
+    }
+
+    document.lxmSelect = new Array(1);
+    function updateLaximoWizard(catalogId, ssd) {
+        updatePannel('@Url.Action("Wizard", "Lxm")' + "?catalogId=" + catalogId + (ssd ? "&ssd=" + ssd : ""),
+            "WizardPannel",
+            "WizardPannelLoader",
+            function() {
+                document.lxmSelect = new Array(15);
+                $('#WizardPannel .js-select-lxm').each(function(i, item, arr) {
+                    document.lxmSelect[i] = new Choices(item,
+                        {
+                            delimiter: ',',
+                            itemSelectText: ''
+                            //searchResultLimit: 20
+                        });
+                });
+                document.lxmSelect.forEach(function(el) {
+                    if (!el.passedElement) return;
+                    el.passedElement.element.addEventListener(
+                        'addItem',
+                        function(event) {
+                            updateLaximoWizard(document.getElementById("LxmCatalog").value, event.detail.value);
+                            console.log(event.detail.value);
+                            console.log(event.detail.label);
+                        },
+                        false
+                    );
+                    $("#WizardPannel a").click(function() {
+                        updateLaximoWizard(document.getElementById("LxmCatalog").value, this.dataset.ssd);
+                        return false;
+                    });
+                });
+            });
+    }
+
+    function ShowAutos(ssd) {
+        console.log('ShowAutos: ' + ssd);
+        var url = '@Url.Action("FindVehicles", "Lxm")' + "?catalogId=" + document.getElementById("LxmCatalog").value + (ssd ? "&ssd=" + ssd : "");
+        updatePannel(url, 'modifications', null, tippyInitVehicles);
+    }
+</script>

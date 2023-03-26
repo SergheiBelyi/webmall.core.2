@@ -1,0 +1,190 @@
+﻿@using ViewRes
+@using Webmall.Model.Entities.Catalog
+@using Webmall.UI.Core
+@using Webmall.UI.Core.HtmlHelpers
+
+@model GridViewModel<WareListItem>
+<div class="catalog__main is-table-view">
+    @Html.Hidden("SortDir", Model.SortDirection.ToString())
+    @Html.Hidden("SortColumn", Model.SortColumn)
+    <!-- spec table desktop-->
+    <div class="spec-table catalog__spec-table">
+        <div class="spec-table__header">
+            <div class="spec-table__row">
+                <div class="spec-table__col">
+                    <div class="spec-table__caption"></div>
+                </div>
+                <div class="spec-table__col">
+                    <div class="spec-table__sorts">
+                        @Html.SortColumnLink(Model, SharedResources.Producer, "ProducerName")
+                        @Html.SortColumnLink(Model, SharedResources.WareNumber, "WareNumber")
+                        @*<div class="spec-table__sort is-asc">
+                            <div class="spec-table__caption">@Html.SortColumnLink(Model, SharedResources.Producer, "ProducerName")</div>
+                        </div>*@
+                        @*<div class="spec-table__sort is-asc">
+                            <div class="spec-table__caption">@SharedResources.WareNumber</div>
+                        </div>*@
+                    </div>
+                </div>
+                <div class="spec-table__col">
+                    @Html.SortColumnLink(Model, SharedResources.Name, "Name")
+                    @*<div class="spec-table__sort is-desc is-sorted">
+                        <div class="spec-table__caption">@SharedResources.Name</div>
+                    </div>*@
+                </div>
+                @*<div class="spec-table__col text-center">
+                        <div class="spec-table__caption">Наличие</div>
+                    </div>
+                    <div class="spec-table__col text-center">
+                        <div class="spec-table__caption">Цена</div>
+                    </div>*@
+            </div>
+        </div>
+        <div class="spec-table__body">
+            @foreach (var item in Model.List)
+            {
+                var imgUrl = item.ImageUrl ?? (item.HasImage ? Url.WareImage(item.ImageId) : "~/assets/images/general/product-default.jpg");
+
+                <div class="spec-table__row">
+                    <div class="spec-table__col">
+                        <a class="spec-table__preview js-item-gallery" href="@(Url.Content(imgUrl))" data-lg-id="158abeb2-e0b5-469b-b011-129f2bf31aff">
+                            <img class="spec-table__preview-img" src="@(Url.Content(imgUrl))" alt="" width="46" height="46">
+                            <div class="spec-table__stickers">
+                                <div class="spec-table__sticker sticker is-action">Акция</div>
+                                <div class="spec-table__sticker sticker is-discount">Распродажа</div>
+                            </div>
+                            <div class="spec-table__badges">
+                                <span class="spec-table__badge badge" data-tippy-content="Рекомендуем">
+                                    <svg class="icon icon-like badge__icon" width="25" height="25">
+                                        <use href="@Url.Content($"~/assets/images/svg/symbol/sprite.svg#like")"></use>
+                                    </svg>
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="spec-table__col">
+                        <div class="spec-table__meta">
+                            <a class="spec-table__brand" href="@item.Url" target="_blank">@item.ProducerName</a>
+                            <a class="spec-table__articul" href="@item.Url" target="_blank">@item.WareNumber</a>
+                        </div>
+                    </div>
+                    <div class="spec-table__col">
+                        <div class="spec-table__product-header">
+                            <div class="spec-table__product-heading">
+                                <a class="spec-table__product-heading-link" href="@item.Url">@item.Name</a>
+                            </div>
+                            <a class="spec-table__product-badge badge" href="@item.Url">
+                                <svg class="icon icon-scales-add badge__icon" width="25" height="25">
+                                    <use href="@Url.Content($"~/assets/images/svg/symbol/sprite.svg#scales-add")"></use>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="spec-table__params spec-table-params">
+                            <dl class="spec-table-params__list" data-ware-id="@item.Id" id="table_spec_@item.Id">
+                                @SharedResources.Loading ...
+                            </dl>
+                            <button class="spec-table-params__trigger js-spec-params-trigger btn" type="button">
+                                <span class="btn__text">@SharedResources.Specifications</span>
+                                <svg class="icon icon-chevron-down btn__icon" width="25" height="25">
+                                    <use href="@Url.Content($"~/assets/images/svg/symbol/sprite.svg#chevron-down")"></use>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="spec-table__col text-center">
+                        @*<span class="spec-table__text">&gt; 100</span>*@
+                    </div>
+                    <div class="spec-table__col text-center">
+                        @*<strong class="spec-table__price">от 140 руб</strong>*@
+                    </div>
+                    <div class="spec-table__col text-right">
+                        <a class="spec-table__add btn btn--primary" href="@item.Url">
+                            <svg class="icon icon-magnifying-zoom-glass btn__icon" width="25" height="25">
+                                <use href="@Url.Content($"~/assets/images/svg/symbol/sprite.svg#magnifying-zoom-glass")"></use>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+    <!-- /spec table desktop-->
+    <!-- spec table mobile-->
+    <div class="spec catalog__spec-table-mob">
+        <div class="spec__specs-toggle checkbox-label">
+            <input class="checkbox-label__input js-spec-params-all-trigger" type="checkbox" name="specs" id="scff">
+            <label class="checkbox-label__main" for="scff">@SharedResources.OpenAllSpecifications</label>
+        </div>
+        @foreach (var item in Model.List)
+        {
+            var imgUrl = item.HasImage ? Url.WareImage(item.ImageId) : "~/assets/images/general/product-default.jpg";
+
+            <!-- spec-product-->
+            <div class="spec__product spec-product">
+                <div class="spec-product__stickers">
+                    <div class="spec-product__sticker sticker is-action">Акция</div>
+                    <div class="spec-product__sticker sticker is-discount">Распродажа</div>
+                </div>
+                <div class="spec-product__header">
+                    <div class="spec-product__meta">
+                        <a class="spec-product__brand" href="@item.Url">@item.ProducerName</a>
+                        <a class="spec-product__articul" href="@item.Url">@item.WareNumber</a>
+                    </div>
+                    <div class="spec-product__heading">
+                        <a class="spec-product__heading-link" href="@item.Url">@item.Name</a>
+                    </div>
+                    <div class="spec-product__badges">
+                        <span class="spec-product__badge badge" data-tippy-content="Рекомендуем">
+                            <svg class="icon icon-like badge__icon" width="25" height="25">
+                                <use href="@Url.Content($"~/assets/images/svg/symbol/sprite.svg#like")"></use>
+                            </svg>
+                        </span>
+                        <a class="spec-product__badge badge js-single-gallery" href="@(Url.Content(imgUrl))">
+                            <svg class="icon icon-photo badge__icon" width="25" height="25">
+                                <use href="@Url.Content($"~/assets/images/svg/symbol/sprite.svg#photo")"></use>
+                            </svg>
+                        </a>
+                        <a class="spec-product__badge badge" href="@item.Url">
+                            <svg class="icon icon-scales-add badge__icon" width="25" height="25">
+                                <use href="@Url.Content($"~/assets/images/svg/symbol/sprite.svg#scales-add")"></use>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="spec-product__params spec-table-params">
+                    <dl class="spec-table-params__list" data-ware-id="@item.Id" id="mobTable_spec_@item.Id">
+                        <div class="spec-table-params__item">
+                            @SharedResources.Loading ...
+                        </div>
+                    </dl>
+                    <button class="spec-table-params__trigger js-spec-params-trigger btn" type="button">
+                        <span class="btn__text">@SharedResources.Specifications</span>
+                        <svg class="icon icon-chevron-down btn__icon" width="25" height="25">
+                            <use href="@Url.Content($"~/assets/images/svg/symbol/sprite.svg#chevron-down")"></use>
+                        </svg>
+                    </button>
+                </div>
+                <div class="spec-product__footer">
+                    @*<dl class="spec-product__props">
+                                <div class="spec-product__prop">
+                                <dt class="spec-product__property">Наличие</dt>
+                                <dd class="spec-product__value">&gt; 100</dd>
+                        </div>
+                        <div class="spec-product__prop">
+                            <dt class="spec-product__property">Цена с НДС</dt>
+                            <dd class="spec-product__value">от 32,04 руб</dd>
+                        </div>
+                        </dl>*@
+                    <a class="spec-product__add btn btn--primary" href="@item.Url">
+                        <svg class="icon icon-magnifying-zoom-glass btn__icon" width="25" height="25">
+                            <use href="@Url.Content($"~/assets/images/svg/symbol/sprite.svg#magnifying-zoom-glass")"></use>
+                        </svg>
+                    </a>
+                </div>
+            </div><!-- /spec-product-->
+        }
+    </div>
+    <!-- /spec table mobile-->
+</div>

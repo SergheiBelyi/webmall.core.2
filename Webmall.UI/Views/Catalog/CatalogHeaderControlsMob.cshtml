@@ -1,0 +1,97 @@
+﻿@using ViewRes
+@using Webmall.UI.Core
+
+@model Webmall.UI.Models.Catalog.CatalogWaresModel
+@{
+    var view = ViewBag.ViewMode;
+    var productSize = Model.Wares.List.Count;
+    var sortableFields = new[]
+    {
+        new SelectListItem { Value="ProducerName", Text = SharedResources.Producer},
+        new SelectListItem { Value="WareNumber", Text = SharedResources.WareNumber},
+        new SelectListItem { Value="Name", Text = SharedResources.Name},
+    };
+    var selected = (Model.Wares.SortColumn ?? "WareNumber").ToLower();
+    var selectedItem = sortableFields.FirstOrDefault(i => i.Value.ToLower() == selected) ?? sortableFields.First();
+    selectedItem.Selected = true;
+}
+
+<div class="catalog__mob-controls">
+    @Html.Hidden("SortDir", Model.Wares.SortDirection.ToString())
+    @Html.Hidden("SortColumn", Model.Wares.SortColumn)
+    <div class="catalog__mob-top-controls header-controls">
+        @if (Model.TotalAmountWares > 0)
+        {
+            <div class="header-control">
+                <div class="header-control__progress">
+                    @SharedResources.Products <strong>@productSize</strong> @SharedResources.of <strong>@Model.TotalAmountWares</strong>
+                </div>
+            </div>
+        }
+        <div class="header-control">
+            <ul class="header-control__modes view-modes">
+                <li class="view-modes__item @(view == 1 ? "is-active" : "")">
+                    <a class="view-modes__link" href="#"
+                       @if (view == 0) { <text> onclick="setview(1);return false;" </text>  }>
+                        <svg class="icon icon-th view-modes__icon" width="25" height="25">
+                            <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#th")"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li class="view-modes__item @(view == 0 ? "is-active" : "")">
+                    <a class="view-modes__link" href="#"
+                       @if (view == 1) { <text> onclick="setview(0);return false;" </text>  }>
+                        <svg class="icon icon-th-list view-modes__icon" width="25" height="25">
+                            <use href="@Url.Content("~/assets/images/svg/symbol/sprite.svg#th-list")"></use>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="catalog__mob-bottom-controls header-controls">
+        <div class="header-control">
+            <a class="header-control__filter filter-toggle" href="#">
+                <svg class="filter-toggle__icon" width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 5C3.99597 6.37349 4.66054 8.04251 6.53348 9.89108C7.22053 10.5607 7.60622 11.4446 7.6129 12.3651V17L11.3871 15.2651V12.3651C11.3871 11.4447 11.7843 10.5651 12.4665 9.89108C14.3404 8.04251 15.9476 5.45783 16 5" fill="#49A122"></path>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0 1C0 0.447715 0.447715 0 1 0H18.0526C18.6049 0 19.0526 0.447715 19.0526 1C19.0526 1.77453 18.7312 2.60947 18.3391 3.36955C17.9327 4.15745 17.3824 4.99169 16.7904 5.79811C15.6049 7.41293 14.1876 9.0027 13.2364 10.0234C12.7141 10.5849 12.4211 11.3054 12.4211 12.0435V15.2105C12.4211 15.5893 12.207 15.9356 11.8683 16.105L8.07879 17.9997C7.7688 18.1547 7.40066 18.1381 7.10585 17.9559C6.81103 17.7737 6.63158 17.4518 6.63158 17.1053V12.047C6.62578 11.2957 6.33601 10.5744 5.82039 10.0278L5.81605 10.0232L5.81606 10.0232C4.86543 9.00262 3.44822 7.41265 2.26261 5.79776C1.67055 4.99132 1.12017 4.15707 0.713701 3.36924C0.32162 2.6093 0 1.77441 0 1ZM2.27554 2C2.33599 2.13945 2.40748 2.29019 2.49109 2.45223C2.831 3.11107 3.31497 3.85164 3.87478 4.61416C4.99213 6.13608 6.34765 7.65947 7.27748 8.6578C8.13938 9.57265 8.62316 10.7798 8.63156 12.0368L8.6316 12.0435H8.63158V15.4872L10.4211 14.5925V12.0435C10.4211 10.7715 10.9254 9.57097 11.7728 8.66037L11.7733 8.6598C12.7035 7.66162 14.0602 6.13738 15.1782 4.61452C15.7379 3.8521 16.2218 3.11157 16.5616 2.45273C16.6453 2.2905 16.7169 2.1396 16.7773 2H2.27554Z" fill="#525252"></path>
+                </svg>
+                <span class="filter-toggle__text">@SharedResources.Filters</span>
+            </a>
+        </div>
+        <div class="header-control">
+            <div class="sort-field">
+                <button class="price-sort sort-field__btn is-@((Model.Wares.SortDirection == System.Web.UI.WebControls.SortDirection.Descending ? "desc" : "asc"))" type="button" @Html.SortColumnLinkMobile(Model.Wares, selectedItem.Text, selectedItem.Value)>
+                    <svg width="22" height="17" viewBox="0 0 22 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9.9 10.6875C9.9 11.2398 10.3477 11.6875 10.9 11.6875H18.8C19.3523 11.6875 19.8 11.2398 19.8 10.6875V10.5625C19.8 10.0102 19.3523 9.5625 18.8 9.5625H10.9C10.3477 9.5625 9.9 10.0102 9.9 10.5625V10.6875ZM9.9 6.4375C9.9 6.98979 10.3477 7.4375 10.9 7.4375H16.6C17.1523 7.4375 17.6 6.98979 17.6 6.4375V6.3125C17.6 5.76021 17.1523 5.3125 16.6 5.3125H10.9C10.3477 5.3125 9.9 5.76021 9.9 6.3125V6.4375ZM9.9 14.9375C9.9 15.4898 10.3477 15.9375 10.9 15.9375H21C21.5523 15.9375 22 15.4898 22 14.9375V14.8125C22 14.2602 21.5523 13.8125 21 13.8125H10.9C10.3477 13.8125 9.9 14.2602 9.9 14.8125V14.9375ZM9.9 2.1875C9.9 2.73979 10.3477 3.1875 10.9 3.1875H14.4C14.9523 3.1875 15.4 2.73979 15.4 2.1875V2.0625C15.4 1.51021 14.9523 1.0625 14.4 1.0625H10.9C10.3477 1.0625 9.9 1.51021 9.9 2.0625V2.1875ZM3.3 1C3.3 0.447716 3.74772 0 4.3 0H4.5C5.05229 0 5.5 0.447716 5.5 1V12.75H8.8L4.4 17L0 12.75H3.3V1Z" fill="#525252"></path>
+                    </svg>
+                    <svg width="22" height="17" viewBox="0 0 22 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9.9 6.3125C9.9 5.76022 10.3477 5.3125 10.9 5.3125H18.8C19.3523 5.3125 19.8 5.76022 19.8 6.3125V6.4375C19.8 6.98978 19.3523 7.4375 18.8 7.4375H10.9C10.3477 7.4375 9.9 6.98978 9.9 6.4375V6.3125ZM9.9 10.5625C9.9 10.0102 10.3477 9.5625 10.9 9.5625H16.6C17.1523 9.5625 17.6 10.0102 17.6 10.5625V10.6875C17.6 11.2398 17.1523 11.6875 16.6 11.6875H10.9C10.3477 11.6875 9.9 11.2398 9.9 10.6875V10.5625ZM9.9 2.0625C9.9 1.51022 10.3477 1.0625 10.9 1.0625H21C21.5523 1.0625 22 1.51022 22 2.0625V2.1875C22 2.73978 21.5523 3.1875 21 3.1875H10.9C10.3477 3.1875 9.9 2.73978 9.9 2.1875V2.0625ZM9.9 14.8125C9.9 14.2602 10.3477 13.8125 10.9 13.8125H14.4C14.9523 13.8125 15.4 14.2602 15.4 14.8125V14.9375C15.4 15.4898 14.9523 15.9375 14.4 15.9375H10.9C10.3477 15.9375 9.9 15.4898 9.9 14.9375V14.8125ZM3.3 16C3.3 16.5523 3.74772 17 4.3 17H4.5C5.05229 17 5.5 16.5523 5.5 16V4.25H8.8L4.4 0L0 4.25H3.3V16Z" fill="#525252"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="sort-field__dropdown custom-dropdown js-dropdown">
+                <div class="custom-dropdown__header js-dropdown-toggle">
+                    <div class="custom-dropdown__heading">@(selectedItem.Text)</div>
+                </div>
+                <ul class="custom-dropdown__items">
+                    @foreach (var item in sortableFields)
+                    {
+                        <li class="custom-dropdown__item">
+                            <a class="custom-dropdown__link" href="#" @Html.SortColumnLinkMobile(Model.Wares, item.Text, item.Value, Model.Wares.SortDirection.ToString())>@(item.Text)</a>
+                        </li>
+                    }
+                    @*<li class="custom-dropdown__item">
+                            <a class="custom-dropdown__link" href="#">Артикул</a>
+                        </li>
+                        <li class="custom-dropdown__item">
+                            <a class="custom-dropdown__link" href="#">Наименование</a>
+                        </li>
+                        <li class="custom-dropdown__item">
+                            <a class="custom-dropdown__link" href="#">Цена</a>
+                        </li>*@
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
